@@ -29,7 +29,8 @@
             <App:ConnectPannel />
 
             <!--Pannel real time data-->
-            <Rectangle Grid.Row="0" Grid.Column="1" x:Name="realTimeRectangle" Fill="LightGray" Width="250"/>
+            <RealTime: />
+            <!--<Rectangle Grid.Row="0" Grid.Column="1" x:Name="realTimeRectangle" Fill="LightGray" Width="250"/>-->
         </Grid>
 
         <StatusBar Grid.Row="1">

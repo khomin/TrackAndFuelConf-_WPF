@@ -87,13 +87,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="RealTimeData\RealTimeData.xaml.cs">
+      <DependentUpon>RealTimeData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPannel.xaml.cs">
       <DependentUpon>SettingsPannel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="settingsTabItems\SettingsCommunication.xaml.cs">
+    <Compile Include="SettingsTabItems\SettingsCommunication.xaml.cs">
       <DependentUpon>SettingsCommunication.xaml</DependentUpon>
     </Compile>
-    <Compile Include="settingsTabItems\SettingsConnection.xaml.cs">
+    <Compile Include="SettingsTabItems\SettingsConnection.xaml.cs">
       <DependentUpon>SettingsConnection.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -119,6 +122,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RealTimeData\RealTimeData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,11 +138,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="settingsTabItems\SettingsCommunication.xaml">
+    <Page Include="SettingsTabItems\SettingsCommunication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="settingsTabItems\SettingsConnection.xaml">
+    <Page Include="SettingsTabItems\SettingsConnection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
