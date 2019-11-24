@@ -13,19 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf
 {
     public partial class MainWindow : MetroWindow
     {
+        private MainViewModel mainViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
+            mainViewModel = new MainViewModel();
+            DataContext = mainViewModel;
         }
     }
 }

@@ -23,8 +23,7 @@
 
             <TabItem Header="SMS alarm">
             </TabItem>
-
-            <!--<exampleViews:HamburgerMenuCreatorsUpdate DataContext="{Binding}" />-->
+            
         </TabControl>
     </Grid>
     

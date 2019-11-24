@@ -93,7 +93,13 @@
     <Compile Include="settingsTabItems\SettingsCommunication.xaml.cs">
       <DependentUpon>SettingsCommunication.xaml</DependentUpon>
     </Compile>
+    <Compile Include="settingsTabItems\SettingsConnection.xaml.cs">
+      <DependentUpon>SettingsConnection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SettingsCommunicationViewModel.cs" />
+    <Compile Include="ViewModel\SettingsConnectionViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="ConnectPannel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="settingsTabItems\SettingsCommunication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="settingsTabItems\SettingsConnection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
