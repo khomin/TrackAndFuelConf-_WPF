@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace trackerWpfConf.RealTime
+namespace trackerWpfConf.RightPanel
 {
     /// <summary>
     /// Interaction logic for RealTimePanel.xaml

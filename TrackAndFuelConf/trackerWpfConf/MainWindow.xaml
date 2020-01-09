@@ -3,7 +3,7 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      xmlns:RealTime="clr-namespace:trackerWpfConf.RealTime"
+                      xmlns:RealTime="clr-namespace:trackerWpfConf.RightPanel"
                       xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
                       Title="" Width="1100" Height="600">
     <Grid>
