@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="trackerWpfConf.settingsTabItems.SettingsConnection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:trackerWpfConf.settingsTabItems"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="{Binding Header}" Margin="10,10,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="Margin" Value="10,10,10,10" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Address-->
+                    <TextBlock Text="Address" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,13,0,11" Grid.ColumnSpan="2"/>
+                    <TextBox Text="{Binding Address}" Grid.Row="0" Grid.Column="2" MinWidth="150" Width="Auto" Grid.ColumnSpan="2" Margin="10,10,10,12"/>
+                    <!--Port -->
+                    <TextBlock Text="Port" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,11" Grid.ColumnSpan="2"/>
+                    <TextBox Text="" Grid.Row="1" Grid.Column="2" MinWidth="150" Width="Auto" Grid.ColumnSpan="2" Margin="10,8,10,12"/>
+                    <!--Protocol-->
+                    <TextBlock Text="Protocol" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,11" Grid.ColumnSpan="2"/>
+                    <TextBox Text="" Grid.Row="2" Grid.Column="2" MinWidth="150" Width="Auto" Grid.ColumnSpan="2"/>
+                </Grid>
+
+                <GroupBox Grid.Row="1" Header="Data for send">
+                    <StackPanel>
+                        <CheckBox>
+                            <TextBlock Text="LLS"/>
+                        </CheckBox>
+                        <CheckBox>
+                            <TextBlock Text="LLS internal"/>
+                        </CheckBox>
+                        <CheckBox>
+                            <TextBlock Text="CNT"/>
+                        </CheckBox>
+                        <CheckBox>
+                            <TextBlock Text="Moto hours"/>
+                        </CheckBox>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>
