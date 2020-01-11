@@ -99,8 +99,11 @@
       <DependentUpon>SettingsConnection.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\CurrentDataViewModel.cs" />
+    <Compile Include="ViewModel\RightPannelViewModel.cs" />
     <Compile Include="ViewModel\SettingsCommunicationViewModel.cs" />
     <Compile Include="ViewModel\SettingsConnectionViewModel.cs" />
+    <Compile Include="ViewModel\StatusDataViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="ConnectPannel.xaml">
       <SubType>Designer</SubType>

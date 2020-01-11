@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using testViewModel;
+using ViewModelBase;
 
 namespace trackerWpfConf.ViewModel
 {
-    class SettingsCommunicationViewModel : ViewModelBase
+    class SettingsCommunicationViewModel : ViewModelBase.ViewModelBase
     {
         private string apnName = "defaultName";
         private string apnPassword = "defaultPassword";
