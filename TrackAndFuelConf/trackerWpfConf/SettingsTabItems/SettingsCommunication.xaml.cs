@@ -21,7 +21,7 @@ namespace trackerWpfConf.settingsTabItems
     /// </summary>
     public partial class SettingsCommunication : UserControl
     {
-        private SettingsCommunicationViewModel settingsCommunicationViewModel;
+        private readonly SettingsCommunicationViewModel settingsCommunicationViewModel;
 
         public SettingsCommunication()
         {

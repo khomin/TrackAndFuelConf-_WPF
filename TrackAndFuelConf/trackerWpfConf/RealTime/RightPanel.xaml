@@ -39,43 +39,43 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="IMEI" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="IMEI" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="Imei" Grid.Row="0" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="AIN1" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="AIN1" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="AIn1" Grid.Row="1" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="AIN2" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="AIN2" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="AIn2" Grid.Row="2" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="AIN3" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="AIN3" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="AIn3" Grid.Row="3" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="AIN4" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="AIN4" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="AIn4" Grid.Row="4" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="CSQ" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="CSQ" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="Csq" Grid.Row="5" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="FIX" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="FIX" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="Fix" Grid.Row="6" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="Lat" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Lat" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="Lat" Grid.Row="7" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="Lon" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Lon" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="Lon" Grid.Row="8" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="GSM" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="GSM" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="Gsm" Grid.Row="9" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="Battery" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Battery" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="Battery" Grid.Row="10" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="External" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="External" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <TextBox x:Name="External" Grid.Row="10" Grid.Column="1" Background="Transparent" IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Path=IMEI}"/>
 
-                        <TextBlock Text="DO" Grid.Row="12" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="DO" Grid.Row="12" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <Grid Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent">
                             <Grid.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -100,7 +100,7 @@
 
                         </Grid>
 
-                        <TextBlock Text="DI" Grid.Row="13" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="DI" Grid.Row="13" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0"/>
                         <Grid Grid.Row="13" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <Grid.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -144,10 +144,10 @@
                             </Style>
                         </Grid.Resources>
 
-                        <TextBlock Text="Crystal 8MHz" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Crystal 8MHz" Grid.Row="0" Grid.Column="0" Margin="10,0,10,0" VerticalAlignment="Center"/>
                         <Border Background="Red" MinWidth="20" MinHeight="20" MaxHeight="20" MaxWidth="20" Grid.Row="0" Grid.Column="1"/>
 
-                        <TextBlock Text="Crystal 32KHz" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Crystal 32KHz" Grid.Row="1" Grid.Column="0" Margin="10,0,10,0" VerticalAlignment="Center"/>
                         <Border Background="Red" MinWidth="20" MinHeight="20" MaxHeight="20" MaxWidth="20" Grid.Row="1" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
