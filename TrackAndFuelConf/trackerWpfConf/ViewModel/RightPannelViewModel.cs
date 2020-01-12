@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViewModelBase;
 
 namespace trackerWpfConf.ViewModel
 {
-    class RightPannelViewModel : ViewModelBase.ViewModelBase
+    class RightPannelViewModel : ViewModelBase
     {
-            private string address;
+        private readonly CurrentDataViewModel _currentDataViewModel = new CurrentDataViewModel();
+        private readonly StatusDataViewModel _statusDataViewModel = new StatusDataViewModel();
 
-            public string Address
-            {
-                get { return address; }
-                set
-                {
-                    address = value;
-                    OnPropertyChanged();
-                }
-            }
+        public CurrentDataViewModel Model
+        {
+            get { return _currentDataViewModel; }
+        }
+
+        public StatusDataViewModel StatusDataViewModel
+        {
+            get { return _statusDataViewModel; }
         }
     }
 }

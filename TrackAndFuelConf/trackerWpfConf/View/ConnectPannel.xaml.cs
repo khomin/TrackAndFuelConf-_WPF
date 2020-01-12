@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf
 {
@@ -20,9 +21,14 @@ namespace trackerWpfConf
     /// </summary>
     public partial class ConnectPannel : UserControl
     {
+        private readonly ConnectPannelViewModel _connectPannelViewModel;
+
         public ConnectPannel()
         {
             InitializeComponent();
+
+            _connectPannelViewModel = new ConnectPannelViewModel();
+            DataContext = _connectPannelViewModel;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace trackerWpfConf.ViewModel
 {
     class CurrentDataViewModel : ViewModelBase
     {
-        private string _imeiModemValue = "";
+        private string _imeiModemValue = "11112223344";
         private float _ain1Value = 0.0f;
         private float _ain2Value = 0.0f;
         private float _ain3Value = 0.0f;

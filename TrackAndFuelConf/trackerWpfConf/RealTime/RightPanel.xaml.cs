@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf.RightPanel
 {
@@ -20,9 +21,14 @@ namespace trackerWpfConf.RightPanel
     /// </summary>
     public partial class RealTimePanel : UserControl
     {
+        private readonly RightPannelViewModel _rightPanelViewModel;
+        
         public RealTimePanel()
         {
             InitializeComponent();
+
+            _rightPanelViewModel = new RightPannelViewModel();
+            DataContext = _rightPanelViewModel;
         }
     }
 }
