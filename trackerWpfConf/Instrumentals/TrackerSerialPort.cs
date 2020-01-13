@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace trackerWpfConf.Instrumentals
 {
-    class TrackerSerialPortt
+    class TrackerSerialPort
     {
         static SerialPort _serialPort;
         private List<byte[]> dataOutBuff;
@@ -19,7 +19,7 @@ namespace trackerWpfConf.Instrumentals
         private bool _serialIsActive = false;
         private System.Timers.Timer _timerDisconnectControl;
 
-        public TrackerSerialPortt(string name, int baudrate, Parity parity, int dataBits, StopBits stopBits, Action<List<int>> dataReceivedCallback, Action disconnectPortErrorCallback)
+        public TrackerSerialPort(string name, int baudrate, Parity parity, int dataBits, StopBits stopBits, Action<List<int>> dataReceivedCallback, Action disconnectPortErrorCallback)
         {
             _serialPort = new SerialPort(name, baudrate, parity, dataBits, stopBits);
             this.dataReceivedCallback = dataReceivedCallback;

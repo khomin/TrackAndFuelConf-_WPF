@@ -35,7 +35,7 @@
 
             <!--Path="IsVisible" Converter="{StaticResource con}" Mode="TwoWay"-->
             <local:ConnectPannel x:Name="connectPannel" ShowLoadSpinner="{Binding Path=Visibility, ElementName=spinner, Mode=TwoWay}"
-                                 Margin="0,0,0,0" Grid.ColumnSpan="2">
+                                 Margin="0,433,0,0">
 
                 <!--<MultiBinding Converter="{StaticResource Converter}" UpdateSourceTrigger="PropertyChanged">
                     <Binding ElementName="txtFirstName" Path="Text" />
@@ -44,7 +44,7 @@
             </local:ConnectPannel>
 
             <!--Pannel real time data-->
-            <!--<RealTime:RealTimePanel Grid.Row="0" Grid.Column="1"/>-->
+            <local:RealTimePanel Grid.Row="0" Grid.Column="1"/>
         </Grid>
 
         <StatusBar Grid.Row="1">

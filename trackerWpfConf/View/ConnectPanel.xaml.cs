@@ -25,7 +25,7 @@ namespace trackerWpfConf
     {
         private readonly ConnectPannelViewModel _connectPannelViewModel;
 
-        private TrackerSerialPortt _serialPortHandler;
+        private TrackerSerialPort _serialPortHandler;
 
         public ConnectPannel()
         {
@@ -43,7 +43,7 @@ namespace trackerWpfConf
 
         private void connectReconnect(object sender, RoutedEventArgs e)
         {
-            _serialPortHandler = new TrackerSerialPortt(
+            _serialPortHandler = new TrackerSerialPort(
                 PortComBox.Text,
                 115200,
             Parity.None,

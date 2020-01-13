@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trackerWpfConf.ViewModel;
 
-namespace trackerWpfConf.RightPanel
+namespace trackerWpfConf 
 {
     /// <summary>
     /// Interaction logic for RealTimePanel.xaml
