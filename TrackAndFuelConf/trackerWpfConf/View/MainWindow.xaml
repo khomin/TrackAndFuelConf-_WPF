@@ -25,7 +25,13 @@
             <local:SettingsPannel />
 
             <!--Pannel connection-->
-            <local:ConnectPannel />
+            <local:ConnectPannel>
+                <DataTrigger Binding="{Binding ShowLoadSpinner}" Value="True">
+                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                </DataTrigger>
+            </local:ConnectPannel>
+                <!--ShowLoadSpinner="{Binding Path=ShowLoadSpinner}" />-->
 
             <!--Pannel real time data-->
             <!--<RealTime:RealTimePanel Grid.Row="0" Grid.Column="1"/>-->
