@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,22 +18,26 @@ namespace trackerWpfConf.ViewModel
 
         public ConnectPannelViewModel()
         {
-            PortsList = new ObservableCollection<string> { "COM1", "COM2" };
-            IsConnected = false;
+            _portList = new ObservableCollection<string>(SerialPort.GetPortNames().ToList());
+            _isConnected = false;
             _colorStatus = Brushes.Red;
         }
 
-        public ObservableCollection<string> PortsList {
-            get {
+        public ObservableCollection<string> PortsList
+        {
+            get
+            {
                 return _portList;
             }
-            set {
+            set
+            {
                 _portList = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool IsConnected {
+        public bool IsConnected
+        {
             get
             {
                 return _isConnected;
@@ -55,7 +60,7 @@ namespace trackerWpfConf.ViewModel
 
         public void ResearchPorts()
         {
-            _portList = new ObservableCollection<string> { "COM1", "COM2" };
+            _portList = new ObservableCollection<string>(SerialPort.GetPortNames().ToList());
         }
 
         public Brush ColorStatus

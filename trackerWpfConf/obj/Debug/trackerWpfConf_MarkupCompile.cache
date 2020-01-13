@@ -12,9 +12,9 @@ DEBUG;TRACE
 C:\Projects\TrackAndFuelConf\trackerWpfConf\App.xaml
 81054269768
 
-20-1275774405
+21961564982
 1371530424137
 Resources\Icons.xaml;Resources\IconsNonShared.xaml;View\ConnectPanel.xaml;View\MainWindow.xaml;View\RealTimePanel.xaml;View\SettingsPanel.xaml;View\SettingsCommunication.xaml;View\SettingsConnection.xaml;
 
-False
+True
 
