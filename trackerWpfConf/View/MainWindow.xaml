@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -29,22 +29,24 @@
             </Grid.RowDefinitions>
 
             <!--Pannel settings -->
-            <local:SettingsPannel IsEnabled="{Binding Path=IsVisible, ElementName=spinner, Converter={StaticResource converter}}"/>
 
             <fa:ImageAwesome x:Name="spinner" Visibility="Hidden" Icon="Spinner" Spin="True" SpinDuration="4" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <!--Path="IsVisible" Converter="{StaticResource con}" Mode="TwoWay"-->
-            <local:ConnectPannel x:Name="connectPannel" ShowLoadSpinner="{Binding Path=Visibility, ElementName=spinner, Mode=TwoWay}"
-                                 Margin="0,433,0,0">
-
-                <!--<MultiBinding Converter="{StaticResource Converter}" UpdateSourceTrigger="PropertyChanged">
-                    <Binding ElementName="txtFirstName" Path="Text" />
-                    <Binding ElementName="txtLastName" Path="Text" />
-                </MultiBinding>-->
-            </local:ConnectPannel>
 
             <!--Pannel real time data-->
             <local:RealTimePanel Grid.Row="0" Grid.Column="1"/>
+
+            <!--Pannel settings -->
+            <local:SettingsPannel IsEnabled="{Binding IsVisible, Converter={StaticResource converter}, ElementName=spinner}"  Grid.Row="0" Grid.Column="0" Height="Auto"/>
+            <local:ConnectPannel x:Name="connectPannel" ShowLoadSpinner="{Binding Visibility, ElementName=spinner, Mode=TwoWay}" Grid.Row="1" Grid.Column="0" Height="50">
+
+                <!--<MultiBinding Converter="{StaticResource Converter}" UpdateSourceTrigger="PropertyChanged">
+                <Binding ElementName="txtFirstName" Path="Text" />
+                <Binding ElementName="txtLastName" Path="Text" />
+            </MultiBinding>-->
+            </local:ConnectPannel>
+
         </Grid>
 
         <StatusBar Grid.Row="1">
