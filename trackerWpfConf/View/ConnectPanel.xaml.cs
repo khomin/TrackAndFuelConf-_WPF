@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -52,7 +53,8 @@ namespace trackerWpfConf
             (data) =>
                 {
                     _connectPannelViewModel.IsConnected = true;
-                    ShowLoadSpinner = Visibility.Hidden;
+                    //ShowLoadSpinner = Visibility.Hidden;
+                    Trace.WriteLine(data);
                 },
             () =>
             {
@@ -67,7 +69,7 @@ namespace trackerWpfConf
                 });
             }
             );
-            _serialPortHandler.open();
+            _serialPortHandler.Open();
             ShowLoadSpinner = Visibility.Visible;
         }
 

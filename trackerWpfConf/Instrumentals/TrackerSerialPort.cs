@@ -33,7 +33,7 @@ namespace trackerWpfConf.Instrumentals
             _serialIsActive = false;
         }
 
-        public bool open()
+        public bool Open()
         {
             bool result = false;
             try {
@@ -49,6 +49,7 @@ namespace trackerWpfConf.Instrumentals
                         {
                             int data = _serialPort.ReadByte();
                             rxData.Add(data);
+                            _serialIsActive = true;
                         }
                         catch (TimeoutException)
                         {
@@ -65,9 +66,7 @@ namespace trackerWpfConf.Instrumentals
                 _serialPort.Open();
                 result = true;
 
-                _serialIsActive = true;
-
-                _timerDisconnectControl = new System.Timers.Timer(1500);
+                _timerDisconnectControl = new System.Timers.Timer(3000);
                 _timerDisconnectControl.AutoReset = true;
                 _timerDisconnectControl.Enabled = true;
                 _timerDisconnectControl.Elapsed += (sourse, e) =>
@@ -83,7 +82,7 @@ namespace trackerWpfConf.Instrumentals
                     }
                 };
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 Console.WriteLine("SerialPort: exception " + this.GetType().FullName + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
