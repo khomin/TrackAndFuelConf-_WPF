@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
+        
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -29,31 +29,24 @@
             </Grid.RowDefinitions>
 
             <!--Pannel settings -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <local:SettingsPannel Grid.Row="0" IsEnabled="{Binding IsVisible, Converter={StaticResource converter}, ElementName=spinner}"  Height="Auto"/>
+                <local:ConnectPannel x:Name="connectPannel" Grid.Row="1" ShowLoadSpinner="{Binding Visibility, ElementName=spinner, Mode=TwoWay}" Height="50"/>
+            </Grid>
 
-            <fa:ImageAwesome x:Name="spinner" Visibility="Hidden" Icon="Spinner" Spin="True" SpinDuration="4" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-            <!--Path="IsVisible" Converter="{StaticResource con}" Mode="TwoWay"-->
-
-            <!--Pannel real time data-->
             <local:RealTimePanel Grid.Row="0" Grid.Column="1"/>
-
-            <!--Pannel settings -->
-            <local:SettingsPannel IsEnabled="{Binding IsVisible, Converter={StaticResource converter}, ElementName=spinner}"  Grid.Row="0" Grid.Column="0" Height="Auto"/>
-            <local:ConnectPannel x:Name="connectPannel" ShowLoadSpinner="{Binding Visibility, ElementName=spinner, Mode=TwoWay}" Grid.Row="1" Grid.Column="0" Height="50">
-
-                <!--<MultiBinding Converter="{StaticResource Converter}" UpdateSourceTrigger="PropertyChanged">
-                <Binding ElementName="txtFirstName" Path="Text" />
-                <Binding ElementName="txtLastName" Path="Text" />
-            </MultiBinding>-->
-            </local:ConnectPannel>
-
+            
+            <fa:ImageAwesome x:Name="spinner" Visibility="Hidden" Icon="Spinner" Spin="True" SpinDuration="4" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
         <StatusBar Grid.Row="1">
             <StatusBarItem>Current status</StatusBarItem>
             <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
         </StatusBar>
-
     </Grid>
-
+    
 </Controls:MetroWindow>

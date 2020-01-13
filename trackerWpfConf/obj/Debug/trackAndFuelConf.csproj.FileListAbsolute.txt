@@ -164,12 +164,8 @@ C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\zh-Hant\Micr
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuelConf.csprojAssemblyReference.cache
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\Resources\Icons.baml
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\Resources\IconsNonShared.baml
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPannel.baml
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\App.baml
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPannel.g.cs
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\MainWindow.g.cs
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\RealTime\RightPanel.g.cs
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPannel.g.cs
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsCommunication.g.cs
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsConnection.g.cs
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\App.g.cs
@@ -177,8 +173,6 @@ C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\GeneratedInt
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf_MarkupCompile.cache
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf_MarkupCompile.lref
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\MainWindow.baml
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\RealTime\RightPanel.baml
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPannel.baml
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsCommunication.baml
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsConnection.baml
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.g.resources
@@ -278,3 +272,9 @@ C:\Projects\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPanel.baml
 C:\Projects\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPanel.g.cs
 C:\Projects\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPanel.g.cs
 C:\Projects\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPanel.baml
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPanel.baml
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\RealTimePanel.baml
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPanel.g.cs
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\RealTimePanel.g.cs
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPanel.g.cs
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPanel.baml
