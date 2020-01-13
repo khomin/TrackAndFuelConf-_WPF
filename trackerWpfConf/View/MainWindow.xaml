@@ -7,9 +7,9 @@
                       xmlns:l="clr-namespace:trackerWpfConf.Resources"
                       Title="" Width="1100" Height="600">
 
-    <!--<Window.Resources>
+    <Window.Resources>
         <l:BoolInvertionConverter x:Key="converter" />
-    </Window.Resources>-->
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -29,14 +29,13 @@
             </Grid.RowDefinitions>
 
             <!--Pannel settings -->
-            <local:SettingsPannel IsEnabled="{Binding Path=IsVisible, ElementName=spinner}"/>
+            <local:SettingsPannel IsEnabled="{Binding Path=IsVisible, ElementName=spinner, Converter={StaticResource converter}}"/>
 
             <fa:ImageAwesome x:Name="spinner" Visibility="Hidden" Icon="Spinner" Spin="True" SpinDuration="4" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            
             <!--Path="IsVisible" Converter="{StaticResource con}" Mode="TwoWay"-->
             <local:ConnectPannel x:Name="connectPannel" ShowLoadSpinner="{Binding Path=Visibility, ElementName=spinner, Mode=TwoWay}"
-                                 Margin="3,-31,-3,31" Grid.ColumnSpan="2">
+                                 Margin="0,0,0,0" Grid.ColumnSpan="2">
 
                 <!--<MultiBinding Converter="{StaticResource Converter}" UpdateSourceTrigger="PropertyChanged">
                     <Binding ElementName="txtFirstName" Path="Text" />
