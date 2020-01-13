@@ -52,15 +52,14 @@ namespace trackerWpfConf
             (data) =>
                 {
                     _connectPannelViewModel.IsConnected = true;
-                    _connectPannelViewModel.ShowLoadSpinner = false;
-                    //ShowSpinnerLoading = true;
+                    ShowLoadSpinner = Visibility.Hidden;
                 },
             () =>
             {
                 this.Dispatcher.Invoke(() =>
                 {
                     _connectPannelViewModel.IsConnected = false;
-                    _connectPannelViewModel.ShowLoadSpinner = false;
+                    ShowLoadSpinner = Visibility.Hidden;
                     MessageBoxResult result = MessageBox.Show("Connection lost",
                                           "Warning",
                                           MessageBoxButton.OK,
@@ -69,25 +68,22 @@ namespace trackerWpfConf
             }
             );
             _serialPortHandler.open();
-            _connectPannelViewModel.ShowLoadSpinner = true;
+            ShowLoadSpinner = Visibility.Visible;
         }
 
 
-        public bool ShowLoadSpinner
+        public Visibility ShowLoadSpinner
         {
-            get { return (bool)GetValue(ShowLoadSpinnerProperty); }
+            get { return (Visibility)GetValue(ShowLoadSpinnerProperty); }
             set { SetValue(ShowLoadSpinnerProperty, value); }
         }
 
         public static readonly DependencyProperty ShowLoadSpinnerProperty =
-            DependencyProperty.Register("ShowLoadSpinner", typeof(bool), typeof(ConnectPannel), new UIPropertyMetadata(UserNameChanged));
+            DependencyProperty.Register("ShowLoadSpinner", typeof(Visibility), typeof(ConnectPannel), new UIPropertyMetadata(Visibility.Hidden, OnMyPropertyChanged));
 
-        static void UserNameChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        public static void OnMyPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-            var ele = obj as ConnectPannel;
-            ele.ShowLoadSpinner = true;//e.NewValue as bool;
-            ////do things with the object and it's properties
-            //var newVal = (string)e.NewValue;
+            // code to be executed when property changed
         }
     }
 }

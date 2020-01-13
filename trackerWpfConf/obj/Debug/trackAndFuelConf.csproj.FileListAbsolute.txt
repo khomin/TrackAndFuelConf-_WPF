@@ -187,3 +187,5 @@ C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuel
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuelConf.csproj.CopyComplete
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.exe
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.pdb
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\CalcBinding.dll
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\DynamicExpresso.Core.dll

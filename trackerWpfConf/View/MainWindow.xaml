@@ -4,7 +4,13 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:fa="http://schemas.fontawesome.io/icons/"
+                      xmlns:l="clr-namespace:trackerWpfConf.Resources"
                       Title="" Width="1100" Height="600">
+
+    <!--<Window.Resources>
+        <l:BoolInvertionConverter x:Key="converter" />
+    </Window.Resources>-->
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -23,16 +29,21 @@
             </Grid.RowDefinitions>
 
             <!--Pannel settings -->
-            <local:SettingsPannel />
+            <local:SettingsPannel IsEnabled="{Binding Path=IsVisible, ElementName=spinner}"/>
 
-            <fa:ImageAwesome x:Name="spinner" Icon="Spinner" SpinDuration="4" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <fa:ImageAwesome x:Name="spinner" Visibility="Hidden" Icon="Spinner" Spin="True" SpinDuration="4" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <Button x:Name="buttonTest" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-            <!--Pannel connection-->
-            <local:ConnectPannel x:Name="connectPannel" ShowLoadSpinner="{Binding Path=IsEnabled, ElementName=buttonTest, Mode=TwoWay}"/>
-            <!--<local:ConnectPannel x:Name="connectPannel" ShowLoadSpinner="{Binding Path=Spin, ElementName=Spinner, Mode=OneWay}"/>-->
             
+            <!--Path="IsVisible" Converter="{StaticResource con}" Mode="TwoWay"-->
+            <local:ConnectPannel x:Name="connectPannel" ShowLoadSpinner="{Binding Path=Visibility, ElementName=spinner, Mode=TwoWay}"
+                                 Margin="3,-31,-3,31" Grid.ColumnSpan="2">
+
+                <!--<MultiBinding Converter="{StaticResource Converter}" UpdateSourceTrigger="PropertyChanged">
+                    <Binding ElementName="txtFirstName" Path="Text" />
+                    <Binding ElementName="txtLastName" Path="Text" />
+                </MultiBinding>-->
+            </local:ConnectPannel>
+
             <!--Pannel real time data-->
             <!--<RealTime:RealTimePanel Grid.Row="0" Grid.Column="1"/>-->
         </Grid>

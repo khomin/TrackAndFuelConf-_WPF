@@ -27,10 +27,6 @@ namespace trackerWpfConf
 
             mainViewModel = new MainViewModel();
             DataContext = mainViewModel;
-
-            //connectPannel.DataContextChanged += (o, e) => {
-            //    spinner.Visibility = Visibility.Hidden;
-            //};
         }
     }
 }

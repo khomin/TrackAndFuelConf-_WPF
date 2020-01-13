@@ -70,21 +70,5 @@ namespace trackerWpfConf.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        private bool _showLoadSpinner = false;
-
-        public bool ShowLoadSpinner
-        {
-            get
-            {
-                return _showLoadSpinner;
-            }
-
-            set
-            {
-                _showLoadSpinner = value;
-                OnPropertyChanged();
-            }
-        }
     }
 }
