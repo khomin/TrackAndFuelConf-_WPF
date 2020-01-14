@@ -34,16 +34,15 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
-                <!--<local:SettingsPannel Grid.Row="0" IsEnabled="{Binding IsVisible, Converter={StaticResource converter}, ElementName=spinner}"  Height="Auto"/>-->
+
+                <local:SettingsPannel Grid.Row="0" IsEnabled="{Binding ConnectViewModel.MainFormIsAvailableForInteracting}" Height="Auto"/>
 
                 <local:ConnectPannel x:Name="connectPannel" Grid.Row="1" Height="50" DataContext="{Binding .}"/>
-                <!--ShowLoadSpinner="{Binding Visibility, ElementName=spinner, Mode=TwoWay}" Height="50"/>-->
             </Grid>
 
             <local:RightPanel DataContext="{Binding .}" Grid.Row="0" Grid.Column="1"/>
-            
-            <fa:ImageAwesome x:Name="spinner" Visibility="{Binding ConnectViewModel.IsConnected}" 
+
+            <fa:ImageAwesome x:Name="spinner" Visibility="{Binding ConnectViewModel.LoadingViewIsShow}" 
                              Icon="Spinner" Spin="True" SpinDuration="4" Width="100" Height="100" 
                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>

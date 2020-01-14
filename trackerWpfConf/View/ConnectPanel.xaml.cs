@@ -34,12 +34,14 @@ namespace trackerWpfConf
         {
             InitializeComponent();
 
-            //_connectPannelViewModel = new ConnectPannelViewModel();
-            //DataContext = _connectPannelViewModel;
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
+                viewModel = this.DataContext as MainViewModel;
+            };
         }
 
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
+            viewModel.ConnectViewModel.IsConnected = true;
             //    //_connectPannelViewModel.ResearchPorts();
             //    //PortComBox.SelectedIndex = 0;
         }
@@ -128,5 +130,21 @@ namespace trackerWpfConf
         //    get { return (MainViewModel)GetValue(MyRealDataContextProperty); }
         //    set { SetValue(MyRealDataContextProperty, value); }
         //}
+
+        //public static readonly DependencyProperty MyDataContextProperty = 
+        //    DependencyProperty.Register(null, "MyDataContext", typeof(object), typeof(ConnectPannel), new PropertyMetadata(MyDataContextChangedCallback));
+
+        //private PropertyMetadata MyDataContextChangedCallback;
+
+        //private void MyDataContextChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e) 
+        //{
+        //}
+
+        //// create binding in constructor or initialization.
+        //Binding binding = new Binding("DataContext");
+
+        //BindingOperations.SetBinding(this, MyDataContextProperty, binding);
+
+        //BindingOperations.SetBinding(this, MyDataContextProperty, binding);
     }
 }

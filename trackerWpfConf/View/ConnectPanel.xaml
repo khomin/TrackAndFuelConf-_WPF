@@ -7,8 +7,7 @@
                     d:DesignHeight="600"
                     d:DesignWidth="800"
                     mc:Ignorable="d"
-                 d:DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MainViewModel}}, Path=ViewModel}">
-
+             d:DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainViewModel}}">
     <!--DataContext="{Binding RelativeSource={RelativeSource Self}}">-->
     <!--d:DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MainViewModel}}, Path=ViewModel}">-->
 
@@ -51,7 +50,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="statusConnect" Text="{Binding StatusConnect}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                <TextBlock x:Name="statusConnect" Text="{Binding ConnectViewModel.StatusConnect}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center" />
                 <Rectangle x:Name="statusRectangle" Height="5" Width="200"  Grid.Row="1" Grid.Column="0" Fill="{Binding ConnectViewModel.ColorStatus}"/>
             </Grid>
 

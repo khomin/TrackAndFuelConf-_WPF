@@ -17,6 +17,7 @@ namespace trackerWpfConf.ViewModel
         {
             _rightPannelViewModel = new RightPannelViewModel();
             _connectPannelViewModel = new ConnectPannelViewModel();
+            _connectPannelViewModel.StatusConnect = "undefined";
         }
 
         public RightPannelViewModel RightPannelViewModel
@@ -33,13 +34,6 @@ namespace trackerWpfConf.ViewModel
             {
                 return _connectPannelViewModel;
             }
-        }
-
-        private string _statusConnect = "na";
-
-        public string StatusConnect 
-        {
-            get => _statusConnect;
         }
     }
 }

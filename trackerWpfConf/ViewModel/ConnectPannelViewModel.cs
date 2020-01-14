@@ -18,13 +18,14 @@ namespace trackerWpfConf.ViewModel
         private Brush _colorStatus;
         private Visibility _loadingViewIsShow;
         private bool _mainFormIsAvailableForInteracting;
+        private string _statusConnect = "na";
 
         public ConnectPannelViewModel()
         {
             _portList = new ObservableCollection<string>(SerialPort.GetPortNames().ToList());
             _isConnected = false;
             _colorStatus = Brushes.Red;
-            _loadingViewIsShow = Visibility.Hidden;
+            LoadingViewIsShow = Visibility.Hidden;
             _mainFormIsAvailableForInteracting = false;
         }
 
@@ -77,6 +78,36 @@ namespace trackerWpfConf.ViewModel
             set
             {
                 _colorStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool MainFormIsAvailableForInteracting
+        {
+            get => _mainFormIsAvailableForInteracting; 
+            set
+            {
+                _mainFormIsAvailableForInteracting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility LoadingViewIsShow
+        {
+            get => _loadingViewIsShow;
+            set
+            {
+                _loadingViewIsShow = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string StatusConnect
+        {
+            get => _statusConnect;
+            set 
+            {
+                _statusConnect = value;
                 OnPropertyChanged();
             }
         }
