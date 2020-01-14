@@ -17,7 +17,6 @@ namespace trackerWpfConf.ViewModel
         {
             _rightPannelViewModel = new RightPannelViewModel();
             _connectPannelViewModel = new ConnectPannelViewModel();
-            _connectPannelViewModel.StatusConnect = "undefined";
         }
 
         public RightPannelViewModel RightPannelViewModel

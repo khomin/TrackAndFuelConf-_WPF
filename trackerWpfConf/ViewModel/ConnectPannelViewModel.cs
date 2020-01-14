@@ -54,10 +54,12 @@ namespace trackerWpfConf.ViewModel
                 if (value)
                 {
                     ColorStatus = Brushes.Green;
+                    MainFormIsAvailableForInteracting = true;
                 }
                 else
                 {
                     ColorStatus = Brushes.Red;
+                    MainFormIsAvailableForInteracting = false;
                 }
 
                 OnPropertyChanged();

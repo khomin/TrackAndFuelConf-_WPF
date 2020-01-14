@@ -24,11 +24,9 @@ namespace trackerWpfConf
     /// </summary>
     public partial class ConnectPannel : UserControl
     {
-        //private readonly ConnectPannelViewModel viewModel;
-
         private MainViewModel viewModel;
 
-        //private TrackerSerialPort _serialPortHandler;
+        private TrackerSerialPort _serialPortHandler;
 
         public ConnectPannel()
         {
@@ -42,109 +40,43 @@ namespace trackerWpfConf
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
             viewModel.ConnectViewModel.IsConnected = true;
-            //    //_connectPannelViewModel.ResearchPorts();
-            //    //PortComBox.SelectedIndex = 0;
+            viewModel.ConnectViewModel.ResearchPorts();
+            PortComBox.SelectedIndex = 0;
         }
 
         private void connectReconnect(object sender, RoutedEventArgs e)
         {
-            //    //_serialPortHandler = new TrackerSerialPort(
-            //    //    PortComBox.Text,
-            //    //    115200,
-            //    //Parity.None,
-            //    //8,
-            //    //StopBits.One,
-            //    //(data) =>
-            //    //    {
-            //    //        _connectPannelViewModel.IsConnected = true;
-            //    //        //ShowLoadSpinner = Visibility.Hidden;
-            //    //        Trace.WriteLine(data);
-            //    //    },
-            //    //() =>
-            //    //{
-            //    //    this.Dispatcher.Invoke(() =>
-            //    //    {
-            //    //        _connectPannelViewModel.IsConnected = false;
-            //    //        ShowLoadSpinner = Visibility.Hidden;
-            //    //        MessageBoxResult result = MessageBox.Show("Connection lost",
-            //    //                              "Warning",
-            //    //                              MessageBoxButton.OK,
-            //    //                              MessageBoxImage.Warning);
-            //    //    });
-            //    //}
-            //    //);
-            //    //_serialPortHandler.Open();
-            //    //ShowLoadSpinner = Visibility.Visible;
+            _serialPortHandler = new TrackerSerialPort(
+                PortComBox.Text,
+                115200,
+            Parity.None,
+            8,
+            StopBits.One,
+            (data) =>
+                {
+                    viewModel.ConnectViewModel.IsConnected = true;
+                    viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
+                    viewModel.ConnectViewModel.StatusConnect = "Connected";
+
+                    Trace.WriteLine(data);
+                },
+            () =>
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    viewModel.ConnectViewModel.IsConnected = false;
+                    viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
+                    viewModel.ConnectViewModel.StatusConnect = "Disconnected";
+                    MessageBoxResult result = MessageBox.Show("Connection lost",
+                                          "Warning",
+                                          MessageBoxButton.OK,
+                                          MessageBoxImage.Warning);
+                });
+            }
+            );
+            _serialPortHandler.Open();
+            viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
+            viewModel.ConnectViewModel.StatusConnect = "Connecting";
         }
-
-
-        //public Visibility ShowLoadSpinner
-        //{
-        //    get { return (Visibility)GetValue(ShowLoadSpinnerProperty); }
-        //    set { SetValue(ShowLoadSpinnerProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty ShowLoadSpinnerProperty =
-        //    DependencyProperty.Register("ShowLoadSpinner", typeof(Visibility), typeof(ConnectPannel), new UIPropertyMetadata(Visibility.Hidden, OnMyPropertyChanged));
-
-        //public static void OnMyPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        //{
-        //    // code to be executed when property changed
-        //}
-
-        //public MainViewModel ViewModel
-        //{
-        //    get { return (MainViewModel)GetValue(ViewModelProperty); }
-        //    set { SetValue(ViewModelProperty, value); }
-        //}
-        //public static DependencyProperty ViewModelProperty = DependencyProperty.Register("ViewModel", typeof(string), typeof(ConnectPannel), new PropertyMetadata(null));
-
-        //public string Header
-        //{
-        //    get { return (string)GetValue(HeaderProperty); }
-        //    set { SetValue(HeaderProperty, value); }
-        //}
-        //public static DependencyProperty HeaderProperty =
-        //    DependencyProperty.Register("Header", typeof(string), typeof(ConnectPannel), new PropertyMetadata(null));
-
-        //public static readonly DependencyProperty MyRealDataContextProperty =
-        //DependencyProperty.Register(
-        //    "MyRealDataContext",
-        //    typeof(MainViewModel),
-        //    typeof(ConnectPannel),
-        //    new UIPropertyMetadata());
-        //public MainViewModel MyRealDataContext
-        //{
-        //    get { return (MainViewModel)GetValue(MyRealDataContextProperty); }
-        //    set { SetValue(MyRealDataContextProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty MyRealDataContextProperty = DependencyProperty.Register("ViewModel",
-        //    typeof(MainViewModel),
-        //    typeof(MainViewModel),
-        //    new PropertyMetadata(default(ConnectPannelViewModel))
-        //);
-
-        //public MainViewModel MyRealDataContext
-        //{
-        //    get { return (MainViewModel)GetValue(MyRealDataContextProperty); }
-        //    set { SetValue(MyRealDataContextProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty MyDataContextProperty = 
-        //    DependencyProperty.Register(null, "MyDataContext", typeof(object), typeof(ConnectPannel), new PropertyMetadata(MyDataContextChangedCallback));
-
-        //private PropertyMetadata MyDataContextChangedCallback;
-
-        //private void MyDataContextChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e) 
-        //{
-        //}
-
-        //// create binding in constructor or initialization.
-        //Binding binding = new Binding("DataContext");
-
-        //BindingOperations.SetBinding(this, MyDataContextProperty, binding);
-
-        //BindingOperations.SetBinding(this, MyDataContextProperty, binding);
     }
 }

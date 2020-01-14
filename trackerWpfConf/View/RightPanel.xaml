@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Width="300">
+             mc:Ignorable="d" Width="300"
+             xmlns:local="clr-namespace:trackerWpfConf.ViewModel"
+             DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainViewModel}}">
     <Border Background="#ebedf0">
         <Grid>
             <Grid.Resources>
@@ -55,7 +57,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="IMEI" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox x:Name="Imei" Grid.Row="0" Grid.Column="1" Text="{Binding Path=IMEI}"/>
+                        <TextBox x:Name="Imei" Grid.Row="0" Grid.Column="1" Text="{Binding RightPannelViewModel.CurrentData.ImeiModemValue}"/>
 
                         <TextBlock Text="AIN1" Grid.Row="1" Grid.Column="0"/>
                         <TextBox x:Name="AIn1" Grid.Row="1" Grid.Column="1" Text="{Binding Path=IMEI}"/>

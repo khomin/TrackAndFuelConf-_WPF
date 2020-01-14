@@ -11,12 +11,12 @@ namespace trackerWpfConf.ViewModel
         private readonly CurrentDataViewModel _currentDataViewModel = new CurrentDataViewModel();
         private readonly StatusDataViewModel _statusDataViewModel = new StatusDataViewModel();
 
-        public CurrentDataViewModel Model
+        public CurrentDataViewModel CurrentData
         {
             get { return _currentDataViewModel; }
         }
 
-        public StatusDataViewModel StatusDataViewModel
+        public StatusDataViewModel StatusErrors
         {
             get { return _statusDataViewModel; }
         }
