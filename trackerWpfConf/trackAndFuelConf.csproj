@@ -135,9 +135,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Instrumentals\TrackerCommandParser.cs" />
-    <Compile Include="Instrumentals\TrackerParserCrc.cs" />
-    <Compile Include="Instrumentals\TrackerParserDataDebug.cs" />
+    <Compile Include="Instrumentals\TrackerDataResult.cs" />
+    <Compile Include="Instrumentals\TrackerParserData.cs" />
     <Compile Include="Instrumentals\TrackerParserDataAbstract.cs" />
     <Compile Include="Instrumentals\TrackerSerialPort.cs" />
     <Compile Include="Instrumentals\TrackerTypeData.cs" />
@@ -224,6 +223,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

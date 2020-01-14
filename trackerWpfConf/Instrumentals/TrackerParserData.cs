@@ -14,7 +14,7 @@ namespace trackerWpfConf.Instrumentals
             this.data = data;
         }
 
-        protected override TrackerDataResult Parse()
+        public override TrackerDataResult Parse()
         {
             TrackerDataResult result = null;
             CRCManager manager = new CRCManager() { DataFormat = EnumOriginalDataFormat.HEX };
@@ -36,7 +36,7 @@ namespace trackerWpfConf.Instrumentals
             return result;
         }
 
-        protected override TrackerDataResult Parse(byte[] data)
+        public override TrackerDataResult Parse(byte[] data)
         {
             this.data = data;
             return Parse();

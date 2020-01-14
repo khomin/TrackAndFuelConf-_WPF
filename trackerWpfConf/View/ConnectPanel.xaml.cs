@@ -54,11 +54,7 @@ namespace trackerWpfConf
             StopBits.One,
             (data) =>
                 {
-                    viewModel.ConnectViewModel.IsConnected = true;
-                    viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
-                    viewModel.ConnectViewModel.StatusConnect = "Connected";
-
-                    Trace.WriteLine(data);
+                    DataReceiveHandle(data);
                 },
             () =>
             {
@@ -77,6 +73,35 @@ namespace trackerWpfConf
             _serialPortHandler.Open();
             viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
             viewModel.ConnectViewModel.StatusConnect = "Connecting";
+
+            /* TEST ONLY !!! */
+            System.Timers.Timer testTimer = new System.Timers.Timer(3000);
+            testTimer.AutoReset = true;
+            testTimer.Enabled = true;
+            testTimer.Elapsed += (sourse, evendt) =>
+            {
+                DataReceiveHandle(new List<int>(10));
+            };
+        }
+
+        private void DataReceiveHandle(List<int> data)
+        {
+            viewModel.ConnectViewModel.IsConnected = true;
+            viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
+            viewModel.ConnectViewModel.StatusConnect = "Connected";
+
+            byte[] test = { 0x24, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x16, 0x00, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6C, 0x74, 0x20, 0x74, 0x61, 0x73, 0x6B, 0x20, 0x77, 0x6F, 0x72, 0x6B, 0x69, 0x6E, 0x67, 0x0D, 0x0A, 0xB3 };
+            data.Clear();
+            for (int i = 0; i < test.Length; i++)
+            {
+                data.Add(test[i]);
+            }
+
+            TrackerParserData parserData = new TrackerParserData();
+            TrackerDataResult result = parserData.Parse(test);
+            Trace.WriteLine(data);
+
+            //viewModel.RightPannelViewModel.CurrentData.Ain1Value = 
         }
     }
 }

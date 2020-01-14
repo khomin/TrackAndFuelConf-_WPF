@@ -11,8 +11,8 @@ namespace trackerWpfConf.Instrumentals
         protected byte[] data;
         protected uint crcResult;
 
-        protected abstract TrackerDataResult Parse();
+        public abstract TrackerDataResult Parse();
 
-        protected abstract TrackerDataResult Parse(byte[] data);
+        public abstract TrackerDataResult Parse(byte[] data);
     }
 }
