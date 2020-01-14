@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Projects\TrackAndFuelConf\trackerWpfConf\obj\Debug\
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\
 trackerWpfConf
 none
 false
 DEBUG;TRACE
-C:\Projects\TrackAndFuelConf\trackerWpfConf\App.xaml
-81054269768
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\App.xaml
+8-404740398
 
-21961564982
-1371530424137
-Resources\Icons.xaml;Resources\IconsNonShared.xaml;View\ConnectPanel.xaml;View\MainWindow.xaml;View\RealTimePanel.xaml;View\SettingsPanel.xaml;View\SettingsCommunication.xaml;View\SettingsConnection.xaml;
+211676392477
+137-2085544533
+Resources\Icons.xaml;Resources\IconsNonShared.xaml;View\ConnectPanel.xaml;View\MainWindow.xaml;View\RightPanel.xaml;View\SettingsPanel.xaml;View\SettingsCommunication.xaml;View\SettingsConnection.xaml;
 
 False
 

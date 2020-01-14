@@ -9,6 +9,12 @@ namespace trackerWpfConf.ViewModel
 {
     class MainViewModel : ViewModelBase
     {
+        private RightPannelViewModel _rightPannelViewModel;
+
+        public RightPannelViewModel RightPannelViewModel
+        {
+            get => _rightPannelViewModel;
+        }
 
     }
 }

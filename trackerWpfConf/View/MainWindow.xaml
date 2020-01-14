@@ -5,8 +5,8 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:fa="http://schemas.fontawesome.io/icons/"
                       xmlns:l="clr-namespace:trackerWpfConf.Resources"
-                      Title="" Width="1100" Height="600">
-
+                      Title="Tracker configure" Width="1100" Height="600"
+                      DataContext="{StaticResource MainViewModel}">
     <Window.Resources>
         <l:BoolInvertionConverter x:Key="converter" />
     </Window.Resources>
@@ -38,7 +38,7 @@
                 <local:ConnectPannel x:Name="connectPannel" Grid.Row="1" ShowLoadSpinner="{Binding Visibility, ElementName=spinner, Mode=TwoWay}" Height="50"/>
             </Grid>
 
-            <local:RealTimePanel Grid.Row="0" Grid.Column="1"/>
+            <local:RightPanel DataContext="{Binding Path=MainViewModel.RightPannelViewModel}" Grid.Row="0" Grid.Column="1"/>
             
             <fa:ImageAwesome x:Name="spinner" Visibility="Hidden" Icon="Spinner" Spin="True" SpinDuration="4" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>

@@ -133,8 +133,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Instrumentals\TrackerSerialPort.cs" />
-    <Compile Include="View\RealTimePanel.xaml.cs">
-      <DependentUpon>RealTimePanel.xaml</DependentUpon>
+    <Compile Include="View\RightPanel.xaml.cs">
+      <DependentUpon>RightPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Converter.cs" />
     <Compile Include="ViewModel\ConnectPannelViewModel.cs" />
@@ -181,7 +181,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\RealTimePanel.xaml">
+    <Page Include="View\RightPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

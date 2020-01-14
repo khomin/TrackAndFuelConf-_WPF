@@ -273,8 +273,8 @@ C:\Projects\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPanel.g.cs
 C:\Projects\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPanel.g.cs
 C:\Projects\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPanel.baml
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPanel.baml
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\RealTimePanel.baml
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectPanel.g.cs
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\RealTimePanel.g.cs
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPanel.g.cs
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\SettingsPanel.baml
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\RightPanel.baml
+C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\RightPanel.g.cs
