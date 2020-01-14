@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace trackerWpfConf.ViewModel
@@ -15,12 +16,16 @@ namespace trackerWpfConf.ViewModel
 
         private bool _isConnected;
         private Brush _colorStatus;
+        private Visibility _loadingViewIsShow;
+        private bool _mainFormIsAvailableForInteracting;
 
         public ConnectPannelViewModel()
         {
             _portList = new ObservableCollection<string>(SerialPort.GetPortNames().ToList());
             _isConnected = false;
             _colorStatus = Brushes.Red;
+            _loadingViewIsShow = Visibility.Hidden;
+            _mainFormIsAvailableForInteracting = false;
         }
 
         public ObservableCollection<string> PortsList
