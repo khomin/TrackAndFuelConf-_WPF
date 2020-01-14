@@ -123,6 +123,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Tako.CRC, Version=1.0.3.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tako.CRC.1.0.3.4\lib\net40-client\Tako.CRC.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -132,7 +135,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Instrumentals\TrackerCommandParser.cs" />
+    <Compile Include="Instrumentals\TrackerParserCrc.cs" />
+    <Compile Include="Instrumentals\TrackerParserDataDebug.cs" />
+    <Compile Include="Instrumentals\TrackerParserDataAbstract.cs" />
     <Compile Include="Instrumentals\TrackerSerialPort.cs" />
+    <Compile Include="Instrumentals\TrackerTypeData.cs" />
     <Compile Include="View\RightPanel.xaml.cs">
       <DependentUpon>RightPanel.xaml</DependentUpon>
     </Compile>
