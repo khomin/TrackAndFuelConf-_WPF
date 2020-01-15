@@ -16,7 +16,7 @@ namespace trackerWpfConf.ViewModel
             get { return _currentDataViewModel; }
         }
 
-        public StatusDataViewModel StatusErrors
+        public StatusDataViewModel StatusInfo
         {
             get { return _statusDataViewModel; }
         }

@@ -18,9 +18,7 @@ namespace trackerWpfConf.Instrumentals
         public enum KeyParameter
         {
             DbgLevel = 0x00,
-            DbgMessage = 0x01,
-            Imei = 0x03,
-            Temperature = 0x04
+            DbgMessage = 0x01
         }
 
         public enum TypeParameter

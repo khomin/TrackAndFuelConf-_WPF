@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" Width="300"
              xmlns:local="clr-namespace:trackerWpfConf.ViewModel"
+             xmlns:l="clr-namespace:trackerWpfConf.Resources"
              DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainViewModel}}">
     <Border Background="#ebedf0">
         <Grid>
@@ -131,6 +132,7 @@
                     </Grid>
 
                 </TabItem>
+
                 <TabItem Header="Status" Background="#ebedf0" MinWidth="100">
                     <Grid Grid.Row="1" Background="#ebedf0" Margin="10,10,10,10">
                         <Grid.ColumnDefinitions>
@@ -148,6 +150,69 @@
 
                         <TextBlock Text="Crystal 32KHz" Grid.Row="1" Grid.Column="0" Margin="10,0,10,0" VerticalAlignment="Center"/>
                         <Border Background="Red" MinWidth="20" MinHeight="20" MaxHeight="20" MaxWidth="20" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Debug" Background="#ebedf0" MinWidth="100">
+                    <Grid Grid.Row="1" Background="#ebedf0" Margin="10,10,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,0">
+                            <ItemsControl ItemsSource="{Binding RightPannelViewModel.StatusInfo.Log}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="local:Log">
+                                        <TextBlock Text="{Binding Message}" x:Name="MessageText"/>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Type}" Value="DbgLevel">
+                                                <Setter TargetName="MessageText" Property="Foreground" Value="Orange" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Type}" Value="DbgMessage">
+                                                <Setter TargetName="MessageText" Property="Foreground" Value="Gray" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Log" Background="#ebedf0" MinWidth="100">
+                    <Grid Grid.Row="1" Background="#ebedf0" Margin="10,10,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition MinWidth="50"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,0">
+                            <ItemsControl ItemsSource="{Binding RightPannelViewModel.StatusInfo.Log}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="local:Log">
+                                        <TextBlock Text="{Binding Message}" x:Name="MessageText"/>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Type}" Value="DbgLevel">
+                                                <Setter TargetName="MessageText" Property="Foreground" Value="Orange" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Type}" Value="DbgMessage">
+                                                <Setter TargetName="MessageText" Property="Foreground" Value="Gray" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </Grid>
                 </TabItem>
             </TabControl>

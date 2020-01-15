@@ -99,9 +99,52 @@ namespace trackerWpfConf
 
             TrackerParserData parserData = new TrackerParserData();
             var result = parserData.Parse(test);
-            Trace.WriteLine(data);
 
-            //viewModel.RightPannelViewModel.CurrentData.Ain1Value = 
+
+            switch (result.type)
+            {
+                case TrackerTypeData.TypePacketData.Request:
+                    break;
+                case TrackerTypeData.TypePacketData.Answer:
+                    break;
+                case TrackerTypeData.TypePacketData.AsyncData:
+                    foreach (var i in result.data) 
+                    {
+                        switch (i.Key)
+                        {
+                            case TrackerTypeData.KeyParameter.DbgLevel:
+                                if (i.Data.GetType() == typeof(int))
+                                {
+                                    Console.WriteLine(i.Data);
+                                }
+                                else if (i.Data.GetType() == typeof(bool))
+                                {
+                                    Console.WriteLine(i.Data);
+                                }
+                                else if (i.Data.GetType() == typeof(Single))
+                                {
+                                    Console.WriteLine(i.Data);
+                                }
+                                else if (i.Data.GetType() == typeof(string)) 
+                                {
+                                    Console.WriteLine(i.Data);
+                                }
+                                else
+                                {
+
+                                }
+                                break;
+
+                            case TrackerTypeData.KeyParameter.DbgMessage:
+                                App.Current.Dispatcher.Invoke((Action)delegate
+                                {
+                                    viewModel.RightPannelViewModel.StatusInfo.Log.Add(item: new StatusDataViewModel.LogItem { Message = i.Data.ToString(), Type = i.Key });
+                                });
+                                break;
+                        }
+                    }
+                    break;
+            }
         }
     }
 }

@@ -4,13 +4,8 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:fa="http://schemas.fontawesome.io/icons/"
-                      xmlns:l="clr-namespace:trackerWpfConf.Resources"
                       Title="Tracker configure" Width="1100" Height="600"
                       DataContext="{StaticResource MainViewModel}">
-    <Window.Resources>
-        <l:BoolInvertionConverter x:Key="converter" />
-    </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

@@ -18,7 +18,7 @@ namespace trackerWpfConf.ViewModel
         private Brush _colorStatus;
         private Visibility _loadingViewIsShow;
         private bool _mainFormIsAvailableForInteracting;
-        private string _statusConnect = "na";
+        private string _statusConnect = "Disconnected";
 
         public ConnectPannelViewModel()
         {
