@@ -206,9 +206,7 @@ C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfCo
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\trackerWpfConf.exe.config
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\trackerWpfConf.exe
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\trackerWpfConf.pdb
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\CalcBinding.dll
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\ControlzEx.dll
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\DynamicExpresso.Core.dll
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\FontAwesome.WPF.dll
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\MahApps.Metro.dll
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\Microsoft.CodeAnalysis.CSharp.dll

@@ -98,7 +98,7 @@ namespace trackerWpfConf
             }
 
             TrackerParserData parserData = new TrackerParserData();
-            TrackerDataResult result = parserData.Parse(test);
+            var result = parserData.Parse(test);
             Trace.WriteLine(data);
 
             //viewModel.RightPannelViewModel.CurrentData.Ain1Value = 

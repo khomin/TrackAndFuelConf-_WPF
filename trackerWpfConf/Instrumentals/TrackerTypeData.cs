@@ -10,34 +10,44 @@ namespace trackerWpfConf.Instrumentals
     {
         public enum TypePacketData
         {
-            headerData = 0x31,
-            answer = 0x3e,
-            asyncData = 0x24
+            Request = 0x31,
+            Answer = 0x3e,
+            AsyncData = 0x24
         }
 
         public enum KeyParameter
         {
-            DBG_LEVEL = 0x00,
-            DBG_MSG = 0x01
+            DbgLevel = 0x00,
+            DbgMessage = 0x01,
+            Imei = 0x03,
+            Temperature = 0x04
         }
 
-        enum TypeMessage
+        public enum TypeParameter
+        {
+            ParamTypeInt  = 0x00,
+            ParamTypeFloat = 0x01,
+            ParamTypeString = 0x03,
+            ParamTypeBool = 0x04,
+            ParamTypeBinary = 0x05
+        }
+
+        public enum TypeMessage
         {
             Debug = 0x00,
             Status = 0x01,
             Data = 0x02,
             AsyncData = 0x03,
             Settings = 0x04,
-            Log = 0x05
+            Log = 0x05,
+            Undefined = 0xff
         }
 
-        enum TypeData
+        public enum PacketField
         {
-            Int = 0x00,
-            Float = 0x01,
-            String = 0x02,
-            Boolean = 0x03,
-            Binary = 0x04
+            Header = 0x00,
+            TypePacket = 0x01,
+            ParamsCount = 0X02
         }
     }
 }
