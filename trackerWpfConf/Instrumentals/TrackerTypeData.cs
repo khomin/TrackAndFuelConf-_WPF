@@ -27,9 +27,9 @@ namespace trackerWpfConf.Instrumentals
         {
             ParamTypeInt  = 0x00,
             ParamTypeFloat = 0x01,
-            ParamTypeString = 0x03,
-            ParamTypeBool = 0x04,
-            ParamTypeBinary = 0x05
+            ParamTypeString = 0x02,
+            ParamTypeBool = 0x03,
+            ParamTypeBinary = 0x04
         }
 
         public enum TypeMessage

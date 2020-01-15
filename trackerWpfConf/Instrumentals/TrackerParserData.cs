@@ -49,9 +49,11 @@ namespace trackerWpfConf.Instrumentals
             while (paramsCount != 0)
             {
                 DataItemParam dataField = new DataItemParam();
-                dataField.Key = (TrackerTypeData.KeyParameter)(int)data[beginIndex];
+                dataField.Key = (TrackerTypeData.KeyParameter)(int)data[beginIndex++];
                 int len;
-                switch ((TrackerTypeData.TypeParameter)(int)data[beginIndex++])
+                var paramType = (TrackerTypeData.TypeParameter)(int)data[beginIndex];
+                beginIndex += 1;
+                switch (paramType)
                 {
                     case TrackerTypeData.TypeParameter.ParamTypeInt:
                         dataField.Type = typeof(int);
@@ -66,7 +68,6 @@ namespace trackerWpfConf.Instrumentals
                     case TrackerTypeData.TypeParameter.ParamTypeString:
                         len = BitConverter.ToUInt16(data, beginIndex);
                         beginIndex += 2;
-
                         dataField.Data = System.Text.Encoding.UTF8.GetString(data, beginIndex, len);
                         beginIndex += len;
                         dataField.Type = typeof(string);
@@ -89,7 +90,6 @@ namespace trackerWpfConf.Instrumentals
                 paramsCount -= 1;
                 list.Add(dataField);
             }
-
             return list;
         }
     }
