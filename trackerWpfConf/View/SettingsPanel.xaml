@@ -4,24 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              MinWidth="200" MinHeight="200">
     <Grid>
         <TabControl x:Name="SettingsTabPanel">
-            <TabItem Header="Communication">
+            <TabItem Header="Communication" mah:ControlsHelper.HeaderFontSize="16">
                 <SettingsApp:SettingsCommunication Width="Auto" Height="Auto"/>
             </TabItem>
-            
-            <TabItem Header="System">
-            </TabItem>
-            
-            <TabItem Header="Inputs/Outputs">
+
+            <TabItem Header="System" mah:ControlsHelper.HeaderFontSize="16">
             </TabItem>
 
-            <TabItem Header="Geofence">
+            <TabItem Header="Inputs/Outputs" mah:ControlsHelper.HeaderFontSize="16">
             </TabItem>
 
-            <TabItem Header="SMS alarm">
+            <TabItem Header="Geofence" mah:ControlsHelper.HeaderFontSize="16">
+            </TabItem>
+
+            <TabItem Header="SMS alarm" mah:ControlsHelper.HeaderFontSize="16">
             </TabItem>
             
         </TabControl>
