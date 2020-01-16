@@ -1,5 +1,9 @@
 ﻿using MahApps.Metro.Controls;
+using System;
 using System.Windows;
+using System.Windows.Navigation;
+using trackerWpfConf.View.Tracker;
+using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf.View
 {
@@ -8,24 +12,14 @@ namespace trackerWpfConf.View
     /// </summary>
     public partial class Main : MetroWindow
     {
+        private MainViewModel viewModel;
         public Main()
         {
             InitializeComponent();
-        }
+            viewModel = new MainViewModel();
+            DataContext = viewModel;
 
-        private void connectPannel_ConnectEvent(object sender, System.EventArgs e)
-        {
-            ConnectDialog connectDialog = new ConnectDialog();
-            connectDialog.WindowStartupLocation = WindowStartupLocation.Manual;
-            connectDialog.WindowStyle = WindowStyle.None;
-            connectDialog.ShowInTaskbar = false;
-            connectDialog.ResizeMode = ResizeMode.NoResize;
-            connectDialog.AllowsTransparency = true;
-            var ownerContent = (FrameworkElement)Content;
-            var contentPoints = ownerContent.PointToScreen(new Point(0, 0));
-            connectDialog.Top = ownerContent.ActualHeight / 2;
-            connectDialog.Left = ownerContent.ActualWidth / 2;
-            var dialog = connectDialog.ShowDialog();
+            viewModel.NavigateContent = new StartPanel(viewModel);
         }
     }
 }

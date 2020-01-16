@@ -1,11 +1,14 @@
 ﻿
 FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\App.xaml;;
 FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\ConnectDialog.xaml;;
+FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\ConnectPanel.xaml;;
 FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Main.xaml;;
+FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\StartPanel.xaml;;
+FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\Page1.xaml;;
 FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerConnectPanel.xaml;;
+FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerMainPanel.xaml;;
 FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerRightPanel.xaml;;
 FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerSettingsPanel.xaml;;
 FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerSettingsCommunication.xaml;;
 FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerSettingsConnection.xaml;;
-FC:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\ConnectPanel.xaml;;
 

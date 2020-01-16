@@ -15,13 +15,6 @@ namespace trackerWpfConf.ViewModel
         private string apnPassword = "defaultPassword";
         private string apnPdp = "defaultPdp";
 
-        //public SettingsCommunicationViewModel()
-        //{
-        //    _settingsConnection = new ObservableCollection<SettingsConnectionViewModel>();
-        //    _settingsConnection.Add(new SettingsConnectionViewModel() { Header = "Primary server", Address = "192.168.15.74" });
-        //    _settingsConnection.Add(new SettingsConnectionViewModel() { Header = "Reserve server" });
-        //}
-
         ObservableCollection<SettingsConnectionViewModel> _settingsConnection;
         public ObservableCollection<SettingsConnectionViewModel> SettingsConnection
         {

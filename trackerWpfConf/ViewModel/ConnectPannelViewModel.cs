@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace trackerWpfConf.ViewModel
 {
-    class ConnectPannelViewModel : ViewModelBase
+    public class ConnectPannelViewModel : ViewModelBase
     {
         private ObservableCollection<string> _portList;
 

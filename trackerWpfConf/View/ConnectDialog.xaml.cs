@@ -10,13 +10,11 @@ namespace trackerWpfConf.View
     public partial class ConnectDialog : MetroWindow
     {
         private MainViewModel viewModel;
-        public ConnectDialog()
+        public ConnectDialog(MainViewModel viewModel)
         {
             InitializeComponent();
 
-            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
-                viewModel = this.DataContext as MainViewModel;
-            };
+            this.viewModel = viewModel;
         }
 
         private void connectButton_Click(object sender, System.Windows.RoutedEventArgs e)

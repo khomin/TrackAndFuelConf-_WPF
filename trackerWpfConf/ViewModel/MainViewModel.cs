@@ -1,25 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.Windows.Controls;
 
 namespace trackerWpfConf.ViewModel
 {
-    class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
-        private readonly RightPannelViewModel _rightPannelViewModel;
+        private RightPannelViewModel _rightPannelViewModel;
         
-        private readonly ConnectPannelViewModel _connectPannelViewModel;
+        private ConnectPannelViewModel _connectPannelViewModel;
 
+        private Page _content;
+
+        private int _switchView;
+
+        public int SwitchView
+        {
+            get => _switchView;
+            set 
+            {
+                _switchView = value;
+                OnPropertyChanged();
+            }
+        }
         public MainViewModel() 
         {
             _rightPannelViewModel = new RightPannelViewModel();
             _connectPannelViewModel = new ConnectPannelViewModel();
+            SwitchView = 0;
         }
 
-        public RightPannelViewModel RightPannelViewModel
+        public Page NavigateContent 
+        {
+            get => _content;
+            set 
+            {
+                _content = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RightPannelViewModel RightPannelModel
         {
             get
             {

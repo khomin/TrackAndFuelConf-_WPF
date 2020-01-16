@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace trackerWpfConf.ViewModel
 {
-    class RightPannelViewModel : ViewModelBase
+    public class RightPannelViewModel : ViewModelBase
     {
-        private readonly CurrentDataViewModel _currentDataViewModel = new CurrentDataViewModel();
-        private readonly StatusDataViewModel _statusDataViewModel = new StatusDataViewModel();
+        private CurrentDataViewModel _currentDataViewModel = new CurrentDataViewModel();
+        private StatusDataViewModel _statusDataViewModel = new StatusDataViewModel();
 
         public CurrentDataViewModel CurrentData
         {

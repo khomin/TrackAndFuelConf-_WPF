@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\App.xaml
-10953477007
+13-1256366914
 
-28-2079292753
-135460274332
-Resources\Icons.xaml;Resources\IconsNonShared.xaml;View\ConnectDialog.xaml;View\ConnectPanel.xaml;View\Main.xaml;View\Tracker\TrackerConnectPanel.xaml;View\Tracker\TrackerRightPanel.xaml;View\Tracker\TrackerSettingsPanel.xaml;View\Tracker\TrackerSettingsCommunication.xaml;View\Tracker\TrackerSettingsConnection.xaml;
+31607259907
+13672000665
+Resources\Icons.xaml;Resources\IconsNonShared.xaml;View\ConnectDialog.xaml;View\ConnectPanel.xaml;View\Main.xaml;View\StartPanel.xaml;View\Tracker\Page1.xaml;View\Tracker\TrackerConnectPanel.xaml;View\Tracker\TrackerMainPanel.xaml;View\Tracker\TrackerRightPanel.xaml;View\Tracker\TrackerSettingsPanel.xaml;View\Tracker\TrackerSettingsCommunication.xaml;View\Tracker\TrackerSettingsConnection.xaml;
 
 False
 

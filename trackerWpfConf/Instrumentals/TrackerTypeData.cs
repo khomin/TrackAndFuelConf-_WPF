@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace trackerWpfConf.Instrumentals
 {
-    class TrackerTypeData
+    public class TrackerTypeData
     {
         public enum TypePacketData
         {

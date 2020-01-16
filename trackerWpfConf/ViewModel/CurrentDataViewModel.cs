@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace trackerWpfConf.ViewModel
 {
-    class CurrentDataViewModel : ViewModelBase
+    public class CurrentDataViewModel : ViewModelBase
     {
         private string _imeiModemValue = "11112223344";
         private float _ain1Value = 0.0f;

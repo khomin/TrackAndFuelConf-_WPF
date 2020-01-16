@@ -8,7 +8,7 @@ using trackerWpfConf.Instrumentals;
 
 namespace trackerWpfConf.ViewModel
 {
-    class StatusDataViewModel : ViewModelBase
+    public class StatusDataViewModel : ViewModelBase
     {
         private Boolean _crystal8Mhz;
         private Boolean _crystal16KHz;
