@@ -4,8 +4,8 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:local="clr-namespace:trackerWpfConf.ViewModel"
-                    d:DesignHeight="600"
-                    d:DesignWidth="800"
+                    MinHeight="50"
+                    MinWidth="100"
                     mc:Ignorable="d"
                     DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainViewModel}}">
     <Grid>
@@ -41,7 +41,7 @@
             <!--<Button x:Name="connectButton" Grid.Row="0" Grid.Column="2" Width="Auto" Height="30" Content="Connect" Click="connectReconnect" Margin="5,0,5,0" />
             <Button x:Name="refreshButton" Grid.Row="0" Grid.Column="3" Width="Auto" Height="30" Content="Refresh" Click="refreshButton_Click" Margin="5,0,5,0" />-->
 
-            <Button x:Name="Disconnect" Grid.Row="0" Grid.Column="2" Width="Auto" Height="30" Content="Disconnect" Margin="5,0,5,0" />
+            <Button x:Name="Disconnect" Grid.Row="0" Grid.Column="2" Width="Auto" Height="30" Content="Disconnect" Click="Disconnect_Click" Margin="5,0,5,0" />
             
             <Grid Grid.Row="0" Grid.Column="4">
                 <Grid.RowDefinitions>

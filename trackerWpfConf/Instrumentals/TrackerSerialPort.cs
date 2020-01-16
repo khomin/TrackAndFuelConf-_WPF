@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace trackerWpfConf.Instrumentals
 {
-    class TrackerSerialPort
+    class TrackerSerialPort : TrackerDataPortAbstract
     {
         static SerialPort _serialPort;
         private List<byte[]> dataOutBuff;
         
-        Action<List<int>> dataReceivedCallback;
-        Action disconnectPortErrorCallback;
+        Action disconnectCallback;
 
         private bool _serialIsActive = false;
         private System.Timers.Timer _timerDisconnectControl;
@@ -22,21 +17,21 @@ namespace trackerWpfConf.Instrumentals
         public TrackerSerialPort(string name, int baudrate, Parity parity, int dataBits, StopBits stopBits, Action<List<int>> dataReceivedCallback, Action disconnectPortErrorCallback)
         {
             _serialPort = new SerialPort(name, baudrate, parity, dataBits, stopBits);
-            this.dataReceivedCallback = dataReceivedCallback;
-            this.disconnectPortErrorCallback = disconnectPortErrorCallback;
+            this.disconnectCallback = disconnectPortErrorCallback;
         }
 
-        public void close()
+        public override void Close()
         {
             _timerDisconnectControl.Stop();
             _serialPort.Close();
             _serialIsActive = false;
         }
 
-        public bool Open()
+        public override bool Open(Dictionary<string, object> property, Action<List<int>> callBack)
         {
             bool result = false;
-            try {
+            try
+            {
                 // Attach a method to be called when there
                 // is data waiting in the port's buffer
                 _serialPort.DataReceived += new SerialDataReceivedEventHandler((o, i) =>
@@ -57,7 +52,7 @@ namespace trackerWpfConf.Instrumentals
                         }
                     } while (readyRead);
 
-                    dataReceivedCallback.Invoke(rxData);
+                    callBack.Invoke(rxData);
                 });
 
                 dataOutBuff = new List<byte[]>();
@@ -77,8 +72,8 @@ namespace trackerWpfConf.Instrumentals
                     }
                     else
                     {
-                        close();
-                        disconnectPortErrorCallback.Invoke();
+                        Close();
+                        disconnectCallback.Invoke();
                     }
                 };
             }
@@ -87,9 +82,9 @@ namespace trackerWpfConf.Instrumentals
                 Console.WriteLine("SerialPort: exception " + this.GetType().FullName + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
-            if (!result) 
+            if (!result)
             {
-                disconnectPortErrorCallback.Invoke();
+                disconnectCallback.Invoke();
             }
 
             return result;

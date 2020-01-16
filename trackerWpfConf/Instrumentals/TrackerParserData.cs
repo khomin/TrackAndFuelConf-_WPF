@@ -42,6 +42,16 @@ namespace trackerWpfConf.Instrumentals
             return Parse();
         }
 
+        public override (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse(List<int> data)
+        {
+            this.data = new byte[data.Count];
+            for (int i=0; i<this.data.Length; i++)
+            {
+                this.data[i] = (byte)data[i];
+            }
+            return Parse();
+        }
+
         private List<DataItemParam> ParseField(byte[] data, int beginIndex, int paramsCount)
         {
             List<DataItemParam> list = new List<DataItemParam>();

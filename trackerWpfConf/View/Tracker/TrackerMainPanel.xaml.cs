@@ -24,7 +24,7 @@ namespace trackerWpfConf.View.Tracker
     public partial class TrackerMainPanel : Page
     {
         private MainViewModel viewModel;
-        private TrackerSerialPort _serialPortHandler;
+        private TrackerDataPortAbstract _dataPort;
 
         public TrackerMainPanel(MainViewModel viewModel)
         {
@@ -32,68 +32,70 @@ namespace trackerWpfConf.View.Tracker
 
             this.viewModel = viewModel;
 
-            viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
-
             DataContext = viewModel;
+            viewModel.ConnectViewModel.IsConnected = false;
 
-            //connectToPort("demo");
+            connectToPort("Demo");
         }
+
         private void connectToPort(string portName)
         {
-            _serialPortHandler = new TrackerSerialPort(
-                portName,
-                115200,
-            Parity.None,
-            8,
-            StopBits.One,
-            (data) =>
-                {
-                    DataReceiveHandle(data);
-                },
-            () =>
+            if (portName.Contains("Demo"))
             {
-                this.Dispatcher.Invoke(() =>
-                {
-                    viewModel.ConnectViewModel.IsConnected = false;
-                    viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
+                _dataPort = new TrackerSimulationPort((data) => {
+                    receiveData(data);
+                }, () => {
+                    viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
                     viewModel.ConnectViewModel.StatusConnect = "Disconnected";
-                    MessageBoxResult result = MessageBox.Show("Connection lost",
-                                          "Warning",
-                                          MessageBoxButton.OK,
-                                          MessageBoxImage.Warning);
+                    viewModel.ConnectViewModel.IsConnected = false;
                 });
+                viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
+                viewModel.ConnectViewModel.StatusConnect = "Connecting";
             }
-            );
-            _serialPortHandler.Open();
-            viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
-            viewModel.ConnectViewModel.StatusConnect = "Connecting";
-
-            /* TEST ONLY !!! */
-            System.Timers.Timer testTimer = new System.Timers.Timer(3000);
-            testTimer.AutoReset = true;
-            testTimer.Enabled = true;
-            testTimer.Elapsed += (sourse, evendt) =>
+            else
             {
-                DataReceiveHandle(new List<int>(10));
-            };
+                _dataPort = new TrackerSerialPort(
+                    portName,
+                    115200,
+                Parity.None,
+                8,
+                StopBits.One,
+                (data) =>
+                    {
+                        receiveData(data);
+                    },
+                () =>
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        viewModel.ConnectViewModel.IsConnected = false;
+                        viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
+                        viewModel.ConnectViewModel.StatusConnect = "Disconnected";
+                        MessageBoxResult result = MessageBox.Show("Connection lost",
+                                              "Warning",
+                                              MessageBoxButton.OK,
+                                              MessageBoxImage.Warning);
+                    });
+                }
+                );
+
+                Dictionary<string, object> property = new Dictionary<string, object>();
+                _dataPort.Open(property, (a) => { 
+                
+                });
+                viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
+                viewModel.ConnectViewModel.StatusConnect = "Connecting";
+            }
         }
 
-        private void DataReceiveHandle(List<int> data)
+        private void receiveData(List<int> data)
         {
             viewModel.ConnectViewModel.IsConnected = true;
             viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
             viewModel.ConnectViewModel.StatusConnect = "Connected";
 
-            byte[] test = { 0x24, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x16, 0x00, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6C, 0x74, 0x20, 0x74, 0x61, 0x73, 0x6B, 0x20, 0x77, 0x6F, 0x72, 0x6B, 0x69, 0x6E, 0x67, 0x0D, 0x0A, 0xB3 };
-            data.Clear();
-            for (int i = 0; i < test.Length; i++)
-            {
-                data.Add(test[i]);
-            }
-
             TrackerParserData parserData = new TrackerParserData();
-            var result = parserData.Parse(test);
-
+            var result = parserData.Parse(data);
 
             switch (result.type)
             {
@@ -139,6 +141,11 @@ namespace trackerWpfConf.View.Tracker
                     }
                     break;
             }
+        }
+
+        private void TrackerConnectPannel_disconnectEvent(object sender, EventArgs e)
+        {
+            _dataPort.Close();
         }
     }
 }

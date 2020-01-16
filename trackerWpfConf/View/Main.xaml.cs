@@ -19,7 +19,7 @@ namespace trackerWpfConf.View
             viewModel = new MainViewModel();
             DataContext = viewModel;
 
-            viewModel.NavigateContent = new StartPanel(viewModel);
+            viewModel.NavigateContent = new StartPanel(viewModel); // TrackerMainPanel(viewModel);
         }
     }
 }

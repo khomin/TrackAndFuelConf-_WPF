@@ -12,7 +12,7 @@ namespace trackerWpfConf.Instrumentals
         protected uint crcResult;
 
         public abstract (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse();
-
         public abstract (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse(byte[] data);
+        public abstract (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse(List<int> data);
     }
 }

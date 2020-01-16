@@ -24,8 +24,22 @@ namespace trackerWpfConf
     /// </summary>
     public partial class TrackerConnectPannel : UserControl
     {
-        private MainViewModel viewModel;
+        public event EventHandler disconnectEvent;
+        private MainViewModel viewModel = null;
 
+        public TrackerConnectPannel() 
+        {
+            InitializeComponent();
 
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
+                viewModel = this.DataContext as MainViewModel;
+            };
+        }
+
+        private void Disconnect_Click(object sender, RoutedEventArgs e)
+        {
+            disconnectEvent(this, EventArgs.Empty);
+            viewModel.NavigateContent.NavigationService.GoBack();
+        }
     }
 }

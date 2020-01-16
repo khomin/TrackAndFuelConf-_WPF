@@ -11,22 +11,10 @@ namespace trackerWpfConf.ViewModel
 
         private Page _content;
 
-        private int _switchView;
-
-        public int SwitchView
-        {
-            get => _switchView;
-            set 
-            {
-                _switchView = value;
-                OnPropertyChanged();
-            }
-        }
         public MainViewModel() 
         {
             _rightPannelViewModel = new RightPannelViewModel();
             _connectPannelViewModel = new ConnectPannelViewModel();
-            SwitchView = 0;
         }
 
         public Page NavigateContent 

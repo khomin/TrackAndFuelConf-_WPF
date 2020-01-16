@@ -10,11 +10,6 @@
                 xmlns:Models="clr-namespace:trackerWpfConf.ViewModel"
                 DataContext="{StaticResource MainViewModel}">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -27,11 +22,11 @@
             </Grid.RowDefinitions>
 
             <!--Pannel settings -->
-            <local:SettingsPannel />
+            <local:SettingsPannel Grid.Row="0"/>
 
             <!--Pannel connection-->
-            <local:TrackerConnectPannel/>
-            
+            <local:TrackerConnectPannel Grid.Row="1" disconnectEvent="TrackerConnectPannel_disconnectEvent" DataContext="{Binding .}"/>
+
             <!--Pannel real time data-->
             <local:RightPanel Grid.Row="0" Grid.Column="1"/>
 

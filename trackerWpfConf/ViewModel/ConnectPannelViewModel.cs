@@ -23,7 +23,7 @@ namespace trackerWpfConf.ViewModel
         public ConnectPannelViewModel()
         {
             _portList = new ObservableCollection<string>(SerialPort.GetPortNames().ToList());
-            _portList.Add("Demo");
+            _portList.Insert(0, "Demo");
             _isConnected = false;
             _colorStatus = Brushes.Red;
             LoadingViewIsShow = Visibility.Hidden;
@@ -70,7 +70,7 @@ namespace trackerWpfConf.ViewModel
         public void ResearchPorts()
         {
             _portList = new ObservableCollection<string>(SerialPort.GetPortNames().ToList());
-            _portList.Add("Demo");
+            _portList.Insert(0, "Demo");
         }
 
         public Brush ColorStatus

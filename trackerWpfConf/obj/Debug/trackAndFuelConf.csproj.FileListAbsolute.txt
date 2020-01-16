@@ -284,5 +284,3 @@ C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\StartPa
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerMainPanel.g.cs
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\StartPanel.baml
 C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerMainPanel.baml
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\Page1.g.cs
-C:\PROJECTs\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\Page1.baml
