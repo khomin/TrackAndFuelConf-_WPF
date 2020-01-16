@@ -1,27 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MahApps.Metro.Controls;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf.View
 {
     /// <summary>
     /// Interaction logic for ConnectDialog.xaml
     /// </summary>
-    public partial class ConnectDialog : Window
+    public partial class ConnectDialog : MetroWindow
     {
+        private MainViewModel viewModel;
         public ConnectDialog()
         {
             InitializeComponent();
+
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
+                viewModel = this.DataContext as MainViewModel;
+            };
+        }
+
+        private void connectButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void refreshButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            viewModel.ConnectViewModel.ResearchPorts();
+            PortComBox.SelectedIndex = 0;
+        }
+
+        private void closeButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.DialogResult = false;
         }
     }
 }

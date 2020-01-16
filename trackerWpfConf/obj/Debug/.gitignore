@@ -1,3 +1,7 @@
 *.g.resources
 *.pdb
 *.exe
+*.cache
+*.csprojAssemblyReference.cache
+*.i.cache
+*.i.lref
