@@ -1,3 +1,4 @@
 *.vs/
 *.baml
 *.g.i.cs
+*.cache
