@@ -4,45 +4,93 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:trackerWpfConf.settingsTabItems"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             DataContext="{Binding RelativeSource={RelativeSource Self}}" Height="270" Width="480">
     <Grid>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="{Binding Header}" Margin="10,10,0,0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="{Binding Header}">
+            <StackPanel>
                 <Grid>
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter Property="Margin" Value="10,10,10,10" />
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
-                    <!--Address-->
-                    <TextBlock Text="Address" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,13,0,11" Grid.ColumnSpan="2"/>
-                    <TextBox Text="{Binding Address}" Grid.Row="0" Grid.Column="2" MinWidth="150" Width="Auto" Grid.ColumnSpan="2" Margin="10,10,10,12"/>
-                    <!--Port -->
-                    <TextBlock Text="Port" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,11" Grid.ColumnSpan="2"/>
-                    <TextBox Text="" Grid.Row="1" Grid.Column="2" MinWidth="150" Width="Auto" Grid.ColumnSpan="2" Margin="10,8,10,12"/>
-                    <!--Protocol-->
-                    <TextBlock Text="Protocol" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,11" Grid.ColumnSpan="2"/>
-                    <TextBox Text="" Grid.Row="2" Grid.Column="2" MinWidth="150" Width="Auto" Grid.ColumnSpan="2"/>
+                    <TextBlock Text="Servers"  VerticalAlignment="Center"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MinWidth="200"/>
                 </Grid>
 
-                <GroupBox Grid.Row="1" Header="Data for send">
+                <GroupBox Header="Server">
+                    <StackPanel>
+                        <!--CheckBox Enable/Disable -->
+                        <CheckBox Content="Enable" Grid.Row="0" Grid.Column="0"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!--Ip/DNS-->
+                            <TextBlock Text="iP/DNS" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                            <TextBox Text="aaaaaaaaaaa" Grid.Row="0" Grid.Column="2" MinWidth="200"/>
+                            <Button Content="Check" MinWidth="100" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!--Port-->
+                            <TextBlock Text="Port" Grid.Row="3" Grid.Column="0"/>
+                            <TextBox Text="aaaaaaaaaaa" Grid.Row="3" Grid.Column="1" MinWidth="200"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!--DataProtocol-->
+                            <TextBlock Text="IP/DNS" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200"/>
+                        </Grid>
+                        
+                        <!--Packet compression-->
+                        <CheckBox Content="Compression" Grid.Row="5" Grid.Column="0" MinWidth="200"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Algorithm of working with telematic services">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Type of connection with telematic servers" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Period of ping (short empty message)" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="If series of attempts was unsuccessful" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                            <mah:NumericUpDown MaxWidth="50" Grid.Row="0" Grid.Column="1"/>
+                            <mah:NumericUpDown MaxWidth="50" Grid.Row="0" Grid.Column="2"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <!--<GroupBox Grid.Row="1" Header="Data for send">
                     <StackPanel>
                         <CheckBox>
                             <TextBlock Text="LLS"/>
@@ -53,12 +101,10 @@
                         <CheckBox>
                             <TextBlock Text="CNT"/>
                         </CheckBox>
-                        <CheckBox>
-                            <TextBlock Text="Moto hours"/>
-                        </CheckBox>
+                        <CheckBox/>
                     </StackPanel>
-                </GroupBox>
-            </Grid>
+                </GroupBox>-->
+            </StackPanel>
         </GroupBox>
     </Grid>
 </UserControl>

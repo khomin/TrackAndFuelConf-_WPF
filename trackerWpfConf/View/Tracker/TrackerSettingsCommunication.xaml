@@ -4,56 +4,61 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
-             mc:Ignorable="d" Height="395.178" Width="758.884">
+             mc:Ignorable="d" Height="494.178" Width="835.384">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+        <StackPanel Height="700">
+            <GroupBox Header="GPRS setup" HorizontalAlignment="Left" Width="480">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Operator" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200"/>
+                    </Grid>
 
-            <GroupBox Grid.Row="0" Grid.Column="0" Header="APN setup" Margin="10,10,0,0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="APN" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200"/>
+                    </Grid>
 
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter Property="Margin" Value="10,10,10,10" />
-                        </Style>
-                    </Grid.Resources>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Login" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="200"/>
+                    </Grid>
 
-                    <!--Apn name-->
-                    <TextBlock Text="Name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding Path=ApnName}" Grid.Row="0" Grid.Column="1" MinWidth="150" Width="Auto"/>
-                    <!--Apn password-->
-                    <TextBlock Text="Password" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding Path=ApnPassword}" Grid.Row="1" Grid.Column="1" MinWidth="150" Width="Auto"/>
-                    <!--Apn PDP-->
-                    <TextBlock Text="PDP context" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding Path=ApnDdp}" Grid.Row="2" Grid.Column="1" MinWidth="150" Width="Auto"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Password" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="3" Grid.Column="3" MinWidth="200"/>
+                    </Grid>
 
-                </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Pin code" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200"/>
+                    </Grid>
+                </StackPanel>
             </GroupBox>
 
-            <SettingsApp:SettingsConnection Grid.Row="1" Grid.Column="0" DataContext="{Binding SettingsConnection[0]}" />
-
-            <SettingsApp:SettingsConnection Grid.Row="1" Grid.Column="1" DataContext="{Binding SettingsConnection[1]}" />
-
-        </Grid>
+            <SettingsApp:SettingsConnection Grid.Row="1" Grid.Column="0" Margin="10,10,10,10" HorizontalAlignment="Left" Height="350" DataContext="{Binding SettingsConnection[0]}" />
+        </StackPanel>
     </ScrollViewer>
 
 </UserControl>
