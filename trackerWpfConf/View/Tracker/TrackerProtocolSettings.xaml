@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
              mc:Ignorable="d" Height="494.178" Width="835.384">
-
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <StackPanel Height="700">
             <GroupBox Header="GPRS setup" HorizontalAlignment="Left" Width="480">

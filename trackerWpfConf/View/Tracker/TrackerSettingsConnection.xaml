@@ -75,7 +75,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Period of ping (short empty message)" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200"/>
+                            <mah:NumericUpDown MaxWidth="100" Height="25" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -83,9 +83,13 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="If series of attempts was unsuccessful" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                            <mah:NumericUpDown MaxWidth="50" Grid.Row="0" Grid.Column="1"/>
-                            <mah:NumericUpDown MaxWidth="50" Grid.Row="0" Grid.Column="2"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+                                If series of attempts was unsuccessful,
+                                <LineBreak/>
+                                to suspend connection to
+                            </TextBlock>
+                            <mah:NumericUpDown MaxWidth="100" Height="25" Grid.Row="0" Grid.Column="1"/>
+                            <mah:NumericUpDown MaxWidth="100" Height="25" Grid.Row="0" Grid.Column="2"/>
                         </Grid>
                     </StackPanel>
                 </GroupBox>
