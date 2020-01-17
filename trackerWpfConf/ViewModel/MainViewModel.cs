@@ -41,6 +41,11 @@ namespace trackerWpfConf.ViewModel
             {
                 return _connectPannelViewModel;
             }
+            set 
+            {
+                _connectPannelViewModel = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

@@ -6,18 +6,15 @@ namespace trackerWpfConf.Instrumentals
 {
     class TrackerSerialPort : TrackerDataPortAbstract
     {
-        static SerialPort _serialPort;
-        private List<byte[]> dataOutBuff;
-        
+        static SerialPort _serialPort;        
         Action disconnectCallback;
 
         private bool _serialIsActive = false;
         private System.Timers.Timer _timerDisconnectControl;
 
-        public TrackerSerialPort(string name, int baudrate, Parity parity, int dataBits, StopBits stopBits, Action<List<int>> dataReceivedCallback, Action disconnectPortErrorCallback)
+        public TrackerSerialPort(string name, int baudrate, Parity parity, int dataBits, StopBits stopBits)
         {
             _serialPort = new SerialPort(name, baudrate, parity, dataBits, stopBits);
-            this.disconnectCallback = disconnectPortErrorCallback;
         }
 
         public override void Close()
@@ -27,7 +24,7 @@ namespace trackerWpfConf.Instrumentals
             _serialIsActive = false;
         }
 
-        public override bool Open(Dictionary<string, object> property, Action<List<int>> callBack)
+        public override bool Open(Dictionary<string, object> property, Action<List<int>> updateDataCallback, Action disconnectCallback)
         {
             bool result = false;
             try
@@ -52,10 +49,8 @@ namespace trackerWpfConf.Instrumentals
                         }
                     } while (readyRead);
 
-                    callBack.Invoke(rxData);
+                    updateDataCallback.Invoke(rxData);
                 });
-
-                dataOutBuff = new List<byte[]>();
 
                 // Begin communications
                 _serialPort.Open();
@@ -88,6 +83,11 @@ namespace trackerWpfConf.Instrumentals
             }
 
             return result;
+        }
+
+        public override bool WriteData(byte[] data)
+        {
+            throw new NotImplementedException();
         }
     }
 }

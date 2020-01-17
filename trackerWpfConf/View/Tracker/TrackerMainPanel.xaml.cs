@@ -31,64 +31,55 @@ namespace trackerWpfConf.View.Tracker
             InitializeComponent();
 
             this.viewModel = viewModel;
-
             DataContext = viewModel;
-            viewModel.ConnectViewModel.IsConnected = false;
 
             connectToPort("Demo");
         }
 
         private void connectToPort(string portName)
         {
+            Dictionary<string, object> connectProperty = new Dictionary<string, object>();
+
             if (portName.Contains("Demo"))
             {
-                _dataPort = new TrackerSimulationPort((data) => {
-                    receiveData(data);
-                }, () => {
-                    viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
-                    viewModel.ConnectViewModel.StatusConnect = "Disconnected";
-                    viewModel.ConnectViewModel.IsConnected = false;
-                });
-                viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
-                viewModel.ConnectViewModel.StatusConnect = "Connecting";
+                _dataPort = new TrackerSimulationPort();
             }
             else
             {
-                _dataPort = new TrackerSerialPort(
-                    portName,
-                    115200,
-                Parity.None,
-                8,
-                StopBits.One,
-                (data) =>
-                    {
-                        receiveData(data);
-                    },
-                () =>
-                {
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        viewModel.ConnectViewModel.IsConnected = false;
-                        viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
-                        viewModel.ConnectViewModel.StatusConnect = "Disconnected";
-                        MessageBoxResult result = MessageBox.Show("Connection lost",
-                                              "Warning",
-                                              MessageBoxButton.OK,
-                                              MessageBoxImage.Warning);
-                    });
-                }
-                );
-
-                Dictionary<string, object> property = new Dictionary<string, object>();
-                _dataPort.Open(property, (a) => { 
-                
-                });
-                viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
-                viewModel.ConnectViewModel.StatusConnect = "Connecting";
+                _dataPort = new TrackerSerialPort(portName, 115200, Parity.None, 8, StopBits.One);
             }
+
+            _dataPort.Open(connectProperty, (newData) =>
+            {
+                /* updating of new data */
+                ReceiveData(newData);
+            }, () =>
+            {
+                /* disconnect callback */
+                DisconnectHandle();
+            });
+
+            viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
+            viewModel.ConnectViewModel.StatusConnect = "Connecting";
         }
 
-        private void receiveData(List<int> data)
+        private void DisconnectHandle()
+        {
+            viewModel.ConnectViewModel.StatusConnect = "Disconnected";
+            viewModel.ConnectViewModel.IsConnected = false;
+            this.Dispatcher.Invoke(() =>
+            {
+                viewModel.ConnectViewModel.IsConnected = false;
+                viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
+                viewModel.ConnectViewModel.StatusConnect = "Disconnected";
+                MessageBoxResult result = MessageBox.Show("Connection lost",
+                                      "Warning",
+                                      MessageBoxButton.OK,
+                                      MessageBoxImage.Warning);
+            });
+        }
+
+        private void ReceiveData(List<int> data)
         {
             viewModel.ConnectViewModel.IsConnected = true;
             viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;

@@ -52,9 +52,9 @@
                 <Rectangle x:Name="statusRectangle" Height="5" Width="200"  Grid.Row="1" Grid.Column="0" Fill="{Binding ConnectViewModel.ColorStatus}"/>
             </Grid>
 
-            <Button x:Name="loadSettingsButton" Grid.Row="0" Grid.Column="5" Width="Auto" Height="30" Content="Load config" Margin="5,0,5,0" />
-            <Button x:Name="saveSettingsButton" Grid.Row="0" Grid.Column="6" Width="Auto" Height="30" Content="Save config" Margin="5,0,5,0" />
-            <Button x:Name="toolButton" Grid.Row="0" Grid.Column="7" Width="Auto" Height="30" Content="..." Margin="5,0,5,0" />
+            <Button x:Name="loadSettingsButton" Grid.Row="0" Grid.Column="5" Width="Auto" Height="30" Content="Load config" IsEnabled="{Binding ConnectViewModel.IsConnected}" Margin="5,0,5,0" />
+            <Button x:Name="saveSettingsButton" Grid.Row="0" Grid.Column="6" Width="Auto" Height="30" Content="Save config" IsEnabled="{Binding ConnectViewModel.IsConnected}" Margin="5,0,5,0" />
+            <Button x:Name="toolButton" Grid.Row="0" Grid.Column="7" Width="Auto" Height="30" Content="..." IsEnabled="{Binding ConnectViewModel.IsConnected}" Margin="5,0,5,0" />
 
         </Grid>
     </Grid>
