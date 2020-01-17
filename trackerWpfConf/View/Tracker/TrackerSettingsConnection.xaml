@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:trackerWpfConf.settingsTabItems"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             DataContext="{Binding RelativeSource={RelativeSource Self}}" Height="270" Width="480">
+             DataContext="{Binding RelativeSource={RelativeSource Self}}" Height="Auto" Width="Auto">
     <Grid>
         <GroupBox Grid.Row="1" Grid.Column="0" Header="{Binding Header}">
             <StackPanel>
@@ -32,7 +32,6 @@
                             <!--Ip/DNS-->
                             <TextBlock Text="iP/DNS" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
                             <TextBox Text="aaaaaaaaaaa" Grid.Row="0" Grid.Column="2" MinWidth="200"/>
-                            <Button Content="Check" MinWidth="100" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -83,9 +82,13 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="If series of attempts was unsuccessful" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                            <mah:NumericUpDown MaxWidth="50" Grid.Row="0" Grid.Column="1"/>
-                            <mah:NumericUpDown MaxWidth="50" Grid.Row="0" Grid.Column="2"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+                                If series of attempts was unsuccessful
+                                <LineBreak/>
+                                Delay before next connecting
+                            </TextBlock>
+                            <mah:NumericUpDown Width="100" Grid.Row="0" Grid.Column="1"/>
+                            <mah:NumericUpDown Width="100" Grid.Row="0" Grid.Column="2"/>
                         </Grid>
                     </StackPanel>
                 </GroupBox>

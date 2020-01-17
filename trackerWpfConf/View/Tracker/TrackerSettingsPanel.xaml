@@ -6,11 +6,11 @@
              xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             MinWidth="200" MinHeight="200">
+             Height="Auto" Width="Auto">
     <Grid>
         <TabControl x:Name="SettingsTabPanel">
             <TabItem Header="Communication" mah:ControlsHelper.HeaderFontSize="16">
-                <SettingsApp:SettingsCommunication Width="Auto" Height="Auto"/>
+                <SettingsApp:SettingsCommunication HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
             <TabItem Header="System" mah:ControlsHelper.HeaderFontSize="16">
@@ -24,9 +24,9 @@
 
             <TabItem Header="SMS alarm" mah:ControlsHelper.HeaderFontSize="16">
             </TabItem>
-            
+
         </TabControl>
     </Grid>
-    
+
 
 </UserControl>
