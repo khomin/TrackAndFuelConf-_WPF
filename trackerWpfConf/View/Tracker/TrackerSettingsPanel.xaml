@@ -13,7 +13,8 @@
                 <SettingsApp:SettingsCommunication HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
-            <TabItem Header="System" mah:ControlsHelper.HeaderFontSize="16">
+            <TabItem Header="Protocol settings" mah:ControlsHelper.HeaderFontSize="16">
+                <SettingsApp:SettingsCommunication HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
             <TabItem Header="Inputs/Outputs" mah:ControlsHelper.HeaderFontSize="16">

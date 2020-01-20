@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}" Height="Auto" Width="Auto">
     <Grid>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="{Binding Header}">
-            <StackPanel>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Server settings">
+            <StackPanel MinWidth="480">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
