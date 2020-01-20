@@ -6,8 +6,11 @@ FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Main.xaml;;
 FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\StartPanel.xaml;;
 FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerConnectPanel.xaml;;
 FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerMainPanel.xaml;;
+FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerOneWireSettings.xaml;;
 FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerRightPanel.xaml;;
 FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerSettingsPanel.xaml;;
 FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerSettingsCommunication.xaml;;
 FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerSettingsConnection.xaml;;
+FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerSettingsProtocol.xaml;;
+FC:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\View\Tracker\TrackerTrackSettings.xaml;;
 

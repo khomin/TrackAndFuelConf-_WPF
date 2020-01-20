@@ -12,23 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf.settings
 {
     /// <summary>
-    /// Interaction logic for SettingsCommunication.xaml
+    /// Interaction logic for TrackerSettingsProtocol.xaml
     /// </summary>
-    public partial class SettingsCommunication : UserControl
+    public partial class TrackerSettingsProtocol : UserControl
     {
-        private readonly SettingsCommunicationViewModel settingsCommunicationViewModel;
-
-        public SettingsCommunication()
+        public TrackerSettingsProtocol()
         {
             InitializeComponent();
-
-            settingsCommunicationViewModel = new SettingsCommunicationViewModel();
-            DataContext = settingsCommunicationViewModel;
         }
     }
 }

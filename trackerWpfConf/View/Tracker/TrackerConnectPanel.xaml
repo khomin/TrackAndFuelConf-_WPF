@@ -35,12 +35,6 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!--<TextBlock x:Name="PortLabel" Text="Port" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,5,0"/>-->
-            <!--<ComboBox x:Name="PortComBox" ItemsSource="{Binding Path=ConnectViewModel.PortsList}" SelectedItem="{Binding Path=ConnectViewModel.PortsList, Mode=OneWay}"-->
-                                <!--IsSynchronizedWithCurrentItem="True" SelectedIndex="0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" />-->
-            <!--<Button x:Name="connectButton" Grid.Row="0" Grid.Column="2" Width="Auto" Height="30" Content="Connect" Click="connectReconnect" Margin="5,0,5,0" />
-            <Button x:Name="refreshButton" Grid.Row="0" Grid.Column="3" Width="Auto" Height="30" Content="Refresh" Click="refreshButton_Click" Margin="5,0,5,0" />-->
-
             <Button x:Name="Disconnect" Grid.Row="0" Grid.Column="2" Width="Auto" Height="30" Content="Disconnect" Click="Disconnect_Click" Margin="5,0,5,0" />
             
             <Grid Grid.Row="0" Grid.Column="4">

@@ -154,6 +154,9 @@
     <Compile Include="View\Tracker\TrackerMainPanel.xaml.cs">
       <DependentUpon>TrackerMainPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Tracker\TrackerOneWireSettings.xaml.cs">
+      <DependentUpon>TrackerOneWireSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Tracker\TrackerRightPanel.xaml.cs">
       <DependentUpon>TrackerRightPanel.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,12 @@
     <Compile Include="ViewModel\SettingsConnectionViewModel.cs" />
     <Compile Include="ViewModel\StatusDataViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\Tracker\TrackerSettingsProtocol.xaml.cs">
+      <DependentUpon>TrackerSettingsProtocol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tracker\TrackerTrackSettings.xaml.cs">
+      <DependentUpon>TrackerTrackSettings.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -211,6 +220,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Tracker\TrackerOneWireSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Tracker\TrackerRightPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +237,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Tracker\TrackerSettingsConnection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Tracker\TrackerSettingsProtocol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Tracker\TrackerTrackSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

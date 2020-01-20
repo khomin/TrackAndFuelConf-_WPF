@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="trackerWpfConf.settingsTabItems.SettingsCommunication"
+﻿<UserControl x:Class="trackerWpfConf.settings.SettingsCommunication"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -18,7 +18,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Operator" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
                     </Grid>
 
                     <Grid>
@@ -27,7 +27,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="APN" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
 
                     <Grid>
@@ -36,7 +36,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Login" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="200"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
 
                     <Grid>
@@ -45,7 +45,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Password" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="3" Grid.Column="3" MinWidth="200"/>
+                        <TextBox Grid.Row="3" Grid.Column="3" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
 
                     <Grid>
@@ -54,7 +54,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Pin code" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200"/>
+                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
                 </StackPanel>
             </GroupBox>

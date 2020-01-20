@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="trackerWpfConf.settings.TrackerOneWireSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:trackerWpfConf.settings"
+             xmlns:App="clr-namespace:XamlGeneratedNamespace"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" Height="Auto" Width="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                  Width="Auto" 
+                  HorizontalScrollBarVisibility="Auto" 
+                  HorizontalAlignment="Stretch">
+        <StackPanel Height="350" MinWidth="800">
+            <GroupBox Header="1-Wite settings" Width="Auto">
+                <StackPanel>
+                    <Grid Style="{StaticResource GridStyleMarging}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Sensor code" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                            <Separator Grid.Row="0" Grid.Column="1">
+                                <Separator.LayoutTransform>
+                                    <RotateTransform Angle="90" />
+                                </Separator.LayoutTransform>
+                            </Separator>
+
+                            <TextBlock Text="Enable" Grid.Row="0" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}"/>
+
+                            <Separator Grid.Row="0" Grid.Column="3">
+                                <Separator.LayoutTransform>
+                                    <RotateTransform Angle="90" />
+                                </Separator.LayoutTransform>
+                            </Separator>
+
+                            <TextBlock Text="Sensor name" Grid.Row="0" Grid.Column="4" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+
+
+                            <Separator Grid.Row="0" Grid.Column="5">
+                                <Separator.LayoutTransform>
+                                    <RotateTransform Angle="90" />
+                                </Separator.LayoutTransform>
+                            </Separator>
+
+                            <TextBlock Text="Alarm zone" Grid.Row="0" Grid.Column="6" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+
+                            <!--Data 1-->
+                            <TextBox Text="0xAAABBBCCDD" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Row="1" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <TextBox Text="Something name" Grid.Row="1" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <mah:RangeSlider Grid.Row="1" Grid.Column="6"
+                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
+                                    IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
+                            </mah:RangeSlider>
+
+                            <!--Data 2-->
+                            <TextBox Text="0xAAABBBCCDD" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Row="2" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <TextBox Text="Something name" Grid.Row="2" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <mah:RangeSlider Grid.Row="2" Grid.Column="6"
+                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
+                                    IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
+                            </mah:RangeSlider>
+
+                            <!--Data 3-->
+                            <TextBox Text="0xAAABBBCCDD" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Row="3" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <TextBox Text="Something name" Grid.Row="3" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <mah:RangeSlider Grid.Row="3" Grid.Column="6"
+                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
+                                    IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
+                            </mah:RangeSlider>
+
+                            <!--Data 4-->
+                            <TextBox Text="0xAAABBBCCDD" Grid.Row="4" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Row="4" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <TextBox Text="Something name" Grid.Row="4" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <mah:RangeSlider Grid.Row="4" Grid.Column="6"
+                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
+                                    IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
+                            </mah:RangeSlider>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

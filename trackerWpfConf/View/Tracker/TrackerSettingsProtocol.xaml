@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="trackerWpfConf.settings.TrackerSettingsProtocol"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
+             mc:Ignorable="d" Height="Auto" Width="Auto">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
+        <StackPanel Height="350" MinWidth="400">
+            <GroupBox Header="Protocol settings" Width="Auto">
+                <StackPanel>
+                    <Grid>
+                        <GroupBox Header="Select protocol type" MinWidth="400" HorizontalAlignment="Left">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Transmission protocol" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Header="Main" Width="Auto" MinWidth="300" Grid.Column="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Content="Event type" Grid.Column="0" Grid.Row="0"/>
+                                <CheckBox Content="Odometer" Grid.Column="1" Grid.Row="0"/>
+                                <CheckBox Content="Gsm strenght" Grid.Column="0" Grid.Row="1"/>
+                                <CheckBox Content="Temprature (internal)" Grid.Column="1" Grid.Row="1"/>
+                                <CheckBox Content="Engine hours" Grid.Column="0" Grid.Row="2"/>
+                                <CheckBox Content="Igntition state" Grid.Column="1" Grid.Row="2"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Navigation" Width="Auto" MinWidth="300" Grid.Column="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Content="Latitude" Grid.Column="0" Grid.Row="0"/>
+                                <CheckBox Content="Longitude" Grid.Column="1" Grid.Row="0"/>
+                                <CheckBox Content="Fix" Grid.Column="0" Grid.Row="1"/>
+                                <CheckBox Content="Altitide" Grid.Column="1" Grid.Row="1"/>
+                                <CheckBox Content="Heading" Grid.Column="0" Grid.Row="2"/>
+                                <CheckBox Content="Speed" Grid.Column="1" Grid.Row="2"/>
+                                <CheckBox Content="Hdop" Grid.Column="0" Grid.Row="3"/>
+                                <CheckBox Content="Sats count" Grid.Column="1" Grid.Row="3"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Header="IO" Width="Auto" MinWidth="300" Grid.Column="0" Grid.Row="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Content="Power internal" Grid.Column="0" Grid.Row="0"/>
+                                <CheckBox Content="Power external" Grid.Column="1" Grid.Row="0"/>
+                                <CheckBox Content="Digital outs" Grid.Column="0" Grid.Row="1"/>
+                                <CheckBox Content="Inputs" Grid.Column="1" Grid.Row="1"/>
+                                <CheckBox Content="LLS internal" Grid.Column="0" Grid.Row="2"/>
+                                <CheckBox Content="Temperature 1-wire" Grid.Column="1" Grid.Row="2"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

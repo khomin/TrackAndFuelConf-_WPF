@@ -3,24 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
+             xmlns:Views="clr-namespace:trackerWpfConf.settings"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              Height="Auto" Width="Auto">
     <Grid>
         <TabControl x:Name="SettingsTabPanel">
             <TabItem Header="Communication" mah:ControlsHelper.HeaderFontSize="16">
-                <SettingsApp:SettingsCommunication HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
+                <Views:SettingsCommunication HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
             <TabItem Header="Protocol settings" mah:ControlsHelper.HeaderFontSize="16">
-                <SettingsApp:SettingsCommunication HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
+                <Views:TrackerSettingsProtocol HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
-            <TabItem Header="Inputs/Outputs" mah:ControlsHelper.HeaderFontSize="16">
+            <TabItem Header="Track settings" mah:ControlsHelper.HeaderFontSize="16">
+                <Views:TrackerTrackSettings HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
-            <TabItem Header="Geofence" mah:ControlsHelper.HeaderFontSize="16">
+            <TabItem Header="1-Wire settings" mah:ControlsHelper.HeaderFontSize="16">
+                <Views:TrackerOneWireSettings HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
             <TabItem Header="SMS alarm" mah:ControlsHelper.HeaderFontSize="16">
