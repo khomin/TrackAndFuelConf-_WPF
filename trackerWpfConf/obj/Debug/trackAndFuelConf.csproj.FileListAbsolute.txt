@@ -385,3 +385,7 @@ C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerT
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerTrackSettings.baml
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerOneWireSettings.g.cs
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerOneWireSettings.baml
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerInputSettings.g.cs
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerInputSettingsItem.g.cs
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerInputSettings.baml
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerInputSettingsItem.baml

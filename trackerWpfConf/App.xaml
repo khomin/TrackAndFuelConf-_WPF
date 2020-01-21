@@ -60,6 +60,10 @@
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
+            <Style x:Key="MahSliedStyleMarging" TargetType="mah:RangeSlider">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 

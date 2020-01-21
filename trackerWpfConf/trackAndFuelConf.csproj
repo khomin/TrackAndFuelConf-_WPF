@@ -151,6 +151,12 @@
     <Compile Include="View\Tracker\TrackerConnectPanel.xaml.cs">
       <DependentUpon>TrackerConnectPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Tracker\TrackerInputSettings.xaml.cs">
+      <DependentUpon>TrackerInputSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tracker\TrackerInputSettingsItem.xaml.cs">
+      <DependentUpon>TrackerInputSettingsItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Tracker\TrackerMainPanel.xaml.cs">
       <DependentUpon>TrackerMainPanel.xaml</DependentUpon>
     </Compile>
@@ -215,6 +221,14 @@
     <Page Include="View\Tracker\TrackerConnectPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Tracker\TrackerInputSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Tracker\TrackerInputSettingsItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Tracker\TrackerMainPanel.xaml">
       <SubType>Designer</SubType>

@@ -11,9 +11,9 @@
                   Width="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
                   HorizontalAlignment="Stretch">
-        <StackPanel Height="350" MinWidth="800">
-            <GroupBox Header="1-Wite settings" Width="Auto">
-                <StackPanel>
+        <StackPanel Height="350" MinWidth="700" Width="Auto" HorizontalAlignment="Stretch">
+            <GroupBox Header="1-Wite settings" Width="Auto" HorizontalAlignment="Stretch">
+                <StackPanel Width="Auto" HorizontalAlignment="Stretch">
                     <Grid Style="{StaticResource GridStyleMarging}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -27,6 +27,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>

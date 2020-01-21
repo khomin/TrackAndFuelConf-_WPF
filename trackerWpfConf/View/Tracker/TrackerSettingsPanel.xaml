@@ -25,7 +25,8 @@
                 <Views:TrackerOneWireSettings HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
-            <TabItem Header="SMS alarm" mah:ControlsHelper.HeaderFontSize="16">
+            <TabItem Header="Input lines" mah:ControlsHelper.HeaderFontSize="16">
+                <Views:TrackerInputSettings HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
         </TabControl>
