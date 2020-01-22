@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf.settingsTabItems
 {
@@ -20,28 +21,15 @@ namespace trackerWpfConf.settingsTabItems
     /// </summary>
     public partial class SettingsConnection : UserControl
     {
+        private SettingsConnectionViewModel viewModel;
+
         public SettingsConnection()
         {
             InitializeComponent();
+
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
+                viewModel = this.DataContext as SettingsConnectionViewModel;
+            };
         }
-
-        public string Header
-        {
-            get { return (string)GetValue(HeaderProperty); }
-            set { SetValue(HeaderProperty, value); }
-        }
-        public static DependencyProperty HeaderProperty =
-            DependencyProperty.Register("Header", typeof(string), typeof(SettingsConnection), new PropertyMetadata(null));
-
-        public string Address
-        {
-            get { return (string)GetValue(AddressProperty); }
-            set { SetValue(AddressProperty, value); }
-        }
-
-        public static DependencyProperty AddressProperty { get => addressProperty; set => addressProperty = value; }
-
-        private static DependencyProperty addressProperty =
-            DependencyProperty.Register("Address", typeof(string), typeof(SettingsConnection), new PropertyMetadata(null));
     }
 }

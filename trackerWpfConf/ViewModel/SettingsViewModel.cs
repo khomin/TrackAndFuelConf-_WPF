@@ -10,15 +10,15 @@ namespace trackerWpfConf.ViewModel
     public class SettingsViewModel : ViewModelBase
     {
 
-        private ObservableCollection<string> _operatorsList;
-
+        private readonly ObservableCollection<string> _operatorsList;
         private string _apn = "gdata";
         private string _apnLogin = "login";
         private string _apnPassword = "default";
         private string _apnPinCode = "";
-        private string _ipDnsAddress = "";
 
         private ObservableCollection<string> _serversConnection;
+
+        private ObservableCollection<SettingsConnectionViewModel> _serversConnectionModel;
 
         public SettingsViewModel()
         {
@@ -31,6 +31,12 @@ namespace trackerWpfConf.ViewModel
             _serversConnection = new ObservableCollection<string>();
             _serversConnection.Add("Primary");
             _serversConnection.Add("Reserv");
+
+            _serversConnectionModel = new ObservableCollection<SettingsConnectionViewModel>();
+            _serversConnectionModel.Add(new SettingsConnectionViewModel());
+            _serversConnectionModel.Add(new SettingsConnectionViewModel());
+            _serversConnectionModel[0].IpDnsAddress = "ya.ru1";
+            _serversConnectionModel[1].IpDnsAddress = "ya.ru2";
         }
 
         public ObservableCollection<string> OperatorsList { get => _operatorsList; }
@@ -72,5 +78,7 @@ namespace trackerWpfConf.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<SettingsConnectionViewModel> ServersConnectionModel { get => _serversConnectionModel; }
     }
 }

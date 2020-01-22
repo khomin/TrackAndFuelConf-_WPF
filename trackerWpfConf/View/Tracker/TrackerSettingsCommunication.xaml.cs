@@ -30,6 +30,16 @@ namespace trackerWpfConf.settings
             this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) =>
             {
                 viewModel = this.DataContext as MainViewModel;
+
+                if(viewModel.SettingsModel.ServersConnectionModel != null)
+                {
+                    ServerItem.DataContext = viewModel.SettingsModel.ServersConnectionModel[0];
+                }
+            };
+
+            ServerCurrent.SelectionChanged += (a, b) => {
+                var combox = a as ComboBox;
+                ServerItem.DataContext = viewModel.SettingsModel.ServersConnectionModel[combox.SelectedIndex];
             };
         }
     }

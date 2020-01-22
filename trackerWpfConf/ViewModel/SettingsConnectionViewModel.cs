@@ -6,27 +6,16 @@ using System.Threading.Tasks;
 
 namespace trackerWpfConf.ViewModel
 {
-    class SettingsConnectionViewModel : ViewModelBase
+    public class SettingsConnectionViewModel : ViewModelBase
     {
-        string header;
-        
-        public string Header
+        private string _ipDnsAddress = "ya.ru";
+
+        public string IpDnsAddress
         {
-            get { return header; }
+            get => _ipDnsAddress; 
             set
             {
-                header = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string address;
-
-        public string Address
-        {
-            get { return address; }
-            set { 
-                address = value;
+                _ipDnsAddress = value;
                 OnPropertyChanged();
             }
         }

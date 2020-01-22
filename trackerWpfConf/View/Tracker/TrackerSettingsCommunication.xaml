@@ -64,7 +64,24 @@
                 </StackPanel>
             </GroupBox>
 
-            <SettingsApp:SettingsConnection Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" DataContext="{Binding .}" />
+            <Grid>
+                <GroupBox Grid.Row="1" Grid.Column="0" Header="Server settings">
+                    <StackPanel MinWidth="480">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Servers"  Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="ServerCurrent"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MinWidth="200"  
+                              Style="{StaticResource ComboBoxStyleMarging}"
+                              ItemsSource="{Binding Path=SettingsModel.ServerConnectionList}" 
+                              SelectedItem="{Binding Path=SettingsModel.ServerConnectionList, Mode=OneWay}" SelectedIndex="0"/>
+                        </Grid>
+                        <SettingsApp:SettingsConnection x:Name="ServerItem"/>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 

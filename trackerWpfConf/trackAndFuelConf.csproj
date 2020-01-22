@@ -136,6 +136,7 @@
     <Compile Include="Instrumentals\TrackerSimulationPort.cs" />
     <Compile Include="Instrumentals\TrackerTypeData.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
+    <Compile Include="ViewModel\SettingsConnectionViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\ConnectDialog.xaml.cs">
       <DependentUpon>ConnectDialog.xaml</DependentUpon>
@@ -187,8 +188,6 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\CurrentDataViewModel.cs" />
     <Compile Include="ViewModel\RightPannelViewModel.cs" />
-    <Compile Include="ViewModel\SettingsCommunicationViewModel.cs" />
-    <Compile Include="ViewModel\SettingsConnectionViewModel.cs" />
     <Compile Include="ViewModel\StatusDataViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Tracker\TrackerSettingsProtocol.xaml.cs">

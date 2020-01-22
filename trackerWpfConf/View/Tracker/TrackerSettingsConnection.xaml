@@ -2,125 +2,111 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:trackerWpfConf.settingsTabItems"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              DataContext="{Binding RelativeSource={RelativeSource Self}}" Height="Auto" Width="Auto">
     <Grid>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Server settings">
-            <StackPanel MinWidth="480">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Servers"  Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
-                    <ComboBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MinWidth="200"  
-                              Style="{StaticResource ComboBoxStyleMarging}"
-                              ItemsSource="{Binding Path=SettingsModel.ServerConnectionList}" 
-                              SelectedItem="{Binding Path=SettingsModel.ServerConnectionList, Mode=OneWay}" SelectedIndex="0"/>
-                </Grid>
+        <StackPanel MinWidth="480">
+            <GroupBox Header="Server">
+                <StackPanel>
+                    <!--CheckBox Enable/Disable -->
+                    <CheckBox Content="Enable" Grid.Row="0" Grid.Column="0"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <!--Ip/DNS-->
+                        <TextBlock Text="iP/DNS" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBox Text="{Binding IpDnsAddress}" x:Name="ipDnsTextBox" Grid.Row="0" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <!--Port-->
+                        <TextBlock Text="Port" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBox Text="dddd" Grid.Row="3" Grid.Column="1" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                    </Grid>
 
-                <GroupBox Header="Server">
-                    <StackPanel>
-                        <!--CheckBox Enable/Disable -->
-                        <CheckBox Content="Enable" Grid.Row="0" Grid.Column="0"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <!--Ip/DNS-->
-                            <TextBlock Text="iP/DNS" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBox Text="{Binding SettingsModel.ServerConnectionList[0].}" Grid.Row="0" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <!--Port-->
-                            <TextBlock Text="Port" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBox Text="aaaaaaaaaaa" Grid.Row="3" Grid.Column="1" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
-                        </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <!--DataProtocol-->
+                        <TextBlock Text="IP/DNS" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
+                    </Grid>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <!--DataProtocol-->
-                            <TextBlock Text="IP/DNS" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
-                        </Grid>
+                    <!--Packet compression-->
+                    <CheckBox Content="Compression" Grid.Row="5" Grid.Column="0" MinWidth="200"/>
+                </StackPanel>
+            </GroupBox>
 
-                        <!--Packet compression-->
-                        <CheckBox Content="Compression" Grid.Row="5" Grid.Column="0" MinWidth="200"/>
-                    </StackPanel>
-                </GroupBox>
-
-                <GroupBox Header="Algorithm of working with telematic services">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Type of connection with telematic servers" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Period of ping (short empty message)" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}">
+            <GroupBox Header="Algorithm of working with telematic services">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Type of connection with telematic servers" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Period of ping (short empty message)" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}">
                                 If series of attempts was unsuccessful
                                 <LineBreak/>
                                 Delay before next connecting
-                            </TextBlock>
-                            <Slider Grid.Row="0" Grid.Column="1" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
-                            <TextBlock Text="50" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBlock Text="Second" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        </Grid>
+                        </TextBlock>
+                        <Slider Grid.Row="0" Grid.Column="1" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
+                        <TextBlock Text="50" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Second" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                    </Grid>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="143*"/>
-                                <ColumnDefinition Width="74*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Text="Sending period during parking" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <Slider Grid.Row="0" Grid.Column="2" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
-                            <TextBlock Text="50" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBlock Text="Second" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="143*"/>
+                            <ColumnDefinition Width="74*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Sending period during parking" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <Slider Grid.Row="0" Grid.Column="2" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
+                        <TextBlock Text="50" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Second" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                            <TextBlock Text="Sending period in sleep mode" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <Slider Grid.Row="1" Grid.Column="2" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
-                            <TextBlock Text="50" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBlock Text="Second" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        </Grid>
-                    </StackPanel>
-                </GroupBox>
-            </StackPanel>
-        </GroupBox>
+                        <TextBlock Text="Sending period in sleep mode" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <Slider Grid.Row="1" Grid.Column="2" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
+                        <TextBlock Text="50" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Second" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
     </Grid>
 </UserControl>
