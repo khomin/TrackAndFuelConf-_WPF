@@ -157,6 +157,12 @@
     <Compile Include="View\Tracker\TrackerInputSettingsItem.xaml.cs">
       <DependentUpon>TrackerInputSettingsItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Tracker\TrackerLlsItem.xaml.cs">
+      <DependentUpon>TrackerLlsItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tracker\TrackerLlsSettings.xaml.cs">
+      <DependentUpon>TrackerLlsSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Tracker\TrackerMainPanel.xaml.cs">
       <DependentUpon>TrackerMainPanel.xaml</DependentUpon>
     </Compile>
@@ -186,6 +192,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Tracker\TrackerSettingsProtocol.xaml.cs">
       <DependentUpon>TrackerSettingsProtocol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tracker\TrackerSmsSettings.xaml.cs">
+      <DependentUpon>TrackerSmsSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Tracker\TrackerTrackSettings.xaml.cs">
       <DependentUpon>TrackerTrackSettings.xaml</DependentUpon>
@@ -230,6 +239,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Tracker\TrackerLlsItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Tracker\TrackerLlsSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Tracker\TrackerMainPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,6 +272,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Tracker\TrackerSettingsProtocol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Tracker\TrackerSmsSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

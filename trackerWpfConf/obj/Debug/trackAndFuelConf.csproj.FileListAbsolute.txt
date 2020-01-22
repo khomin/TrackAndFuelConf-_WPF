@@ -389,3 +389,9 @@ C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerI
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerInputSettingsItem.g.cs
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerInputSettings.baml
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerInputSettingsItem.baml
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerSmsSettings.g.cs
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerSmsSettings.baml
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerLlsItem.g.cs
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerLlsSettings.g.cs
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerLlsItem.baml
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\TrackerLlsSettings.baml

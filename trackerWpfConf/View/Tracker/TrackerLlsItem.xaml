@@ -1,0 +1,274 @@
+﻿<UserControl x:Class="trackerWpfConf.View.Tracker.TrackerLlsItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:trackerWpfConf.View.Tracker"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+    <Grid HorizontalAlignment="Stretch" Width="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Settings" Grid.Row="0" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch">
+            <TabControl>
+                <TabItem Header="Main settings" mah:ControlsHelper.HeaderFontSize="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="0">
+                            <GroupBox Header="Min-Max calibration">
+                                <StackPanel>
+                                    <TextBlock Text="Set boundaries of measurement" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Content="Empty" Grid.Column="0"/>
+                                        <Button Content="Full" Grid.Column="1"/>
+                                        <Button Content="Edit" Grid.Column="2"/>
+                                    </Grid>
+                                </StackPanel>
+                            </GroupBox>
+                            <GroupBox Header="Temperature compenstation">
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Mode" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Coefficient 1" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBox Text="000" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Coefficient 2" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBox Text="000" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                    </Grid>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="1">
+                            <GroupBox Header="General settings">
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Min level value (0-1023)" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Max level value (0-4095)" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                    </Grid>
+
+                                    <GroupBox Header="Output message type">
+                                        <StackPanel>
+                                            <RadioButton Content="Relative level" Style="{StaticResource RadioStyleMarging}"/>
+                                            <RadioButton Content="Volume (according to calibration table)" Style="{StaticResource RadioStyleMarging}"/>
+                                        </StackPanel>
+                                    </GroupBox>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Type of interpolation" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                    </Grid>
+                                </StackPanel>
+                            </GroupBox>
+                            <StackPanel>
+                                <GroupBox Header="Fltration">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="Type of filtering" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0"/>
+                                                <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                            </Grid>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="Averaging time (0-21), seconds" Style="{StaticResource TextBlockStyleMarging}"/>
+                                                <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                            </Grid>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="The length of the median (0-7)" Style="{StaticResource TextBlockStyleMarging}"/>
+                                                <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                            </Grid>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="Process noise covariance (Q)" Style="{StaticResource TextBlockStyleMarging}"/>
+                                                <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                            </Grid>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="Measurement noise covariance (R)" Style="{StaticResource TextBlockStyleMarging}"/>
+                                                <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Grid>
+                                </GroupBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Calibration table" mah:ControlsHelper.HeaderFontSize="16">
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Ganerate table" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Read table from sensor" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Save table to sensor" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Save as (*.csv)" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
+                        </Grid>
+                        <Grid DockPanel.Dock="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Clear" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Remove" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Add" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Enter the current volume" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
+                        </Grid>
+                        <DataGrid DockPanel.Dock="Bottom">
+                        </DataGrid>
+                    </DockPanel>
+                </TabItem>
+                <TabItem Header="Mode/status" mah:ControlsHelper.HeaderFontSize="16">
+                    <StackPanel>
+                        <TextBlock Text="Errors checkup" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
+                            <TextBlock Text="The minimum limit is less than 10%" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
+                            <TextBlock Text="The maximum limit is exceeded by 10%" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
+                            <TextBlock Text="Measuring oscillator frequency 0 Hz" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </GroupBox>
+
+        <GroupBox Header="LLS status " MaxWidth="200" Grid.Row="0" HorizontalAlignment="Right" Grid.Column="1">
+            <StackPanel>
+                <Grid Style="{StaticResource GridStyleMarging}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Status" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="1"/>
+
+                        <TextBlock Text="CNT" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="000" Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+
+                        <TextBlock Text="Level/Valume" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="000" Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+
+                        <TextBlock Text="Frequency, Hz" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="000" Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <ProgressBar Value="100"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</UserControl>
