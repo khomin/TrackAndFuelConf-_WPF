@@ -6,11 +6,12 @@
              xmlns:Views="clr-namespace:trackerWpfConf.settings"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
+             DataContext="{StaticResource MainViewModel}"
              Height="Auto" Width="Auto">
     <Grid>
         <TabControl x:Name="SettingsTabPanel">
             <TabItem Header="Communication" mah:ControlsHelper.HeaderFontSize="16">
-                <Views:SettingsCommunication HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
+                <Views:SettingsCommunication DataContext="{Binding .}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
             <TabItem Header="Protocol settings" mah:ControlsHelper.HeaderFontSize="16">

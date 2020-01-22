@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
-             mc:Ignorable="d" Height="Auto" Width="Auto">
+             xmlns:Models="clr-namespace:trackerWpfConf.ViewModel"
+             mc:Ignorable="d" Height="Auto" Width="Auto"
+             DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Models:MainViewModel}}">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
         <StackPanel Height="690">
@@ -18,7 +20,10 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Operator" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
+
+                        <ComboBox ItemsSource="{Binding Path=SettingsModel.OperatorsList}" 
+                                  SelectedItem="{Binding Path=SettingsModel.OperatorsList, Mode=OneWay}" SelectedIndex="3"
+                                  Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
                     </Grid>
 
                     <Grid>
@@ -27,7 +32,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="APN" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200" Text="{Binding SettingsModel.Apn}" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
 
                     <Grid>
@@ -36,7 +41,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Login" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" Text="{Binding SettingsModel.ApnLogin}"/>
                     </Grid>
 
                     <Grid>
@@ -45,7 +50,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Password" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="3" Grid.Column="3" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBox Grid.Row="3" Grid.Column="3" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" Text="{Binding SettingsModel.ApnPassword}"/>
                     </Grid>
 
                     <Grid>
@@ -54,12 +59,12 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Pin code" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" Text="{Binding SettingsModel.ApnPinCode}"/>
                     </Grid>
                 </StackPanel>
             </GroupBox>
 
-            <SettingsApp:SettingsConnection Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" DataContext="{Binding SettingsConnection[0]}" />
+            <SettingsApp:SettingsConnection Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" DataContext="{Binding .}" />
         </StackPanel>
     </ScrollViewer>
 

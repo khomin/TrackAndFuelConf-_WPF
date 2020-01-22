@@ -16,7 +16,10 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Servers"  Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
-                    <ComboBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MinWidth="200"  
+                              Style="{StaticResource ComboBoxStyleMarging}"
+                              ItemsSource="{Binding Path=SettingsModel.ServerConnectionList}" 
+                              SelectedItem="{Binding Path=SettingsModel.ServerConnectionList, Mode=OneWay}" SelectedIndex="0"/>
                 </Grid>
 
                 <GroupBox Header="Server">
@@ -31,7 +34,7 @@
                             </Grid.ColumnDefinitions>
                             <!--Ip/DNS-->
                             <TextBlock Text="iP/DNS" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBox Text="aaaaaaaaaaa" Grid.Row="0" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                            <TextBox Text="{Binding SettingsModel.ServerConnectionList[0].}" Grid.Row="0" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                         </Grid>
                         <Grid>
                             <Grid.ColumnDefinitions>

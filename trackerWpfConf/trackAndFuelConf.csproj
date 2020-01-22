@@ -136,6 +136,7 @@
     <Compile Include="Instrumentals\TrackerSimulationPort.cs" />
     <Compile Include="Instrumentals\TrackerTypeData.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\ConnectDialog.xaml.cs">
       <DependentUpon>ConnectDialog.xaml</DependentUpon>
     </Compile>

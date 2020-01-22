@@ -21,14 +21,16 @@ namespace trackerWpfConf.settings
     /// </summary>
     public partial class SettingsCommunication : UserControl
     {
-        private readonly SettingsCommunicationViewModel settingsCommunicationViewModel;
+        private MainViewModel viewModel;
 
         public SettingsCommunication()
         {
             InitializeComponent();
 
-            settingsCommunicationViewModel = new SettingsCommunicationViewModel();
-            DataContext = settingsCommunicationViewModel;
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) =>
+            {
+                viewModel = this.DataContext as MainViewModel;
+            };
         }
     }
 }

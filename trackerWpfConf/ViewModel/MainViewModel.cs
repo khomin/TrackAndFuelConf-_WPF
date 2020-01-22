@@ -5,6 +5,8 @@ namespace trackerWpfConf.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private SettingsViewModel _settingsViewModel;
+
         private RightPannelViewModel _rightPannelViewModel;
         
         private ConnectPannelViewModel _connectPannelViewModel;
@@ -15,6 +17,7 @@ namespace trackerWpfConf.ViewModel
         {
             _rightPannelViewModel = new RightPannelViewModel();
             _connectPannelViewModel = new ConnectPannelViewModel();
+            _settingsViewModel = new SettingsViewModel();
         }
 
         public Page NavigateContent 
@@ -44,6 +47,16 @@ namespace trackerWpfConf.ViewModel
             set 
             {
                 _connectPannelViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public SettingsViewModel SettingsModel
+        {
+            get => _settingsViewModel;
+            set 
+            {
+                _settingsViewModel = value;
                 OnPropertyChanged();
             }
         }

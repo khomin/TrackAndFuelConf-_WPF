@@ -7,7 +7,8 @@
                 xmlns:ViewBase="clr-namespace:trackerWpfConf.View"
                 xmlns:TrackerView="clr-namespace:trackerWpfConf.View.Tracker"
                 xmlns:Models="clr-namespace:trackerWpfConf.ViewModel"
-                DataContext="{StaticResource MainViewModel}" Height="Auto" Width="Auto">
+                DataContext="{StaticResource MainViewModel}" 
+      Height="Auto" Width="Auto">
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -22,7 +23,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Pannel settings -->
-                <local:SettingsPannel Grid.Row="0" Width="Auto"/>
+                <local:SettingsPannel DataContext="{Binding .}" Grid.Row="0" Width="Auto"/>
 
                 <!--Pannel connection-->
                 <local:TrackerConnectPannel Grid.Row="1" disconnectEvent="TrackerConnectPannel_disconnectEvent" DataContext="{Binding .}"/>

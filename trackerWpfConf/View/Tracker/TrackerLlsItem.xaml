@@ -91,11 +91,12 @@
                                     </Grid>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="115.333"/>
+                                            <ColumnDefinition Width="23.667"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="Max level value (0-4095)" Style="{StaticResource TextBlockStyleMarging}"/>
-                                        <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                        <TextBlock Text="Max level value (0-4095)" Style="{StaticResource TextBlockStyleMarging}" Grid.ColumnSpan="2"/>
+                                        <TextBox Text="000" Grid.Column="2" Style="{StaticResource TextBoxStyleMarging}"/>
                                     </Grid>
 
                                     <GroupBox Header="Output message type">
