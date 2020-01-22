@@ -40,9 +40,9 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Button Content="Empty" Grid.Column="0"/>
-                                        <Button Content="Full" Grid.Column="1"/>
-                                        <Button Content="Edit" Grid.Column="2"/>
+                                        <Button Content="Empty" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
+                                        <Button Content="Full" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
+                                        <Button Content="Edit" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
                                     </Grid>
                                 </StackPanel>
                             </GroupBox>
@@ -196,7 +196,7 @@
                             <Button Content="Clear" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
                             <Button Content="Remove" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
                             <Button Content="Add" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
-                            <Button Content="Enter the current volume" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Enter the current volume" Grid.Column="3"/>
                         </Grid>
                         <DataGrid DockPanel.Dock="Bottom">
                         </DataGrid>

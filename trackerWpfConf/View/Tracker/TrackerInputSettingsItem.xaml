@@ -197,7 +197,7 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <GroupBox Header="For start event" Grid.Column="0" Width="Auto">
+                                <GroupBox Header="For start event" Grid.Column="0" Width="Auto" Style="{x:Null}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -218,7 +218,7 @@
                                     </Grid>
                                 </GroupBox>
 
-                                <GroupBox Header="For end event" Grid.Column="0" Grid.Row="1" Width="Auto">
+                                <GroupBox Header="For end event" Grid.Column="0" Grid.Row="1" Width="Auto" Style="{x:Null}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -238,42 +238,42 @@
                                         <mah:NumericUpDown Grid.Column="5" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
                                     </Grid>
                                 </GroupBox>
-                                
-                                <GroupBox Header="Form aditional event count" Grid.Column="0" Grid.Row="2" Width="Auto">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="Every" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <mah:NumericUpDown Grid.Column="1" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
-                                    <TextBlock Text="pulses, " Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <TextBlock Text="or every seconds" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <mah:NumericUpDown Grid.Column="4" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
-                                </Grid>
-                            </GroupBox>
 
-                            <GroupBox Header="" Grid.Column="0" Grid.Row="3" Width="Auto" HorizontalAlignment="Stretch">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <CheckBox Content="Activate line for time of count" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Style="{StaticResource CheckBoxStyleMarging}"/>
-                                    <CheckBox Content="Ignore impulse in movement" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Style="{StaticResource CheckBoxStyleMarging}"/>
-                                </Grid>
-                            </GroupBox>
+                                <GroupBox Header="Form aditional event count" Grid.Column="0" Grid.Row="2" Width="Auto" Style="{x:Null}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="Every" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <mah:NumericUpDown Grid.Column="1" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
+                                        <TextBlock Text="pulses, " Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBlock Text="or every seconds" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <mah:NumericUpDown Grid.Column="4" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
+                                    </Grid>
+                                </GroupBox>
 
-                            <GroupBox Header="Zeroing value at the time of recording" Grid.Column="0" Grid.Row="4" Width="Auto">
-                                <ComboBox Grid.Row="1" MaxWidth="150" MinWidth="200" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyleMarging}"/>
-                            </GroupBox>
+                                <GroupBox Header="" Grid.Column="0" Grid.Row="3" Width="Auto" HorizontalAlignment="Stretch" Style="{x:Null}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <CheckBox Content="Activate line for time of count" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                        <CheckBox Content="Ignore impulse in movement" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                    </Grid>
+                                </GroupBox>
+
+                                <GroupBox Header="Zeroing value at the time of recording" Grid.Column="0" Grid.Row="4" Width="Auto" Style="{x:Null}">
+                                    <ComboBox Grid.Row="1" MaxWidth="150" MinWidth="200" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                </GroupBox>
                             </Grid>
                         </StackPanel>
                     </TabItem>
