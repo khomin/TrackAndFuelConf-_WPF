@@ -345,7 +345,6 @@ C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\ru\Microsoft.CodeAnal
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
-C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuelConf.csprojAssemblyReference.cache
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\Resources\Icons.baml
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\Resources\IconsNonShared.baml
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\ConnectDialog.g.cs
@@ -395,3 +394,4 @@ C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuelConf.cspr
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuelConf.csproj.CopyComplete
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.exe
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.pdb
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuelConf.csprojAssemblyReference.cache

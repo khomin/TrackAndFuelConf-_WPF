@@ -135,6 +135,7 @@
     <Compile Include="Instrumentals\TrackerSerialPort.cs" />
     <Compile Include="Instrumentals\TrackerSimulationPort.cs" />
     <Compile Include="Instrumentals\TrackerTypeData.cs" />
+    <Compile Include="Resources\IgnitionAutoManualConverter.cs" />
     <Compile Include="Resources\IntToStringConverter.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
     <Compile Include="ViewModel\SettingsConnectionViewModel.cs" />

@@ -42,6 +42,18 @@ namespace trackerWpfConf.ViewModel
         private bool _protocolMsgTypeLlsInternal = false;
         private bool _protocolMsgTypeTemperature1Wire = false;
 
+        private ObservableCollection<string> _typeOfIgnitionDetection;
+        private IgnitionDetectionType _typeOfIgnitionDetectionIndex = 0;
+        public enum IgnitionDetectionType
+        {
+            Off = 0,
+            AutoByPower = 1,
+            Input3 = 2
+        };
+
+        private float _manualIgnitionDetectionLowValue = 0;
+        private float _manualIgnitionDetectionHightValue = 0;
+
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();
@@ -62,6 +74,11 @@ namespace trackerWpfConf.ViewModel
 
             _transmitProtocol = new ObservableCollection<string>();
             _transmitProtocol.Add("Wialon");
+
+            TypeOfIgnitionDetection = new ObservableCollection<string>();
+            TypeOfIgnitionDetection.Add("Disable");
+            TypeOfIgnitionDetection.Add("Virtual (by power voltage");
+            TypeOfIgnitionDetection.Add("IN3");
         }
 
         public ObservableCollection<string> OperatorsList { get => _operatorsList; }
@@ -69,7 +86,7 @@ namespace trackerWpfConf.ViewModel
         public ObservableCollection<string> ServerConnectionList { get => _serversConnection; }
         public string ApnLogin
         {
-            get => _apnLogin; 
+            get => _apnLogin;
             set
             {
                 _apnLogin = value;
@@ -77,7 +94,8 @@ namespace trackerWpfConf.ViewModel
             }
         }
 
-        public string ApnPassword { 
+        public string ApnPassword
+        {
             get => _apnPassword;
             set
             {
@@ -87,7 +105,7 @@ namespace trackerWpfConf.ViewModel
         }
         public string ApnPinCode
         {
-            get => _apnPinCode; 
+            get => _apnPinCode;
             set
             {
                 _apnPinCode = value;
@@ -95,7 +113,8 @@ namespace trackerWpfConf.ViewModel
             }
         }
 
-        public string Apn { 
+        public string Apn
+        {
             get => _apn;
             set
             {
@@ -115,13 +134,18 @@ namespace trackerWpfConf.ViewModel
             }
         }
 
-        public ObservableCollection<string> TransmitProtocol { get => _transmitProtocol; 
-            set {
+        public ObservableCollection<string> TransmitProtocol
+        {
+            get => _transmitProtocol;
+            set
+            {
                 _transmitProtocol = value;
                 OnPropertyChanged();
             }
         }
-        public int TransmitProtocolIndex { get => _transmitProtocolIndex;
+        public int TransmitProtocolIndex
+        {
+            get => _transmitProtocolIndex;
             set
             {
                 _transmitProtocolIndex = value;
@@ -304,6 +328,44 @@ namespace trackerWpfConf.ViewModel
             get => _protocolMsgTypeTemperature1Wire; set
             {
                 _protocolMsgTypeTemperature1Wire = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> TypeOfIgnitionDetection
+        {
+            get => _typeOfIgnitionDetection;
+            set
+            {
+                _typeOfIgnitionDetection = value;
+                OnPropertyChanged();
+            }
+        }
+        public int TypeOfIgnitionDetectionIndex
+        { 
+            get => (int)_typeOfIgnitionDetectionIndex;
+            set
+            {
+                _typeOfIgnitionDetectionIndex = (IgnitionDetectionType)value ;
+                OnPropertyChanged();
+            }
+        }
+
+        public float ManualIgnitionDetectionLowValue
+        {
+            get => _manualIgnitionDetectionLowValue; 
+            set
+            {
+                _manualIgnitionDetectionLowValue = value;
+                OnPropertyChanged();
+            }
+        }
+        public float ManualIgnitionDetectionHightValue
+        {
+            get => _manualIgnitionDetectionHightValue; 
+            set
+            {
+                _manualIgnitionDetectionHightValue = value;
                 OnPropertyChanged();
             }
         }

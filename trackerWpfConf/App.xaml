@@ -37,6 +37,7 @@
             <Resourse:BoolInvertionConverter x:Key="BoolInvertConverter"/>
             <Resourse:ListToStringConverter x:Key="ListToStringConverter"/>
             <Resourse:IntToStringConverter x:Key="IntToStringConverter"/>
+            <Resourse:IgnitionAutoManualConverter x:Key="IgnitionAutoManualConverter"/>
 
             <Style x:Key="GridStyleMarging" TargetType="Grid">
                 <Setter Property="Margin" Value="5,5,5,5" />
@@ -85,7 +86,7 @@
             <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
-
+            
         </ResourceDictionary>
     </Application.Resources>
 

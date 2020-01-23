@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
              xmlns:App="clr-namespace:XamlGeneratedNamespace"
+             xmlns:Resourse="clr-namespace:trackerWpfConf.Resources"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" Height="Auto" Width="Auto">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" 
+                  HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
         <StackPanel Height="350" MinWidth="500">
             <GroupBox Header="Track settings" Width="Auto">
                 <StackPanel>
@@ -24,15 +26,34 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Text="Type of ignition sensor" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                <ComboBox ItemsSource="{Binding SettingsModel.TypeOfIgnitionDetection}"
+                                          SelectedIndex="{Binding SettingsModel.TypeOfIgnitionDetectionIndex}"
+                                    Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
 
                                 <TextBlock Text="Virtual ignition detect" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                                <mah:RangeSlider Grid.Row="1" Grid.Column="1"
-                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                    AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
-                                    IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
-                                </mah:RangeSlider>
+
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding SettingsModel.ManualIgnitionDetectionLowValue, FallbackValue=NA, Mode=OneWay, StringFormat=N1}"  Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="V" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <mah:RangeSlider Grid.Column="2"
+                                        Minimum="0.0"
+                                        Maximum="80"
+                                        LowerValue="{Binding SettingsModel.ManualIgnitionDetectionLowValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        UpperValue="{Binding SettingsModel.ManualIgnitionDetectionHightValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
+                                        IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True" Style="{StaticResource MahSliedStyleMarging}"
+                                        IsEnabled="{Binding SettingsModel.TypeOfIgnitionDetectionIndex, Converter={StaticResource IgnitionAutoManualConverter}}">
+                                    </mah:RangeSlider>
+                                    <TextBlock Text="{Binding SettingsModel.ManualIgnitionDetectionHightValue, FallbackValue=NA, Mode=OneWay, StringFormat=N1}" Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="V" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="4"/>
+                                </Grid>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -77,5 +98,4 @@
             </GroupBox>
         </StackPanel>
     </ScrollViewer>
-
 </UserControl>
