@@ -3,7 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:local="clr-namespace:trackerWpfConf.ViewModel"
             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-            xmlns:l="clr-namespace:trackerWpfConf.Resources"
+            xmlns:Resourse="clr-namespace:trackerWpfConf.Resources"
             StartupUri="./View/Main.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -34,8 +34,9 @@
 
             <local:MainViewModel x:Key="MainViewModel" />
 
-            <l:BoolInvertionConverter x:Key="BoolInvertConverter"/>
-            <l:ListToStringConverter x:Key="ListToStringConverter"/>
+            <Resourse:BoolInvertionConverter x:Key="BoolInvertConverter"/>
+            <Resourse:ListToStringConverter x:Key="ListToStringConverter"/>
+            <Resourse:IntToStringConverter x:Key="IntToStringConverter"/>
 
             <Style x:Key="GridStyleMarging" TargetType="Grid">
                 <Setter Property="Margin" Value="5,5,5,5" />
@@ -79,6 +80,10 @@
 
             <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
                 <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+            <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+                <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
         </ResourceDictionary>

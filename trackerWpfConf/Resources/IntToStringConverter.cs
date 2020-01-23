@@ -8,23 +8,17 @@ using System.Windows.Data;
 
 namespace trackerWpfConf.Resources
 {
-    public class BoolInvertionConverter : IValueConverter
+    public class IntToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // Do the conversion from bool to visibility
-            if (value != null && value is bool)
-            {
-                return !((bool)value);
-            }
-
-            return true;
+            return value.ToString();
         }
         public object ConvertBack(object value, Type targetType,
         object parameter, CultureInfo culture)
         {
-            // Do the conversion from visibility to bool
-            return Convert(value, targetType, parameter, culture);
+            int ret = 0;
+            return int.TryParse((string)value, out ret) ? ret : 0;
         }
     }
 }

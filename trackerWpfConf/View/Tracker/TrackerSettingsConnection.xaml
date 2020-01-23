@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:trackerWpfConf.settingsTabItems"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Resourse="clr-namespace:trackerWpfConf.Resources"
              mc:Ignorable="d"
              DataContext="{Binding RelativeSource={RelativeSource Self}}" Height="Auto" Width="Auto">
     <Grid>
@@ -12,43 +13,54 @@
             <GroupBox Header="Server">
                 <StackPanel>
                     <!--CheckBox Enable/Disable -->
-                    <CheckBox Content="Enable" Grid.Row="0" Grid.Column="0"/>
-                    <Grid>
+                    <CheckBox Content="Enable" IsChecked="{Binding ServerIsEnabled,Mode=TwoWay}" Grid.Row="0" Grid.Column="0"/>
+                    <Grid IsEnabled="{Binding ServerIsEnabled}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <!--Ip/DNS-->
-                        <TextBlock Text="iP/DNS" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBox Text="{Binding IpDnsAddress}" x:Name="ipDnsTextBox" Grid.Row="0" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBlock Text="IP/DNS" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBox Text="{Binding IpDnsAddress, FallbackValue=NA}" Grid.Row="0" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
-                    <Grid>
+                    <Grid IsEnabled="{Binding ServerIsEnabled}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <!--Port-->
                         <TextBlock Text="Port" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBox Text="dddd" Grid.Row="3" Grid.Column="1" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBox Text="{Binding Port, FallbackValue=NA}" Grid.Row="3" Grid.Column="1" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
 
-                    <Grid>
+                    <Grid IsEnabled="{Binding ServerIsEnabled}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <!--Check-->
+                        <Button Grid.Row="0" IsEnabled="False" Content="Check" Grid.Column="1" MinWidth="200" Style="{StaticResource ButtonStyleMarging}"/>
+                    </Grid>
+
+                    <Grid IsEnabled="{Binding ServerIsEnabled}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <!--DataProtocol-->
-                        <TextBlock Text="IP/DNS" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
+                        <TextBlock Text="Protocol type" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <ComboBox ItemsSource="{Binding ProtocolType, FallbackValue=NA}"
+                                  SelectedIndex="{Binding ProtocolTypeIndex, Mode=TwoWay}"
+                                  Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
                     </Grid>
 
                     <!--Packet compression-->
-                    <CheckBox Content="Compression" Grid.Row="5" Grid.Column="0" MinWidth="200"/>
+                    <CheckBox Content="Compression" IsEnabled="False" Grid.Row="5" Grid.Column="0" MinWidth="200"/>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Algorithm of working with telematic services">
+            <GroupBox Header="Algorithm of working with telematic services" IsEnabled="{Binding ServerIsEnabled}">
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -56,7 +68,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Type of connection with telematic servers" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
+                        <ComboBox ItemsSource="{Binding TypeOfConServer, FallbackValue=NA}" 
+                                  SelectedIndex="{Binding TypeOfConServerIndex, Mode=TwoWay}" 
+                                  Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -64,7 +78,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Period of ping (short empty message)" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
+                        <ComboBox ItemsSource="{Binding PeriodOfPingShortMessage, FallbackValue=NA}" 
+                                  SelectedIndex="{Binding PeriodOfPingShortMessageIndex, Mode=TwoWay}"
+                                  Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -78,8 +94,10 @@
                                 <LineBreak/>
                                 Delay before next connecting
                         </TextBlock>
-                        <Slider Grid.Row="0" Grid.Column="1" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
-                        <TextBlock Text="50" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <Slider Value="{Binding DelayBeforeNextAttempConnecting}" Maximum="100" 
+                                Grid.Row="0" Grid.Column="1" MinWidth="120" VerticalAlignment="Center" Style="{StaticResource SliderStyleMarging}"/>
+                        <TextBlock Text="{Binding DelayBeforeNextAttempConnecting, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
+                                   Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
                         <TextBlock Text="Second" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
                     </Grid>
 
@@ -96,14 +114,19 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Sending period during parking" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <Slider Grid.Row="0" Grid.Column="2" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
-                        <TextBlock Text="50" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <Slider Value="{Binding SendingPeriodDuringParking}" Maximum="10000" 
+                            Grid.Row="0" Grid.Column="2" MinWidth="120" VerticalAlignment="Center" Style="{StaticResource SliderStyleMarging}"/>
+                        <TextBlock Text="{Binding SendingPeriodDuringParking, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                                   Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
                         <TextBlock Text="Second" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="Sending period in sleep mode" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <Slider Grid.Row="1" Grid.Column="2" MinWidth="120" TickPlacement="Both" Style="{StaticResource SliderStyleMarging}"/>
-                        <TextBlock Text="50" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBlock Text="Second" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Sending period in sleep mode" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" 
+                                   IsEnabled="False" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <Slider Value="{Binding SendingPeriodInSleepMode}" Maximum="10000" IsEnabled="False" 
+                            Grid.Row="1" Grid.Column="2" MinWidth="120" VerticalAlignment="Center" Style="{StaticResource SliderStyleMarging}"/>
+                        <TextBlock Text="{Binding SendingPeriodInSleepMode, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" IsEnabled="False"
+                            Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Second" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}" IsEnabled="False"/>
                     </Grid>
                 </StackPanel>
             </GroupBox>

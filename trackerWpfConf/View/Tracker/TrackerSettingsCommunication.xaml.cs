@@ -36,7 +36,7 @@ namespace trackerWpfConf.settings
                     ServerItem.DataContext = viewModel.SettingsModel.ServersConnectionModel[0];
                 }
             };
-
+            
             ServerCurrent.SelectionChanged += (a, b) => {
                 var combox = a as ComboBox;
                 ServerItem.DataContext = viewModel.SettingsModel.ServersConnectionModel[combox.SelectedIndex];

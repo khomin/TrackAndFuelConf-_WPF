@@ -6,6 +6,7 @@
              xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
              xmlns:Models="clr-namespace:trackerWpfConf.ViewModel"
              mc:Ignorable="d" Height="Auto" Width="Auto"
+             xmlns:App="clr-namespace:trackerWpfConf"
              DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Models:MainViewModel}}">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
@@ -50,7 +51,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Password" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="3" Grid.Column="3" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" Text="{Binding SettingsModel.ApnPassword}"/>
+                        <PasswordBox Grid.Row="3" Grid.Column="3" MinWidth="200" Style="{StaticResource PasswordBoxStyle}" InputScope="{Binding SettingsModel.ApnPassword}"/>
                     </Grid>
 
                     <Grid>
@@ -58,8 +59,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Pin code" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" Text="{Binding SettingsModel.ApnPinCode}"/>
+                        <TextBlock Text="Pin code" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" IsEnabled="False"/>
+                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" IsEnabled="False" Text="{Binding SettingsModel.ApnPinCode}"/>
                     </Grid>
                 </StackPanel>
             </GroupBox>
@@ -76,7 +77,7 @@
                             <ComboBox x:Name="ServerCurrent"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MinWidth="200"  
                               Style="{StaticResource ComboBoxStyleMarging}"
                               ItemsSource="{Binding Path=SettingsModel.ServerConnectionList}" 
-                              SelectedItem="{Binding Path=SettingsModel.ServerConnectionList, Mode=OneWay}" SelectedIndex="0"/>
+                              SelectedIndex="{Binding SettingsModel.ServerConnectionListIndex, Mode=TwoWay}"/>
                         </Grid>
                         <SettingsApp:SettingsConnection x:Name="ServerItem"/>
                     </StackPanel>

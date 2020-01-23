@@ -12,13 +12,16 @@
                 <StackPanel>
                     <Grid>
                         <GroupBox Header="Select protocol type" MinWidth="400" HorizontalAlignment="Left">
-                            <Grid>
+                            <Grid Style="{StaticResource GridStyleMarging}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Transmission protocol" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                <TextBlock Text="Transmission protocol" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" 
+                                           Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox ItemsSource="{Binding SettingsModel.TransmitProtocol}" 
+                                          SelectedIndex="{Binding SettingsModel.TransmitProtocolIndex, Mode=TwoWay}"
+                                          Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -46,12 +49,14 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <CheckBox Content="Event type" Grid.Column="0" Grid.Row="0"/>
-                                <CheckBox Content="Odometer" Grid.Column="1" Grid.Row="0"/>
-                                <CheckBox Content="Gsm strenght" Grid.Column="0" Grid.Row="1"/>
-                                <CheckBox Content="Temprature (internal)" Grid.Column="1" Grid.Row="1"/>
-                                <CheckBox Content="Engine hours" Grid.Column="0" Grid.Row="2"/>
-                                <CheckBox Content="Igntition state" Grid.Column="1" Grid.Row="2"/>
+                                
+                                <!--TODO: now it's only one protocol support-->
+                                <CheckBox Content="Event type" IsChecked="{Binding SettingsModel.ProtocolMsgTypeEventType, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Odometer" IsChecked="{Binding SettingsModel.ProtocolMsgTypeOdometer, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Gsm strenght" IsChecked="{Binding SettingsModel.ProtocolMsgTypeGsmStreng, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Temprature (internal)" IsChecked="{Binding SettingsModel.ProtocolMsgTypeTemperature, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Engine hours" IsChecked="{Binding SettingsModel.ProtocolMsgTypeEngHours, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Igntition state" IsChecked="{Binding SettingsModel.ProtocolMsgTypeIgnState, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Style="{StaticResource CheckBoxStyleMarging}"/>
                             </Grid>
                         </GroupBox>
                         <GroupBox Header="Navigation" Width="Auto" MinWidth="300" Grid.Column="1">
@@ -68,14 +73,14 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <CheckBox Content="Latitude" Grid.Column="0" Grid.Row="0"/>
-                                <CheckBox Content="Longitude" Grid.Column="1" Grid.Row="0"/>
-                                <CheckBox Content="Fix" Grid.Column="0" Grid.Row="1"/>
-                                <CheckBox Content="Altitide" Grid.Column="1" Grid.Row="1"/>
-                                <CheckBox Content="Heading" Grid.Column="0" Grid.Row="2"/>
-                                <CheckBox Content="Speed" Grid.Column="1" Grid.Row="2"/>
-                                <CheckBox Content="Hdop" Grid.Column="0" Grid.Row="3"/>
-                                <CheckBox Content="Sats count" Grid.Column="1" Grid.Row="3"/>
+                                <CheckBox Content="Latitude" IsChecked="{Binding SettingsModel.ProtocolMsgTypeLatitude, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Longitude" IsChecked="{Binding SettingsModel.ProtocolMsgTypeLongitude, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Fix" IsChecked="{Binding SettingsModel.ProtocolMsgTypeFix, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Altitide" IsChecked="{Binding SettingsModel.ProtocolMsgTypeAltitude, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Heading" IsChecked="{Binding SettingsModel.ProtocolMsgTypeHeading, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Speed" IsChecked="{Binding SettingsModel.ProtocolMsgTypeSpeed, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Hdop" IsChecked="{Binding SettingsModel.ProtocolMsgTypeHdop, Mode=TwoWay}" Grid.Column="0" Grid.Row="3" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Sats count" IsChecked="{Binding SettingsModel.ProtocolMsgTypeSatsCount, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Style="{StaticResource CheckBoxStyleMarging}"/>
                             </Grid>
                         </GroupBox>
 
@@ -93,12 +98,12 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <CheckBox Content="Power internal" Grid.Column="0" Grid.Row="0"/>
-                                <CheckBox Content="Power external" Grid.Column="1" Grid.Row="0"/>
-                                <CheckBox Content="Digital outs" Grid.Column="0" Grid.Row="1"/>
-                                <CheckBox Content="Inputs" Grid.Column="1" Grid.Row="1"/>
-                                <CheckBox Content="LLS internal" Grid.Column="0" Grid.Row="2"/>
-                                <CheckBox Content="Temperature 1-wire" Grid.Column="1" Grid.Row="2"/>
+                                <CheckBox Content="Power internal" IsChecked="{Binding SettingsModel.ProtocolMsgTypePowerInternal, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Power external" IsChecked="{Binding SettingsModel.ProtocolMsgTypePowerExternal, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Digital outs" IsChecked="{Binding SettingsModel.ProtocolMsgTypeDigitalOuts, Mode=TwoWay}" Grid.Column="0" Grid.Row="1" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Inputs" IsChecked="{Binding SettingsModel.ProtocolMsgTypeInputs, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="LLS internal" IsChecked="{Binding SettingsModel.ProtocolMsgTypeLlsInternal, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                <CheckBox Content="Temperature 1-wire" IsChecked="{Binding SettingsModel.ProtocolMsgTypeTemperature1Wire, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Style="{StaticResource CheckBoxStyleMarging}"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
