@@ -138,6 +138,7 @@
     <Compile Include="Resources\IgnitionAutoManualConverter.cs" />
     <Compile Include="Resources\IntToStringConverter.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
+    <Compile Include="ViewModel\InputItemSettingsModel.cs" />
     <Compile Include="ViewModel\OneWireItemModel.cs" />
     <Compile Include="ViewModel\SettingsConnectionViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />

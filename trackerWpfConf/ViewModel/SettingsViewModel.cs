@@ -61,6 +61,7 @@ namespace trackerWpfConf.ViewModel
         private int _maxSpeedForDetectionParking = 0;
 
         private readonly ObservableCollection<OneWireItemModel> _oneWireSettingsModelList;
+        private readonly ObservableCollection<InputItemSettingsModel> _inputsSettingsModelList;
 
         public SettingsViewModel()
         {
@@ -101,6 +102,11 @@ namespace trackerWpfConf.ViewModel
             _oneWireSettingsModelList[1].SensorName = "Temp2";
             _oneWireSettingsModelList[2].SensorName = "Temp3";
             _oneWireSettingsModelList[3].SensorName = "Temp4";
+
+            _inputsSettingsModelList = new ObservableCollection<InputItemSettingsModel>();
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN1", false));
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN2", false));
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN3", true));
         }
 
         public ObservableCollection<string> OperatorsList { get => _operatorsList; }
@@ -438,5 +444,7 @@ namespace trackerWpfConf.ViewModel
         }
 
         public ObservableCollection<OneWireItemModel> OneWireSettingsModelList => _oneWireSettingsModelList;
+
+        public ObservableCollection<InputItemSettingsModel> InputsSettingsModelList => _inputsSettingsModelList;
     }
 }

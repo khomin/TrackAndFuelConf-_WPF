@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:SettingsApp="clr-namespace:trackerWpfConf.settingsTabItems"
+             DataContext="{StaticResource MainViewModel}"
              mc:Ignorable="d" Height="Auto" Width="Auto">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">

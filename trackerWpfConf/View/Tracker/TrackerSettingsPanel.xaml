@@ -27,15 +27,15 @@
             </TabItem>
 
             <TabItem Header="Input lines" mah:ControlsHelper.HeaderFontSize="16">
-                <Views:TrackerInputSettings HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
+                <Views:TrackerInputSettings DataContext="{Binding .}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
             <TabItem Header="SMS" mah:ControlsHelper.HeaderFontSize="16">
-                <Views:TrackerSmsSettings HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
+                <Views:TrackerSmsSettings DataContext="{Binding .}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
             <TabItem Header="LLS" mah:ControlsHelper.HeaderFontSize="16">
-                <Views:TrackerLlsSettings HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
+                <Views:TrackerLlsSettings DataContext="{Binding .}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
             
         </TabControl>

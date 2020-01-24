@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:trackerWpfConf.settings"
              xmlns:App="clr-namespace:XamlGeneratedNamespace"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             DataContext="{StaticResource MainViewModel}"
              mc:Ignorable="d" Height="Auto" Width="Auto">
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   Width="Auto" 
@@ -24,9 +25,9 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <local:TrackerInputSettingsItem Grid.Row="0"/>
-                            <local:TrackerInputSettingsItem Grid.Row="1"/>
-                            <local:TrackerInputSettingsItem Grid.Row="2"/>
+                            <local:TrackerInputSettingsItem DataContext="{Binding SettingsModel.InputsSettingsModelList[0]}" Grid.Row="0" HorizontalAlignment="Left"/>
+                            <local:TrackerInputSettingsItem DataContext="{Binding SettingsModel.InputsSettingsModelList[1]}" Grid.Row="1" HorizontalAlignment="Left"/>
+                            <local:TrackerInputSettingsItem DataContext="{Binding SettingsModel.InputsSettingsModelList[2]}" Grid.Row="2" HorizontalAlignment="Left"/>
                         </Grid>
                         </Grid>
                 </StackPanel>

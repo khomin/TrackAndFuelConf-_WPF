@@ -7,9 +7,10 @@
              xmlns:App="clr-namespace:XamlGeneratedNamespace"
              xmlns:Items="clr-namespace:trackerWpfConf.settingsTabItems"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             DataContext="{StaticResource MainViewModel}"
              mc:Ignorable="d" Height="Auto" Width="Auto">
-    <StackPanel Height="Auto" MinWidth="400">
-        <GroupBox Header="{Binding lineNumber}" Width="Auto">
+    <StackPanel Height="Auto" MinWidth="550" MaxWidth="800">
+        <GroupBox Header="{Binding PortLineName}" Width="Auto">
             <StackPanel>
                 <Grid Style="{StaticResource GridStyleMarging}">
                     <Grid>
@@ -25,63 +26,78 @@
                         <TextBlock Text="Line name" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
                         <TextBlock Text="Function" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
                         <TextBox Text="Something pin name1" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}"/>
-                        <ComboBox Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
-                        <CheckBox Content="Use as Ignition" Grid.Row="1" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}"/>
+                        <ComboBox ItemsSource="{Binding PortRoleList, FallbackValue=NA}" SelectedIndex="{Binding PortRoleIndex, Mode=TwoWay}"
+                            Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
+                        <!--<CheckBox Content="Use as Ignition" Grid.Row="1" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" IsEnabled="{Binding AvailableAsIgnitionSensor}"/>-->
                     </Grid>
                 </Grid>
 
-                <TabControl Width="Auto" Height="Auto">
+                <TabControl Width="Auto" Height="Auto" SelectedIndex="{Binding PortRoleIndex}">
+                    <TabControl.ItemContainerStyle>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </Style>
+                    </TabControl.ItemContainerStyle>
                     <TabItem Header="Not connected-" mah:ControlsHelper.HeaderFontSize="16">
 
                     </TabItem>
 
                     <TabItem Header="NO-" mah:ControlsHelper.HeaderFontSize="16">
-                        <GroupBox Header="Signal analysys time" Width="Auto" HorizontalAlignment="Left">
+                        <GroupBox Header="Signal analysys time" Width="Auto" HorizontalAlignment="Stretch">
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="1000ms" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                                <Slider Style="{StaticResource SliderStyleMarging}" Grid.Column="1"/>
+                                <Slider Value="{Binding SignalAnalysysTime}" Style="{StaticResource SliderStyleMarging}" Grid.Column="0"/>
+                                <TextBlock Text="{Binding SignalAnalysysTime, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                                           Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <TextBlock Text="ms" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}"/>
                             </Grid>
                         </GroupBox>
                     </TabItem>
 
                     <TabItem Header="NC-" mah:ControlsHelper.HeaderFontSize="16">
-                        <GroupBox Header="Signal analysys time" Width="Auto" HorizontalAlignment="Left">
+                        <GroupBox Header="Signal analysys time" Width="Auto" HorizontalAlignment="Stretch">
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="1000ms" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                                <Slider Style="{StaticResource SliderStyleMarging}" Grid.Column="1"/>
+                                <Slider Value="{Binding SignalAnalysysTime}" Style="{StaticResource SliderStyleMarging}" Grid.Column="0"/>
+                                <TextBlock Text="{Binding SignalAnalysysTime, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                                           Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <TextBlock Text="ms" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}"/>
                             </Grid>
                         </GroupBox>
                     </TabItem>
 
-                    <TabItem Header="NO+" mah:ControlsHelper.HeaderFontSize="16">
+                    <TabItem Header="NO+" mah:ControlsHelper.HeaderFontSize="16" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <GroupBox Header="Signal analysys time" Grid.Column="0" Width="Auto" HorizontalAlignment="Left">
+                            <GroupBox Header="Signal analysys time" Grid.Column="0" HorizontalAlignment="Stretch">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="1000ms" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <Slider Style="{StaticResource SliderStyleMarging}" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <Slider Value="{Binding SignalAnalysysTime}" Style="{StaticResource SliderStyleMarging}" Grid.Column="0"/>
+                                    <TextBlock Text="{Binding SignalAnalysysTime, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                                           Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="ms" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}"/>
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Header="Activation level settings" Grid.Column="1" MinWidth="400">
+                            <GroupBox Header="Activation level settings" Grid.Column="1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -93,18 +109,20 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Text="Upper threshold" Grid.Column="0" Grid.Row="0" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <TextBlock Text="Activation level settings" Grid.Column="1" Grid.Row="0" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <TextBlock Text="Lower threshold" Grid.Column="2" Grid.Row="0" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="Upper threshold" Grid.Column="0" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="Activation level settings" Grid.Column="1" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="Lower threshold" Grid.Column="2" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                                    <TextBlock Text="1000ms" Grid.Column="0" Grid.Row="1" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="{Binding ThresholdUpper, Converter={StaticResource IntToStringConverter}, StringFormat={}{0}V}" Grid.Column="0" Grid.Row="1" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
                                     <mah:RangeSlider Grid.Column="1" Grid.Row="1" Width="Auto" Style="{StaticResource MahSliedStyleMarging}"
-                                            Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            Minimum="0"
+                                            Maximum="99999"
+                                            LowerValue="{Binding ThresholdLower}"
+                                            UpperValue="{Binding ThresholdUpper}"
                                             AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                             IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
                                     </mah:RangeSlider>
-                                    <TextBlock Text="1000ms" Grid.Column="2" Grid.Row="1" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="{Binding ThresholdLower, Converter={StaticResource IntToStringConverter}, StringFormat={}{0}V}" Grid.Column="3" Grid.Row="1" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
                                 </Grid>
                             </GroupBox>
                         </Grid>

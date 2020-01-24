@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf.settings
 {
@@ -20,9 +21,14 @@ namespace trackerWpfConf.settings
     /// </summary>
     public partial class TrackerInputSettings : UserControl
     {
+        private MainViewModel viewModel;
         public TrackerInputSettings()
         {
             InitializeComponent();
+
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
+                viewModel = this.DataContext as MainViewModel;
+            };
         }
     }
 }
