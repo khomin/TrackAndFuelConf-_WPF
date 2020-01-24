@@ -23,7 +23,7 @@
             </TabItem>
 
             <TabItem Header="1-Wire settings" mah:ControlsHelper.HeaderFontSize="16">
-                <Views:TrackerOneWireSettings HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
+                <Views:TrackerOneWireSettings DataContext="{Binding .}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto"/>
             </TabItem>
 
             <TabItem Header="Input lines" mah:ControlsHelper.HeaderFontSize="16">

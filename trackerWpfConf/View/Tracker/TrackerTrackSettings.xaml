@@ -74,24 +74,38 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="The maximum distance between two points on the track" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0" Grid.Row="0"/>
-                        <Slider Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="0"/>
+                        <Slider Value="{Binding SettingsModel.MaxDistanceBetweenTwoPoints}" Maximum="99999"
+                            Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="0"/>
+                        <TextBlock Text="{Binding SettingsModel.MaxDistanceBetweenTwoPoints, FallbackValue=NA, Converter={StaticResource IntToStringConverter}}" 
+                                   Style="{StaticResource TextBlockStyleMarging}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBlock Text="m" Style="{StaticResource TextBlockStyleMarging}" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"/>
 
                         <TextBlock Text="The maximum angle of rotation between two points" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0" Grid.Row="1"/>
-                        <Slider Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="1"/>
+                        <Slider Value="{Binding SettingsModel.MaxDistanceAngeOfRotationBetweenTwoPoints}" Maximum="99999"
+                            Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="1"/>
+                        <TextBlock Text="{Binding SettingsModel.MaxDistanceAngeOfRotationBetweenTwoPoints, FallbackValue=NA, Converter={StaticResource IntToStringConverter}}" 
+                                   Style="{StaticResource TextBlockStyleMarging}" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                        <TextBlock Text="m" Style="{StaticResource TextBlockStyleMarging}" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"/>
 
                         <TextBlock Text="Acceleration threshold for determining motion" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0" Grid.Row="2"/>
-                        <Slider Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="2"/>
-                        <TextBlock Text="50" Style="{StaticResource TextBlockStyleMarging}" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+                        <Slider Value="{Binding SettingsModel.AccelerationThresholdDetermMotion}" Maximum="99999"
+                            Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="2"/>
+                        <TextBlock Text="{Binding SettingsModel.AccelerationThresholdDetermMotion, FallbackValue=NA, Converter={StaticResource IntToStringConverter}}" 
+                                   Style="{StaticResource TextBlockStyleMarging}" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
                         <TextBlock Text="km/h" Style="{StaticResource TextBlockStyleMarging}" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center"/>
 
                         <TextBlock Text="Minimum speed for determining motion" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0" Grid.Row="3"/>
-                        <Slider Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="3"/>
-                        <TextBlock Text="50" Grid.Row="3" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                        <Slider Value="{Binding SettingsModel.MinSpeedForDetectionMotion}"
+                            Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="3"/>
+                        <TextBlock Text="{Binding SettingsModel.MinSpeedForDetectionMotion, FallbackValue=NA, Converter={StaticResource IntToStringConverter}}" 
+                                   Grid.Row="3" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                         <TextBlock Text="km/h" Grid.Row="3" Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
 
                         <TextBlock Text="The maximum speed of determining parking" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0" Grid.Row="4"/>
-                        <Slider Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="4"/>
-                        <TextBlock Text="50" Grid.Row="4" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                        <Slider Value="{Binding SettingsModel.MaxSpeedForDetectionParking}"
+                            Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="4"/>
+                        <TextBlock Text="{Binding SettingsModel.MaxSpeedForDetectionParking, FallbackValue=NA, Converter={StaticResource IntToStringConverter}}" 
+                                   Grid.Row="4" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                         <TextBlock Text="km/h" Grid.Row="4" Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                     </Grid>
                 </StackPanel>

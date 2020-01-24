@@ -54,6 +54,14 @@ namespace trackerWpfConf.ViewModel
         private float _manualIgnitionDetectionLowValue = 0;
         private float _manualIgnitionDetectionHightValue = 0;
 
+        private int _maxDistanceBetweenTwoPoints = 0;
+        private int _maxDistanceAngeOfRotationBetweenTwoPoints = 0;
+        private int _accelerationThresholdDetermMotion = 0;
+        private int _minSpeedForDetectionMotion = 0;
+        private int _maxSpeedForDetectionParking = 0;
+
+        private readonly ObservableCollection<OneWireItemModel> _oneWireSettingsModelList;
+
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();
@@ -79,6 +87,20 @@ namespace trackerWpfConf.ViewModel
             TypeOfIgnitionDetection.Add("Disable");
             TypeOfIgnitionDetection.Add("Virtual (by power voltage");
             TypeOfIgnitionDetection.Add("IN3");
+
+            _oneWireSettingsModelList = new ObservableCollection<OneWireItemModel>();
+            _oneWireSettingsModelList.Add(new OneWireItemModel());
+            _oneWireSettingsModelList.Add(new OneWireItemModel());
+            _oneWireSettingsModelList.Add(new OneWireItemModel());
+            _oneWireSettingsModelList.Add(new OneWireItemModel());
+            _oneWireSettingsModelList[0].HexCode = "AABBCC1";
+            _oneWireSettingsModelList[1].HexCode = "AABBCC2";
+            _oneWireSettingsModelList[2].HexCode = "AABBCC3";
+            _oneWireSettingsModelList[3].HexCode = "AABBCC4";
+            _oneWireSettingsModelList[0].SensorName = "Temp1";
+            _oneWireSettingsModelList[1].SensorName = "Temp2";
+            _oneWireSettingsModelList[2].SensorName = "Temp3";
+            _oneWireSettingsModelList[3].SensorName = "Temp4";
         }
 
         public ObservableCollection<string> OperatorsList { get => _operatorsList; }
@@ -342,18 +364,18 @@ namespace trackerWpfConf.ViewModel
             }
         }
         public int TypeOfIgnitionDetectionIndex
-        { 
+        {
             get => (int)_typeOfIgnitionDetectionIndex;
             set
             {
-                _typeOfIgnitionDetectionIndex = (IgnitionDetectionType)value ;
+                _typeOfIgnitionDetectionIndex = (IgnitionDetectionType)value;
                 OnPropertyChanged();
             }
         }
 
         public float ManualIgnitionDetectionLowValue
         {
-            get => _manualIgnitionDetectionLowValue; 
+            get => _manualIgnitionDetectionLowValue;
             set
             {
                 _manualIgnitionDetectionLowValue = value;
@@ -362,12 +384,59 @@ namespace trackerWpfConf.ViewModel
         }
         public float ManualIgnitionDetectionHightValue
         {
-            get => _manualIgnitionDetectionHightValue; 
+            get => _manualIgnitionDetectionHightValue;
             set
             {
                 _manualIgnitionDetectionHightValue = value;
                 OnPropertyChanged();
             }
         }
+
+        public int MaxDistanceBetweenTwoPoints
+        {
+            get => _maxDistanceBetweenTwoPoints; set
+            {
+                _maxDistanceBetweenTwoPoints = value;
+                OnPropertyChanged();
+            }
+        }
+        public int MaxDistanceAngeOfRotationBetweenTwoPoints
+        {
+            get => _maxDistanceAngeOfRotationBetweenTwoPoints;
+            set
+            {
+                _maxDistanceAngeOfRotationBetweenTwoPoints = value;
+                OnPropertyChanged();
+            }
+        }
+        public int AccelerationThresholdDetermMotion
+        {
+            get => _accelerationThresholdDetermMotion;
+            set
+            {
+                _accelerationThresholdDetermMotion = value;
+                OnPropertyChanged();
+            }
+        }
+        public int MinSpeedForDetectionMotion
+        {
+            get => _minSpeedForDetectionMotion;
+            set
+            {
+                _minSpeedForDetectionMotion = value;
+                OnPropertyChanged();
+            }
+        }
+        public int MaxSpeedForDetectionParking
+        {
+            get => _maxSpeedForDetectionParking;
+            set
+            {
+                _maxSpeedForDetectionParking = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<OneWireItemModel> OneWireSettingsModelList => _oneWireSettingsModelList;
     }
 }

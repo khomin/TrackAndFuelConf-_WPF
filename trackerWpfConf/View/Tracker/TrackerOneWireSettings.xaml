@@ -61,48 +61,140 @@
                             <TextBlock Text="Alarm zone" Grid.Row="0" Grid.Column="6" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
 
                             <!--Data 1-->
-                            <TextBox Text="0xAAABBBCCDD" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <CheckBox Grid.Row="1" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <TextBox Text="Something name" Grid.Row="1" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <mah:RangeSlider Grid.Row="1" Grid.Column="6"
+                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[0].HexCode, FallbackValue=NA}" 
+                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}" 
+                                     Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}"
+                                Grid.Row="1" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[0].SensorName}" 
+                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}"
+                                     Grid.Row="1" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <Grid Grid.Row="1" Grid.Column="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[0].LowerAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                                           Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <TextBlock Text="°C" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <mah:RangeSlider Grid.Column="2"
+                                    IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}"
+                                    LowerValue="{Binding SettingsModel.OneWireSettingsModelList[0].LowerAlarmZone}" 
+                                    UpperValue="{Binding SettingsModel.OneWireSettingsModelList[0].UpperAlarmZone}"
                                     Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                     Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                     AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                     IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
-                            </mah:RangeSlider>
-
+                                </mah:RangeSlider>
+                                <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[0].UpperAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
+                                    Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <TextBlock Text="°C" Grid.Column="4" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                            </Grid>
+                            
                             <!--Data 2-->
-                            <TextBox Text="0xAAABBBCCDD" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <CheckBox Grid.Row="2" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <TextBox Text="Something name" Grid.Row="2" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <mah:RangeSlider Grid.Row="2" Grid.Column="6"
+                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[1].HexCode, FallbackValue=NA}" 
+                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}" 
+                                     Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}"
+                                Grid.Row="2" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[1].SensorName}" 
+                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}"
+                                     Grid.Row="2" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <Grid Grid.Row="2" Grid.Column="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[1].LowerAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                                           Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <TextBlock Text="°C" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <mah:RangeSlider Grid.Column="2"
+                                    IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}"
+                                    LowerValue="{Binding SettingsModel.OneWireSettingsModelList[1].LowerAlarmZone}" 
+                                    UpperValue="{Binding SettingsModel.OneWireSettingsModelList[1].UpperAlarmZone}"
                                     Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                     Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                     AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                     IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
-                            </mah:RangeSlider>
+                                </mah:RangeSlider>
+                                <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[1].UpperAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
+                                    Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <TextBlock Text="°C" Grid.Column="4" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                            </Grid>
 
                             <!--Data 3-->
-                            <TextBox Text="0xAAABBBCCDD" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <CheckBox Grid.Row="3" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <TextBox Text="Something name" Grid.Row="3" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <mah:RangeSlider Grid.Row="3" Grid.Column="6"
+                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[2].HexCode, FallbackValue=NA}" 
+                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}" 
+                                     Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}"
+                                Grid.Row="3" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[2].SensorName}" 
+                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}"
+                                     Grid.Row="3" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <Grid Grid.Row="3" Grid.Column="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[2].LowerAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                                           Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <TextBlock Text="°C" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <mah:RangeSlider Grid.Column="2"
+                                    IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}"
+                                    LowerValue="{Binding SettingsModel.OneWireSettingsModelList[2].LowerAlarmZone}" 
+                                    UpperValue="{Binding SettingsModel.OneWireSettingsModelList[2].UpperAlarmZone}"
                                     Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                     Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                     AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                     IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
-                            </mah:RangeSlider>
+                                </mah:RangeSlider>
+                                <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[2].UpperAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
+                                    Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <TextBlock Text="°C" Grid.Column="4" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                            </Grid>
 
                             <!--Data 4-->
-                            <TextBox Text="0xAAABBBCCDD" Grid.Row="4" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <CheckBox Grid.Row="4" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <TextBox Text="Something name" Grid.Row="4" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <mah:RangeSlider Grid.Row="4" Grid.Column="6"
+                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[3].HexCode, FallbackValue=NA}" 
+                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}" 
+                                     Grid.Row="4" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}"
+                                Grid.Row="4" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[3].SensorName}" 
+                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}"
+                                     Grid.Row="4" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            <Grid Grid.Row="4" Grid.Column="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[3].LowerAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                                           Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <TextBlock Text="°C" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <mah:RangeSlider Grid.Column="2"
+                                    IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}"
+                                    LowerValue="{Binding SettingsModel.OneWireSettingsModelList[3].LowerAlarmZone}" 
+                                    UpperValue="{Binding SettingsModel.OneWireSettingsModelList[3].UpperAlarmZone}"
                                     Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                     Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                     AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                     IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
-                            </mah:RangeSlider>
+                                </mah:RangeSlider>
+                                <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[3].UpperAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
+                                    Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                                <TextBlock Text="°C" Grid.Column="4" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </StackPanel>
