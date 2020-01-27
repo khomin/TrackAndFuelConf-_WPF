@@ -10,13 +10,23 @@ namespace trackerWpfConf.ViewModel
     public class SettingsViewModel : ViewModelBase
     {
         private readonly ObservableCollection<string> _operatorsList;
+        private int _operatorListIndex = 0;
+        enum OperatorType {
+            MTS = 0,
+            Megafon = 1,
+            Beeline = 2,
+            Custom = 3
+        };
+        
         private string _apn = "gdata";
         private string _apnLogin = "login";
         private string _apnPassword = "default";
         private string _apnPinCode = "";
+        private bool _apnIsEditable = false;
         private ObservableCollection<string> _serversConnection;
         private int _serverConnectionListIndex = 0;
         private ObservableCollection<SettingsConnectionViewModel> _serversConnectionModel;
+
 
         private ObservableCollection<string> _transmitProtocol;  // TODO: it now wialon only
         private int _transmitProtocolIndex = 0;
@@ -27,14 +37,14 @@ namespace trackerWpfConf.ViewModel
         private bool _protocolMsgTypeTemperature = false;
         private bool _protocolMsgTypeEngHours = false;
         private bool _protocolMsgTypeIgnState = false;
-        private bool ProtocolMsgTypeLatitude = false;
-        private bool ProtocolMsgTypeLongitude = false;
-        private bool ProtocolMsgTypeFix = false;
-        private bool ProtocolMsgTypeAltitude = false;
-        private bool ProtocolMsgTypeHeading = false;
-        private bool ProtocolMsgTypeSpeed = false;
-        private bool ProtocolMsgTypeHdop = false;
-        private bool ProtocolMsgTypeSatsCount = false;
+        private bool _protocolMsgTypeLatitude = false;
+        private bool _protocolMsgTypeLongitude = false;
+        private bool _protocolMsgTypeFix = false;
+        private bool _protocolMsgTypeAltitude = false;
+        private bool _protocolMsgTypeHeading = false;
+        private bool _protocolMsgTypeSpeed = false;
+        private bool _protocolMsgTypeHdop = false;
+        private bool _protocolMsgTypeSatsCount = false;
         private bool _protocolMsgTypePowerInternal = false;
         private bool _protocolMsgTypePowerExternal = false;
         private bool _protocolMsgTypeDigitalOuts = false;
@@ -66,10 +76,13 @@ namespace trackerWpfConf.ViewModel
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();
-            _operatorsList.Add("MTS");
-            _operatorsList.Add("Megafon");
-            _operatorsList.Add("Beeline");
-            _operatorsList.Add("Custom");
+           
+            var operators = System.Enum.GetNames(typeof(OperatorType));
+            foreach (var op in operators)
+            {
+                _operatorsList.Add(op);
+            }
+            OperatorListIndex = 0;
 
             _serversConnection = new ObservableCollection<string>();
             _serversConnection.Add("Primary");
@@ -78,8 +91,8 @@ namespace trackerWpfConf.ViewModel
             _serversConnectionModel = new ObservableCollection<SettingsConnectionViewModel>();
             _serversConnectionModel.Add(new SettingsConnectionViewModel());
             _serversConnectionModel.Add(new SettingsConnectionViewModel());
-            _serversConnectionModel[0].IpDnsAddress = "ya.ru1";
-            _serversConnectionModel[1].IpDnsAddress = "ya.ru2";
+            _serversConnectionModel[0].IpDnsAddress = "лкщюыё1.ру";
+            _serversConnectionModel[1].IpDnsAddress = "лкщюыё2.ру";
 
             _transmitProtocol = new ObservableCollection<string>();
             _transmitProtocol.Add("Wialon");
@@ -110,6 +123,44 @@ namespace trackerWpfConf.ViewModel
         }
 
         public ObservableCollection<string> OperatorsList { get => _operatorsList; }
+
+        public int OperatorListIndex  
+        {
+            get => _operatorListIndex;
+            set 
+            {
+                _operatorListIndex = value;
+                OperatorType op = (OperatorType)value;
+                switch (op)
+                {
+                    case OperatorType.MTS:
+                        Apn = "internet.mts.ru";
+                        ApnLogin = "mts";
+                        ApnPassword = "mts";
+                        ApnIsEditable = false;
+                        break;
+                    case OperatorType.Megafon:
+                        Apn = "internet.beeline.ru";
+                        ApnLogin = "beeline";
+                        ApnPassword = "beeline";
+                        ApnIsEditable = false;
+                        break;
+                    case OperatorType.Beeline:
+                        Apn = "megafon";
+                        ApnLogin = "gdata";
+                        ApnPassword = "gdata";
+                        ApnIsEditable = false;
+                        break;
+                    case OperatorType.Custom:
+                        Apn = "";
+                        ApnLogin = "";
+                        ApnPassword = "";
+                        ApnIsEditable = true;
+                        break;
+                }
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<string> ServerConnectionList { get => _serversConnection; }
         public string ApnLogin
@@ -147,6 +198,16 @@ namespace trackerWpfConf.ViewModel
             set
             {
                 _apn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool ApnIsEditable 
+        {
+            get => _apnIsEditable;
+            set 
+            {
+                _apnIsEditable = value;
                 OnPropertyChanged();
             }
         }
@@ -236,73 +297,73 @@ namespace trackerWpfConf.ViewModel
         }
         public bool ProtocolMsgTypeLatitude1
         {
-            get => ProtocolMsgTypeLatitude;
+            get => _protocolMsgTypeLatitude;
             set
             {
-                ProtocolMsgTypeLatitude = value;
+                _protocolMsgTypeLatitude = value;
                 OnPropertyChanged();
             }
         }
         public bool ProtocolMsgTypeLongitude1
         {
-            get => ProtocolMsgTypeLongitude;
+            get => _protocolMsgTypeLongitude;
             set
             {
-                ProtocolMsgTypeLongitude = value;
+                _protocolMsgTypeLongitude = value;
                 OnPropertyChanged();
             }
         }
         public bool ProtocolMsgTypeFix1
         {
-            get => ProtocolMsgTypeFix;
+            get => _protocolMsgTypeFix;
             set
             {
-                ProtocolMsgTypeFix = value;
+                _protocolMsgTypeFix = value;
                 OnPropertyChanged();
             }
         }
         public bool ProtocolMsgTypeAltitude1
         {
-            get => ProtocolMsgTypeAltitude;
+            get => _protocolMsgTypeAltitude;
             set
             {
-                ProtocolMsgTypeAltitude = value;
+                _protocolMsgTypeAltitude = value;
                 OnPropertyChanged();
             }
         }
         public bool ProtocolMsgTypeHeading1
         {
-            get => ProtocolMsgTypeHeading;
+            get => _protocolMsgTypeHeading;
             set
             {
-                ProtocolMsgTypeHeading = value;
+                _protocolMsgTypeHeading = value;
                 OnPropertyChanged();
             }
         }
         public bool ProtocolMsgTypeSpeed1
         {
-            get => ProtocolMsgTypeSpeed;
+            get => _protocolMsgTypeSpeed;
             set
             {
-                ProtocolMsgTypeSpeed = value;
+                _protocolMsgTypeSpeed = value;
                 OnPropertyChanged();
             }
         }
         public bool ProtocolMsgTypeHdop1
         {
-            get => ProtocolMsgTypeHdop;
+            get => _protocolMsgTypeHdop;
             set
             {
-                ProtocolMsgTypeHdop = value;
+                _protocolMsgTypeHdop = value;
                 OnPropertyChanged();
             }
         }
         public bool ProtocolMsgTypeSatsCount1
         {
-            get => ProtocolMsgTypeSatsCount;
+            get => _protocolMsgTypeSatsCount;
             set
             {
-                ProtocolMsgTypeSatsCount = value;
+                _protocolMsgTypeSatsCount = value;
                 OnPropertyChanged();
             }
         }

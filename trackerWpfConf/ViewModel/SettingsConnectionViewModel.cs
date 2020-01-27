@@ -9,14 +9,11 @@ namespace trackerWpfConf.ViewModel
 {
     public class SettingsConnectionViewModel : ViewModelBase
     {
-        private string _ipDnsAddress = "ya.ru";
+        private string _ipDnsAddress = "лкщюыё.ру";
         private int _port = 1000;
         
         private ObservableCollection<string> _protocolType; // combox
         private int _protocolTypeIndex = 0;
-
-        private ObservableCollection<string> _typeOfConServer; // combox
-        private int _typeOfConServerIndex = 0;
 
         private ObservableCollection<string>  _periodOfPingShortMessage; // combox
         private int _periodOfPingShortMessageIndex = 0;
@@ -30,10 +27,6 @@ namespace trackerWpfConf.ViewModel
         {
             _protocolType = new ObservableCollection<string>();
             _protocolType.Add("Wialon");
-
-            _typeOfConServer = new ObservableCollection<string>();
-            _typeOfConServer.Add("Primary");
-            _typeOfConServer.Add("Reserv");
 
             _periodOfPingShortMessage = new ObservableCollection<string>();
             _periodOfPingShortMessage.Add("15 sec");
@@ -73,15 +66,6 @@ namespace trackerWpfConf.ViewModel
 
         public ObservableCollection<string> ProtocolType => _protocolType;
 
-        public ObservableCollection<string> TypeOfConServer
-        {
-            get => _typeOfConServer;
-            set
-            {
-                _typeOfConServer = value;
-                OnPropertyChanged();
-            }
-        }
         public ObservableCollection<string> PeriodOfPingShortMessage
         {
             get => _periodOfPingShortMessage;
@@ -138,13 +122,7 @@ namespace trackerWpfConf.ViewModel
                 OnPropertyChanged();
             }
         }
-        public int TypeOfConServerIndex { get => _typeOfConServerIndex;
-            set
-            {
-                _typeOfConServerIndex = value;
-                OnPropertyChanged();
-            }
-        }
+
         public int PeriodOfPingShortMessageIndex
         {
             get => _periodOfPingShortMessageIndex;

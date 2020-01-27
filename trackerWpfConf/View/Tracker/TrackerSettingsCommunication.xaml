@@ -23,7 +23,7 @@
                         <TextBlock Text="Operator" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
 
                         <ComboBox ItemsSource="{Binding Path=SettingsModel.OperatorsList}" 
-                                  SelectedItem="{Binding Path=SettingsModel.OperatorsList, Mode=OneWay}" SelectedIndex="3"
+                                  SelectedIndex="{Binding SettingsModel.OperatorListIndex}"
                                   Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>
                     </Grid>
 
@@ -33,7 +33,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="APN" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200" Text="{Binding SettingsModel.Apn}" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200" Text="{Binding SettingsModel.Apn}" Style="{StaticResource TextBoxStyleMarging}" IsEnabled="{Binding SettingsModel.ApnIsEditable}"/>
                     </Grid>
 
                     <Grid>
@@ -42,7 +42,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Login" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" Text="{Binding SettingsModel.ApnLogin}"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" Text="{Binding SettingsModel.ApnLogin}" IsEnabled="{Binding SettingsModel.ApnIsEditable}"/>
                     </Grid>
 
                     <Grid>
@@ -51,7 +51,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Password" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                        <PasswordBox Grid.Row="3" Grid.Column="3" MinWidth="200" Style="{StaticResource PasswordBoxStyle}" InputScope="{Binding SettingsModel.ApnPassword}"/>
+                        <PasswordBox Grid.Row="3" Grid.Column="3" MinWidth="200" Style="{StaticResource PasswordBoxStyle}" InputScope="{Binding SettingsModel.ApnPassword}" IsEnabled="{Binding SettingsModel.ApnIsEditable}"/>
                     </Grid>
 
                     <Grid>

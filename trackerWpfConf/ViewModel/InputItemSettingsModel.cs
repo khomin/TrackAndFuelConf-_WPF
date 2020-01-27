@@ -13,9 +13,13 @@ namespace trackerWpfConf.ViewModel
         private PortRole _portRoleIndex;
         private string _portLineName = "";
         private bool _availableAsIgnitionSensor = false;
-        private int _signalAnalysysTime = 0;
+        private int _signalAnalysysTime = 250;
         private int _thresholdUpper = 0;
         private int _thresholdLower = 0;
+        private int _thresholdLevelOfFixationFrequency = 0;
+        private bool _useFiltrating = false;
+        private int _averagingWindowValue = 1;
+        private int _levelOfFiltrationValue = 0;
 
         enum PortRole
         {
@@ -36,14 +40,11 @@ namespace trackerWpfConf.ViewModel
             PortRoleIndex = 0;
             _portRoleList = new ObservableCollection<string>();
             PortRoleList.Add("Not used");
-            PortRoleList.Add("Discrete NO-");
-            PortRoleList.Add("Discrete NC-");
-            PortRoleList.Add("Discrete NO+");
-            PortRoleList.Add("Discrete NC-");
-            PortRoleList.Add("Pulse counter");
+            PortRoleList.Add("Discrete input");
+            //PortRoleList.Add("Pulse counter");
             PortRoleList.Add("Frequency sensor");
             PortRoleList.Add("Voltage measurement");
-            PortRoleList.Add("Tachometer");
+            //PortRoleList.Add("Tachometer");
             _portLineName = name;
         }
 
@@ -101,6 +102,43 @@ namespace trackerWpfConf.ViewModel
             set
             {
                 _thresholdLower = value;
+                OnPropertyChanged();
+            }
+        }
+        public int ThresholdLevelOfFixationFrequency
+        {
+            get => _thresholdLevelOfFixationFrequency;
+            set
+            {
+                _thresholdLevelOfFixationFrequency = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool UseFiltrating
+        {
+            get => _useFiltrating;
+            set
+            {
+                _useFiltrating = value;
+                OnPropertyChanged();
+            }
+        }
+        public int AveragingWindowValue
+        {
+            get => _averagingWindowValue;
+            set
+            {
+                _averagingWindowValue = value;
+                OnPropertyChanged();
+            }
+        }
+        public int LevelOfFiltrationValue
+        {
+            get => _levelOfFiltrationValue;
+            set
+            {
+                _levelOfFiltrationValue = value;
                 OnPropertyChanged();
             }
         }

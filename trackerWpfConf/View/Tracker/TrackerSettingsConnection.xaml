@@ -67,16 +67,6 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Type of connection with telematic servers" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <ComboBox ItemsSource="{Binding TypeOfConServer, FallbackValue=NA}" 
-                                  SelectedIndex="{Binding TypeOfConServerIndex, Mode=TwoWay}" 
-                                  Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
                         <TextBlock Text="Period of ping (short empty message)" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
                         <ComboBox ItemsSource="{Binding PeriodOfPingShortMessage, FallbackValue=NA}" 
                                   SelectedIndex="{Binding PeriodOfPingShortMessageIndex, Mode=TwoWay}"
