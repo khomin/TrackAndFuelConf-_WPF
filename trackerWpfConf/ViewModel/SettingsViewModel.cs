@@ -11,13 +11,14 @@ namespace trackerWpfConf.ViewModel
     {
         private readonly ObservableCollection<string> _operatorsList;
         private int _operatorListIndex = 0;
-        enum OperatorType {
+        enum OperatorType
+        {
             MTS = 0,
             Megafon = 1,
             Beeline = 2,
             Custom = 3
         };
-        
+
         private string _apn = "gdata";
         private string _apnLogin = "login";
         private string _apnPassword = "default";
@@ -70,13 +71,43 @@ namespace trackerWpfConf.ViewModel
         private int _minSpeedForDetectionMotion = 0;
         private int _maxSpeedForDetectionParking = 0;
 
+        private bool _enableSmsSubscribing_0 = false;
+        private bool _enableSmsSubscribing_1 = false;
+        private bool _allowSmsControl_0 = false;
+        private bool _allowSmsControl_1 = false;
+        private readonly ObservableCollection<String> _sensorActivation_0_phone_0;
+        private int _sensorActivation_0_phone_0_index = 0;
+        private readonly ObservableCollection<String> _sensorActivation_0_phone_1;
+        private int _sensorActivation_0_phone_1_index = 0;
+        private readonly ObservableCollection<String> _sensorActivation_1_phone_0;
+        private int _sensorActivation_1_phone_0_index = 0;
+        private readonly ObservableCollection<String> _sensorActivation_1_phone_1;
+        private int _sensorActivation_1_phone_1_index = 0;
+        private readonly ObservableCollection<String> _temperatureDecreasePhone_0;
+        private int _temperatureDecreasePhone_0_index = 0;
+        private readonly ObservableCollection<String> _temperatureDecreasePhone_1;
+        private int _temperatureDecreasePhone_1_index = 0;
+        private readonly ObservableCollection<String> _temperatureIncreasePhone_0;
+        private int _temperatureIncreasePhone_0_index = 0;
+        private readonly ObservableCollection<String> _temperatureIncreasePhone_1;
+        private int _temperatureIncreasePhone_1_index = 0;
+        private readonly ObservableCollection<String> _temperatureRecoveryPhone_0;
+        private int _temperatureRecoveryPhone_0_index = 0;
+        private readonly ObservableCollection<String> _temperatureRecoveryPhone_1;
+        private int _temperatureRecoveryPhone_1_index = 0;
+        public enum SubscribitionEvent
+        {
+            Off = 0,
+            SentSms = 1,
+        };
+
         private readonly ObservableCollection<OneWireItemModel> _oneWireSettingsModelList;
         private readonly ObservableCollection<InputItemSettingsModel> _inputsSettingsModelList;
 
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();
-           
+
             var operators = System.Enum.GetNames(typeof(OperatorType));
             foreach (var op in operators)
             {
@@ -120,14 +151,54 @@ namespace trackerWpfConf.ViewModel
             _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN1", false));
             _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN2", false));
             _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN3", true));
+
+            _sensorActivation_0_phone_0 = new ObservableCollection<string>();
+            _sensorActivation_0_phone_1 = new ObservableCollection<string>();
+            _sensorActivation_1_phone_0 = new ObservableCollection<string>();
+            _sensorActivation_1_phone_1 = new ObservableCollection<string>();
+            _temperatureDecreasePhone_0 = new ObservableCollection<string>();
+            _temperatureDecreasePhone_1 = new ObservableCollection<string>();
+            _temperatureIncreasePhone_0 = new ObservableCollection<string>();
+            _temperatureIncreasePhone_1 = new ObservableCollection<string>();
+            _temperatureRecoveryPhone_0 = new ObservableCollection<string>();
+            _temperatureRecoveryPhone_1 = new ObservableCollection<string>();
+            _sensorActivation_0_phone_0.Add("Off");
+            _sensorActivation_0_phone_0.Add("Sent SMS");
+            
+            _sensorActivation_0_phone_1.Add("Off");
+            _sensorActivation_0_phone_1.Add("Sent SMS");
+            
+            _sensorActivation_1_phone_0.Add("Off");
+            _sensorActivation_1_phone_0.Add("Sent SMS");
+
+            _sensorActivation_1_phone_1.Add("Off");
+            _sensorActivation_1_phone_1.Add("Sent SMS");
+
+            _temperatureDecreasePhone_0.Add("Off");
+            _temperatureDecreasePhone_0.Add("Sent SMS");
+
+            _temperatureDecreasePhone_1.Add("Off");
+            _temperatureDecreasePhone_1.Add("Sent SMS");
+
+            _temperatureIncreasePhone_0.Add("Off");
+            _temperatureIncreasePhone_0.Add("Sent SMS");
+
+            _temperatureIncreasePhone_1.Add("Off");
+            _temperatureIncreasePhone_1.Add("Sent SMS");
+
+            _temperatureRecoveryPhone_0.Add("Off");
+            _temperatureRecoveryPhone_0.Add("Sent SMS");
+
+            _temperatureRecoveryPhone_1.Add("Off");
+            _temperatureRecoveryPhone_1.Add("Sent SMS");
         }
 
         public ObservableCollection<string> OperatorsList { get => _operatorsList; }
 
-        public int OperatorListIndex  
+        public int OperatorListIndex
         {
             get => _operatorListIndex;
-            set 
+            set
             {
                 _operatorListIndex = value;
                 OperatorType op = (OperatorType)value;
@@ -202,10 +273,10 @@ namespace trackerWpfConf.ViewModel
             }
         }
 
-        public bool ApnIsEditable 
+        public bool ApnIsEditable
         {
             get => _apnIsEditable;
-            set 
+            set
             {
                 _apnIsEditable = value;
                 OnPropertyChanged();
@@ -507,5 +578,152 @@ namespace trackerWpfConf.ViewModel
         public ObservableCollection<OneWireItemModel> OneWireSettingsModelList => _oneWireSettingsModelList;
 
         public ObservableCollection<InputItemSettingsModel> InputsSettingsModelList => _inputsSettingsModelList;
+
+        public bool EnableSmsSubscribing_0
+        {
+            get => _enableSmsSubscribing_0;
+            set
+            {
+                _enableSmsSubscribing_0 = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool EnableSmsSubscribing_1
+        {
+            get => _enableSmsSubscribing_1;
+            set
+            {
+                _enableSmsSubscribing_1 = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool AllowSmsControl_0
+        {
+            get => _allowSmsControl_0;
+            set
+            {
+                _allowSmsControl_0 = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool AllowSmsControl_1
+        {
+            get => _allowSmsControl_1;
+            set
+            {
+                _allowSmsControl_1 = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> SensorActivation_0_phone_0 => _sensorActivation_0_phone_0;
+
+        public int SensorActivation_0_phone_0_index
+        {
+            get => _sensorActivation_0_phone_0_index;
+            set
+            {
+                _sensorActivation_0_phone_0_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> SensorActivation_0_phone_1 => _sensorActivation_0_phone_1;
+
+        public int SensorActivation_0_phone_1_index
+        {
+            get => _sensorActivation_0_phone_1_index;
+            set
+            {
+                _sensorActivation_0_phone_1_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> SensorActivation_1_phone_0 => _sensorActivation_1_phone_0;
+
+        public int SensorActivation_1_phone_0_index
+        {
+            get => _sensorActivation_1_phone_0_index;
+            set
+            {
+                _sensorActivation_1_phone_0_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> SensorActivation_1_phone_1 => _sensorActivation_1_phone_1;
+
+        public int SensorActivation_1_phone_1_index
+        {
+            get => _sensorActivation_1_phone_1_index;
+            set
+            {
+                _sensorActivation_1_phone_1_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> TemperatureDecreasePhone_0 => _temperatureDecreasePhone_0;
+
+        public int TemperatureDecreasePhone_0_index
+        {
+            get => _temperatureDecreasePhone_0_index;
+            set
+            {
+                _temperatureDecreasePhone_0_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> TemperatureDecreasePhone_1 => _temperatureDecreasePhone_1;
+
+        public int TemperatureDecreasePhone_1_index
+        {
+            get => _temperatureDecreasePhone_1_index;
+            set
+            {
+                _temperatureDecreasePhone_1_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> TemperatureIncreasePhone_0 => _temperatureIncreasePhone_0;
+
+        public int TemperatureIncreasePhone_0_index
+        {
+            get => _temperatureIncreasePhone_0_index;
+            set
+            {
+                _temperatureIncreasePhone_0_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> TemperatureIncreasePhone_1 => _temperatureIncreasePhone_1;
+
+        public int TemperatureIncreasePhone_1_index
+        {
+            get => _temperatureIncreasePhone_1_index;
+            set
+            {
+                _temperatureIncreasePhone_1_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> TemperatureRecoveryPhone_0 => _temperatureRecoveryPhone_0;
+
+        public int TemperatureRecoveryPhone_0_index
+        {
+            get => _temperatureRecoveryPhone_0_index;
+            set
+            {
+                _temperatureRecoveryPhone_0_index = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<string> TemperatureRecoveryPhone_1 => _temperatureRecoveryPhone_1;
+
+        public int TemperatureRecoveryPhone_1_index
+        {
+            get => _temperatureRecoveryPhone_1_index;
+            set
+            {
+                _temperatureRecoveryPhone_1_index = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }
