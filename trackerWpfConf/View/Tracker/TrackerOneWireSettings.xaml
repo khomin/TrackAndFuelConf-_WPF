@@ -80,7 +80,7 @@
                                 <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[0].LowerAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
                                            Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                                 <TextBlock Text="°C" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
-                                <mah:RangeSlider Grid.Column="2"
+                                <mah:RangeSlider Grid.Column="2" Width="180"
                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}"
                                     LowerValue="{Binding SettingsModel.OneWireSettingsModelList[0].LowerAlarmZone}" 
                                     UpperValue="{Binding SettingsModel.OneWireSettingsModelList[0].UpperAlarmZone}"
@@ -114,7 +114,7 @@
                                 <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[1].LowerAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
                                            Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                                 <TextBlock Text="°C" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
-                                <mah:RangeSlider Grid.Column="2"
+                                <mah:RangeSlider Grid.Column="2" Width="180"
                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}"
                                     LowerValue="{Binding SettingsModel.OneWireSettingsModelList[1].LowerAlarmZone}" 
                                     UpperValue="{Binding SettingsModel.OneWireSettingsModelList[1].UpperAlarmZone}"
@@ -148,7 +148,7 @@
                                 <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[2].LowerAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
                                            Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                                 <TextBlock Text="°C" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
-                                <mah:RangeSlider Grid.Column="2"
+                                <mah:RangeSlider Grid.Column="2" Width="180"
                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}"
                                     LowerValue="{Binding SettingsModel.OneWireSettingsModelList[2].LowerAlarmZone}" 
                                     UpperValue="{Binding SettingsModel.OneWireSettingsModelList[2].UpperAlarmZone}"
@@ -182,7 +182,7 @@
                                 <TextBlock Text="{Binding SettingsModel.OneWireSettingsModelList[3].LowerAlarmZone, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
                                            Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                                 <TextBlock Text="°C" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
-                                <mah:RangeSlider Grid.Column="2"
+                                <mah:RangeSlider Grid.Column="2" Width="180"
                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}"
                                     LowerValue="{Binding SettingsModel.OneWireSettingsModelList[3].LowerAlarmZone}" 
                                     UpperValue="{Binding SettingsModel.OneWireSettingsModelList[3].UpperAlarmZone}"
