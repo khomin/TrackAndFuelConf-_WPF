@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trackerWpfConf.ViewModel;
 
 namespace trackerWpfConf.View.Tracker
 {
@@ -20,9 +21,15 @@ namespace trackerWpfConf.View.Tracker
     /// </summary>
     public partial class TrackerLlsItem : UserControl
     {
+        private LlsDataViewModel viewModel;
         public TrackerLlsItem()
         {
             InitializeComponent();
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) =>
+            {
+                viewModel = this.DataContext as LlsDataViewModel;
+            };
+
         }
     }
 }

@@ -104,6 +104,8 @@ namespace trackerWpfConf.ViewModel
         private readonly ObservableCollection<OneWireItemModel> _oneWireSettingsModelList;
         private readonly ObservableCollection<InputItemSettingsModel> _inputsSettingsModelList;
 
+        private readonly ObservableCollection<LlsDataViewModel> _llsDataViewModelList;
+
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();
@@ -191,6 +193,10 @@ namespace trackerWpfConf.ViewModel
 
             _temperatureRecoveryPhone_1.Add("Off");
             _temperatureRecoveryPhone_1.Add("Sent SMS");
+
+            _llsDataViewModelList = new ObservableCollection<LlsDataViewModel>();
+            _llsDataViewModelList.Add(new LlsDataViewModel());
+            _llsDataViewModelList.Add(new LlsDataViewModel());
         }
 
         public ObservableCollection<string> OperatorsList { get => _operatorsList; }
@@ -725,5 +731,7 @@ namespace trackerWpfConf.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<LlsDataViewModel> LlsDataViewModelList => _llsDataViewModelList;
     }
 }

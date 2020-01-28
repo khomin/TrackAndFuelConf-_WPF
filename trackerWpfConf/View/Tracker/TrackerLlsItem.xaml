@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:trackerWpfConf.View.Tracker"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Resourses="clr-namespace:trackerWpfConf.Resources"
              mc:Ignorable="d" 
+             DataContext="{StaticResource LlsDataViewModel}"
              Height="Auto" Width="Auto">
     <Grid HorizontalAlignment="Stretch" Width="Auto">
         <Grid.ColumnDefinitions>
@@ -54,7 +56,9 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Mode" Style="{StaticResource TextBlockStyleMarging}"/>
-                                        <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                        <ComboBox Grid.Row="0" ItemsSource="{Binding TempCompensationMode}"
+                                                  SelectedIndex="{Binding TempCompenstationModeIndex, Mode=TwoWay}"
+                                                  Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}" MinWidth="100" HorizontalAlignment="Right"/>
                                     </Grid>
 
                                     <Grid>
@@ -63,7 +67,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Coefficient 1" Style="{StaticResource TextBlockStyleMarging}"/>
-                                        <TextBox Text="000" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                        <TextBox Text="{Binding TempCompensationCoef1, StringFormat=N2}" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}" MinWidth="100" HorizontalAlignment="Right"/>
                                     </Grid>
 
                                     <Grid>
@@ -72,7 +76,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Coefficient 2" Style="{StaticResource TextBlockStyleMarging}"/>
-                                        <TextBox Text="000" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                        <TextBox Text="{Binding TempCompensationCoef2, StringFormat=N2}" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}" MinWidth="100" HorizontalAlignment="Right"/>
                                     </Grid>
                                 </StackPanel>
                             </GroupBox>
@@ -87,7 +91,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Min level value (0-1023)" Style="{StaticResource TextBlockStyleMarging}"/>
-                                        <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                        <TextBox Text="{Binding MinLevel, Converter={StaticResource IntToStringConverter}}" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
                                     </Grid>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -96,13 +100,15 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Max level value (0-4095)" Style="{StaticResource TextBlockStyleMarging}" Grid.ColumnSpan="2"/>
-                                        <TextBox Text="000" Grid.Column="2" Style="{StaticResource TextBoxStyleMarging}"/>
+                                        <TextBox Text="{Binding MaxLevel, Converter={StaticResource IntToStringConverter}}" Grid.Column="2" Style="{StaticResource TextBoxStyleMarging}"/>
                                     </Grid>
 
                                     <GroupBox Header="Output message type">
                                         <StackPanel>
-                                            <RadioButton Content="Relative level" Style="{StaticResource RadioStyleMarging}"/>
-                                            <RadioButton Content="Volume (according to calibration table)" Style="{StaticResource RadioStyleMarging}"/>
+                                            <RadioButton Content="Relative level" IsChecked="{Binding TypeOutMessageIsRelativeLevel}" Style="{StaticResource RadioStyleMarging}"/>
+                                            <RadioButton Content="Volume (according to calibration table)" 
+                                                         IsChecked="{Binding TypeOutMessageIsRelativeLevel, Converter={StaticResource BoolInvertConverter}}"
+                                                        Style="{StaticResource RadioStyleMarging}"/>
                                         </StackPanel>
                                     </GroupBox>
 
@@ -112,25 +118,27 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Text="Type of interpolation" Style="{StaticResource TextBlockStyleMarging}"/>
-                                        <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                        <ComboBox Grid.Row="0" Grid.Column="1" 
+                                                  ItemsSource="{Binding TypeOfInterpolation}"
+                                                  SelectedIndex="{Binding TypeOfInterpolationIndex}"
+                                                  Style="{StaticResource ComboBoxStyleMarging}" MinWidth="100" HorizontalAlignment="Right"/>
                                     </Grid>
                                 </StackPanel>
                             </GroupBox>
                             <StackPanel>
                                 <GroupBox Header="Fltration">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0">
+                                    <StackPanel>
+                                        <StackPanel>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="Type of filtering" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0"/>
-                                                <ComboBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                                <ComboBox Grid.Row="0" Grid.Column="1" 
+                                                    ItemsSource="{Binding TypeOfFiltration}"
+                                                    SelectedIndex="{Binding TypeOfFiltrationIndex}"
+                                                          Style="{StaticResource ComboBoxStyleMarging}" MinWidth="100" HorizontalAlignment="Right"/>
                                             </Grid>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -138,7 +146,9 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="Averaging time (0-21), seconds" Style="{StaticResource TextBlockStyleMarging}"/>
-                                                <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                                <TextBox Text="{Binding FiltrationAveragingTime, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
+                                                         MinWidth="100" HorizontalAlignment="Right"
+                                                         Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
                                             </Grid>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -146,17 +156,20 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="The length of the median (0-7)" Style="{StaticResource TextBlockStyleMarging}"/>
-                                                <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                                <TextBox Text="{Binding FiltrationLenghtOfMedian, Converter={StaticResource IntToStringConverter}}" 
+                                                    Grid.Column="1" MinWidth="100" HorizontalAlignment="Right"
+                                                    Style="{StaticResource TextBoxStyleMarging}"/>
                                             </Grid>
                                         </StackPanel>
-                                        <StackPanel Grid.Column="1">
+                                        <StackPanel>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="Process noise covariance (Q)" Style="{StaticResource TextBlockStyleMarging}"/>
-                                                <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                                <TextBox Text="{Binding FiltrationProcessNoiseCovarianceQ, Converter={StaticResource IntToStringConverter}}"
+                                                    MinWidth="100" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}" HorizontalAlignment="Right"/>
                                             </Grid>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -164,10 +177,12 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <TextBlock Text="Measurement noise covariance (R)" Style="{StaticResource TextBlockStyleMarging}"/>
-                                                <TextBox Text="000" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
+                                                <TextBox Text="{Binding FiltrationMeasurementNoiseCovarianceR, Converter={StaticResource IntToStringConverter}}"
+                                                         HorizontalAlignment="Right"
+                                                    MinWidth="100" Grid.Column="1" Style="{StaticResource TextBoxStyleMarging}"/>
                                             </Grid>
                                         </StackPanel>
-                                    </Grid>
+                                    </StackPanel>
                                 </GroupBox>
                             </StackPanel>
                         </StackPanel>
@@ -211,7 +226,8 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="{Binding ErrorMinLimitLessThan10Percent, Converter={StaticResource BoolToColorConverter}, FallbackValue=Yellow}" 
+                                    MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
                             <TextBlock Text="The minimum limit is less than 10%" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
                         <Grid>
@@ -219,7 +235,8 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="{Binding ErrorMaxLimitIsExceededBy10Percent, Converter={StaticResource BoolToColorConverter}, FallbackValue=Yellow}" 
+                                    MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
                             <TextBlock Text="The maximum limit is exceeded by 10%" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
                         <Grid>
@@ -227,7 +244,8 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="{Binding MeasuringOscillatorFrequency0Hz, Converter={StaticResource BoolToColorConverter}, FallbackValue=Yellow}"
+                                MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
                             <TextBlock Text="Measuring oscillator frequency 0 Hz" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
                     </StackPanel>
@@ -253,20 +271,24 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="Status" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="1"/>
+                        <Border Background="{Binding SensorIsOffline, Converter={StaticResource BoolToColorConverter}, FallbackValue=Yellow}"
+                                MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="1"/>
 
                         <TextBlock Text="CNT" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBlock Text="000" Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="{Binding SensorCntValue, Converter={StaticResource IntToStringConverter}}" 
+                                   Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="Level/Valume" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBlock Text="000" Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Level/Volume" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="{Binding SensorLevelVolume, Converter={StaticResource IntToStringConverter}}"
+                                   Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
 
                         <TextBlock Text="Frequency, Hz" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBlock Text="000" Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="{Binding SensorFrequency, Converter={StaticResource IntToStringConverter}}"
+                                   Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
                     </Grid>
                 </Grid>
                 <Grid>
-                    <ProgressBar Value="100"/>
+                    <ProgressBar Value="{Binding SensorLevelInPercent, FallbackValue=50}"/>
                 </Grid>
             </StackPanel>
         </GroupBox>

@@ -14,10 +14,10 @@
         <Grid HorizontalAlignment="Stretch">
             <TabControl x:Name="SettingsTabPanel" HorizontalAlignment="Stretch">
                 <TabItem Header="LLS1" mah:ControlsHelper.HeaderFontSize="16">
-                    <local:TrackerLlsItem HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
+                    <local:TrackerLlsItem DataContext="{Binding SettingsModel.LlsDataViewModelList[0]}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
                 </TabItem>
                 <TabItem Header="LLS1" mah:ControlsHelper.HeaderFontSize="16">
-                    <local:TrackerLlsItem HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
+                    <local:TrackerLlsItem DataContext="{Binding SettingsModel.LlsDataViewModelList[1]}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
                 </TabItem>
             </TabControl>
         </Grid>

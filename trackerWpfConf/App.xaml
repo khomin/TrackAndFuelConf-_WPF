@@ -33,11 +33,13 @@
             </Storyboard>
 
             <local:MainViewModel x:Key="MainViewModel" />
+            <local:LlsDataViewModel x:Key="LlsDataViewModel" />
 
             <Resourse:BoolInvertionConverter x:Key="BoolInvertConverter"/>
             <Resourse:ListToStringConverter x:Key="ListToStringConverter"/>
             <Resourse:IntToStringConverter x:Key="IntToStringConverter"/>
             <Resourse:IgnitionAutoManualConverter x:Key="IgnitionAutoManualConverter"/>
+            <Resourse:BoolToColorConverter x:Key="BoolToColorConverter"/>
 
             <Style x:Key="GridStyleMarging" TargetType="Grid">
                 <Setter Property="Margin" Value="5,5,5,5" />
