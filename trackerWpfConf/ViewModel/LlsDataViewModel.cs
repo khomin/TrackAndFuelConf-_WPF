@@ -93,6 +93,7 @@ namespace trackerWpfConf.ViewModel
         }
 
         private readonly ObservableCollection<CalibrateTable> _calibrateTables;
+        private int _calibrateTablesIndex = 0;
 
         public LlsDataViewModel()
         {
@@ -307,5 +308,15 @@ namespace trackerWpfConf.ViewModel
         }
 
         public ObservableCollection<CalibrateTable> CalibrateTables => _calibrateTables;
+
+        public int CalibrateTablesIndex
+        {
+            get => _calibrateTablesIndex; 
+            set
+            {
+                _calibrateTablesIndex = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

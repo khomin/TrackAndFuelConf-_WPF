@@ -207,7 +207,9 @@
                             <Button Content="Save table to sensor" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
                             <Button Content="Save as (*.csv)" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
                         </Grid>
-                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" VerticalAlignment="Stretch" ItemsSource="{Binding CalibrateTables}">
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" VerticalAlignment="Stretch" 
+                                  ItemsSource="{Binding CalibrateTables}"
+                                  SelectedIndex="{Binding CalibrateTablesIndex, Mode=TwoWay}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Num" Binding="{Binding Num}"/>
                                 <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
@@ -221,10 +223,10 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Button Content="Clear" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
-                            <Button Content="Remove" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
-                            <Button Content="Add" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
-                            <Button Content="Enter the current volume" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Clear" Click="ClearCalibrateTable" IsEnabled="{Binding CalibrateTables.Count}" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Remove" Click="RemoveCalibrateTable" IsEnabled="{Binding CalibrateTables.Count}" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Add" Click="AddCalibrateTable" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Enter the current volume" Click="EnterCurrentVolumeCalibrateTable" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
                         </Grid>
                     </Grid>
                 </TabItem>

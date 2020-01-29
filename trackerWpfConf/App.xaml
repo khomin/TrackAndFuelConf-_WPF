@@ -1,7 +1,8 @@
 ﻿<Application x:Class="trackerWpfConf.App"
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:local="clr-namespace:trackerWpfConf.ViewModel"
+            xmlns:local="clr-namespace:trackerWpfConf"
+            xmlns:Models="clr-namespace:trackerWpfConf.ViewModel"
             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
             xmlns:Resourse="clr-namespace:trackerWpfConf.Resources"
             StartupUri="./View/Main.xaml">
@@ -32,8 +33,9 @@
                 </ObjectAnimationUsingKeyFrames>
             </Storyboard>
 
-            <local:MainViewModel x:Key="MainViewModel" />
-            <local:LlsDataViewModel x:Key="LlsDataViewModel" />
+            <Models:MainViewModel x:Key="MainViewModel" />
+            <Models:LlsDataViewModel x:Key="LlsDataViewModel" />
+            <Models:LlsCalibrateTableAddLevelViewModel x:Key="LlsCalibrateTableAddLevelViewModel" />
 
             <Resourse:BoolInvertionConverter x:Key="BoolInvertConverter"/>
             <Resourse:ListToStringConverter x:Key="ListToStringConverter"/>
