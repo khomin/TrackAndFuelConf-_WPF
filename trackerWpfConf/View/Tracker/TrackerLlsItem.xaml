@@ -44,7 +44,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Button Content="Empty" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
                                         <Button Content="Full" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
-                                        <Button Content="Edit" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
+                                        <Button Content="Edit" Click="ChangeLLsLevelMinMax" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
                                     </Grid>
                                 </StackPanel>
                             </GroupBox>

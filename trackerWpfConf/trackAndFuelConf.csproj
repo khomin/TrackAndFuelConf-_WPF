@@ -140,6 +140,7 @@
     <Compile Include="Resources\IntToStringConverter.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
     <Compile Include="ViewModel\InputItemSettingsModel.cs" />
+    <Compile Include="ViewModel\LlsChangeLevelMinMaxViewModel.cs" />
     <Compile Include="ViewModel\LlsDataViewModel.cs" />
     <Compile Include="ViewModel\OneWireItemModel.cs" />
     <Compile Include="ViewModel\SettingsConnectionViewModel.cs" />
@@ -155,6 +156,9 @@
     </Compile>
     <Compile Include="View\StartPanel.xaml.cs">
       <DependentUpon>StartPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tracker\LlsChangeLevelDialog.xaml.cs">
+      <DependentUpon>LlsChangeLevelDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Tracker\TrackerConnectPanel.xaml.cs">
       <DependentUpon>TrackerConnectPanel.xaml</DependentUpon>
@@ -234,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\StartPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Tracker\LlsChangeLevelDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

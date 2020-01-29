@@ -31,5 +31,20 @@ namespace trackerWpfConf.View.Tracker
             };
 
         }
+
+        private void ChangeLLsLevelMinMax(object sender, RoutedEventArgs e)
+        {
+            LlsChangeLevelDialog dialog = new LlsChangeLevelDialog(viewModel.MinLevel, viewModel.MaxLevel);
+            var ownerContent = (FrameworkElement)Content;
+            var contentPoints = ownerContent.PointToScreen(new Point(0, 0));
+            dialog.Top = ownerContent.ActualHeight / 2;
+            dialog.Left = ownerContent.ActualWidth / 2;
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                viewModel.MaxLevel = dialog.GetMaxLevel();
+                viewModel.MinLevel = dialog.GetMinLevel();
+            }
+        }
     }
 }
