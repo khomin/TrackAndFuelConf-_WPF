@@ -9,17 +9,16 @@
              mc:Ignorable="d" 
              DataContext="{StaticResource LlsDataViewModel}"
              Height="Auto" Width="Auto">
-    <Grid HorizontalAlignment="Stretch" Width="Auto">
+    <Grid Height="Auto" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <GroupBox Header="Settings" Grid.Row="0" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch">
+        <GroupBox Header="Settings" Grid.Column="0" VerticalAlignment="Stretch">
             <TabControl>
                 <TabItem Header="Main settings" mah:ControlsHelper.HeaderFontSize="16">
                     <Grid>
@@ -42,8 +41,8 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Button Content="Empty" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
-                                        <Button Content="Full" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
+                                        <Button Content="Empty" Click="ChangeMinLevelClicked" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
+                                        <Button Content="Full" Click="ChangeMaxLevelClicked" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
                                         <Button Content="Edit" Click="ChangeLLsLevelMinMax" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
                                     </Grid>
                                 </StackPanel>
@@ -188,9 +187,15 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Calibration table" mah:ControlsHelper.HeaderFontSize="16">
-                    <DockPanel>
-                        <Grid DockPanel.Dock="Top">
+                <TabItem Header="Calibration table" mah:ControlsHelper.HeaderFontSize="16" VerticalAlignment="Stretch">
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -202,7 +207,14 @@
                             <Button Content="Save table to sensor" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
                             <Button Content="Save as (*.csv)" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
                         </Grid>
-                        <Grid DockPanel.Dock="Bottom">
+                        <DataGrid Grid.Row="1" AutoGenerateColumns="False" VerticalAlignment="Stretch" ItemsSource="{Binding CalibrateTables}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Num" Binding="{Binding Num}"/>
+                                <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
+                                <DataGridTextColumn Header="Level" Binding="{Binding Level}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -214,9 +226,7 @@
                             <Button Content="Add" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
                             <Button Content="Enter the current volume" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
                         </Grid>
-                        <DataGrid DockPanel.Dock="Bottom">
-                        </DataGrid>
-                    </DockPanel>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Mode/status" mah:ControlsHelper.HeaderFontSize="16">
                     <StackPanel>
@@ -252,8 +262,7 @@
                 </TabItem>
             </TabControl>
         </GroupBox>
-
-        <GroupBox Header="LLS status " MaxWidth="200" Grid.Row="0" HorizontalAlignment="Right" Grid.Column="1">
+        <GroupBox Header="LLS status" MaxWidth="200" HorizontalAlignment="Right" Grid.Column="1">
             <StackPanel>
                 <Grid Style="{StaticResource GridStyleMarging}">
                     <Grid>
@@ -292,6 +301,5 @@
                 </Grid>
             </StackPanel>
         </GroupBox>
-
     </Grid>
 </UserControl>

@@ -46,5 +46,29 @@ namespace trackerWpfConf.View.Tracker
                 viewModel.MinLevel = dialog.GetMinLevel();
             }
         }
+
+        private void ChangeMinLevelClicked(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Set current level as minimum?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                //do no stuff
+            }
+            else
+            {
+                //do yes stuff
+            }
+        }
+
+        private void ChangeMaxLevelClicked(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Set current level as maximum?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                //do no stuff
+            }
+            else
+            {
+                //do yes stuff
+            }
+        }
     }
 }

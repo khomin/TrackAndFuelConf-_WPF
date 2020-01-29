@@ -395,3 +395,10 @@ C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuelConf.cspr
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.exe
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.pdb
 C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackAndFuelConf.csprojAssemblyReference.cache
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\Resources\ColorApp.baml
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\LlsChangeLevelDialog.g.cs
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\View\Tracker\LlsChangeLevelDialog.baml
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\trackerWpfConf.exe.manifest
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\bin\Debug\trackerWpfConf.application
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.exe.manifest
+C:\PROJECTs\.NET\TrackAndFuelConf\trackerWpfConf\obj\Debug\trackerWpfConf.application

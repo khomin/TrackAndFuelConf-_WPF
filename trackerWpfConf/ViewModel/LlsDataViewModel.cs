@@ -62,6 +62,38 @@ namespace trackerWpfConf.ViewModel
         private int _sensorFrequency = 555;
         private int _sensorLevelInPercent = 80;
 
+        public class CalibrateTable : ViewModelBase
+        {
+            private int _value;
+            private int _level;
+
+            public CalibrateTable(int value, int level) 
+            {
+                _value = value;
+                _level  = level;
+            }
+
+            public int Value
+            {
+                get => _value; set
+                {
+                    _value = value;
+                    OnPropertyChanged();
+                }
+            }
+            public int Level
+            {
+                get => _level;
+                set
+                {
+                    _level = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private readonly ObservableCollection<CalibrateTable> _calibrateTables;
+
         public LlsDataViewModel()
         {
             _tempCompensationMode = new ObservableCollection<string>();
@@ -84,6 +116,10 @@ namespace trackerWpfConf.ViewModel
             _typeOfFiltration.Add("Average");
             _typeOfFiltration.Add("Median");
             _typeOfFiltration.Add("Adaptive");
+
+            _calibrateTables = new ObservableCollection<CalibrateTable>();
+            _calibrateTables.Add(new CalibrateTable(50, 10));
+            _calibrateTables.Add(new CalibrateTable(100, 200));
         }
         public ObservableCollection<string> TempCompensationMode { get => _tempCompensationMode; }
         public int TempCompenstationModeIndex
@@ -269,5 +305,7 @@ namespace trackerWpfConf.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<CalibrateTable> CalibrateTables => _calibrateTables;
     }
 }

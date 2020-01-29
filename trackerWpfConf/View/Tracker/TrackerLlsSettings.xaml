@@ -7,19 +7,12 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              Height="Auto" Width="Auto">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                  Width="Auto" 
-                  HorizontalScrollBarVisibility="Auto" 
-                  HorizontalAlignment="Stretch">
-        <Grid HorizontalAlignment="Stretch">
-            <TabControl x:Name="SettingsTabPanel" HorizontalAlignment="Stretch">
-                <TabItem Header="LLS1" mah:ControlsHelper.HeaderFontSize="16">
-                    <local:TrackerLlsItem DataContext="{Binding SettingsModel.LlsDataViewModelList[0]}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
-                </TabItem>
-                <TabItem Header="LLS1" mah:ControlsHelper.HeaderFontSize="16">
-                    <local:TrackerLlsItem DataContext="{Binding SettingsModel.LlsDataViewModelList[1]}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto"/>
-                </TabItem>
-            </TabControl>
-        </Grid>
-    </ScrollViewer>
+    <TabControl x:Name="SettingsTabPanel" VerticalAlignment="Stretch">
+            <TabItem Header="LLS1" mah:ControlsHelper.HeaderFontSize="16">
+                <local:TrackerLlsItem DataContext="{Binding SettingsModel.LlsDataViewModelList[0]}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            </TabItem>
+            <TabItem Header="LLS1" mah:ControlsHelper.HeaderFontSize="16">
+                <local:TrackerLlsItem DataContext="{Binding SettingsModel.LlsDataViewModelList[1]}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            </TabItem>
+    </TabControl>
 </UserControl>

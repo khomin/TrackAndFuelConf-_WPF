@@ -15,15 +15,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
-            <Grid Grid.Row="0">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
                 <!--Pannel settings -->
-                <local:SettingsPannel DataContext="{Binding .}" Grid.Row="0" Width="Auto"/>
+                <local:SettingsPannel DataContext="{Binding .}" Grid.Row="0"/>
 
                 <!--Pannel connection-->
                 <local:TrackerConnectPannel Grid.Row="1" disconnectEvent="TrackerConnectPannel_disconnectEvent" DataContext="{Binding .}"/>
