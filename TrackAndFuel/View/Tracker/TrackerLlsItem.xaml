@@ -194,7 +194,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
+
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -208,12 +208,13 @@
                             <Button Content="Save as (*.csv)" Click="SaveAsCsvClicked" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
                         </Grid>
                         <DataGrid Grid.Row="1" AutoGenerateColumns="False" VerticalAlignment="Stretch" 
-                                  ItemsSource="{Binding CalibrateTables}"
-                                  SelectedIndex="{Binding CalibrateTablesIndex, Mode=TwoWay}">
+                                  CanUserReorderColumns="False"
+                                  CanUserSortColumns="False"
+                                  ItemsSource="{Binding CalibrateTables}" 
+                                  SelectedIndex="{Binding CalibrateTablesIndex, Mode=TwoWay}" Style="{StaticResource DataGridStyle}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Num" Binding="{Binding Num}"/>
                                 <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
-                                <DataGridTextColumn Header="Level" Binding="{Binding Level}" />
+                                <DataGridTextColumn Header="Level" Binding="{Binding Level}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <Grid Grid.Row="2">
