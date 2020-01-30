@@ -80,6 +80,7 @@
     <Compile Include="Resources\IgnitionAutoManualConverter.cs" />
     <Compile Include="Resources\IntToStringConverter.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
+    <Compile Include="ViewModel\LlsCalibrateTableGenerateViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="ViewModel\ConnectPannelViewModel.cs" />
     <Compile Include="ViewModel\CurrentDataViewModel.cs" />
@@ -112,6 +113,9 @@
     </Compile>
     <Compile Include="View\Tracker\LlsCalibrateTableAddLevel.xaml.cs">
       <DependentUpon>LlsCalibrateTableAddLevel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tracker\LlsCalibrationGenerateTableDialog.xaml.cs">
+      <DependentUpon>LlsCalibrationGenerateTableDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Tracker\LlsChangeLevelDialog.xaml.cs">
       <DependentUpon>LlsChangeLevelDialog.xaml</DependentUpon>
@@ -219,6 +223,10 @@
     <Page Include="View\Tracker\LlsCalibrateTableAddLevel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Tracker\LlsCalibrationGenerateTableDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Tracker\LlsChangeLevelDialog.xaml">
       <Generator>MSBuild:Compile</Generator>

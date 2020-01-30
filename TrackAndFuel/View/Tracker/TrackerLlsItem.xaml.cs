@@ -67,6 +67,10 @@ namespace TrackAndFuel.Tracker
 
         private void RemoveCalibrateTable(object sender, RoutedEventArgs e)
         {
+            var index = 0;
+            if (viewModel.CalibrateTablesIndex > 0) {
+                index = viewModel.CalibrateTablesIndex - 1;
+            }
             viewModel.CalibrateTables.RemoveAt(viewModel.CalibrateTablesIndex);
             viewModel.CalibrateTablesIndex = viewModel.CalibrateTables.Count - 1;
         }
@@ -81,14 +85,63 @@ namespace TrackAndFuel.Tracker
             var result = dialog.ShowDialog();
             if (result == true)
             {
-                viewModel.CalibrateTables.Insert(viewModel.CalibrateTablesIndex, new LlsDataViewModel.CalibrateTable(dialog.GetLevel(), dialog.GetValue()));
+                if (viewModel.CalibrateTables.Count != 0)
+                {
+                    viewModel.CalibrateTables.Insert(viewModel.CalibrateTablesIndex + 1, new LlsDataViewModel.CalibrateTable(dialog.GetLevel(), dialog.GetValue()));
+                }
+                else 
+                {
+                    viewModel.CalibrateTables.Add(new LlsDataViewModel.CalibrateTable(dialog.GetLevel(), dialog.GetValue()));
+                }
                 viewModel.CalibrateTablesIndex = viewModel.CalibrateTables.Count - 1;
             }
         }
         private void EnterCurrentVolumeCalibrateTable(object sender, RoutedEventArgs e)
         {
-            viewModel.CalibrateTables.Add(new LlsDataViewModel.CalibrateTable(100, 200));
-            viewModel.CalibrateTablesIndex = viewModel.CalibrateTables.Count-1;
+            if (viewModel.CalibrateTables.Count != 0)
+            {
+                viewModel.CalibrateTables.Insert(viewModel.CalibrateTablesIndex + 1, new LlsDataViewModel.CalibrateTable(0, 0));
+            }
+            else
+            {
+                viewModel.CalibrateTables.Add(new LlsDataViewModel.CalibrateTable(0, 0));
+            }
+            viewModel.CalibrateTablesIndex = viewModel.CalibrateTables.Count - 1;
+        }
+
+        private void GenerateTableClicked(object sender, RoutedEventArgs e)
+        {
+            LlsCalibrationGenerateTableDialog dialog = new LlsCalibrationGenerateTableDialog();
+            var ownerContent = (FrameworkElement)Content;
+            var contentPoints = ownerContent.PointToScreen(new Point(0, 0));
+            dialog.Top = ownerContent.ActualHeight / 2;
+            dialog.Left = ownerContent.ActualWidth / 2;
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                int literCounter = 0;
+                viewModel.CalibrateTables.Clear();
+                for (int i = 0; i < dialog.GetSteps(); i++) 
+                {
+                    viewModel.CalibrateTables.Add(new LlsDataViewModel.CalibrateTable(literCounter, dialog.GetLiters()));
+                    literCounter += dialog.GetLiters();
+                }
+            }
+        }
+
+        private void ReadTableFromSensorClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveTableToSensorClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveAsCsvClicked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,0 +1,43 @@
+﻿<Window x:Class="TrackAndFuel.Tracker.LlsCalibrationGenerateTableDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrackAndFuel.Tracker"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        DataContext="{StaticResource LlsCalibrateTableGenerateViewModel}"
+        SizeToContent="WidthAndHeight"
+        MinHeight="100" MinWidth="100">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Liters" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+            <TextBox Text="{Binding Liters, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
+                     Grid.Column="1" MinWidth="100" HorizontalAlignment="Right" Style="{StaticResource TextBoxStyleMarging}"/>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Steps (30 max)" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+            <TextBox Text="{Binding Steps, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
+                Grid.Column="1" MinWidth="100" HorizontalAlignment="Right" Style="{StaticResource TextBoxStyleMarging}"/>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Generate" Click="GenerateButtonClicked" Width="Auto" IsEnabled="{Binding IsReadyForGenerate}" HorizontalAlignment="Stretch" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
+            <Button Content="Close" Click="CloseButtonClicked" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource ButtonStyleMarging}"/>
+        </Grid>
+
+    </StackPanel>
+</Window>
+

@@ -202,10 +202,10 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Button Content="Ganerate table" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
-                            <Button Content="Read table from sensor" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
-                            <Button Content="Save table to sensor" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
-                            <Button Content="Save as (*.csv)" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Ganerate table" Click="GenerateTableClicked" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Read table from sensor" Click="ReadTableFromSensorClicked" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Save table to sensor" Click="SaveTableToSensorClicked" Grid.Column="2" Style="{StaticResource ButtonStyleMarging}"/>
+                            <Button Content="Save as (*.csv)" Click="SaveAsCsvClicked" Grid.Column="3" Style="{StaticResource ButtonStyleMarging}"/>
                         </Grid>
                         <DataGrid Grid.Row="1" AutoGenerateColumns="False" VerticalAlignment="Stretch" 
                                   ItemsSource="{Binding CalibrateTables}"

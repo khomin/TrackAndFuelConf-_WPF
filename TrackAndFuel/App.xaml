@@ -35,7 +35,8 @@
 
             <Models:MainViewModel x:Key="MainViewModel" />
             <Models:LlsDataViewModel x:Key="LlsDataViewModel" />
-            <Models:LlsCalibrateTableAddLevelViewModel x:Key="LlsCalibrateTableAddLevelViewModel" />
+            <Models:LlsCalibrateTableAddLevelViewModel x:Key="LlsCalibrateTableAddLevelViewModel"/>
+            <Models:LlsCalibrateTableGenerateViewModel x:Key="LlsCalibrateTableGenerateViewModel"/>
 
             <Resourse:BoolInvertionConverter x:Key="BoolInvertConverter"/>
             <Resourse:ListToStringConverter x:Key="ListToStringConverter"/>
