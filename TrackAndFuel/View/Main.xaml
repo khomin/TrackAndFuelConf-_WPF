@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Frame x:Name="frame" Content="{Binding NavigateContent}" Margin="0,0,0,0"/>
+        <Frame x:Name="frame" Content="{Binding NavigateContent}" NavigationUIVisibility="Hidden"/>
 
         <StatusBar Grid.Row="1">
             <StatusBarItem>Current status</StatusBarItem>

@@ -4,8 +4,9 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:fa="http://schemas.fontawesome.io/icons/"
-                      Title="Tracker configure" 
-                      Width="250" Height="120"
+                      Title="Tracker configure"
+                      SizeToContent="WidthAndHeight"
+                      Width="Auto" Height="Auto"
                       DataContext="{StaticResource MainViewModel}">
     <Grid>
         <Grid.RowDefinitions>

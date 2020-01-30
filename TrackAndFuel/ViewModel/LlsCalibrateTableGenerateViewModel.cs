@@ -18,7 +18,7 @@ namespace TrackAndFuel.ViewModel
             set
             {
                 _liters = value;
-                IsReadyForGenerate = ((_liters != 0) && (_steps != 0));
+                IsReadyForGenerate = ((_liters != 0) && (_steps != 0) && (_steps <= 30));
                 OnPropertyChanged();
             }
         }
@@ -28,7 +28,7 @@ namespace TrackAndFuel.ViewModel
             set
             {
                 _steps = value;
-                IsReadyForGenerate = ((_liters != 0) && (_steps != 0));
+                IsReadyForGenerate = ((_liters != 0) && (_steps != 0) && (_steps <= 30));
                 OnPropertyChanged();
             }
         }

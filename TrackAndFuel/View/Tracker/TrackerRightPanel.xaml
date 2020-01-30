@@ -11,26 +11,9 @@
              DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Models:MainViewModel}}">
     <Border Background="#ebedf0">
         <Grid>
-            <Grid.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="Margin" Value="5,5,5,5" />
-                </Style>
-                <Style TargetType="TextBlock">
-                    <Setter Property="TextAlignment" Value="Center"/>
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                    <Setter Property="Margin" Value="5,5,5,5" />
-                </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="IsReadOnly" Value="True"/>
-                    <Setter Property="Margin" Value="5,5,5,5" />
-                </Style>
-            </Grid.Resources>
-
             <TabControl x:Name="rightPanelTab" Background="#ebedf0">
                 <TabItem Header="Current data" Background="#ebedf0" mah:ControlsHelper.HeaderFontSize="14">
-                    <Grid Grid.Row="1" Background="#ebedf0" Margin="10,10,10,10" MinWidth="100">
+                    <Grid Grid.Row="1" Background="#ebedf0" MinWidth="100" Style="{StaticResource GridStyleMarging}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition MinWidth="50"/>
@@ -59,44 +42,44 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="IMEI" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox x:Name="Imei" Grid.Row="0" Grid.Column="1" Text="{Binding RightPannelViewModel.CurrentData.ImeiModemValue}"/>
+                        <TextBlock Text="IMEI" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding RightPannelViewModel.CurrentData.ImeiModemValue}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="AIN1" Grid.Row="1" Grid.Column="0"/>
-                        <TextBox x:Name="AIn1" Grid.Row="1" Grid.Column="1" Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="AIN1" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="AIN2" Grid.Row="2" Grid.Column="0"/>
-                        <TextBox x:Name="AIn2" Grid.Row="2" Grid.Column="1" Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="AIN2" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="AIN3" Grid.Row="3" Grid.Column="0"/>
-                        <TextBox x:Name="AIn3" Grid.Row="3" Grid.Column="1" Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="AIN3" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="AIN4" Grid.Row="4" Grid.Column="0"/>
-                        <TextBox x:Name="AIn4" Grid.Row="4" Grid.Column="1"  Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="AIN4" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1"  Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="CSQ" Grid.Row="5" Grid.Column="0"/>
-                        <TextBox x:Name="Csq" Grid.Row="5" Grid.Column="1"  Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="CSQ" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1"  Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="FIX" Grid.Row="6" Grid.Column="0"/>
-                        <TextBox x:Name="Fix" Grid.Row="6" Grid.Column="1"  Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="FIX" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1"  Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="Lat" Grid.Row="7" Grid.Column="0"/>
-                        <TextBox x:Name="Lat" Grid.Row="7" Grid.Column="1"  Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="Lat" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="7" Grid.Column="1"  Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="Lon" Grid.Row="8" Grid.Column="0"/>
-                        <TextBox x:Name="Lon" Grid.Row="8" Grid.Column="1"  Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="Lon" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="8" Grid.Column="1"  Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="GSM" Grid.Row="9" Grid.Column="0"/>
-                        <TextBox x:Name="Gsm" Grid.Row="9" Grid.Column="1"  Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="GSM" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="9" Grid.Column="1"  Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="Battery" Grid.Row="10" Grid.Column="0" />
-                        <TextBox x:Name="Battery" Grid.Row="10" Grid.Column="1"  Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="Battery" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="10" Grid.Column="1"  Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="External" Grid.Row="11" Grid.Column="0" />
-                        <TextBox x:Name="External" Grid.Row="10" Grid.Column="1"  Text="{Binding Path=IMEI}"/>
+                        <TextBlock Text="External" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Row="10" Grid.Column="1"  Text="{Binding Path=IMEI}" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                        <TextBlock Text="DO" Grid.Row="12" Grid.Column="0" />
-                        <Grid Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent">
+                        <TextBlock Text="DO" Grid.Row="12" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Grid Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" Style="{StaticResource GridStyleMarging}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -106,15 +89,14 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0"/>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="1"/>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="2"/>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="3"/>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="2" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="3" Style="{StaticResource BorderStyleMarging}"/>
 
                         </Grid>
 
-                        <TextBlock Text="DI" Grid.Row="13" Grid.Column="0" />
+                        <TextBlock Text="DI" Grid.Row="13" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <Grid Grid.Row="13" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -125,17 +107,17 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0"/>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="1"/>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="2"/>
-                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="3"/>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="2" Style="{StaticResource BorderStyleMarging}"/>
+                            <Border Background="Red" MinWidth="20" MinHeight="20" Grid.Row="0" Grid.Column="3" Style="{StaticResource BorderStyleMarging}"/>
 
                         </Grid>
                     </Grid>
 
                 </TabItem>
 
-                <TabItem Header="Status" Background="#ebedf0" MinWidth="100" mah:ControlsHelper.HeaderFontSize="14">
+                <TabItem Header="Status" Background="#ebedf0" mah:ControlsHelper.HeaderFontSize="14">
                     <Grid Grid.Row="1" Background="#ebedf0" Margin="10,10,10,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
@@ -155,7 +137,7 @@
                     </Grid>
                 </TabItem>
 
-                <TabItem Header="Debug" Background="#ebedf0" MinWidth="100" mah:ControlsHelper.HeaderFontSize="14">
+                <TabItem Header="Log" Background="#ebedf0" MinWidth="100" mah:ControlsHelper.HeaderFontSize="14">
                     <Grid Grid.Row="1" Background="#ebedf0" Margin="10,10,10,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

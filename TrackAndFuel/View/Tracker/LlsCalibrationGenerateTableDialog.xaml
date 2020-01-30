@@ -14,9 +14,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Liters" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-            <TextBox Text="{Binding Liters, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
-                     Grid.Column="1" MinWidth="100" HorizontalAlignment="Right" Style="{StaticResource TextBoxStyleMarging}"/>
+            <TextBlock Text="Steps (30 max)" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+            <TextBox Text="{Binding Steps, Converter={StaticResource IntToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=NA}"
+                Grid.Column="1" MinWidth="100" HorizontalAlignment="Right" Style="{StaticResource TextBoxStyleMarging}"/>
         </Grid>
 
         <Grid>
@@ -24,11 +24,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Steps (30 max)" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-            <TextBox Text="{Binding Steps, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
-                Grid.Column="1" MinWidth="100" HorizontalAlignment="Right" Style="{StaticResource TextBoxStyleMarging}"/>
+            <TextBlock Text="Step volume" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+            <TextBox Text="{Binding Liters, Converter={StaticResource IntToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=NA}" 
+                     Grid.Column="1" MinWidth="100" HorizontalAlignment="Right" Style="{StaticResource TextBoxStyleMarging}"/>
         </Grid>
-
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
