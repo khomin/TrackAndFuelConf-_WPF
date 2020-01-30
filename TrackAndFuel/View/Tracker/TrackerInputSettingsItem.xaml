@@ -1,0 +1,312 @@
+﻿<UserControl x:Class="TrackAndFuel.Tracker.TrackerInputSettingsItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrackAndFuel.Tracker"
+             xmlns:App="clr-namespace:XamlGeneratedNamespace"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             DataContext="{StaticResource MainViewModel}"
+             mc:Ignorable="d" Height="Auto" Width="Auto">
+    <StackPanel Height="Auto" MinWidth="550" MaxWidth="800">
+        <GroupBox Header="{Binding PortLineName}" Width="Auto">
+            <StackPanel>
+                <Grid Style="{StaticResource GridStyleMarging}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Line name" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Function" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBox Text="Something pin name1" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <ComboBox ItemsSource="{Binding PortRoleList, FallbackValue=NA}" SelectedIndex="{Binding PortRoleIndex, Mode=TwoWay}"
+                            Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
+                    </Grid>
+                </Grid>
+
+                <TabControl Width="Auto" Height="Auto" SelectedIndex="{Binding PortRoleIndex}">
+                    <TabControl.ItemContainerStyle>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </Style>
+                    </TabControl.ItemContainerStyle>
+                    <TabItem Header="Not connected-" mah:ControlsHelper.HeaderFontSize="16">
+
+                    </TabItem>
+                   
+                    <TabItem Header="Discrete input" mah:ControlsHelper.HeaderFontSize="16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Header="Signal analysys time" Grid.Column="0" HorizontalAlignment="Left">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding SignalAnalysysTime, StringFormat={}{0}ms}" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <Slider Value="{Binding SignalAnalysysTime}" Style="{StaticResource SliderStyleMarging}" Minimum="250" Maximum="2500"
+                                            VerticalAlignment="Center" HorizontalAlignment="Stretch" MinWidth="150" Grid.Column="1"/>
+                                </Grid>
+                            </GroupBox>
+
+                            <GroupBox Header="Activation level settings" Grid.Column="1" MinWidth="400">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Text="Upper threshold" Grid.Column="0" Grid.Row="0" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="Activation level settings" Grid.Column="1" Grid.Row="0" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="Lower threshold" Grid.Column="2" Grid.Row="0" Width="Auto" Style="{StaticResource TextBlockStyleMarging}"/>
+
+                                    <TextBlock Text="{Binding ThresholdLower, StringFormat={}{0}V, FallbackValue=NA}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <mah:RangeSlider Grid.Column="1" Grid.Row="1" Width="Auto" Style="{StaticResource MahSliedStyleMarging}"
+                                            Minimum="0" Maximum="31" 
+                                            LowerValue="{Binding Path=ThresholdLower, Mode=TwoWay}"
+                                            UpperValue="{Binding Path=ThresholdUpper, Mode=TwoWay}" 
+                                            AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
+                                            IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
+                                    </mah:RangeSlider>
+                                    <TextBlock Text="{Binding ThresholdUpper, StringFormat={}{0}V, FallbackValue=NA}" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </TabItem>
+
+                    <!--<TabItem Header="Pulse counter" mah:ControlsHelper.HeaderFontSize="16">
+                        <StackPanel Height="Auto" MinWidth="400">
+                            <GroupBox Header="Threshold" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="Voltage" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="Threshold of level" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="Voltage" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+
+                                    <TextBlock Text="1000ms" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <Slider Style="{StaticResource SliderStyleMarging}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+                                    <TextBlock Text="1000ms" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                </Grid>
+                            </GroupBox>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <GroupBox Header="For start event" Grid.Column="0" Width="Auto" Style="{x:Null}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Move" Grid.Column="0" MaxWidth="70" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBlock Text="10 pulses" Grid.Column="1" MaxWidth="70" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <mah:NumericUpDown Grid.Column="2" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
+
+                                        <TextBlock Text="Per time" Grid.Column="3" MaxWidth="70" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBlock Text="5sec" Grid.Column="4" MaxWidth="70" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <mah:NumericUpDown Grid.Column="5" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
+                                    </Grid>
+                                </GroupBox>
+
+                                <GroupBox Header="For end event" Grid.Column="0" Grid.Row="1" Width="Auto" Style="{x:Null}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Less" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBlock Text="10 pulses" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <mah:NumericUpDown Grid.Column="2" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
+
+                                        <TextBlock Text="Per time" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBlock Text="5sec" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <mah:NumericUpDown Grid.Column="5" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
+                                    </Grid>
+                                </GroupBox>
+
+                                <GroupBox Header="Form aditional event count" Grid.Column="0" Grid.Row="2" Width="Auto" Style="{x:Null}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="Every" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <mah:NumericUpDown Grid.Column="1" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
+                                        <TextBlock Text="pulses, " Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <TextBlock Text="or every seconds" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                        <mah:NumericUpDown Grid.Column="4" Minimum="0" Maximum="10000" Interval="5" StringFormat="C2" />
+                                    </Grid>
+                                </GroupBox>
+
+                                <GroupBox Header="" Grid.Column="0" Grid.Row="3" Width="Auto" HorizontalAlignment="Stretch" Style="{x:Null}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <CheckBox Content="Activate line for time of count" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                        <CheckBox Content="Ignore impulse in movement" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                    </Grid>
+                                </GroupBox>
+
+                                <GroupBox Header="Zeroing value at the time of recording" Grid.Column="0" Grid.Row="4" Width="Auto" Style="{x:Null}">
+                                    <ComboBox Grid.Row="1" MaxWidth="150" MinWidth="200" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                </GroupBox>
+                            </Grid>
+                        </StackPanel>
+                    </TabItem>-->
+
+                    <TabItem Header="Frequency sensor" mah:ControlsHelper.HeaderFontSize="16">
+                        <StackPanel Height="Auto" MinWidth="400">
+                            <GroupBox Header="Threshold" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="Voltage" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <TextBlock Text="Threshold of level" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                    <Slider Value="{Binding ThresholdLevelOfFixationFrequency}" Maximum="31" Style="{StaticResource SliderStyleMarging}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+                                    <TextBlock Text="{Binding ThresholdLevelOfFixationFrequency, StringFormat={}{0}V, FallbackValue=NA}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                                </Grid>
+                            </GroupBox>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <GroupBox Header="Additional settings" Grid.Column="0" Width="Auto" Style="{x:Null}">
+                                    <StackPanel>
+                                        <CheckBox Content="Use filtration" IsChecked="{Binding UseFiltrating}" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Averaging window" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                            <TextBlock Text="Level of filtration" Grid.Column="0" Grid.Row="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                                            <mah:NumericUpDown Value="{Binding AveragingWindowValue, StringFormat={}{0}}" Grid.Column="1" Grid.Row="0" Minimum="1" Maximum="1000" Interval="1"/>
+                                            <mah:NumericUpDown Value="{Binding LevelOfFiltrationValue, StringFormat={}{0}}" Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="10" Interval="1"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </GroupBox>
+                            </Grid>
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Header="Volgate measurement" mah:ControlsHelper.HeaderFontSize="16">
+                        <StackPanel Height="Auto" MinWidth="400">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <GroupBox Header="Settings" Grid.Column="0" Width="Auto" Style="{x:Null}">
+                                    <StackPanel>
+                                        <CheckBox Content="Use filtration" Style="{StaticResource CheckBoxStyleMarging}"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Averaging window" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                            <TextBlock Text="Level of filtration" Grid.Column="0" Grid.Row="1" Style="{StaticResource TextBlockStyleMarging}"/>
+                                            <mah:NumericUpDown Value="{Binding AveragingWindowValue, StringFormat={}{0}}" Grid.Column="1" Grid.Row="0" Minimum="1" Maximum="1000" Interval="1"/>
+                                            <mah:NumericUpDown Value="{Binding LevelOfFiltrationValue, StringFormat={}{0}}" Grid.Column="1" Grid.Row="1" Minimum="0" Maximum="30" Interval="1"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </GroupBox>
+                            </Grid>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

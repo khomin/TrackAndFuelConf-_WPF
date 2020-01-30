@@ -1,0 +1,96 @@
+﻿<Application x:Class="TrackAndFuel.App"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:local="clr-namespace:TrackAndFuel"
+            xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
+            xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+            xmlns:Resourse="clr-namespace:TrackAndFuel.Resources"
+            StartupUri="./View/Main.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+
+            <!--quick change of the collapse storyboard duration-->
+            <Storyboard x:Key="MahApps.Storyboard.ExpanderCollapse">
+                <DoubleAnimation Storyboard.TargetName="ExpandSite"
+                                 Storyboard.TargetProperty="(UIElement.Opacity)"
+                                 To="0"
+                                 Duration="0:0:0.1" />
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpandSite" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Collapsed}" />
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Models:MainViewModel x:Key="MainViewModel" />
+            <Models:LlsDataViewModel x:Key="LlsDataViewModel" />
+            <Models:LlsCalibrateTableAddLevelViewModel x:Key="LlsCalibrateTableAddLevelViewModel" />
+
+            <Resourse:BoolInvertionConverter x:Key="BoolInvertConverter"/>
+            <Resourse:ListToStringConverter x:Key="ListToStringConverter"/>
+            <Resourse:IntToStringConverter x:Key="IntToStringConverter"/>
+            <Resourse:IgnitionAutoManualConverter x:Key="IgnitionAutoManualConverter"/>
+            <Resourse:BoolToColorConverter x:Key="BoolToColorConverter"/>
+
+            <Style x:Key="GridStyleMarging" TargetType="Grid">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="SliderStyleMarging" TargetType="Slider">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="TextBlockStyleMarging" TargetType="TextBlock">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="ComboBoxStyleMarging" TargetType="ComboBox">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="TextBoxStyleMarging" TargetType="TextBox">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="CheckBoxStyleMarging" TargetType="CheckBox">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="MahSliedStyleMarging" TargetType="mah:RangeSlider">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="RadioStyleMarging" TargetType="RadioButton">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="BorderStyleMarging" TargetType="Border">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style x:Key="ButtonStyleMarging" TargetType="Button" BasedOn="{StaticResource MetroFlatButton}">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+            <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+            <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
