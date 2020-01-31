@@ -41,7 +41,7 @@ namespace TrackAndFuel.Instrumentals
          10, 84, 215, 137, 107, 53
       };
 
-        public static byte ComputeChecksum(params byte[] bytes)
+        public static byte ComputeChecksum(byte[] bytes)
         {
             byte crc = 0;
             if (bytes != null && bytes.Length > 0)
@@ -53,5 +53,24 @@ namespace TrackAndFuel.Instrumentals
             }
             return crc;
         }
+
+        //public static byte ComputeChecksum(IEnumerable<byte[]> bytes)
+        //{
+        //    //return ComputeChecksum(bytes.SelectMany(i => i).ToArray());
+        //    byte crc = 0;
+        //    var array = bytes.ToList();
+        //    if (bytes != null && array.Count() > 0)
+        //    {
+        //        for (var i = 0; i < bytes.Count(); i++)
+        //        {
+        //            crc = table[crc ^ array.at;
+        //        }
+        //        //foreach (byte b in bytes)
+        //        //{
+        //        //    crc = table[crc ^ b];
+        //        //}
+        //    }
+        //    return crc;
+        //}
     }
 }

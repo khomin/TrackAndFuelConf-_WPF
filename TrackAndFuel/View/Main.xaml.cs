@@ -15,8 +15,8 @@ namespace TrackAndFuel.Tracker
             viewModel = new MainViewModel();
             DataContext = viewModel;
 
-            //viewModel.NavigateContent = new StartPanel(viewModel);
-            viewModel.NavigateContent = new TrackerMainPanel(viewModel);
+            viewModel.NavigateContent = new StartPanel(viewModel);
+            //viewModel.NavigateContent = new TrackerMainPanel(viewModel);
         }
     }
 }

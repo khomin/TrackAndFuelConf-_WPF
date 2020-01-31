@@ -7,13 +7,13 @@ namespace TrackAndFuel.ViewModel
     {
         private SettingsViewModel _settingsViewModel;
         private RightPannelViewModel _rightPannelViewModel;
-        private ConnectPannelViewModel _connectPannelViewModel;
+        private ConnectPanelViewModel _connectPannelViewModel;
         private Page _content;
 
         public MainViewModel()
         {
             _rightPannelViewModel = new RightPannelViewModel();
-            _connectPannelViewModel = new ConnectPannelViewModel();
+            _connectPannelViewModel = new ConnectPanelViewModel();
             _settingsViewModel = new SettingsViewModel();
         }
 
@@ -35,7 +35,7 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public ConnectPannelViewModel ConnectViewModel
+        public ConnectPanelViewModel ConnectViewModel
         {
             get
             {

@@ -18,7 +18,18 @@ namespace TrackAndFuel.Instrumentals
         public enum KeyParameter
         {
             DbgLevel = 0x00,
-            DbgMessage = 0x01
+            DbgMessage = 0x01,
+            imei = 0x02,
+            imsi = 0x03,
+            GsmCsq,
+            GnssLat,
+            GnssLon,
+            GnssSat,
+            Ain1,
+            Ain2,
+            Ain3,
+            PowerBat,
+            PowerExt
         }
 
         public enum TypeParameter
@@ -43,9 +54,9 @@ namespace TrackAndFuel.Instrumentals
 
         public enum PacketField
         {
-            Header = 0x00,
-            TypePacket = 0x01,
-            ParamsCount = 0X02
+            TypePacket = 0x00,
+            TypeMessage = 0x01,
+            ParamsCount = 0x02
         }
     }
 }

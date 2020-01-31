@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TrackAndFuel.Instrumentals
 {
@@ -14,10 +15,9 @@ namespace TrackAndFuel.Instrumentals
             this.data = data;
         }
 
-        public override (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse()
+        public override ParserResult Parse()
         {
-            TrackerTypeData.TypePacketData typePacket = TrackerTypeData.TypePacketData.Request;
-            List<DataItemParam> result = new List<DataItemParam>();
+            ParserResult result = null;
             try
             {
                 if (data.Length != 0)
@@ -26,61 +26,29 @@ namespace TrackAndFuel.Instrumentals
                     Array.Copy(data, 0, crcArray, 0, crcArray.Length);
                     if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
                     {
-                        typePacket = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.Header];
-                        result = ParseField(data, (int)TrackerTypeData.PacketField.ParamsCount + 1, data[(int)TrackerTypeData.PacketField.ParamsCount]);
+                        var packet = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.TypePacket];
+                        var message = (TrackerTypeData.TypeMessage)(int)data[(int)TrackerTypeData.PacketField.TypeMessage];
+                        var bodyData = ParseField(data, (int)TrackerTypeData.PacketField.ParamsCount + 1, data[(int)TrackerTypeData.PacketField.ParamsCount]);
+                        result = new ParserResult(packet, message, bodyData);
+                    }
+                    else {
+                        return null;
                     }
                 }
             }
             catch (Exception) { }
-
-            return (typePacket, result);
+            return result;
         }
-
-        public byte[] CodeValue(List<DataItemParam> data)
-        {
-            List<byte> res = new List<byte>();
-
-            foreach (var i in data) 
-            {
-                
-            }
-
-            //        Array.Copy(data, 0, crcArray, 0, crcArray.Length);
-            //        if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
-            //        {
-            //            typePacket = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.Header];
-            //            result = ParseField(data, (int)TrackerTypeData.PacketField.ParamsCount + 1, data[(int)TrackerTypeData.PacketField.ParamsCount]);
-            //        }
-
-
-            //TrackerTypeData.TypePacketData typePacket = TrackerTypeData.TypePacketData.Request;
-            //List<DataItemParam> result = new List<DataItemParam>();
-            //try
-            //{
-            //    if (data.Length != 0)
-            //    {
-            //        byte[] crcArray = new byte[data.Length - 1];
-            //        Array.Copy(data, 0, crcArray, 0, crcArray.Length);
-            //        if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
-            //        {
-            //            typePacket = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.Header];
-            //            result = ParseField(data, (int)TrackerTypeData.PacketField.ParamsCount + 1, data[(int)TrackerTypeData.PacketField.ParamsCount]);
-            //        }
-            //    }
-            //}
-            //catch (Exception) { }
-
-            return new byte[10];
-        }
-
-        public override (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse(byte[] data)
+        public override ParserResult Parse(byte[] data)
         {
             this.data = data;
             return Parse();
         }
 
-        public override (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse(List<int> data)
+        public override ParserResult Parse(List<int> data)
         {
+            //this.data = data.Select(i => BitConverter.GetBytes(i)).SelectMany(i => i).ToArray();
+
             this.data = new byte[data.Count];
             for (int i = 0; i < this.data.Length; i++)
             {
@@ -138,6 +106,42 @@ namespace TrackAndFuel.Instrumentals
                 list.Add(dataField);
             }
             return list;
+        }
+        public byte[] CodeValue(List<DataItemParam> data)
+        {
+            List<byte> res = new List<byte>();
+
+            foreach (var i in data)
+            {
+
+            }
+
+            //        Array.Copy(data, 0, crcArray, 0, crcArray.Length);
+            //        if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
+            //        {
+            //            typePacket = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.Header];
+            //            result = ParseField(data, (int)TrackerTypeData.PacketField.ParamsCount + 1, data[(int)TrackerTypeData.PacketField.ParamsCount]);
+            //        }
+
+
+            //TrackerTypeData.TypePacketData typePacket = TrackerTypeData.TypePacketData.Request;
+            //List<DataItemParam> result = new List<DataItemParam>();
+            //try
+            //{
+            //    if (data.Length != 0)
+            //    {
+            //        byte[] crcArray = new byte[data.Length - 1];
+            //        Array.Copy(data, 0, crcArray, 0, crcArray.Length);
+            //        if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
+            //        {
+            //            typePacket = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.Header];
+            //            result = ParseField(data, (int)TrackerTypeData.PacketField.ParamsCount + 1, data[(int)TrackerTypeData.PacketField.ParamsCount]);
+            //        }
+            //    }
+            //}
+            //catch (Exception) { }
+
+            return new byte[10];
         }
     }
 }

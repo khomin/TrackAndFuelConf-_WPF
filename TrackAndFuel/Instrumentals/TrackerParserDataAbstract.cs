@@ -11,8 +11,20 @@ namespace TrackAndFuel.Instrumentals
         protected byte[] data;
         protected uint crcResult;
 
-        public abstract (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse();
-        public abstract (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse(byte[] data);
-        public abstract (TrackerTypeData.TypePacketData type, List<DataItemParam> data) Parse(List<int> data);
+        public class ParserResult
+        {
+            public TrackerTypeData.TypePacketData type;
+            public TrackerTypeData.TypeMessage typeMessage;
+            public List<DataItemParam> data;
+            public ParserResult(TrackerTypeData.TypePacketData _type, TrackerTypeData.TypeMessage _typeMessage, List<DataItemParam> _data)  {
+                type = _type;
+                typeMessage = _typeMessage;
+                data = _data;
+            }
+        }
+
+        public abstract ParserResult Parse();
+        public abstract ParserResult Parse(byte[] data);
+        public abstract ParserResult Parse(List<int> data);
     }
 }

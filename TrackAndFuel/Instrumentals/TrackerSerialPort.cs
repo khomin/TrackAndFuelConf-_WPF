@@ -24,7 +24,7 @@ namespace TrackAndFuel.Instrumentals
             _serialIsActive = false;
         }
 
-        public override bool Open(Dictionary<string, object> property, Action<List<int>> updateDataCallback, Action disconnectCallback)
+        public override bool Open(Dictionary<string, object> property, Action<List<byte>> updateDataCallback, Action disconnectCallback)
         {
             bool result = false;
             try
@@ -34,13 +34,13 @@ namespace TrackAndFuel.Instrumentals
                 _serialPort.DataReceived += new SerialDataReceivedEventHandler((o, i) =>
                 {
                     bool readyRead = false;
-                    List<int> rxData = new List<int>();
+                    var rxData = new List<byte>();
                     do
                     {
                         try
                         {
                             int data = _serialPort.ReadByte();
-                            rxData.Add(data);
+                            rxData.Add((byte)data);
                             _serialIsActive = true;
                         }
                         catch (TimeoutException)
