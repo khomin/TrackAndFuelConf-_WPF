@@ -11,7 +11,6 @@ namespace TrackAndFuel.Instrumentals
         private Type type;
         private Object data;
         private TrackerTypeData.KeyParameter key;
-
         internal TrackerTypeData.KeyParameter Key { get => key; set => key = value; }
         internal Type Type { get => type; set => type = value; }
         internal Object Data { get => data; set => data = value; }

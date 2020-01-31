@@ -31,5 +31,9 @@ namespace TrackAndFuel.Tracker
         {
             this.DialogResult = false;
         }
+        public string getSelectedPortName() 
+        {
+            return PortComBox.SelectedItem.ToString();
+        }
     }
 }

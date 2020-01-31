@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace TrackAndFuel.ViewModel
 {
-    public class ConnectPannelViewModel : ViewModelBase
+    public class ConnectPanelViewModel : ViewModelBase
     {
         private ObservableCollection<string> _portList;
 
@@ -20,7 +20,7 @@ namespace TrackAndFuel.ViewModel
         private bool _mainFormIsAvailableForInteracting;
         private string _statusConnect = "Disconnected";
 
-        public ConnectPannelViewModel()
+        public ConnectPanelViewModel()
         {
             _portList = new ObservableCollection<string>(SerialPort.GetPortNames().ToList());
             _portList.Insert(0, "Demo");

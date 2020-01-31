@@ -21,6 +21,6 @@
             </Image.Source>
         </Image>
 
-        <local:ConnectPanel x:Name="connectPannel" Grid.Row="1" Height="50" ConnectEvent="connectPannel_ConnectEvent" DataContext="{Binding .}"/>
+        <local:ConnectPanel x:Name="connectPannel" Grid.Row="1" Height="50" ConnectEvent="connectPanel_ConnectEvent" DataContext="{Binding .}"/>
     </Grid>
 </Page>

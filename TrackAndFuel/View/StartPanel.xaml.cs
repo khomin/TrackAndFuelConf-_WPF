@@ -18,10 +18,10 @@ namespace TrackAndFuel.Tracker
             this.viewModel = viewModel;
         }
 
-        private void connectPannel_ConnectEvent(object sender, EventArgs e)
+        private void connectPanel_ConnectEvent(object sender, EventArgs e)
         {
             /* create the new viewmodel for connection */
-            viewModel.ConnectViewModel = new ConnectPannelViewModel();
+            viewModel.ConnectViewModel = new ConnectPanelViewModel();
             
             /* create dialog selecting com ports */
             ConnectDialog connectDialog = new ConnectDialog(viewModel);
@@ -37,7 +37,7 @@ namespace TrackAndFuel.Tracker
             var result = connectDialog.ShowDialog();
             if (result == true) 
             {
-                viewModel.NavigateContent = new TrackerMainPanel(viewModel);
+                viewModel.NavigateContent = new TrackerMainPanel(viewModel, connectDialog.getSelectedPortName());
             }
         }
     }
