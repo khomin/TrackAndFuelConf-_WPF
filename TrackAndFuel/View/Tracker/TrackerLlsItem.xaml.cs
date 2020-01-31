@@ -13,11 +13,10 @@ namespace TrackAndFuel.Tracker
         public TrackerLlsItem()
         {
             InitializeComponent();
-            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) =>
-            {
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
                 viewModel = this.DataContext as LlsDataViewModel;
+                DataContext = viewModel;
             };
-
         }
 
         private void ChangeLLsLevelMinMax(object sender, RoutedEventArgs e)

@@ -10,21 +10,21 @@ namespace TrackAndFuel.Tracker
     /// </summary>
     public partial class StartPanel : Page
     {
-        private MainViewModel viewModel;
+        private MainViewModel _viewModel;
         public StartPanel(MainViewModel viewModel)
         {
             InitializeComponent();
-
-            this.viewModel = viewModel;
+            DataContext = viewModel;
+            _viewModel = viewModel;
         }
 
         private void connectPanel_ConnectEvent(object sender, EventArgs e)
         {
             /* create the new viewmodel for connection */
-            viewModel.ConnectViewModel = new ConnectPanelViewModel();
+            _viewModel.ConnectViewModel = new ConnectPanelViewModel();
             
             /* create dialog selecting com ports */
-            ConnectDialog connectDialog = new ConnectDialog(viewModel);
+            ConnectDialog connectDialog = new ConnectDialog(_viewModel);
             connectDialog.WindowStartupLocation = WindowStartupLocation.Manual;
             connectDialog.WindowStyle = WindowStyle.None;
             connectDialog.ShowInTaskbar = false;
@@ -37,7 +37,7 @@ namespace TrackAndFuel.Tracker
             var result = connectDialog.ShowDialog();
             if (result == true) 
             {
-                viewModel.NavigateContent = new TrackerMainPanel(viewModel, connectDialog.getSelectedPortName());
+                _viewModel.NavigateContent = new TrackerMainPanel(_viewModel, connectDialog.getSelectedPortName());
             }
         }
     }

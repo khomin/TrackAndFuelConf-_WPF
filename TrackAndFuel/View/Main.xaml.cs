@@ -8,15 +8,18 @@ namespace TrackAndFuel.Tracker
     /// </summary>
     public partial class Main : MetroWindow
     {
-        private MainViewModel viewModel;
+        private MainViewModel _viewModel;
         public Main()
         {
             InitializeComponent();
-            viewModel = new MainViewModel();
-            DataContext = viewModel;
+            _viewModel = new MainViewModel();
+            DataContext = _viewModel;
 
-            viewModel.NavigateContent = new StartPanel(viewModel);
-            //viewModel.NavigateContent = new TrackerMainPanel(viewModel);
+            _viewModel.NavigateContent = new StartPanel(_viewModel);
+
+            _viewModel.RightPannelModel.CurrentData.Ain2Value = 10.20f;
+
+            //_viewModel.NavigateContent = new TrackerMainPanel(_viewModel);
         }
     }
 }

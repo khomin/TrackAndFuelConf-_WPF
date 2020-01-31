@@ -9,16 +9,12 @@ namespace TrackAndFuel.Instrumentals
     abstract class TrackerParserDataAbstract
     {
         protected byte[] data;
-        protected uint crcResult;
-
         public class ParserResult
         {
             public TrackerTypeData.TypePacketData type;
-            public TrackerTypeData.TypeMessage typeMessage;
             public List<DataItemParam> data;
-            public ParserResult(TrackerTypeData.TypePacketData _type, TrackerTypeData.TypeMessage _typeMessage, List<DataItemParam> _data)  {
+            public ParserResult(TrackerTypeData.TypePacketData _type, List<DataItemParam> _data)  {
                 type = _type;
-                typeMessage = _typeMessage;
                 data = _data;
             }
         }

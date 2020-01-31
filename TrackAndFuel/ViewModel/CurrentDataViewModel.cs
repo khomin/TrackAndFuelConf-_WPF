@@ -8,11 +8,10 @@ namespace TrackAndFuel.ViewModel
 {
     public class CurrentDataViewModel : ViewModelBase
     {
-        private string _imeiModemValue = "11112223344";
-        private float _ain1Value = 0.0f;
+        private string _imeiModemValue = "";
+        private float _ain1Value = 0.96f;
         private float _ain2Value = 0.0f;
         private float _ain3Value = 0.0f;
-        private float _ain4Value = 0.0f;
         private float _gmsSignalStrenghtPercentValue = 0;
         private int _gnssSatFixValue = 0;
         private float _gnssLatValue = 0.0f;
@@ -28,7 +27,8 @@ namespace TrackAndFuel.ViewModel
 
         public string ImeiModemValue
         {
-            get => _imeiModemValue; set
+            get => _imeiModemValue; 
+            set
             {
                 _imeiModemValue = value;
                 OnPropertyChanged();
@@ -61,16 +61,6 @@ namespace TrackAndFuel.ViewModel
             set
             {
                 _ain3Value = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public float Ain4Value
-        {
-            get => _ain4Value;
-            set
-            {
-                _ain4Value = value;
                 OnPropertyChanged();
             }
         }

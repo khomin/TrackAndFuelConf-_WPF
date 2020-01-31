@@ -8,12 +8,12 @@ namespace TrackAndFuel.Tracker
     /// </summary>
     public partial class ConnectDialog : MetroWindow
     {
-        private MainViewModel viewModel;
+        private MainViewModel _viewModel;
         public ConnectDialog(MainViewModel viewModel)
         {
             InitializeComponent();
 
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
         }
 
         private void connectButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -23,7 +23,7 @@ namespace TrackAndFuel.Tracker
 
         private void refreshButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            viewModel.ConnectViewModel.ResearchPorts();
+            _viewModel.ConnectViewModel.ResearchPorts();
             PortComBox.SelectedIndex = 0;
         }
 

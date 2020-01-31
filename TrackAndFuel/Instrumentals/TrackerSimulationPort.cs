@@ -51,61 +51,45 @@ namespace TrackAndFuel.Instrumentals
         private List<byte> GetNextRightPanelPacket()
         {
             var data = new List<byte>();
-
             data.Add((int)TrackerTypeData.TypePacketData.AsyncData);
-
-            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.DbgLevel, Type = typeof(int), Data = 0 }));
-            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.DbgLevel, Type = typeof(int), Data = 0 })) ;
-
-            byte crc = Crc8Calc.ComputeChecksum(data.ToArray());
-            data.Add(crc);
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain1, Type = typeof(float), Data = (float)new Random().NextDouble() }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain1, Type = typeof(float), Data = (float)new Random().NextDouble() }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain2, Type = typeof(float), Data = (float)new Random().NextDouble() }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain3, Type = typeof(float), Data = (float)new Random().NextDouble() }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.PowerBat, Type = typeof(float), Data = (float)new Random().Next(3, 4) }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.PowerExt, Type = typeof(float), Data = (float)new Random().Next(10, 12) }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.imei, Type = typeof(string), Data = String.Format("12345678953555") }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssLat, Type = typeof(float), Data = (float)new Random().NextDouble() }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssLon, Type = typeof(float), Data = (float)new Random().NextDouble() }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssSat, Type = typeof(int), Data = new Random().Next(0, 10) }));
+            data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GsmCsq, Type = typeof(int), Data = new Random().Next(0, 31) }));
+            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             return data;
-
-            //var data = new List<int>();
-
-            //data.Add((int)TrackerTypeData.TypePacketData.AsyncData);
-            //data.Add((int)TrackerTypeData.TypeMessage.Data);
-
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain1, Type = typeof(float), Data = new Random().NextDouble() })));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain1, Type = typeof(float), Data = new Random().NextDouble() }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain2, Type = typeof(float), Data = new Random().NextDouble() }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain3, Type = typeof(float), Data = new Random().NextDouble() }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.PowerBat, Type = typeof(float), Data = new Random().Next(3, 4) }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.PowerExt, Type = typeof(float), Data = new Random().Next(10, 12) }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.imei, Type = typeof(string), Data = String.Format("12345678953555") }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssLat, Type = typeof(float), Data = new Random().NextDouble() }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssLon, Type = typeof(float), Data = new Random().NextDouble() }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssSat, Type = typeof(int), Data = new Random().Next(0, 10) }));
-            //data.AddRange(addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GsmCsq, Type = typeof(int), Data = new Random().Next(0, 31) }));
-
-            //var crc = Crc8Calc.ComputeChecksum(data.Select(i => BitConverter.GetBytes(i)));
-            //data.Add(crc);
-            //return data;
         }
 
         private List<byte> addParam(DataItemParam data)
         {
             var res = new List<byte>();
             res.Add((byte)data.Key);
-
             if (data.Type == typeof(int))
             {
-                //res.Add((int)TrackerTypeData.TypeParameter.ParamTypeInt);
-                var t = BitConverter.GetBytes((int)data.Data);
-                res.Add(t[0]);
-                res.Add(t[1]);
-                res.Add(t[2]);
-                res.Add(t[3]);
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeInt);
+                var bytearray = BitConverter.GetBytes((int)data.Data);
+                res.Add(bytearray[0]);
+                res.Add(bytearray[1]);
+                res.Add(bytearray[2]);
+                res.Add(bytearray[3]);
             }
             else if (data.Type == typeof(bool))
             {
-                //res.Add((int)TrackerTypeData.TypeParameter.ParamTypeBool);
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeBool);
                 res.Add((byte)data.Data);
             }
             else if (data.Type == typeof(string))
             {
-                //res.Add((int)TrackerTypeData.TypeParameter.ParamTypeString);
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeString);
                 res.Add((byte)data.Data.ToString().Length);
+                res.Add(0);
                 foreach (var i in data.Data.ToString()) 
                 {
                     res.Add((byte)i);
@@ -113,10 +97,16 @@ namespace TrackAndFuel.Instrumentals
             }
             else if (data.Type == typeof(float))
             {
-                //res.Add((int)TrackerTypeData.TypeParameter.ParamTypeFloat);
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeFloat);
+                var bytearray = BitConverter.GetBytes((float)data.Data);
+                res.Add(bytearray[0]);
+                res.Add(bytearray[1]);
+                res.Add(bytearray[2]);
+                res.Add(bytearray[3]);
             }
             else if (data.Type == typeof(byte[]))
             {
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeBinary);
                 //res.Add((int)TrackerTypeData.TypeParameter.ParamTypeBinary);
                 var d = (byte[])data.Data;
                 res.Add((byte)d.Length);
