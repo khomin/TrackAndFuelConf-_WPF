@@ -36,5 +36,10 @@
         <TabItem Header="LLS" mah:ControlsHelper.HeaderFontSize="16">
             <local:TrackerLlsSettings DataContext="{Binding .}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </TabItem>
+
+        <TabItem Header="Log" mah:ControlsHelper.HeaderFontSize="16">
+            <local:TrackerLogSettings DataContext="{Binding .}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </TabItem>
+
     </TabControl>
 </UserControl>
