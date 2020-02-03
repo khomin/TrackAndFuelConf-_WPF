@@ -53,6 +53,52 @@ namespace TrackAndFuel.Instrumentals
             return Parse();
         }
 
+        public List<byte> addParam(DataItemParam data)
+        {
+            var res = new List<byte>();
+            res.Add((byte)data.Key);
+            if (data.Type == typeof(int))
+            {
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeInt);
+                var bytearray = BitConverter.GetBytes((int)data.Data);
+                res.Add(bytearray[0]);
+                res.Add(bytearray[1]);
+                res.Add(bytearray[2]);
+                res.Add(bytearray[3]);
+            }
+            else if (data.Type == typeof(bool))
+            {
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeBool);
+                res.Add((byte)data.Data);
+            }
+            else if (data.Type == typeof(string))
+            {
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeString);
+                res.Add((byte)data.Data.ToString().Length);
+                res.Add(0);
+                foreach (var i in data.Data.ToString())
+                {
+                    res.Add((byte)i);
+                }
+            }
+            else if (data.Type == typeof(float))
+            {
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeFloat);
+                var bytearray = BitConverter.GetBytes((float)data.Data);
+                res.Add(bytearray[0]);
+                res.Add(bytearray[1]);
+                res.Add(bytearray[2]);
+                res.Add(bytearray[3]);
+            }
+            else if (data.Type == typeof(byte[]))
+            {
+                res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeBinary);
+                var d = (byte[])data.Data;
+                res.Add((byte)d.Length);
+            }
+            return res;
+        }
+
         private List<DataItemParam> ParseField(byte[] data, int beginIndex)
         {
             List<DataItemParam> list = new List<DataItemParam>();
@@ -107,42 +153,6 @@ namespace TrackAndFuel.Instrumentals
                 Console.WriteLine(ex.ToString());
             }
             return list;
-        }
-        public byte[] CodeValue(List<DataItemParam> data)
-        {
-            List<byte> res = new List<byte>();
-
-            foreach (var i in data)
-            {
-
-            }
-
-            //        Array.Copy(data, 0, crcArray, 0, crcArray.Length);
-            //        if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
-            //        {
-            //            typePacket = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.Header];
-            //            result = ParseField(data, (int)TrackerTypeData.PacketField.ParamsCount + 1, data[(int)TrackerTypeData.PacketField.ParamsCount]);
-            //        }
-
-
-            //TrackerTypeData.TypePacketData typePacket = TrackerTypeData.TypePacketData.Request;
-            //List<DataItemParam> result = new List<DataItemParam>();
-            //try
-            //{
-            //    if (data.Length != 0)
-            //    {
-            //        byte[] crcArray = new byte[data.Length - 1];
-            //        Array.Copy(data, 0, crcArray, 0, crcArray.Length);
-            //        if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
-            //        {
-            //            typePacket = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.Header];
-            //            result = ParseField(data, (int)TrackerTypeData.PacketField.ParamsCount + 1, data[(int)TrackerTypeData.PacketField.ParamsCount]);
-            //        }
-            //    }
-            //}
-            //catch (Exception) { }
-
-            return new byte[10];
         }
     }
 }

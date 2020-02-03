@@ -37,5 +37,10 @@ namespace TrackAndFuel.Tracker
         {
             saveConfigEvent(this, EventArgs.Empty);
         }
+
+        private void toolButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

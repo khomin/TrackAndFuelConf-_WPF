@@ -21,15 +21,18 @@ namespace TrackAndFuel.Instrumentals
             DbgMessage = 0x01,
             imei = 0x02,
             imsi = 0x03,
-            GsmCsq,
-            GnssLat,
-            GnssLon,
-            GnssSat,
-            Ain1,
-            Ain2,
-            Ain3,
-            PowerBat,
-            PowerExt
+            GsmCsq = 0x04,
+            GnssLat = 0x05,
+            GnssLon = 0x06,
+            GnssSat = 0x07,
+            Ain1 = 0x08,
+            Ain2 = 0x09,
+            Ain3 = 0x0A,
+            PowerBat = 0x0B,
+            PowerExt = 0x0C,
+            Settings = 0x0D,
+            GetSettings = 0x0E,
+            SettingsAcknowledgement = 0x0F
         }
 
         public enum TypeParameter

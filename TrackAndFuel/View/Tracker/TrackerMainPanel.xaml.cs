@@ -53,13 +53,11 @@ namespace TrackAndFuel.Tracker
 
         private void DisconnectHandle()
         {
-            _viewModel.ConnectViewModel.StatusConnect = "Disconnected";
             _viewModel.ConnectViewModel.IsConnected = false;
+            _viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
+            _viewModel.ConnectViewModel.StatusConnect = "Disconnected";
             this.Dispatcher.Invoke(() =>
             {
-                _viewModel.ConnectViewModel.IsConnected = false;
-                _viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
-                _viewModel.ConnectViewModel.StatusConnect = "Disconnected";
                 MessageBoxResult result = MessageBox.Show("Connection lost",
                                       "Warning",
                                       MessageBoxButton.OK,
@@ -80,7 +78,19 @@ namespace TrackAndFuel.Tracker
             {
                 if (result.type == TrackerTypeData.TypePacketData.Answer)
                 {
-
+                    if (result.data.Count != 0)
+                    {
+                        if (result.data[0].Key == TrackerTypeData.KeyParameter.SettingsAcknowledgement)
+                        {
+                            Application.Current.Dispatcher.Invoke(delegate
+                            {
+                                MessageBox.Show("Settings have been recorded",
+                                      "Ok",
+                                      MessageBoxButton.OK,
+                                      MessageBoxImage.Information);
+                            });
+                        }
+                    }
                 }
                 else
                 {
@@ -171,28 +181,31 @@ namespace TrackAndFuel.Tracker
                 Console.WriteLine("Parser data error");
             }
         }
-
-        public void sendData(byte[] data)
-        {
-            if(_dataPort != null)
-            {
-                _dataPort.WriteData(data);
-            }
-        }
-
         private void TrackerConnectPannel_disconnectEvent(object sender, EventArgs e)
         {
             _dataPort.Close();
+            _viewModel.ConnectViewModel.IsConnected = false;
+            _viewModel.ConnectViewModel.StatusConnect = "Disconnected";
         }
 
         private void TrackerConnectPannel_loadConfigEvent(object sender, EventArgs e)
         {
-
+            var parser = new TrackerParserData();
+            var data = new List<byte>();
+            data.Add((int)TrackerTypeData.TypePacketData.Request);
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GetSettings, Type = typeof(int), Data = 0 }));
+            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            _dataPort.WriteData("writeSettings", data.ToArray());
         }
 
         private void TrackerConnectPannel_saveConfigEvent(object sender, EventArgs e)
         {
-
+            var parser = new TrackerParserData();
+            var data = new List<byte>();
+            data.Add((int)TrackerTypeData.TypePacketData.Request);
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Settings, Type = typeof(byte[]), Data = new byte[10] }));
+            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            _dataPort.WriteData("writeSettings", data.ToArray());
         }
     }
 }

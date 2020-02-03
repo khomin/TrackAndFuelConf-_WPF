@@ -85,7 +85,7 @@ namespace TrackAndFuel.Instrumentals
             return result;
         }
 
-        public override bool WriteData(byte[] data)
+        public override bool WriteData(string hintDataOptional, byte[] data)
         {
             throw new NotImplementedException();
         }

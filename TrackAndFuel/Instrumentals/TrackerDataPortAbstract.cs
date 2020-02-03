@@ -8,6 +8,6 @@ namespace TrackAndFuel.Instrumentals
         public delegate bool CallBack(List<byte> data);
         public abstract bool Open(Dictionary<string, object> property, Action<List<byte>> updateDataCallback, Action disconnectCallback);
         public abstract void Close();
-        public abstract bool WriteData(byte[] data);
+        public abstract bool WriteData(string dataHintOptional, byte[] data);
     }
 }
