@@ -8,6 +8,7 @@ namespace TrackAndFuel.Instrumentals
     {
         private System.Timers.Timer testStatusTimer;
         private bool _settingsIsWrited = false;
+        private bool _logLoadIsEnabled = false;
         public override bool Open(Dictionary<string, object> property, Action<List<byte>> updateDataCallback, Action disconnectCallback)
         {
             bool result = false;
@@ -22,13 +23,19 @@ namespace TrackAndFuel.Instrumentals
                 /* The right panel data packet */
                 updateDataCallback.Invoke(GetNextRightPanelPacket());
 
-                if (_settingsIsWrited) 
+                if (_settingsIsWrited)
                 {
                     _settingsIsWrited = false;
 
                     /* About accept new settings */
                     updateDataCallback.Invoke(GetPacketAboutNewSettings());
                 }
+
+                if (_logLoadIsEnabled) 
+                {
+                    updateDataCallback.Invoke(GetPacketAboutLog());
+                }
+
             };
             return result;
         }
@@ -39,6 +46,9 @@ namespace TrackAndFuel.Instrumentals
         public override bool WriteData(string dataHintOptional, byte[] data)
         {
             bool result = false;
+
+            result = true;
+
             if (dataHintOptional.Contains("writeSettings"))
             {
                 System.Timers.Timer testStatusTimer;
@@ -51,6 +61,17 @@ namespace TrackAndFuel.Instrumentals
                     testStatusTimer.Stop();
                 };
             }
+
+            if (dataHintOptional.Contains("startTestLog"))
+            {
+                _logLoadIsEnabled = true;
+            }
+
+            if (dataHintOptional.Contains("stopTesLog"))
+            {
+                _logLoadIsEnabled = true;
+            }
+
             return result;
         }
 
@@ -95,6 +116,94 @@ namespace TrackAndFuel.Instrumentals
             var parser = new TrackerParserData();
             data.Add((int)TrackerTypeData.TypePacketData.Answer);
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsAcknowledgement, Type = typeof(int), Data = 0 }));
+            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            return data;
+        }
+
+        private List<byte> GetPacketAboutLog()
+        {
+            var data = new List<byte>();
+            var parser = new TrackerParserData();
+            data.Add((int)TrackerTypeData.TypePacketData.Answer);
+            var logRecord = new byte[256];
+
+//            typedef struct __attribute__((packed)) {
+//	//Данные о записи
+//	uint32_t id;            //Номер записи
+//        struct __attribute__((packed)) {
+//		bool is_valid;
+//        uint32_t data;      /*hour/minute/sec */
+//    }
+//    time;
+//	//Событие вызвавшие попадание записи в журнал
+//	uint64_t eventHistory; // события
+//                           //Одометр
+//    uint32_t odometer; // в сотнях метров
+//                       //GPS-телеметрические данные
+//    struct __attribute__((packed)) {
+//		bool is_valid;
+//    float longtitude;
+//    float latitude;
+//    int16_t altitude; //Высота над уровнем моря
+//    uint8_t fix;
+//    uint16_t heading; //Курс
+//    uint32_t speed;
+//    uint16_t hdop;
+//    uint8_t nSat; //Количество спутников
+//}
+//gnss;
+	
+//	uint8_t gsmSignal;
+
+//struct __attribute__((packed)) {
+//		struct __attribute__((packed)) {
+//			float ain1;
+//float vbat;
+//float temp;
+//float power; 
+//		} power;
+//    //
+//    sInputValue_t inputs[INPUTS_COUNT]; //Цифровые выходы (битовая маска)
+//                                        //
+//uint8_t gpout[DIGITAL_OUT_COUNT];   //Цифровые выходы (битовая маска)
+//                                    //
+//struct __attribute__((packed)) {
+//			int16_t hgeo; //Геоидальное различие — различие между земным эллипсоидом WGS 84 и уровнем моря (геоидом), «–» — уровень моря ниже эллипсоида.			
+//uint16_t pdop;
+//uint16_t vdop;			
+//		}gpsAddlData;
+    
+//		//Датчики уровня топлива   
+//    struct __attribute__((packed)) {
+//			uint8_t temperature;
+//uint16_t value;
+//uint16_t frequency;
+//		}llsInternal[LLS_INTERNAL_COUNT_MAX];
+		
+//		//Информация по машине
+//		struct __attribute__((packed)) {
+//			uint64_t engHours;  /* время работы двигателя в нормальном режиме */
+//uint16_t engRpm;
+//bool ignState;
+//		}vehicle;
+			
+//		//oneWire
+//		struct __attribute__((packed)) {
+//			uint32_t idLow;
+//uint32_t idHigh; 
+//		}driver;
+//		//Датчики температуры
+//		struct __attribute__((packed)) {
+//			int16_t value[_TEMPERATURE_SENSOR_COUNT];
+//		}temperatureSensor;
+//	}other;
+	
+//	uint8_t reserv[125];
+//uint16_t crc16;
+//bool isNotSynchronized;
+//}LogRecord_t; // 256!!!
+
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.LogRecord, Type = typeof(byte[]), Data = logRecord }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             return data;
         }

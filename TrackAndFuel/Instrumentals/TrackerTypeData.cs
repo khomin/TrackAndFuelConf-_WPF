@@ -50,7 +50,8 @@ namespace TrackAndFuel.Instrumentals
             SettingsLls = 0x14,
             SettingsCalibration = 0x15,
             SettingsAcknowledgement = 0x16,
-            SettingsAll = 0x17
+            SettingsAll = 0x17,
+            LogRecord = 0x18
         }
 
         public enum TypeParameter

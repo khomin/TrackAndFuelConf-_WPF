@@ -93,6 +93,8 @@ namespace TrackAndFuel.Instrumentals
             else if (data.Type == typeof(byte[]))
             {
                 res.Add((byte)TrackerTypeData.TypeParameter.ParamTypeBinary);
+                var i = (byte[])data.Data;
+                res.Add((byte)i.Length);
                 var d = (byte[])data.Data;
                 res.Add((byte)d.Length);
             }

@@ -15,13 +15,32 @@ namespace TrackAndFuel.Tracker
     {
         private MainViewModel _viewModel;
         private TrackerDataPortAbstract _dataPort;
-
+        private System.Timers.Timer handleRequestTimer;
         public TrackerMainPanel(MainViewModel viewModel, string portName)
         {
             InitializeComponent();
             _viewModel = viewModel;
             DataContext = viewModel;
             connectToPort(portName);
+
+            handleRequestTimer = new System.Timers.Timer(2000);
+            handleRequestTimer.AutoReset = true;
+            handleRequestTimer.Enabled = true;
+            handleRequestTimer.Elapsed += (sourse, evendt) =>
+            {
+                if (_viewModel.ConnectViewModel.CommandDataBuf.Count != 0) 
+                {
+                    var index = _viewModel.ConnectViewModel.CommandDataBuf.Count - 1;
+                    ConnectPanelViewModel.CommandData i = _viewModel.ConnectViewModel.CommandDataBuf[index];
+                    if (_dataPort != null) 
+                    {
+                        if (_dataPort.WriteData(i.key, i.data)) 
+                        {
+                            _viewModel.ConnectViewModel.CommandDataBuf.RemoveAt(index);
+                        }
+                    }
+                }
+            };
         }
 
         private void connectToPort(string portName)
@@ -83,7 +102,7 @@ namespace TrackAndFuel.Tracker
                         switch (i.Key)
                         {
                             case TrackerTypeData.KeyParameter.SettingsConnections:
-                            case TrackerTypeData.KeyParameter.SettingsOneWire: 
+                            case TrackerTypeData.KeyParameter.SettingsOneWire:
                             case TrackerTypeData.KeyParameter.SettingsTrack:
                             case TrackerTypeData.KeyParameter.SettingsGeofence:
                             case TrackerTypeData.KeyParameter.SettingsInputs:

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +26,24 @@ namespace TrackAndFuel.ViewModel
         private Boolean _inDiscret4Value = false;
         private Boolean _outDiscret1Value = false;
         private Boolean _outDiscret2Value = false;
-
-        public CurrentDataViewModel() 
+        private ObservableCollection<LogPoint> _logPositionList;
+        private int _logPositionListIndex = 0;
+        public class LogPoint
         {
-            
+            public int Id = 0;
+            public double Lon = 0;
+            public double Lat = 0;
+            DateTime Datetime;
+        }
+
+        public CurrentDataViewModel()
+        {
+            _logPositionList = new ObservableCollection<LogPoint>();
         }
 
         public string ImeiModemValue
         {
-            get => _imeiModemValue; 
+            get => _imeiModemValue;
             set
             {
                 _imeiModemValue = value;
@@ -46,7 +56,7 @@ namespace TrackAndFuel.ViewModel
             get => _ain1Value;
             set
             {
-                _ain1Value = value; 
+                _ain1Value = value;
                 OnPropertyChanged();
             }
         }
@@ -80,8 +90,10 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
-        
-        public int GnssSatFixValue { get => _gnssSatFixValue;
+
+        public int GnssSatFixValue
+        {
+            get => _gnssSatFixValue;
             set
             {
                 _gnssSatFixValue = value;
@@ -111,7 +123,9 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public float PowerBatteryValue { get => _powerBatteryValue;
+        public float PowerBatteryValue
+        {
+            get => _powerBatteryValue;
             set
             {
                 _powerBatteryValue = value;
@@ -119,7 +133,9 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public float PowerExternalValue { get => _powerExternalValue;
+        public float PowerExternalValue
+        {
+            get => _powerExternalValue;
             set
             {
                 _powerExternalValue = value;
@@ -127,7 +143,9 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public bool InDiscret1Value { get => _inDiscret1Value;
+        public bool InDiscret1Value
+        {
+            get => _inDiscret1Value;
             set
             {
                 _inDiscret1Value = value;
@@ -135,7 +153,9 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public bool InDiscret2Value { get => _inDiscret2Value;
+        public bool InDiscret2Value
+        {
+            get => _inDiscret2Value;
             set
             {
                 _inDiscret2Value = value;
@@ -186,10 +206,22 @@ namespace TrackAndFuel.ViewModel
 
         public string GnssPositionAsString
         {
-            get => _gnssPositionAsString; 
+            get => _gnssPositionAsString;
             set
             {
                 _gnssPositionAsString = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<LogPoint> LogPositionList => _logPositionList;
+
+        public int LogPositionListIndex
+        {
+            get => _logPositionListIndex; 
+            set
+            {
+                _logPositionListIndex = value;
                 OnPropertyChanged();
             }
         }

@@ -22,18 +22,16 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ListView Grid.Row="0" Name="lvUsers" VerticalAlignment="Stretch">
+                <ListView Grid.Row="0" Name="lvUsers" 
+                          ItemsSource="{Binding RightPannelModel.CurrentData.LogPositionList}"
+                          SelectedIndex="{Binding RightPannelModel.CurrentData.LogPositionListIndex, Mode=TwoWay}"
+                          VerticalAlignment="Stretch">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="id" Width="Auto" DisplayMemberBinding="{Binding Name}" />
-                            <GridViewColumn Header="Date" Width="Auto" DisplayMemberBinding="{Binding Age}" />
-                            <GridViewColumn Header="Position" Width="Auto">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Mail}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            <GridViewColumn Header="id" DisplayMemberBinding="{Binding Id, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
+                            <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Datetime, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
+                            <GridViewColumn Header="Position" DisplayMemberBinding="{Binding Lon, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
+                            <GridViewColumn Header="Position" DisplayMemberBinding="{Binding Lat, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -51,11 +49,12 @@
                 </Grid>
             </Grid>
 
-            <m:Map Grid.Column="1" VerticalAlignment="Stretch" 
+            <m:Map x:Name="Map" 
+                   Grid.Column="1" VerticalAlignment="Stretch" 
                        CredentialsProvider="AgMT8wAJD7dJkiyzhEvL6W4xGpBk1JkZb0sZjncZwMo2IDMQKpC1omr8gpBeseya"  
                        Center="{Binding RightPannelModel.CurrentData.GnssPositionAsString}" 
                    ZoomLevel="12">
-                <m:Pushpin Location="{Binding RightPannelModel.CurrentData.GnssPositionAsString}"/>
+                <!--<m:Pushpin Location="{Binding RightPannelModel.CurrentData.GnssPositionAsString}"/>-->
             </m:Map>
         </Grid>
     </GroupBox>

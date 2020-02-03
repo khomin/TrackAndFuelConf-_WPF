@@ -21,6 +21,17 @@ namespace TrackAndFuel.ViewModel
         private string _statusConnect = "Disconnected";
         private bool _isReadyReadWriteSettings = false;
         private bool _isLogReading = false;
+        private readonly List<CommandData> _commandDataBuf;
+        public class CommandData
+        {
+            public string key;
+            public byte[] data;
+            public CommandData(string key, byte[] data) 
+            {
+                this.key = key;
+                this.data = data;
+            }
+        }
 
         public ConnectPanelViewModel()
         {
@@ -30,6 +41,7 @@ namespace TrackAndFuel.ViewModel
             _colorStatus = Brushes.Red;
             LoadingViewIsShow = Visibility.Hidden;
             _mainFormIsAvailableForInteracting = false;
+            _commandDataBuf = new List<CommandData>();
         }
 
         public ObservableCollection<string> PortsList
@@ -53,7 +65,7 @@ namespace TrackAndFuel.ViewModel
             }
             set
             {
-                if (_isConnected == value) 
+                if (_isConnected == value)
                 {
                     return;
                 }
@@ -96,7 +108,7 @@ namespace TrackAndFuel.ViewModel
 
         public bool MainFormIsAvailableForInteracting
         {
-            get => _mainFormIsAvailableForInteracting; 
+            get => _mainFormIsAvailableForInteracting;
             set
             {
                 _mainFormIsAvailableForInteracting = value;
@@ -117,7 +129,7 @@ namespace TrackAndFuel.ViewModel
         public string StatusConnect
         {
             get => _statusConnect;
-            set 
+            set
             {
                 _statusConnect = value;
                 OnPropertyChanged();
@@ -126,7 +138,7 @@ namespace TrackAndFuel.ViewModel
 
         public bool IsReadyReadWriteSettings
         {
-            get => _isReadyReadWriteSettings; 
+            get => _isReadyReadWriteSettings;
             set
             {
                 _isReadyReadWriteSettings = value;
@@ -136,21 +148,23 @@ namespace TrackAndFuel.ViewModel
 
         public bool IsLogReading
         {
-            get => _isLogReading; 
+            get => _isLogReading;
             set
             {
                 if (value == true)
                 {
                     IsReadyReadWriteSettings = false;
                 }
-                else 
+                else
                 {
                     IsReadyReadWriteSettings = true;
                 }
-                
+
                 _isLogReading = value;
                 OnPropertyChanged();
             }
         }
+
+        public List<CommandData> CommandDataBuf => _commandDataBuf;
     }
 }
