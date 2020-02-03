@@ -7,7 +7,7 @@
              xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" Height="Auto" Width="Auto"
-             DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Models:MainViewModel}}">
+             DataContext="{StaticResource MainViewModel}">
     <GroupBox Header="Log" Width="Auto">
         <Grid VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
@@ -42,15 +42,20 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Content="Read all" Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
-                    <Button Content="Clear log" Grid.Column="1" Style="{StaticResource ButtonStyleMarging}"/>
+                    <Button Content="{Binding ConnectViewModel.IsLogReading, 
+                        Converter={StaticResource BoolToStringConverter}, ConverterParameter='Cancel read;Read all'}" 
+                            Click="StartCancelLogRead_Click"
+                            Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
+                    <Button Content="Clear log" 
+                            Grid.Column="1" Style="{StaticResource ButtonStyleMarging}" Click="ClearLogClick"/>
                 </Grid>
             </Grid>
 
             <m:Map Grid.Column="1" VerticalAlignment="Stretch" 
                        CredentialsProvider="AgMT8wAJD7dJkiyzhEvL6W4xGpBk1JkZb0sZjncZwMo2IDMQKpC1omr8gpBeseya"  
-                       Center="47.620574,-122.34942" ZoomLevel="12">
-                <m:Pushpin Location="47.620574,-122.34942"/>
+                       Center="{Binding RightPannelModel.CurrentData.GnssPositionAsString}" 
+                   ZoomLevel="12">
+                <m:Pushpin Location="{Binding RightPannelModel.CurrentData.GnssPositionAsString}"/>
             </m:Map>
         </Grid>
     </GroupBox>

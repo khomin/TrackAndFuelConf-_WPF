@@ -16,6 +16,7 @@ namespace TrackAndFuel.ViewModel
         private int _gnssSatFixValue = 0;
         private float _gnssLatValue = 0.0f;
         private float _gnssLonValue = 0.0f;
+        private string _gnssPositionAsString = "";
         private float _powerBatteryValue = 0.0f;
         private float _powerExternalValue = 0.0f;
         private Boolean _inDiscret1Value = false;
@@ -24,6 +25,11 @@ namespace TrackAndFuel.ViewModel
         private Boolean _inDiscret4Value = false;
         private Boolean _outDiscret1Value = false;
         private Boolean _outDiscret2Value = false;
+
+        public CurrentDataViewModel() 
+        {
+            
+        }
 
         public string ImeiModemValue
         {
@@ -80,14 +86,18 @@ namespace TrackAndFuel.ViewModel
             {
                 _gnssSatFixValue = value;
                 OnPropertyChanged();
+                GnssPositionAsString = value.ToString() + "," + _gnssLatValue.ToString();
             }
         }
 
-        public float GnssLatValue { get => _gnssLatValue;
+        public float GnssLatValue
+        {
+            get => _gnssLatValue;
             set
             {
                 _gnssLatValue = value;
                 OnPropertyChanged();
+                GnssPositionAsString = value.ToString() + "," + _gnssLonValue.ToString();
             }
         }
 
@@ -170,6 +180,16 @@ namespace TrackAndFuel.ViewModel
             set
             {
                 _outDiscret2Value = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string GnssPositionAsString
+        {
+            get => _gnssPositionAsString; 
+            set
+            {
+                _gnssPositionAsString = value;
                 OnPropertyChanged();
             }
         }

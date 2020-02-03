@@ -14,6 +14,17 @@ namespace TrackAndFuel.Instrumentals
             Answer = 0x3e,
             AsyncData = 0x24
         }
+        public enum TypeMessage
+        {
+            Debug = 0x00,
+            Status = 0x01,
+            Data = 0x02,
+            AsyncData = 0x03,
+            SettingsRead = 0x04,
+            SettignsWrite = 0x05,
+            Log = 0x06,
+            Undefined = 0xff
+        }
 
         public enum KeyParameter
         {
@@ -30,9 +41,16 @@ namespace TrackAndFuel.Instrumentals
             Ain3 = 0x0A,
             PowerBat = 0x0B,
             PowerExt = 0x0C,
-            Settings = 0x0D,
-            GetSettings = 0x0E,
-            SettingsAcknowledgement = 0x0F
+            SettingsConnections = 0x0E,
+            SettingsOneWire = 0x0F,
+            SettingsTrack = 0x10,
+            SettingsGeofence = 0x11,
+            SettingsInputs = 0x12,
+            SettingsSms = 0x13,
+            SettingsLls = 0x14,
+            SettingsCalibration = 0x15,
+            SettingsAcknowledgement = 0x16,
+            SettingsAll = 0x17
         }
 
         public enum TypeParameter
@@ -44,16 +62,7 @@ namespace TrackAndFuel.Instrumentals
             ParamTypeBinary = 0x04
         }
 
-        public enum TypeMessage
-        {
-            Debug = 0x00,
-            Status = 0x01,
-            Data = 0x02,
-            AsyncData = 0x03,
-            Settings = 0x04,
-            Log = 0x05,
-            Undefined = 0xff
-        }
+
 
         public enum PacketField
         {

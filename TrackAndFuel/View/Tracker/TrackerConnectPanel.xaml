@@ -40,10 +40,10 @@
                     Click="Disconnect_Click" Margin="5,0,5,0" />
             <Button x:Name="loadSettingsButton" Grid.Row="0" Grid.Column="5" Width="Auto" Height="30" Content="Load config" 
                     Click="LoadConfig_Click"
-                    IsEnabled="{Binding ConnectViewModel.IsConnected}" Margin="5,0,5,0" />
+                    IsEnabled="{Binding ConnectViewModel.IsReadyReadWriteSettings}" Margin="5,0,5,0" />
             <Button x:Name="saveSettingsButton" Grid.Row="0" Grid.Column="6" Width="Auto" Height="30" Content="Save config" 
-                    Click="SaveConfig_Click"
-                    IsEnabled="{Binding ConnectViewModel.IsConnected}" Margin="5,0,5,0" />
+                    IsEnabled="{Binding ConnectViewModel.IsReadyReadWriteSettings}"
+                    Click="SaveConfig_Click" Margin="5,0,5,0" />
             <Button x:Name="toolButton" Grid.Row="0" Grid.Column="7" Width="Auto" Height="30" Content="..." 
                     Click="toolButton_Click"
                     IsEnabled="{Binding ConnectViewModel.IsConnected}" Margin="5,0,5,0" />

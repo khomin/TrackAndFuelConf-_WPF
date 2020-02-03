@@ -78,19 +78,32 @@ namespace TrackAndFuel.Tracker
             {
                 if (result.type == TrackerTypeData.TypePacketData.Answer)
                 {
-                    if (result.data.Count != 0)
+                    foreach (var i in result.data)
                     {
-                        if (result.data[0].Key == TrackerTypeData.KeyParameter.SettingsAcknowledgement)
+                        switch (i.Key)
                         {
-                            Application.Current.Dispatcher.Invoke(delegate
-                            {
-                                MessageBox.Show("Settings have been recorded",
-                                      "Ok",
-                                      MessageBoxButton.OK,
-                                      MessageBoxImage.Information);
-                            });
+                            case TrackerTypeData.KeyParameter.SettingsConnections:
+                            case TrackerTypeData.KeyParameter.SettingsOneWire: 
+                            case TrackerTypeData.KeyParameter.SettingsTrack:
+                            case TrackerTypeData.KeyParameter.SettingsGeofence:
+                            case TrackerTypeData.KeyParameter.SettingsInputs:
+                            case TrackerTypeData.KeyParameter.SettingsSms:
+                            case TrackerTypeData.KeyParameter.SettingsLls:
+                            case TrackerTypeData.KeyParameter.SettingsCalibration:
+                            case TrackerTypeData.KeyParameter.SettingsAcknowledgement:
+                            case TrackerTypeData.KeyParameter.SettingsAll:
+                                break;
+                            default: break;
                         }
                     }
+                    _viewModel.ConnectViewModel.IsReadyReadWriteSettings = true;
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        MessageBox.Show("Settings have been recorded",
+                              "Ok",
+                              MessageBoxButton.OK,
+                              MessageBoxImage.Information);
+                    });
                 }
                 else
                 {
@@ -193,9 +206,10 @@ namespace TrackAndFuel.Tracker
             var parser = new TrackerParserData();
             var data = new List<byte>();
             data.Add((int)TrackerTypeData.TypePacketData.Request);
-            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GetSettings, Type = typeof(int), Data = 0 }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsAll, Type = typeof(int), Data = 0 }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             _dataPort.WriteData("writeSettings", data.ToArray());
+            _viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
         }
 
         private void TrackerConnectPannel_saveConfigEvent(object sender, EventArgs e)
@@ -203,9 +217,17 @@ namespace TrackAndFuel.Tracker
             var parser = new TrackerParserData();
             var data = new List<byte>();
             data.Add((int)TrackerTypeData.TypePacketData.Request);
-            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Settings, Type = typeof(byte[]), Data = new byte[10] }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsCalibration, Type = typeof(byte[]), Data = new byte[10] }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsConnections, Type = typeof(byte[]), Data = new byte[10] }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsGeofence, Type = typeof(byte[]), Data = new byte[10] }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsInputs, Type = typeof(byte[]), Data = new byte[10] }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsLls, Type = typeof(byte[]), Data = new byte[10] }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsOneWire, Type = typeof(byte[]), Data = new byte[10] }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsSms, Type = typeof(byte[]), Data = new byte[10] }));
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsTrack, Type = typeof(byte[]), Data = new byte[10] }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             _dataPort.WriteData("writeSettings", data.ToArray());
+            _viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
         }
     }
 }

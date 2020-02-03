@@ -19,6 +19,8 @@ namespace TrackAndFuel.ViewModel
         private Visibility _loadingViewIsShow;
         private bool _mainFormIsAvailableForInteracting;
         private string _statusConnect = "Disconnected";
+        private bool _isReadyReadWriteSettings = false;
+        private bool _isLogReading = false;
 
         public ConnectPanelViewModel()
         {
@@ -51,16 +53,22 @@ namespace TrackAndFuel.ViewModel
             }
             set
             {
+                if (_isConnected == value) 
+                {
+                    return;
+                }
                 _isConnected = value;
                 if (value)
                 {
                     ColorStatus = Brushes.Green;
                     MainFormIsAvailableForInteracting = true;
+                    IsReadyReadWriteSettings = true;
                 }
                 else
                 {
                     ColorStatus = Brushes.Red;
                     MainFormIsAvailableForInteracting = false;
+                    IsReadyReadWriteSettings = false;
                 }
 
                 OnPropertyChanged();
@@ -112,6 +120,35 @@ namespace TrackAndFuel.ViewModel
             set 
             {
                 _statusConnect = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsReadyReadWriteSettings
+        {
+            get => _isReadyReadWriteSettings; 
+            set
+            {
+                _isReadyReadWriteSettings = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsLogReading
+        {
+            get => _isLogReading; 
+            set
+            {
+                if (value == true)
+                {
+                    IsReadyReadWriteSettings = false;
+                }
+                else 
+                {
+                    IsReadyReadWriteSettings = true;
+                }
+                
+                _isLogReading = value;
                 OnPropertyChanged();
             }
         }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrackAndFuel.ViewModel;
 
 namespace TrackAndFuel.Tracker
 {
@@ -20,9 +21,32 @@ namespace TrackAndFuel.Tracker
     /// </summary>
     public partial class TrackerLogSettings : UserControl
     {
+        private MainViewModel viewModel;
         public TrackerLogSettings()
         {
             InitializeComponent();
+
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
+                viewModel = this.DataContext as MainViewModel;
+                DataContext = viewModel;
+            };
+        }
+
+        private void StartCancelLogRead_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewModel.ConnectViewModel.IsLogReading)
+            {
+                viewModel.ConnectViewModel.IsLogReading = false;
+            }
+            else 
+            {
+                viewModel.ConnectViewModel.IsLogReading = true;
+            }
+        }
+
+        private void ClearLogClick(object sender, RoutedEventArgs e) 
+        {
+        
         }
     }
 }
