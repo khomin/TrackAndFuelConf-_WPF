@@ -27,9 +27,14 @@
                 <local:SettingsPannel DataContext="{Binding .}" Grid.Row="0"/>
 
                 <!--Pannel connection-->
-                <local:TrackerConnectPannel DataContext="{Binding .}" Grid.Row="1" disconnectEvent="TrackerConnectPannel_disconnectEvent"/>
+                <local:TrackerConnectPannel DataContext="{Binding .}" Grid.Row="1"
+                                            loadConfigEvent="TrackerConnectPannel_loadConfigEvent"
+                                            saveConfigEvent="TrackerConnectPannel_saveConfigEvent"
+                                            disconnectEvent="TrackerConnectPannel_disconnectEvent"/>
 
-                <fa:ImageAwesome x:Name="spinner" Visibility="{Binding ConnectViewModel.LoadingViewIsShow}" Grid.Row="0" Grid.Column="0" Icon="Spinner" Spin="True" SpinDuration="4" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <fa:ImageAwesome x:Name="spinner" Visibility="{Binding ConnectViewModel.LoadingViewIsShow}" 
+                                 Grid.Row="0" Grid.Column="0" Icon="Spinner" Spin="True" SpinDuration="4" 
+                                 Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
 
             <!--Pannel real time data-->

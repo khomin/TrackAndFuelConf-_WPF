@@ -105,7 +105,6 @@ namespace TrackAndFuel.ViewModel
         private readonly ObservableCollection<InputItemSettingsModel> _inputsSettingsModelList;
 
         private readonly ObservableCollection<LlsDataViewModel> _llsDataViewModelList;
-
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();

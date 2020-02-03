@@ -172,15 +172,27 @@ namespace TrackAndFuel.Tracker
             }
         }
 
-        public void sendData()
+        public void sendData(byte[] data)
         {
-
-
+            if(_dataPort != null)
+            {
+                _dataPort.WriteData(data);
+            }
         }
 
         private void TrackerConnectPannel_disconnectEvent(object sender, EventArgs e)
         {
             _dataPort.Close();
+        }
+
+        private void TrackerConnectPannel_loadConfigEvent(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TrackerConnectPannel_saveConfigEvent(object sender, EventArgs e)
+        {
+
         }
     }
 }

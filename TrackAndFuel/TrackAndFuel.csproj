@@ -88,6 +88,7 @@
     <Compile Include="Resources\IgnitionAutoManualConverter.cs" />
     <Compile Include="Resources\IntToStringConverter.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
+    <Compile Include="Resources\StatusBarColorConverter.cs" />
     <Compile Include="ViewModel\LlsCalibrateTableGenerateViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="ViewModel\ConnectPannelViewModel.cs" />

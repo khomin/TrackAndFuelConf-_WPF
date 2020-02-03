@@ -7,10 +7,6 @@ namespace TrackAndFuel.Instrumentals
     class TrackerSimulationPort : TrackerDataPortAbstract
     {
         private System.Timers.Timer testStatusTimer;
-        public TrackerSimulationPort()
-        {
-
-        }
         public override bool Open(Dictionary<string, object> property, Action<List<byte>> updateDataCallback, Action disconnectCallback)
         {
             bool result = false;
@@ -33,7 +29,11 @@ namespace TrackAndFuel.Instrumentals
         }
         public override bool WriteData(byte[] data)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            
+            
+
+            return result;
         }
 
         private List<int> GetNextStatusPacket()

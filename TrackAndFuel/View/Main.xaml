@@ -5,6 +5,7 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="Tracker configure" 
                       Width="1100" Height="600"
+                      xmlns:Root="clr-namespace:TrackAndFuel"
                       xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
                       DataContext="{StaticResource MainViewModel}">
     <Grid>
@@ -15,9 +16,9 @@
 
         <Frame x:Name="frame" Content="{Binding NavigateContent}" NavigationUIVisibility="Hidden"/>
 
-        <StatusBar Grid.Row="1">
-            <StatusBarItem>Current status</StatusBarItem>
-            <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
+        <StatusBar Background="{Binding ConnectViewModel.IsConnected, Converter={StaticResource StatusBarColorConverter}}" Grid.Row="1">
+            <StatusBarItem Content="Status"/>
+            <StatusBarItem Content="{Binding ConnectViewModel.StatusConnect, Mode=OneWay}" />
         </StatusBar>
     </Grid>
 
