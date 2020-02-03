@@ -167,10 +167,10 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="Crystal 8MHz" Grid.Row="0" Grid.Column="0" Margin="10,0,10,0" VerticalAlignment="Center"/>
-                        <Border Background="Red" MinWidth="20" MinHeight="20" MaxHeight="20" MaxWidth="20" Grid.Row="0" Grid.Column="1"/>
+                        <Border Background="Red" MinWidth="20" MinHeight="20" MaxHeight="20" MaxWidth="20" Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderStyleMarging}"/>
 
                         <TextBlock Text="Crystal 32KHz" Grid.Row="1" Grid.Column="0" Margin="10,0,10,0" VerticalAlignment="Center"/>
-                        <Border Background="Red" MinWidth="20" MinHeight="20" MaxHeight="20" MaxWidth="20" Grid.Row="1" Grid.Column="1"/>
+                        <Border Background="Red" MinWidth="20" MinHeight="20" MaxHeight="20" MaxWidth="20" Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyleMarging}"/>
                     </Grid>
                 </TabItem>
 
