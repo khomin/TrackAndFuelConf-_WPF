@@ -54,8 +54,7 @@
                    Grid.Column="1" VerticalAlignment="Stretch" 
                        CredentialsProvider="AgMT8wAJD7dJkiyzhEvL6W4xGpBk1JkZb0sZjncZwMo2IDMQKpC1omr8gpBeseya"  
                        Center="{Binding RightPannelModel.CurrentData.GnssPositionAsString}" 
-                   ZoomLevel="12">
-                <!--<m:Pushpin Location="{Binding RightPannelModel.CurrentData.GnssPositionAsString}"/>-->
+                   ZoomLevel="12"
             </m:Map>
         </Grid>
     </GroupBox>

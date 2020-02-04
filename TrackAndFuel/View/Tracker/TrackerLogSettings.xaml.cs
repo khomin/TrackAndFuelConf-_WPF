@@ -51,7 +51,10 @@ namespace TrackAndFuel.Tracker
 
         private void ClearLogClick(object sender, RoutedEventArgs e) 
         {
-            
+            if (MessageBox.Show("All log data in tracker will lose, are you sure?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                // TODO: log cleaning   
+            }
         }
     }
 }
