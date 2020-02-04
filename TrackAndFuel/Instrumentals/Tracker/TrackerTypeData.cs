@@ -62,9 +62,6 @@ namespace TrackAndFuel.Instrumentals
             ParamTypeBool = 0x03,
             ParamTypeBinary = 0x04
         }
-
-
-
         public enum PacketField
         {
             TypePacket = 0x00,

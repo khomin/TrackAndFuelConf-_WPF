@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,15 +27,23 @@ namespace TrackAndFuel.ViewModel
         private Boolean _inDiscret4Value = false;
         private Boolean _outDiscret1Value = false;
         private Boolean _outDiscret2Value = false;
-        private ObservableCollection<LogPoint> _logPositionList;
+        private readonly ObservableCollection<LogPoint> _logPositionList;
         private int _logPositionListIndex = 0;
         public class LogPoint
         {
-            public int Id = 0;
-            public double Lon = 0;
-            public double Lat = 0;
-            DateTime Datetime;
+            public UInt32 Id { get; set; }
+            public double Lon { get; set; }
+            public double Lat { get; set; }
+            public DateTime Datetime { get; set; }
+            public LogPoint(UInt32 id, double lon, double lat, DateTime dateTime)
+            {
+                this.Id = id;
+                this.Lon = lon;
+                this.Lat = lat;
+                this.Datetime = dateTime;
+            }
         }
+        private Map map;
 
         public CurrentDataViewModel()
         {
@@ -218,12 +227,14 @@ namespace TrackAndFuel.ViewModel
 
         public int LogPositionListIndex
         {
-            get => _logPositionListIndex; 
+            get => _logPositionListIndex;
             set
             {
                 _logPositionListIndex = value;
                 OnPropertyChanged();
             }
         }
+
+        public Map Map { get => map; set => map = value; }
     }
 }

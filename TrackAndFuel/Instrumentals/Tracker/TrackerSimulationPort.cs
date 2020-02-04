@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace TrackAndFuel.Instrumentals
 {
@@ -9,6 +10,10 @@ namespace TrackAndFuel.Instrumentals
         private System.Timers.Timer testStatusTimer;
         private bool _settingsIsWrited = false;
         private bool _logLoadIsEnabled = false;
+        private static UInt32 _logRecordIdCounter = 0;
+        private StructureBinaryConverter _structureConverter = new StructureBinaryConverter();
+        private static float lat = 0;
+        private static float lon = 0;
         public override bool Open(Dictionary<string, object> property, Action<List<byte>> updateDataCallback, Action disconnectCallback)
         {
             bool result = false;
@@ -31,7 +36,7 @@ namespace TrackAndFuel.Instrumentals
                     updateDataCallback.Invoke(GetPacketAboutNewSettings());
                 }
 
-                if (_logLoadIsEnabled) 
+                if (_logLoadIsEnabled)
                 {
                     updateDataCallback.Invoke(GetPacketAboutLog());
                 }
@@ -67,9 +72,9 @@ namespace TrackAndFuel.Instrumentals
                 _logLoadIsEnabled = true;
             }
 
-            if (dataHintOptional.Contains("stopTesLog"))
+            if (dataHintOptional.Contains("stopTestLog"))
             {
-                _logLoadIsEnabled = true;
+                _logLoadIsEnabled = false;
             }
 
             return result;
@@ -124,86 +129,27 @@ namespace TrackAndFuel.Instrumentals
         {
             var data = new List<byte>();
             var parser = new TrackerParserData();
-            data.Add((int)TrackerTypeData.TypePacketData.Answer);
+            data.Add((int)TrackerTypeData.TypePacketData.AsyncData);
             var logRecord = new byte[256];
+            TrackerStructureSettingsConnection record = _structureConverter.fromBytes(logRecord);
+            record.AdcAin1 = new Random().Next(0, 31);
+            record.AdcAin2 = new Random().Next(0, 31);
+            record.AdcAin3 = new Random().Next(0, 31);
+            record.AdcPowerExternal = new Random().Next(0, 31);
+            record.AdcPowerInternal = new Random().Next(0, 31);
 
-//            typedef struct __attribute__((packed)) {
-//	//Данные о записи
-//	uint32_t id;            //Номер записи
-//        struct __attribute__((packed)) {
-//		bool is_valid;
-//        uint32_t data;      /*hour/minute/sec */
-//    }
-//    time;
-//	//Событие вызвавшие попадание записи в журнал
-//	uint64_t eventHistory; // события
-//                           //Одометр
-//    uint32_t odometer; // в сотнях метров
-//                       //GPS-телеметрические данные
-//    struct __attribute__((packed)) {
-//		bool is_valid;
-//    float longtitude;
-//    float latitude;
-//    int16_t altitude; //Высота над уровнем моря
-//    uint8_t fix;
-//    uint16_t heading; //Курс
-//    uint32_t speed;
-//    uint16_t hdop;
-//    uint8_t nSat; //Количество спутников
-//}
-//gnss;
-	
-//	uint8_t gsmSignal;
+            lat += (float)0.1;
+            record.GnssLatitude = (float) (lat);
+            record.GnssLongitude = (float)(lon);
+            record.Id = _logRecordIdCounter++;
+            record.DateTimestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 
-//struct __attribute__((packed)) {
-//		struct __attribute__((packed)) {
-//			float ain1;
-//float vbat;
-//float temp;
-//float power; 
-//		} power;
-//    //
-//    sInputValue_t inputs[INPUTS_COUNT]; //Цифровые выходы (битовая маска)
-//                                        //
-//uint8_t gpout[DIGITAL_OUT_COUNT];   //Цифровые выходы (битовая маска)
-//                                    //
-//struct __attribute__((packed)) {
-//			int16_t hgeo; //Геоидальное различие — различие между земным эллипсоидом WGS 84 и уровнем моря (геоидом), «–» — уровень моря ниже эллипсоида.			
-//uint16_t pdop;
-//uint16_t vdop;			
-//		}gpsAddlData;
-    
-//		//Датчики уровня топлива   
-//    struct __attribute__((packed)) {
-//			uint8_t temperature;
-//uint16_t value;
-//uint16_t frequency;
-//		}llsInternal[LLS_INTERNAL_COUNT_MAX];
-		
-//		//Информация по машине
-//		struct __attribute__((packed)) {
-//			uint64_t engHours;  /* время работы двигателя в нормальном режиме */
-//uint16_t engRpm;
-//bool ignState;
-//		}vehicle;
-			
-//		//oneWire
-//		struct __attribute__((packed)) {
-//			uint32_t idLow;
-//uint32_t idHigh; 
-//		}driver;
-//		//Датчики температуры
-//		struct __attribute__((packed)) {
-//			int16_t value[_TEMPERATURE_SENSOR_COUNT];
-//		}temperatureSensor;
-//	}other;
-	
-//	uint8_t reserv[125];
-//uint16_t crc16;
-//bool isNotSynchronized;
-//}LogRecord_t; // 256!!!
-
-            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.LogRecord, Type = typeof(byte[]), Data = logRecord }));
+            data.AddRange(parser.addParam(new DataItemParam
+            {
+                Key = TrackerTypeData.KeyParameter.LogRecord,
+                Type = typeof(byte[]),
+                Data = _structureConverter.getBytes(record)
+            }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             return data;
         }

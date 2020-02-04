@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using TrackAndFuel.Instrumentals;
 using TrackAndFuel.ViewModel;
 
@@ -203,6 +205,20 @@ namespace TrackAndFuel.Tracker
                                         _viewModel.RightPannelModel.CurrentData.PowerExternalValue = (float)i.Data;
                                     });
                                     break;
+                                case TrackerTypeData.KeyParameter.LogRecord:
+                                    Application.Current.Dispatcher.Invoke(delegate
+                                    {
+                                        StructureBinaryConverter structureBinaryConverter = new StructureBinaryConverter();
+                                        var log = structureBinaryConverter.fromBytes((byte[])i.Data);
+                                        _viewModel.RightPannelModel.CurrentData.LogPositionList.Add(new CurrentDataViewModel.LogPoint(log.Id, log.GnssLongitude, log.GnssLatitude, DateTime.Now));
+                                        if (!DrawMap(log.GnssLatitude, log.GnssLongitude)) 
+                                        {
+                                            MessageBox.Show("It is not possible to read more than 500 items", "Information", MessageBoxButton.OK);
+                                            _viewModel.ConnectViewModel.IsLogReading = false;
+                                            _viewModel.ConnectViewModel.CommandDataBuf.Add(new ConnectPanelViewModel.CommandData("stopTestLog", new byte[0]));
+                                        }
+                                    });
+                                    break;
                             }
                         }
                     }
@@ -247,6 +263,32 @@ namespace TrackAndFuel.Tracker
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             _dataPort.WriteData("writeSettings", data.ToArray());
             _viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
+        }
+
+        private List<Tuple<double, double>> _mapList = new List<Tuple<double, double>>();
+        private bool DrawMap(double lat, double lon)
+        {
+            bool result = false;
+            LocationCollection locs = new LocationCollection();
+            if (_mapList.Count < 500)
+            {
+                _mapList.Add(new Tuple<double, double>(lat, lon));
+                _viewModel.RightPannelModel.CurrentData.Map.Children.Clear();
+                foreach (var point in _mapList)
+                {
+                    locs.Add(new Microsoft.Maps.MapControl.WPF.Location(point.Item1, point.Item2));
+
+                    MapPolyline routeLine = new MapPolyline()
+                    {
+                        Locations = locs,
+                        Stroke = new SolidColorBrush(Colors.Blue),
+                        StrokeThickness = 5
+                    };
+                    _viewModel.RightPannelModel.CurrentData.Map.Children.Add(routeLine);
+                    result = true;
+                }
+            }
+            return result;
         }
     }
 }

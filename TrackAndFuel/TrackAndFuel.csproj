@@ -77,13 +77,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Instrumentals\Crc8Calc.cs" />
-    <Compile Include="Instrumentals\DataItemParam.cs" />
-    <Compile Include="Instrumentals\TrackerDataPortAbstract.cs" />
-    <Compile Include="Instrumentals\TrackerParserData.cs" />
-    <Compile Include="Instrumentals\TrackerParserDataAbstract.cs" />
-    <Compile Include="Instrumentals\TrackerSerialPort.cs" />
-    <Compile Include="Instrumentals\TrackerSimulationPort.cs" />
-    <Compile Include="Instrumentals\TrackerTypeData.cs" />
+    <Compile Include="Instrumentals\StructureBinaryConverter.cs" />
+    <Compile Include="Instrumentals\Tracker\DataItemParam.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerDataPortAbstract.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerParserData.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerParserDataAbstract.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerSerialPort.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerSimulationPort.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsConnection.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerTypeData.cs" />
     <Compile Include="Resources\BoolInvertConverter.cs" />
     <Compile Include="Resources\BoolToColorConverter.cs" />
     <Compile Include="Resources\BoolToStringConverter.cs" />

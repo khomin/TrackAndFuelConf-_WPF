@@ -21,17 +21,18 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <ListView Grid.Row="0" Name="lvUsers" 
-                          ItemsSource="{Binding RightPannelModel.CurrentData.LogPositionList}"
+                          ItemsSource="{Binding RightPannelModel.CurrentData.LogPositionList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectedIndex="{Binding RightPannelModel.CurrentData.LogPositionListIndex, Mode=TwoWay}"
                           VerticalAlignment="Stretch">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="id" DisplayMemberBinding="{Binding Id, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
-                            <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Datetime, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
-                            <GridViewColumn Header="Position" DisplayMemberBinding="{Binding Lon, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
-                            <GridViewColumn Header="Position" DisplayMemberBinding="{Binding Lat, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
+                            <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Datetime, StringFormat='yyyy-MM-dd HH:mm:ss', Mode=OneWay}" Width="Auto"/>
+                            <GridViewColumn Header="Longitude" DisplayMemberBinding="{Binding Lon, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
+                            <GridViewColumn Header="Latitude" DisplayMemberBinding="{Binding Lat, Converter={StaticResource IntToStringConverter}}" Width="Auto"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
