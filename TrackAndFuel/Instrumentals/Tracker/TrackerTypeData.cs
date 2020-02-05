@@ -23,6 +23,7 @@ namespace TrackAndFuel.Instrumentals
             SettingsRead = 0x04,
             SettignsWrite = 0x05,
             Log = 0x06,
+            LogCleanFinish = 0x07,
             Undefined = 0xff
         }
 
@@ -66,7 +67,7 @@ namespace TrackAndFuel.Instrumentals
         {
             TypePacket = 0x00,
             TypeMessage = 0x01,
-            ParamsCount = 0x02
+            StartDataInPacket = 0x02
         }
     }
 }

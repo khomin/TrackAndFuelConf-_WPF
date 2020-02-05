@@ -97,6 +97,7 @@ namespace TrackAndFuel.Instrumentals
             var data = new List<byte>();
             var parser = new TrackerParserData();
             data.Add((int)TrackerTypeData.TypePacketData.AsyncData);
+            data.Add((int)TrackerTypeData.TypeMessage.AsyncData);
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain1, Type = typeof(float), Data = (float)new Random().NextDouble() }));
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain1, Type = typeof(float), Data = (float)new Random().NextDouble() }));
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.Ain2, Type = typeof(float), Data = (float)new Random().NextDouble() }));
@@ -120,6 +121,7 @@ namespace TrackAndFuel.Instrumentals
             var data = new List<byte>();
             var parser = new TrackerParserData();
             data.Add((int)TrackerTypeData.TypePacketData.Answer);
+            data.Add((int)TrackerTypeData.TypeMessage.SettingsRead);
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsAcknowledgement, Type = typeof(int), Data = 0 }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             return data;
@@ -130,6 +132,7 @@ namespace TrackAndFuel.Instrumentals
             var data = new List<byte>();
             var parser = new TrackerParserData();
             data.Add((int)TrackerTypeData.TypePacketData.AsyncData);
+            data.Add((int)TrackerTypeData.TypeMessage.Log);
             var logRecord = new byte[256];
             TrackerStructureSettingsConnection record = _structureConverter.fromBytes(logRecord);
             record.AdcAin1 = new Random().Next(0, 31);

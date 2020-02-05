@@ -29,6 +29,7 @@ namespace TrackAndFuel.ViewModel
         private Boolean _outDiscret2Value = false;
         private readonly ObservableCollection<LogPoint> _logPositionList;
         private int _logPositionListIndex = 0;
+        
         public class LogPoint
         {
             public UInt32 Id { get; set; }

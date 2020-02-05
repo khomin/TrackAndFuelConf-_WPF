@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static TrackAndFuel.Instrumentals.TrackerTypeData;
 
 namespace TrackAndFuel.Instrumentals
 {
@@ -13,9 +14,11 @@ namespace TrackAndFuel.Instrumentals
         {
             public TrackerTypeData.TypePacketData type;
             public List<DataItemParam> data;
-            public ParserResult(TrackerTypeData.TypePacketData _type, List<DataItemParam> _data)  {
+            public TypeMessage typeMessage;
+            public ParserResult(TrackerTypeData.TypePacketData _type, List<DataItemParam> _data, TypeMessage _typeMessage)  {
                 type = _type;
                 data = _data;
+                typeMessage = _typeMessage;
             }
         }
 

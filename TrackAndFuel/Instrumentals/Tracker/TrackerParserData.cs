@@ -25,8 +25,8 @@ namespace TrackAndFuel.Instrumentals
                 if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
                 {
                     var packet = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.TypePacket];
-                    var bodyData = ParseField(data, (int)TrackerTypeData.PacketField.TypeMessage);
-                    result = new ParserResult(packet, bodyData);
+                    var bodyData = ParseField(data, (int)TrackerTypeData.PacketField.StartDataInPacket);
+                    result = new ParserResult(packet, bodyData, (TrackerTypeData.TypeMessage)data[(int)TrackerTypeData.PacketField.TypeMessage]);
                 }
                 else
                 {
@@ -113,9 +113,8 @@ namespace TrackAndFuel.Instrumentals
                 {
                     DataItemParam dataField = new DataItemParam();
                     dataField.Key = (TrackerTypeData.KeyParameter)(int)data[beginIndex++];
-                    int len;
-                    var paramType = (TrackerTypeData.TypeParameter)(int)data[beginIndex];
-                    beginIndex += 1;
+                    int len = 0;
+                    var paramType = (TrackerTypeData.TypeParameter)(int)data[beginIndex++];
                     switch (paramType)
                     {
                         case TrackerTypeData.TypeParameter.ParamTypeInt:

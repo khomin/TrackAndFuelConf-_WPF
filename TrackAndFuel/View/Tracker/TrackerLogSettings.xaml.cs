@@ -53,6 +53,7 @@ namespace TrackAndFuel.Tracker
         {
             if (MessageBox.Show("All log data in tracker will lose, are you sure?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
+                viewModel.ConnectViewModel.IsWaitsForLogClear = true;
                 // TODO: log cleaning   
             }
         }

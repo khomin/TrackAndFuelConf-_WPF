@@ -46,7 +46,9 @@
                             Click="StartCancelLogRead_Click"
                             Grid.Column="0" Style="{StaticResource ButtonStyleMarging}"/>
                     <Button Content="Clear log" 
-                            Grid.Column="1" Style="{StaticResource ButtonStyleMarging}" Click="ClearLogClick"/>
+                            Grid.Column="1" Style="{StaticResource ButtonStyleMarging}" 
+                            IsEnabled="{Binding ConnectViewModel.IsWaitsForLogClear, Converter={StaticResource BoolInvertConverter}}"
+                            Click="ClearLogClick"/>
                 </Grid>
             </Grid>
 
@@ -54,7 +56,7 @@
                    Grid.Column="1" VerticalAlignment="Stretch" 
                        CredentialsProvider="AgMT8wAJD7dJkiyzhEvL6W4xGpBk1JkZb0sZjncZwMo2IDMQKpC1omr8gpBeseya"  
                        Center="{Binding RightPannelModel.CurrentData.GnssPositionAsString}" 
-                   ZoomLevel="12"
+                   ZoomLevel="12">
             </m:Map>
         </Grid>
     </GroupBox>

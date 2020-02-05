@@ -30,13 +30,13 @@ namespace TrackAndFuel.Tracker
             handleRequestTimer.Enabled = true;
             handleRequestTimer.Elapsed += (sourse, evendt) =>
             {
-                if (_viewModel.ConnectViewModel.CommandDataBuf.Count != 0) 
+                if (_viewModel.ConnectViewModel.CommandDataBuf.Count != 0)
                 {
                     var index = _viewModel.ConnectViewModel.CommandDataBuf.Count - 1;
                     ConnectPanelViewModel.CommandData i = _viewModel.ConnectViewModel.CommandDataBuf[index];
-                    if (_dataPort != null) 
+                    if (_dataPort != null)
                     {
-                        if (_dataPort.WriteData(i.key, i.data)) 
+                        if (_dataPort.WriteData(i.key, i.data))
                         {
                             _viewModel.ConnectViewModel.CommandDataBuf.RemoveAt(index);
                         }
@@ -130,97 +130,35 @@ namespace TrackAndFuel.Tracker
                 {
                     if (result.type == TrackerTypeData.TypePacketData.AsyncData)
                     {
-                        foreach (var i in result.data)
+                        switch (result.typeMessage)
                         {
-
-                            switch (i.Key)
-                            {
-                                case TrackerTypeData.KeyParameter.DbgLevel:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.StatusInfo.Log.Add(item: new StatusDataViewModel.LogItem { Message = i.Data.ToString(), Type = i.Key });
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.DbgMessage:
-                                    break;
-                                case TrackerTypeData.KeyParameter.imei:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.ImeiModemValue = i.Data.ToString();
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.imsi:
-                                    break;
-                                case TrackerTypeData.KeyParameter.GsmCsq:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.GmsSignalStrenghtPercentValue = (int)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.GnssLat:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.GnssLatValue = (float)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.GnssLon:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.GnssLonValue = (float)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.GnssSat:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.GnssSatFixValue = (int)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.Ain1:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.Ain1Value = (float)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.Ain2:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.Ain2Value = (float)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.Ain3:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.Ain3Value = (float)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.PowerBat:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.PowerBatteryValue = (float)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.PowerExt:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        _viewModel.RightPannelModel.CurrentData.PowerExternalValue = (float)i.Data;
-                                    });
-                                    break;
-                                case TrackerTypeData.KeyParameter.LogRecord:
-                                    Application.Current.Dispatcher.Invoke(delegate
-                                    {
-                                        StructureBinaryConverter structureBinaryConverter = new StructureBinaryConverter();
-                                        var log = structureBinaryConverter.fromBytes((byte[])i.Data);
-                                        _viewModel.RightPannelModel.CurrentData.LogPositionList.Add(new CurrentDataViewModel.LogPoint(log.Id, log.GnssLongitude, log.GnssLatitude, DateTime.Now));
-                                        if (!DrawMap(log.GnssLatitude, log.GnssLongitude)) 
-                                        {
-                                            MessageBox.Show("It is not possible to read more than 500 items", "Information", MessageBoxButton.OK);
-                                            _viewModel.ConnectViewModel.IsLogReading = false;
-                                            _viewModel.ConnectViewModel.CommandDataBuf.Add(new ConnectPanelViewModel.CommandData("stopTestLog", new byte[0]));
-                                        }
-                                    });
-                                    break;
-                            }
+                            case TrackerTypeData.TypeMessage.Debug:
+                            case TrackerTypeData.TypeMessage.Status:
+                            case TrackerTypeData.TypeMessage.Data:
+                            case TrackerTypeData.TypeMessage.AsyncData:
+                            case TrackerTypeData.TypeMessage.Log:
+                                ParseDataToViewModel(result.data);
+                                break;
+                            case TrackerTypeData.TypeMessage.SettingsRead:
+                                break;
+                            case TrackerTypeData.TypeMessage.SettignsWrite:
+                                break;
+                            case TrackerTypeData.TypeMessage.LogCleanFinish:
+                                _viewModel.ConnectViewModel.IsWaitsForLogClear = false;
+                                MessageBox.Show("The log has been cleared",
+                                    "Ok",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Information
+                                );
+                                break;
+                            case TrackerTypeData.TypeMessage.Undefined:
+                                throw new InvalidOperationException("Invalid type");
+                                break;
                         }
+                    }
+                    else
+                    {
+                        throw new System.InvalidOperationException("Undefined type of key");
                     }
                 }
             }
@@ -229,6 +167,102 @@ namespace TrackAndFuel.Tracker
                 Console.WriteLine("Parser data error");
             }
         }
+
+        private void ParseDataToViewModel(List<DataItemParam> data)
+        {
+            foreach (var i in data)
+            {
+
+                switch (i.Key)
+                {
+                    case TrackerTypeData.KeyParameter.DbgLevel:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.StatusInfo.Log.Add(item: new StatusDataViewModel.LogItem { Message = i.Data.ToString(), Type = i.Key });
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.DbgMessage:
+                        break;
+                    case TrackerTypeData.KeyParameter.imei:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.ImeiModemValue = i.Data.ToString();
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.imsi:
+                        break;
+                    case TrackerTypeData.KeyParameter.GsmCsq:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.GmsSignalStrenghtPercentValue = (int)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.GnssLat:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.GnssLatValue = (float)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.GnssLon:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.GnssLonValue = (float)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.GnssSat:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.GnssSatFixValue = (int)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.Ain1:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.Ain1Value = (float)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.Ain2:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.Ain2Value = (float)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.Ain3:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.Ain3Value = (float)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.PowerBat:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.PowerBatteryValue = (float)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.PowerExt:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            _viewModel.RightPannelModel.CurrentData.PowerExternalValue = (float)i.Data;
+                        });
+                        break;
+                    case TrackerTypeData.KeyParameter.LogRecord:
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            StructureBinaryConverter structureBinaryConverter = new StructureBinaryConverter();
+                            var log = structureBinaryConverter.fromBytes((byte[])i.Data);
+                            _viewModel.RightPannelModel.CurrentData.LogPositionList.Add(new CurrentDataViewModel.LogPoint(log.Id, log.GnssLongitude, log.GnssLatitude, DateTime.Now));
+                            if (!DrawMap(log.GnssLatitude, log.GnssLongitude))
+                            {
+                                MessageBox.Show("It is not possible to read more than 500 items", "Information", MessageBoxButton.OK);
+                                _viewModel.ConnectViewModel.IsLogReading = false;
+                                _viewModel.ConnectViewModel.CommandDataBuf.Add(new ConnectPanelViewModel.CommandData("stopTestLog", new byte[0]));
+                            }
+                        });
+                        break;
+                }
+            }
+        }
+
         private void TrackerConnectPannel_disconnectEvent(object sender, EventArgs e)
         {
             _dataPort.Close();

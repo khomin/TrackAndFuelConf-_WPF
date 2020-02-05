@@ -22,6 +22,7 @@ namespace TrackAndFuel.ViewModel
         private bool _isReadyReadWriteSettings = false;
         private bool _isLogReading = false;
         private readonly List<CommandData> _commandDataBuf;
+        private bool _isWaitsForLogClear = false;
         public class CommandData
         {
             public string key;
@@ -166,5 +167,15 @@ namespace TrackAndFuel.ViewModel
         }
 
         public List<CommandData> CommandDataBuf => _commandDataBuf;
+
+        public bool IsWaitsForLogClear
+        {
+            get => _isWaitsForLogClear;
+            set
+            {
+                _isWaitsForLogClear = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }
