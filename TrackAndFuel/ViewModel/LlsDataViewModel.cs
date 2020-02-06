@@ -2,13 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TrackAndFuel.ViewModel
 {
-    public class LlsDataViewModel : ViewModelBase
+    public class LlsDataViewModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
         private readonly ObservableCollection<string> _tempCompensationMode;
         private TemperatureCompenstationModeType _tempCompenstationModeIndex = TemperatureCompenstationModeType.Off;
@@ -24,10 +26,10 @@ namespace TrackAndFuel.ViewModel
             UserMode
         };
 
-        private float _tempCompensationCoef1 = 12.34f;
-        private float _tempCompensationCoef2 = 01.98f;
-        private int _minLevel = 100;
-        private int _maxLevel = 200;
+        private string _tempCompensationCoef1 = "12.34";
+        private string _tempCompensationCoef2 = "01.98";
+        private string _minLevel = "100";
+        private string _maxLevel = "200";
         private bool _typeOutMessageIsRelativeLevel = false;
         private readonly ObservableCollection<string> _typeOfInterpolation;
         private InterpolationType _typeOfInterpolationIndex = InterpolationType.Lineally;
@@ -48,20 +50,20 @@ namespace TrackAndFuel.ViewModel
             Adaptive
         };
 
-        private int _filtrationAveragingTime = 10;
-        private int _filtrationLenghtOfMedian = 2;
-        private int _filtrationProcessNoiseCovarianceQ = 3;
-        private int _filtrationMeasurementNoiseCovarianceR = 4;
+        private string _filtrationAveragingTime = "10";
+        private string _filtrationLenghtOfMedian = "2";
+        private string _filtrationProcessNoiseCovarianceQ = "3";
+        private string _filtrationMeasurementNoiseCovarianceR = "4";
 
         private bool _errorMinLimitLessThan10Percent = false;
         private bool _errorMaxLimitIsExceededBy10Percent = false;
         private bool _measuringOscillatorFrequency0Hz = false;
 
         private bool _sensorIsOffline = true;
-        private int _sensorCntValue = 444;
-        private int _sensorLevelVolume = 333;
-        private int _sensorFrequency = 555;
-        private int _sensorLevelInPercent = 80;
+        private string _sensorCntValue = "444";
+        private string _sensorLevelVolume = "333";
+        private string _sensorFrequency = "555";
+        private string _sensorLevelInPercent = "80";
 
         public class CalibrateTable : ViewModelBase
         {
@@ -76,20 +78,13 @@ namespace TrackAndFuel.ViewModel
 
             public int Value
             {
-                get => _value; set
-                {
-                    _value = value;
-                    OnPropertyChanged();
-                }
+                get => _value;
+                set => Set(ref _value, value);
             }
             public int Level
             {
                 get => _level;
-                set
-                {
-                    _level = value;
-                    OnPropertyChanged();
-                }
+                set => Set(ref _level, value);
             }
         }
 
@@ -126,47 +121,32 @@ namespace TrackAndFuel.ViewModel
         public ObservableCollection<string> TempCompensationMode { get => _tempCompensationMode; }
         public int TempCompenstationModeIndex
         {
-            get => (int)_tempCompenstationModeIndex; set
+            get => (int)_tempCompenstationModeIndex; 
+            set
             {
                 _tempCompenstationModeIndex = (TemperatureCompenstationModeType)value;
                 OnPropertyChanged();
             }
         }
-        public float TempCompensationCoef1
+        public string TempCompensationCoef1
         {
             get => _tempCompensationCoef1;
-            set
-            {
-                _tempCompensationCoef1 = value;
-                OnPropertyChanged();
-            }
+            set => this.Set(ref this._tempCompensationCoef1, value);
         }
-        public float TempCompensationCoef2
+        public string TempCompensationCoef2
         {
             get => _tempCompensationCoef2;
-            set
-            {
-                _tempCompensationCoef2 = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _tempCompensationCoef2, value);
         }
-        public int MinLevel
+        public string MinLevel
         {
             get => _minLevel;
-            set
-            {
-                _minLevel = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _minLevel, value);
         }
-        public int MaxLevel
+        public string MaxLevel
         {
             get => _maxLevel;
-            set
-            {
-                _maxLevel = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _maxLevel, value);
         }
         public bool TypeOutMessageIsRelativeLevel
         {
@@ -197,41 +177,25 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
-        public int FiltrationAveragingTime
+        public string FiltrationAveragingTime
         {
             get => _filtrationAveragingTime;
-            set
-            {
-                _filtrationAveragingTime = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _filtrationAveragingTime, value);
         }
-        public int FiltrationLenghtOfMedian
+        public string FiltrationLenghtOfMedian
         {
             get => _filtrationLenghtOfMedian;
-            set
-            {
-                _filtrationLenghtOfMedian = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _filtrationLenghtOfMedian, value);
         }
-        public int FiltrationProcessNoiseCovarianceQ
+        public string FiltrationProcessNoiseCovarianceQ
         {
             get => _filtrationProcessNoiseCovarianceQ;
-            set
-            {
-                _filtrationProcessNoiseCovarianceQ = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _filtrationProcessNoiseCovarianceQ, value);
         }
-        public int FiltrationMeasurementNoiseCovarianceR
+        public string FiltrationMeasurementNoiseCovarianceR
         {
             get => _filtrationMeasurementNoiseCovarianceR;
-            set
-            {
-                _filtrationMeasurementNoiseCovarianceR = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _filtrationMeasurementNoiseCovarianceR, value);
         }
 
         public bool ErrorMinLimitLessThan10Percent
@@ -271,16 +235,12 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
-        public int SensorCntValue
+        public string SensorCntValue
         {
             get => _sensorCntValue;
-            set
-            {
-                _sensorCntValue = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _sensorCntValue, value);
         }
-        public int SensorLevelVolume
+        public string SensorLevelVolume
         {
             get => _sensorLevelVolume;
             set
@@ -289,7 +249,7 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
-        public int SensorFrequency
+        public string SensorFrequency
         {
             get => _sensorFrequency;
             set
@@ -298,7 +258,7 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
-        public int SensorLevelInPercent
+        public string SensorLevelInPercent
         {
             get => _sensorLevelInPercent;
             set
@@ -319,5 +279,81 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public string Error => throw new NotImplementedException();
+
+        /**/
+        /* validation */
+        /**/
+        Regex regexFloat = new Regex("^[0-9]*(?:\\.[0-9]*)?$");
+        Regex regexMinLelel = new Regex("^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|10[01][0-9]|102[0-3])$");
+        Regex regexMaxLevel = new Regex("^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-3][0-9]{3}|40[0-8][0-9]|409[0-5])$");
+        Regex regexAveragingTime = new Regex("^([0-9]|1[0-9]|2[01])$");
+        Regex regexFiltrationAveragingTime = new Regex("^([0-7])$");
+        
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == nameof(TempCompensationCoef1))
+                {
+                    if ((!regexFloat.IsMatch(this.TempCompensationCoef1)) || (this.TempCompensationCoef1.Length == 0))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                if (columnName == nameof(TempCompensationCoef2))
+                {
+                    if ((!regexFloat.IsMatch(this.TempCompensationCoef2)) || (this.TempCompensationCoef2.Length == 0))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                if (columnName == nameof(MinLevel))
+                {
+                    if (!regexMinLelel.IsMatch(this.MinLevel))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                if (columnName == nameof(MaxLevel))
+                {
+                    if (!regexMaxLevel.IsMatch(this.MaxLevel))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                if (columnName == nameof(FiltrationAveragingTime))
+                {
+                    if (!regexAveragingTime.IsMatch(this.FiltrationAveragingTime))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                if (columnName == nameof(FiltrationLenghtOfMedian))
+                {
+                    if (!regexFiltrationAveragingTime.IsMatch(this.FiltrationLenghtOfMedian))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                if (columnName == nameof(FiltrationProcessNoiseCovarianceQ))
+                {
+                    if ((!regexFloat.IsMatch(this.FiltrationProcessNoiseCovarianceQ)) || (this.FiltrationProcessNoiseCovarianceQ.Length == 0))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                if (columnName == nameof(FiltrationMeasurementNoiseCovarianceR))
+                {
+                    if ((!regexFloat.IsMatch(this.FiltrationMeasurementNoiseCovarianceR)) || (this.FiltrationMeasurementNoiseCovarianceR.Length == 0))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                return null;
+            }
+        }
+        public void Dispose() { }
     }
 }

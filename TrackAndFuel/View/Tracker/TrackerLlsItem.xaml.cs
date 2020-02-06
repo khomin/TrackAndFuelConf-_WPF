@@ -21,7 +21,7 @@ namespace TrackAndFuel.Tracker
 
         private void ChangeLLsLevelMinMax(object sender, RoutedEventArgs e)
         {
-            LlsChangeLevelDialog dialog = new LlsChangeLevelDialog(viewModel.MinLevel, viewModel.MaxLevel);
+            LlsChangeLevelDialog dialog = new LlsChangeLevelDialog(int.Parse(viewModel.MinLevel), int.Parse(viewModel.MaxLevel));
             var ownerContent = (FrameworkElement)Content;
             var contentPoints = ownerContent.PointToScreen(new Point(0, 0));
             dialog.Top = ownerContent.ActualHeight / 2;
@@ -29,8 +29,8 @@ namespace TrackAndFuel.Tracker
             var result = dialog.ShowDialog();
             if (result == true)
             {
-                viewModel.MaxLevel = dialog.GetMaxLevel();
-                viewModel.MinLevel = dialog.GetMinLevel();
+                viewModel.MaxLevel = dialog.GetMaxLevel().ToString();
+                viewModel.MinLevel = dialog.GetMinLevel().ToString();
             }
         }
 
