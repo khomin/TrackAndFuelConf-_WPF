@@ -1,12 +1,15 @@
-﻿using System;
+﻿using MetroDemo.Core;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TrackAndFuel.ViewModel
 {
-    public class OneWireItemModel : ViewModelBase
+    public class OneWireItemModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
         private bool _isEnable = false;
         private string _hexCode = "";
@@ -56,5 +59,35 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
+        /**/
+        /* validation */
+        /**/
+        Regex regexOneWireName = new Regex("^([a-fA-Z]|[0-9]){16}$");
+        Regex regexSensorName = new Regex("^[0-9-A-Z-a-z]{1,16}$");
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == nameof(HexCode))
+                {
+                    if (!regexOneWireName.IsMatch(this.HexCode))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+
+                if (columnName == nameof(SensorName))
+                {
+                    if (!regexSensorName.IsMatch(this.SensorName))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                return null;
+            }
+        }
+        public void Dispose() { }
+        public string Error => string.Empty;
     }
 }

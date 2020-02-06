@@ -1,15 +1,18 @@
-﻿using System;
+﻿using MetroDemo.Core;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TrackAndFuel.ViewModel
 {
-    public class SettingsConnectionViewModel : ViewModelBase
+    public class SettingsConnectionViewModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
-        private string _ipDnsAddress = "лкщюыё.ру";
+        private string _ipDnsAddress = "lkshuuuyaayooo.ru";
         private int _port = 1000;
         
         private ObservableCollection<string> _protocolType; // combox
@@ -132,5 +135,35 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        /**/
+        /* validation */
+        /**/
+        Regex regexApn = new Regex("^[a-z0-9!#$%&'()*+,.\\/:;<=>?@\\[\\] ^_`{|}~-]{1,32}$");
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == nameof(IpDnsAddress))
+                {
+                    if (!regexApn.IsMatch(this.IpDnsAddress))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+
+                if (columnName == nameof(Port))
+                {
+                    if (this.Port == 0)
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                return null;
+            }
+        }
+        public void Dispose() { }
+        public string Error => string.Empty;
     }
 }

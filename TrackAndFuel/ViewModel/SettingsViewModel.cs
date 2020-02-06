@@ -1,13 +1,16 @@
-﻿using System;
+﻿using MetroDemo.Core;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TrackAndFuel.ViewModel
 {
-    public class SettingsViewModel : ViewModelBase
+    public class SettingsViewModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
         private readonly ObservableCollection<string> _operatorsList;
         private int _operatorListIndex = 0;
@@ -16,7 +19,8 @@ namespace TrackAndFuel.ViewModel
             MTS = 0,
             Megafon = 1,
             Beeline = 2,
-            Custom = 3
+            Tele2 = 3,
+            Custom = 4
         };
 
         private string _apn = "gdata";
@@ -75,6 +79,8 @@ namespace TrackAndFuel.ViewModel
         private bool _enableSmsSubscribing_1 = false;
         private bool _allowSmsControl_0 = false;
         private bool _allowSmsControl_1 = false;
+        private string _phoneNumber1 = "79032664165";
+        private string _phoneNumber2 = "79032664165";
         private readonly ObservableCollection<String> _sensorActivation_0_phone_0;
         private int _sensorActivation_0_phone_0_index = 0;
         private readonly ObservableCollection<String> _sensorActivation_0_phone_1;
@@ -123,8 +129,6 @@ namespace TrackAndFuel.ViewModel
             _serversConnectionModel = new ObservableCollection<SettingsConnectionViewModel>();
             _serversConnectionModel.Add(new SettingsConnectionViewModel());
             _serversConnectionModel.Add(new SettingsConnectionViewModel());
-            _serversConnectionModel[0].IpDnsAddress = "лкщюыё1.ру";
-            _serversConnectionModel[1].IpDnsAddress = "лкщюыё2.ру";
 
             _transmitProtocol = new ObservableCollection<string>();
             _transmitProtocol.Add("Wialon");
@@ -139,19 +143,19 @@ namespace TrackAndFuel.ViewModel
             _oneWireSettingsModelList.Add(new OneWireItemModel());
             _oneWireSettingsModelList.Add(new OneWireItemModel());
             _oneWireSettingsModelList.Add(new OneWireItemModel());
-            _oneWireSettingsModelList[0].HexCode = "AABBCC1";
-            _oneWireSettingsModelList[1].HexCode = "AABBCC2";
-            _oneWireSettingsModelList[2].HexCode = "AABBCC3";
-            _oneWireSettingsModelList[3].HexCode = "AABBCC4";
+            _oneWireSettingsModelList[0].HexCode = "AABBCC1000000000";
+            _oneWireSettingsModelList[1].HexCode = "AABBCC1000000001";
+            _oneWireSettingsModelList[2].HexCode = "AABBCC1000000002";
+            _oneWireSettingsModelList[3].HexCode = "AABBCC1000000003";
             _oneWireSettingsModelList[0].SensorName = "Temp1";
             _oneWireSettingsModelList[1].SensorName = "Temp2";
             _oneWireSettingsModelList[2].SensorName = "Temp3";
             _oneWireSettingsModelList[3].SensorName = "Temp4";
 
             _inputsSettingsModelList = new ObservableCollection<InputItemSettingsModel>();
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN1", false));
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN2", false));
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN3", true));
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("LineIN1", false));
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("LineIN2", false));
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("LineIN3", true));
 
             _sensorActivation_0_phone_0 = new ObservableCollection<string>();
             _sensorActivation_0_phone_1 = new ObservableCollection<string>();
@@ -165,10 +169,10 @@ namespace TrackAndFuel.ViewModel
             _temperatureRecoveryPhone_1 = new ObservableCollection<string>();
             _sensorActivation_0_phone_0.Add("Off");
             _sensorActivation_0_phone_0.Add("Sent SMS");
-            
+
             _sensorActivation_0_phone_1.Add("Off");
             _sensorActivation_0_phone_1.Add("Sent SMS");
-            
+
             _sensorActivation_1_phone_0.Add("Off");
             _sensorActivation_1_phone_0.Add("Sent SMS");
 
@@ -205,7 +209,6 @@ namespace TrackAndFuel.ViewModel
             get => _operatorListIndex;
             set
             {
-                _operatorListIndex = value;
                 OperatorType op = (OperatorType)value;
                 switch (op)
                 {
@@ -227,6 +230,12 @@ namespace TrackAndFuel.ViewModel
                         ApnPassword = "gdata";
                         ApnIsEditable = false;
                         break;
+                    case OperatorType.Tele2:
+                        Apn = "internet.tele2.ru";
+                        ApnLogin = "";
+                        ApnPassword = "";
+                        ApnIsEditable = false;
+                        break;
                     case OperatorType.Custom:
                         Apn = "";
                         ApnLogin = "";
@@ -234,7 +243,7 @@ namespace TrackAndFuel.ViewModel
                         ApnIsEditable = true;
                         break;
                 }
-                OnPropertyChanged();
+                this.Set(ref this._operatorListIndex, value);
             }
         }
 
@@ -244,8 +253,7 @@ namespace TrackAndFuel.ViewModel
             get => _apnLogin;
             set
             {
-                _apnLogin = value;
-                OnPropertyChanged();
+                this.Set(ref this._apnLogin, value);
             }
         }
 
@@ -254,8 +262,7 @@ namespace TrackAndFuel.ViewModel
             get => _apnPassword;
             set
             {
-                _apnPassword = value;
-                OnPropertyChanged();
+                this.Set(ref this._apnPassword, value);
             }
         }
         public string ApnPinCode
@@ -263,8 +270,7 @@ namespace TrackAndFuel.ViewModel
             get => _apnPinCode;
             set
             {
-                _apnPinCode = value;
-                OnPropertyChanged();
+                this.Set(ref this._apnPinCode, value);
             }
         }
 
@@ -273,8 +279,7 @@ namespace TrackAndFuel.ViewModel
             get => _apn;
             set
             {
-                _apn = value;
-                OnPropertyChanged();
+                this.Set(ref this._apn, value);
             }
         }
 
@@ -283,8 +288,7 @@ namespace TrackAndFuel.ViewModel
             get => _apnIsEditable;
             set
             {
-                _apnIsEditable = value;
-                OnPropertyChanged();
+                this.Set(ref this._apnIsEditable, value);
             }
         }
 
@@ -294,8 +298,7 @@ namespace TrackAndFuel.ViewModel
             get => _serverConnectionListIndex;
             set
             {
-                _serverConnectionListIndex = value;
-                OnPropertyChanged();
+                this.Set(ref this._serverConnectionListIndex, value);
             }
         }
 
@@ -304,8 +307,7 @@ namespace TrackAndFuel.ViewModel
             get => _transmitProtocol;
             set
             {
-                _transmitProtocol = value;
-                OnPropertyChanged();
+                this.Set(ref this._transmitProtocol, value);
             }
         }
         public int TransmitProtocolIndex
@@ -313,8 +315,7 @@ namespace TrackAndFuel.ViewModel
             get => _transmitProtocolIndex;
             set
             {
-                _transmitProtocolIndex = value;
-                OnPropertyChanged();
+                this.Set(ref this._transmitProtocolIndex, value);
             }
         }
         public bool ProtocolMsgTypeEventType
@@ -322,8 +323,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeEventType;
             set
             {
-                _protocolMsgTypeEventType = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeEventType, value);
             }
         }
         public bool ProtocolMsgTypeOdometer
@@ -331,8 +331,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeOdometer;
             set
             {
-                _protocolMsgTypeOdometer = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeOdometer, value);
             }
         }
         public bool ProtocolMsgTypeGsmStreng
@@ -340,8 +339,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeGsmStreng;
             set
             {
-                _protocolMsgTypeGsmStreng = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeGsmStreng, value);
             }
         }
         public bool ProtocolMsgTypeTemperature
@@ -349,8 +347,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeTemperature;
             set
             {
-                _protocolMsgTypeTemperature = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeTemperature, value);
             }
         }
         public bool ProtocolMsgTypeEngHours
@@ -358,8 +355,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeEngHours;
             set
             {
-                _protocolMsgTypeEngHours = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeEngHours, value);
             }
         }
         public bool ProtocolMsgTypeIgnState
@@ -367,8 +363,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeIgnState;
             set
             {
-                _protocolMsgTypeIgnState = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeIgnState, value);
             }
         }
         public bool ProtocolMsgTypeLatitude1
@@ -376,8 +371,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeLatitude;
             set
             {
-                _protocolMsgTypeLatitude = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeLatitude, value);
             }
         }
         public bool ProtocolMsgTypeLongitude1
@@ -385,8 +379,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeLongitude;
             set
             {
-                _protocolMsgTypeLongitude = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeLongitude, value);
             }
         }
         public bool ProtocolMsgTypeFix1
@@ -394,8 +387,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeFix;
             set
             {
-                _protocolMsgTypeFix = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeFix, value);
             }
         }
         public bool ProtocolMsgTypeAltitude1
@@ -403,8 +395,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeAltitude;
             set
             {
-                _protocolMsgTypeAltitude = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeAltitude, value);
             }
         }
         public bool ProtocolMsgTypeHeading1
@@ -412,8 +403,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeHeading;
             set
             {
-                _protocolMsgTypeHeading = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeHeading, value);
             }
         }
         public bool ProtocolMsgTypeSpeed1
@@ -421,8 +411,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeSpeed;
             set
             {
-                _protocolMsgTypeSpeed = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeSpeed, value);
             }
         }
         public bool ProtocolMsgTypeHdop1
@@ -430,8 +419,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeHdop;
             set
             {
-                _protocolMsgTypeHdop = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeHdop, value);
             }
         }
         public bool ProtocolMsgTypeSatsCount1
@@ -439,8 +427,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeSatsCount;
             set
             {
-                _protocolMsgTypeSatsCount = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeSatsCount, value);
             }
         }
         public bool ProtocolMsgTypePowerInternal
@@ -448,8 +435,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypePowerInternal;
             set
             {
-                _protocolMsgTypePowerInternal = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypePowerInternal, value);
             }
         }
         public bool ProtocolMsgTypePowerExternal
@@ -457,8 +443,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypePowerExternal;
             set
             {
-                _protocolMsgTypePowerExternal = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypePowerExternal, value);
             }
         }
         public bool ProtocolMsgTypeDigitalOuts
@@ -466,8 +451,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeDigitalOuts;
             set
             {
-                _protocolMsgTypeDigitalOuts = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeDigitalOuts, value);
             }
         }
         public bool ProtocolMsgTypeInputs
@@ -475,8 +459,7 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeInputs;
             set
             {
-                _protocolMsgTypeInputs = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeInputs, value);
             }
         }
         public bool ProtocolMsgTypeLlsInternal
@@ -484,16 +467,14 @@ namespace TrackAndFuel.ViewModel
             get => _protocolMsgTypeLlsInternal;
             set
             {
-                _protocolMsgTypeLlsInternal = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeLlsInternal, value);
             }
         }
         public bool ProtocolMsgTypeTemperature1Wire
         {
             get => _protocolMsgTypeTemperature1Wire; set
             {
-                _protocolMsgTypeTemperature1Wire = value;
-                OnPropertyChanged();
+                this.Set(ref this._protocolMsgTypeTemperature1Wire, value);
             }
         }
 
@@ -502,8 +483,7 @@ namespace TrackAndFuel.ViewModel
             get => _typeOfIgnitionDetection;
             set
             {
-                _typeOfIgnitionDetection = value;
-                OnPropertyChanged();
+                this.Set(ref this._typeOfIgnitionDetection, value);
             }
         }
         public int TypeOfIgnitionDetectionIndex
@@ -511,8 +491,7 @@ namespace TrackAndFuel.ViewModel
             get => (int)_typeOfIgnitionDetectionIndex;
             set
             {
-                _typeOfIgnitionDetectionIndex = (IgnitionDetectionType)value;
-                OnPropertyChanged();
+                this.Set(ref this._typeOfIgnitionDetectionIndex, (IgnitionDetectionType)value);
             }
         }
 
@@ -521,17 +500,15 @@ namespace TrackAndFuel.ViewModel
             get => _manualIgnitionDetectionLowValue;
             set
             {
-                _manualIgnitionDetectionLowValue = value;
-                OnPropertyChanged();
+                this.Set(ref this._manualIgnitionDetectionLowValue, value);
             }
         }
         public float ManualIgnitionDetectionHightValue
         {
             get => _manualIgnitionDetectionHightValue;
             set
-            {
-                _manualIgnitionDetectionHightValue = value;
-                OnPropertyChanged();
+            { 
+                this.Set(ref this._manualIgnitionDetectionHightValue, value);
             }
         }
 
@@ -539,8 +516,7 @@ namespace TrackAndFuel.ViewModel
         {
             get => _maxDistanceBetweenTwoPoints; set
             {
-                _maxDistanceBetweenTwoPoints = value;
-                OnPropertyChanged();
+                this.Set(ref this._maxDistanceBetweenTwoPoints, value);
             }
         }
         public int MaxDistanceAngeOfRotationBetweenTwoPoints
@@ -548,8 +524,7 @@ namespace TrackAndFuel.ViewModel
             get => _maxDistanceAngeOfRotationBetweenTwoPoints;
             set
             {
-                _maxDistanceAngeOfRotationBetweenTwoPoints = value;
-                OnPropertyChanged();
+                this.Set(ref this._maxDistanceAngeOfRotationBetweenTwoPoints, value);
             }
         }
         public int AccelerationThresholdDetermMotion
@@ -557,8 +532,7 @@ namespace TrackAndFuel.ViewModel
             get => _accelerationThresholdDetermMotion;
             set
             {
-                _accelerationThresholdDetermMotion = value;
-                OnPropertyChanged();
+                this.Set(ref this._accelerationThresholdDetermMotion, value);
             }
         }
         public int MinSpeedForDetectionMotion
@@ -566,8 +540,7 @@ namespace TrackAndFuel.ViewModel
             get => _minSpeedForDetectionMotion;
             set
             {
-                _minSpeedForDetectionMotion = value;
-                OnPropertyChanged();
+                this.Set(ref this._minSpeedForDetectionMotion, value);
             }
         }
         public int MaxSpeedForDetectionParking
@@ -575,8 +548,7 @@ namespace TrackAndFuel.ViewModel
             get => _maxSpeedForDetectionParking;
             set
             {
-                _maxSpeedForDetectionParking = value;
-                OnPropertyChanged();
+                this.Set(ref this._maxSpeedForDetectionParking, value);
             }
         }
 
@@ -589,8 +561,7 @@ namespace TrackAndFuel.ViewModel
             get => _enableSmsSubscribing_0;
             set
             {
-                _enableSmsSubscribing_0 = value;
-                OnPropertyChanged();
+                this.Set(ref this._enableSmsSubscribing_0, value);
             }
         }
         public bool EnableSmsSubscribing_1
@@ -598,8 +569,7 @@ namespace TrackAndFuel.ViewModel
             get => _enableSmsSubscribing_1;
             set
             {
-                _enableSmsSubscribing_1 = value;
-                OnPropertyChanged();
+                this.Set(ref this._enableSmsSubscribing_1, value);
             }
         }
         public bool AllowSmsControl_0
@@ -607,8 +577,7 @@ namespace TrackAndFuel.ViewModel
             get => _allowSmsControl_0;
             set
             {
-                _allowSmsControl_0 = value;
-                OnPropertyChanged();
+                this.Set(ref this._allowSmsControl_0, value);
             }
         }
         public bool AllowSmsControl_1
@@ -616,8 +585,7 @@ namespace TrackAndFuel.ViewModel
             get => _allowSmsControl_1;
             set
             {
-                _allowSmsControl_1 = value;
-                OnPropertyChanged();
+                this.Set(ref this._allowSmsControl_1, value);
             }
         }
         public ObservableCollection<string> SensorActivation_0_phone_0 => _sensorActivation_0_phone_0;
@@ -627,8 +595,7 @@ namespace TrackAndFuel.ViewModel
             get => _sensorActivation_0_phone_0_index;
             set
             {
-                _sensorActivation_0_phone_0_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._sensorActivation_0_phone_0_index, value);
             }
         }
         public ObservableCollection<string> SensorActivation_0_phone_1 => _sensorActivation_0_phone_1;
@@ -638,8 +605,7 @@ namespace TrackAndFuel.ViewModel
             get => _sensorActivation_0_phone_1_index;
             set
             {
-                _sensorActivation_0_phone_1_index = value;
-                OnPropertyChanged();
+               this.Set(ref this._sensorActivation_0_phone_1_index, value);
             }
         }
         public ObservableCollection<string> SensorActivation_1_phone_0 => _sensorActivation_1_phone_0;
@@ -649,8 +615,7 @@ namespace TrackAndFuel.ViewModel
             get => _sensorActivation_1_phone_0_index;
             set
             {
-                _sensorActivation_1_phone_0_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._sensorActivation_1_phone_0_index, value);
             }
         }
         public ObservableCollection<string> SensorActivation_1_phone_1 => _sensorActivation_1_phone_1;
@@ -660,8 +625,7 @@ namespace TrackAndFuel.ViewModel
             get => _sensorActivation_1_phone_1_index;
             set
             {
-                _sensorActivation_1_phone_1_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._sensorActivation_1_phone_1_index, value);
             }
         }
         public ObservableCollection<string> TemperatureDecreasePhone_0 => _temperatureDecreasePhone_0;
@@ -671,8 +635,7 @@ namespace TrackAndFuel.ViewModel
             get => _temperatureDecreasePhone_0_index;
             set
             {
-                _temperatureDecreasePhone_0_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._temperatureDecreasePhone_0_index, value);
             }
         }
         public ObservableCollection<string> TemperatureDecreasePhone_1 => _temperatureDecreasePhone_1;
@@ -682,8 +645,7 @@ namespace TrackAndFuel.ViewModel
             get => _temperatureDecreasePhone_1_index;
             set
             {
-                _temperatureDecreasePhone_1_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._temperatureDecreasePhone_1_index, value);
             }
         }
         public ObservableCollection<string> TemperatureIncreasePhone_0 => _temperatureIncreasePhone_0;
@@ -693,8 +655,7 @@ namespace TrackAndFuel.ViewModel
             get => _temperatureIncreasePhone_0_index;
             set
             {
-                _temperatureIncreasePhone_0_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._temperatureIncreasePhone_0_index, value);
             }
         }
         public ObservableCollection<string> TemperatureIncreasePhone_1 => _temperatureIncreasePhone_1;
@@ -704,8 +665,7 @@ namespace TrackAndFuel.ViewModel
             get => _temperatureIncreasePhone_1_index;
             set
             {
-                _temperatureIncreasePhone_1_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._temperatureIncreasePhone_1_index, value);
             }
         }
         public ObservableCollection<string> TemperatureRecoveryPhone_0 => _temperatureRecoveryPhone_0;
@@ -715,8 +675,7 @@ namespace TrackAndFuel.ViewModel
             get => _temperatureRecoveryPhone_0_index;
             set
             {
-                _temperatureRecoveryPhone_0_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._temperatureRecoveryPhone_0_index, value);
             }
         }
         public ObservableCollection<string> TemperatureRecoveryPhone_1 => _temperatureRecoveryPhone_1;
@@ -726,11 +685,84 @@ namespace TrackAndFuel.ViewModel
             get => _temperatureRecoveryPhone_1_index;
             set
             {
-                _temperatureRecoveryPhone_1_index = value;
-                OnPropertyChanged();
+                this.Set(ref this._temperatureRecoveryPhone_1_index, value);
             }
         }
 
         public ObservableCollection<LlsDataViewModel> LlsDataViewModelList => _llsDataViewModelList;
+
+        public string Error => string.Empty;
+
+        public string PhoneNumber1 { get => _phoneNumber1; set => this.Set(ref this._phoneNumber1, value); }
+        public string PhoneNumber2 { get => _phoneNumber2; set => this.Set(ref this._phoneNumber2, value); }
+
+        /**/
+        /* validation */
+        /**/
+        Regex regexApn = new Regex("^[a-z0-9!#$%&'()*+,.\\/:;<=>?@\\[\\] ^_`{|}~-]{1,32}$");
+        Regex regexPhone = new Regex(@"\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})");
+        Regex regexPinCode = new Regex("^([\\d]{4})?()$");
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == nameof(Apn))
+                {
+                    if (!regexApn.IsMatch(this.Apn))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+
+                if (columnName == nameof(ApnLogin))
+                {
+                    if (this.ApnLogin.Length != 0) 
+                    {
+                        if (!regexApn.IsMatch(this.ApnLogin))
+                        {
+                            return "Value is not valid!";
+                        }
+                    }
+                }
+
+                if (columnName == nameof(ApnPassword))
+                {
+                    if(this.ApnPassword.Length != 0)
+                    {
+                        if (!regexApn.IsMatch(this.ApnPassword))
+                        {
+                            return "Value is not valid!";
+                        }
+                    }
+                }
+
+                if (columnName == nameof(ApnPinCode))
+                {
+                    if (!regexPinCode.IsMatch(this.ApnPinCode))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+
+                if (columnName == nameof(PhoneNumber1))
+                {
+                    if (!regexPhone.IsMatch(this.PhoneNumber1))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+
+                if (columnName == nameof(PhoneNumber2))
+                {
+                    if (!regexPhone.IsMatch(this.PhoneNumber2))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                return null;
+            }
+        }
+        public void Dispose() {}
     }
 }

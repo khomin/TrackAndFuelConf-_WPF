@@ -253,9 +253,9 @@ namespace TrackAndFuel.Tracker
                             _viewModel.RightPannelModel.CurrentData.LogPositionList.Add(new CurrentDataViewModel.LogPoint(log.Id, log.GnssLongitude, log.GnssLatitude, DateTime.Now));
                             if (!DrawMap(log.GnssLatitude, log.GnssLongitude))
                             {
-                                MessageBox.Show("It is not possible to read more than 500 items", "Information", MessageBoxButton.OK);
                                 _viewModel.ConnectViewModel.IsLogReading = false;
                                 _viewModel.ConnectViewModel.CommandDataBuf.Add(new ConnectPanelViewModel.CommandData("stopTestLog", new byte[0]));
+                                MessageBox.Show("It is not possible to read more than 500 items", "Information", MessageBoxButton.OK);
                             }
                         });
                         break;

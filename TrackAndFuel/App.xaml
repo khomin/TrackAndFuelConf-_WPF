@@ -5,6 +5,7 @@
             xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
             xmlns:Resourse="clr-namespace:TrackAndFuel.Resources"
+            xmlns:clr="clr-namespace:System;assembly=mscorlib"
             StartupUri="./View/Main.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -33,11 +34,17 @@
                 </ObjectAnimationUsingKeyFrames>
             </Storyboard>
 
+            <!---->
+            <!--import viewmodels -->
+            <!---->
             <Models:MainViewModel x:Key="MainViewModel" />
             <Models:LlsDataViewModel x:Key="LlsDataViewModel" />
             <Models:LlsCalibrateTableAddLevelViewModel x:Key="LlsCalibrateTableAddLevelViewModel"/>
             <Models:LlsCalibrateTableGenerateViewModel x:Key="LlsCalibrateTableGenerateViewModel"/>
 
+            <!---->
+            <!--import static classes -->
+            <!---->
             <Resourse:BoolInvertionConverter x:Key="BoolInvertConverter"/>
             <Resourse:ListToStringConverter x:Key="ListToStringConverter"/>
             <Resourse:IntToStringConverter x:Key="IntToStringConverter"/>
@@ -46,27 +53,35 @@
             <Resourse:StatusBarColorConverter x:Key="StatusBarColorConverter"/>
             <Resourse:BoolToStringConverter x:Key="BoolToStringConverter"/>
 
-            <Style x:Key="GridStyleMarging" TargetType="Grid">
+            <!---->
+            <!--validators-->
+            <!---->
+            <clr:String x:Key="ApnValidator">^[\w]{1,32}$</clr:String>
+            
+            <!---->
+            <!--styles-->
+            <!---->
+            <Style x:Key="GridStyleMarging" TargetType="{x:Type Grid}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="SliderStyleMarging" TargetType="Slider">
+            <Style x:Key="SliderStyleMarging" TargetType="{x:Type Slider}" BasedOn="{StaticResource  MetroSlider}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="TextBlockStyleMarging" TargetType="TextBlock">
+            <Style x:Key="TextBlockStyleMarging" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource  MetroTextBlock}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="ComboBoxStyleMarging" TargetType="ComboBox">
+            <Style x:Key="ComboBoxStyleMarging" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource  MetroComboBox}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="TextBoxStyleMarging" TargetType="TextBox">
+            <Style x:Key="TextBoxStyleMarging" TargetType="{x:Type TextBox}" BasedOn="{StaticResource  MetroTextBox}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="CheckBoxStyleMarging" TargetType="CheckBox">
+            <Style x:Key="CheckBoxStyleMarging" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource  MetroCheckBox}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
@@ -74,27 +89,27 @@
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="RadioStyleMarging" TargetType="RadioButton">
+            <Style x:Key="RadioStyleMarging" TargetType="{x:Type RadioButton}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="BorderStyleMarging" TargetType="Border">
+            <Style x:Key="BorderStyleMarging" TargetType="{x:Type Border}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="ButtonStyleMarging" TargetType="Button" BasedOn="{StaticResource MetroFlatButton}">
+            <Style x:Key="ButtonStyleMarging" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroFlatButton}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+            <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
                 <Setter Property="Background" Value="Transparent"/>
             </Style>
 
-            <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+            <Style x:Key="PasswordBoxStyle" TargetType="{x:Type PasswordBox}">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
 
-            <Style x:Key="DataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource AzureDataGrid}">
+            <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}" BasedOn="{StaticResource AzureDataGrid}">
                 <Setter Property="Margin" Value="5,0,5,0" />
             </Style>
 

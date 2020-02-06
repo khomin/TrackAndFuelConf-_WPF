@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using TrackAndFuel.ViewModel;
 
 namespace TrackAndFuel.Tracker
@@ -29,6 +30,11 @@ namespace TrackAndFuel.Tracker
                 var combox = a as ComboBox;
                 ServerItem.DataContext = viewModel.SettingsModel.ServersConnectionModel[combox.SelectedIndex];
             };
+        }
+
+        private void ApnValidateText(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = true;//!char.IsDigit(e.Text.Last()) && !e.Text.Last() == '.';
         }
     }
 }

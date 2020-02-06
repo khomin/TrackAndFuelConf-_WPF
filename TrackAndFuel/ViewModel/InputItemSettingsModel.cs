@@ -1,17 +1,20 @@
-﻿using System;
+﻿using MetroDemo.Core;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TrackAndFuel.ViewModel
 {
-    public class InputItemSettingsModel : ViewModelBase
+    public class InputItemSettingsModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
         private ObservableCollection<string> _portRoleList;
         private PortRole _portRoleIndex;
-        private string _portLineName = "";
+        private string _portLineName = "Something pin name";
         private bool _availableAsIgnitionSensor = false;
         private int _signalAnalysysTime = 250;
         private int _thresholdUpper = 0;
@@ -142,5 +145,28 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public string Error => string.Empty;
+
+        /**/
+        /* validation */
+        /**/
+        Regex regexPortName = new Regex("^[\\d-a-z-A-Z]{1,16}$");
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == nameof(PortLineName))
+                {
+                    if (!regexPortName.IsMatch(this.PortLineName))
+                    {
+                        return "Value is not valid!";
+                    }
+                }
+                return null;
+            }
+        }
+        public void Dispose() { }
     }
 }

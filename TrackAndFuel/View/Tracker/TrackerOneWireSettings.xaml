@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TrackAndFuel.Tracker"
-             xmlns:App="clr-namespace:XamlGeneratedNamespace"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local="clr-namespace:TrackAndFuel.Tracker"
              mc:Ignorable="d" Height="Auto" Width="Auto">
+
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   Width="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
@@ -61,14 +62,22 @@
                             <TextBlock Text="Alarm zone" Grid.Row="0" Grid.Column="6" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
 
                             <!--Data 1-->
-                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[0].HexCode, FallbackValue=NA}" 
+                            <AdornerDecorator Grid.Row="1" Grid.Column="0">
+                                <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[0].HexCode, FallbackValue=NA, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                     Controls:TextBoxHelper.Watermark="11 digits"
                                      IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}" 
-                                     Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                                     Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            </AdornerDecorator>
+
                             <CheckBox IsChecked="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}"
                                 Grid.Row="1" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[0].SensorName}" 
+
+                            <AdornerDecorator Grid.Row="1" Grid.Column="4">
+                                <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[0].SensorName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                     Controls:TextBoxHelper.Watermark="1-16 chars"
                                      IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}"
-                                     Grid.Row="1" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                                     Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            </AdornerDecorator>
                             <Grid Grid.Row="1" Grid.Column="6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -93,16 +102,24 @@
                                     Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                                 <TextBlock Text="°C" Grid.Column="4" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                             </Grid>
-                            
+
                             <!--Data 2-->
-                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[1].HexCode, FallbackValue=NA}" 
+                            <AdornerDecorator Grid.Row="2" Grid.Column="0">
+                                <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[1].HexCode, FallbackValue=NA, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                     Controls:TextBoxHelper.Watermark="11 digits"
                                      IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}" 
-                                     Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                                     Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            </AdornerDecorator>
+
                             <CheckBox IsChecked="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}"
                                 Grid.Row="2" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[1].SensorName}" 
+                            <AdornerDecorator Grid.Row="2" Grid.Column="4">
+                                <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[1].SensorName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                     Controls:TextBoxHelper.Watermark="1-16 chars"
                                      IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}"
-                                     Grid.Row="2" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                                     Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            </AdornerDecorator>
+
                             <Grid Grid.Row="2" Grid.Column="6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -129,14 +146,22 @@
                             </Grid>
 
                             <!--Data 3-->
-                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[2].HexCode, FallbackValue=NA}" 
+                            <AdornerDecorator Grid.Row="3" Grid.Column="0">
+                                <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[2].HexCode, FallbackValue=NA, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                     Controls:TextBoxHelper.Watermark="11 digits"
                                      IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}" 
-                                     Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                                     Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            </AdornerDecorator>
+
                             <CheckBox IsChecked="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}"
                                 Grid.Row="3" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[2].SensorName}" 
+                            <AdornerDecorator Grid.Row="3" Grid.Column="4">
+                                <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[2].SensorName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                     Controls:TextBoxHelper.Watermark="1-16 chars"
                                      IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}"
-                                     Grid.Row="3" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                                     Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            </AdornerDecorator>
+
                             <Grid Grid.Row="3" Grid.Column="6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -163,14 +188,22 @@
                             </Grid>
 
                             <!--Data 4-->
-                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[3].HexCode, FallbackValue=NA}" 
+                            <AdornerDecorator Grid.Row="4" Grid.Column="0">
+                                <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[3].HexCode, FallbackValue=NA, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                     Controls:TextBoxHelper.Watermark="11 digits"
                                      IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}" 
-                                     Grid.Row="4" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                                     Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            </AdornerDecorator>
+
                             <CheckBox IsChecked="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}"
                                 Grid.Row="4" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" VerticalAlignment="Center"/>
-                            <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[3].SensorName}" 
+                            <AdornerDecorator Grid.Row="4" Grid.Column="4">
+                                <TextBox Text="{Binding SettingsModel.OneWireSettingsModelList[3].SensorName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                     Controls:TextBoxHelper.Watermark="1-16 chars"
                                      IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}"
-                                     Grid.Row="4" Grid.Column="4" Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                                     Style="{StaticResource TextBoxStyleMarging}" VerticalAlignment="Center"/>
+                            </AdornerDecorator>
+
                             <Grid Grid.Row="4" Grid.Column="6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

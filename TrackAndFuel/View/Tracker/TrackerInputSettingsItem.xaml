@@ -24,7 +24,11 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="Line name" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
                         <TextBlock Text="Function" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBox Text="Something pin name1" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBoxStyleMarging}"/>
+
+                        <AdornerDecorator Grid.Row="1" Grid.Column="0">
+                            <TextBox Text="{Binding PortLineName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                 Style="{StaticResource TextBoxStyleMarging}" />
+                        </AdornerDecorator>
                         <ComboBox ItemsSource="{Binding PortRoleList, FallbackValue=NA}" SelectedIndex="{Binding PortRoleIndex, Mode=TwoWay}"
                             Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>
                     </Grid>

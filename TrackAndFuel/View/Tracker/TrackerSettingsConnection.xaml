@@ -22,7 +22,8 @@
                         </Grid.ColumnDefinitions>
                         <!--Ip/DNS-->
                         <TextBlock Text="IP/DNS" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBox Text="{Binding IpDnsAddress, FallbackValue=NA}" Grid.Row="0" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBox Text="{Binding IpDnsAddress, FallbackValue=NA, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" 
+                                 Grid.Row="0" Grid.Column="2" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
                     <Grid IsEnabled="{Binding ServerIsEnabled}">
                         <Grid.ColumnDefinitions>
@@ -31,7 +32,8 @@
                         </Grid.ColumnDefinitions>
                         <!--Port-->
                         <TextBlock Text="Port" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBox Text="{Binding Port, FallbackValue=NA}" Grid.Row="3" Grid.Column="1" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
+                        <TextBox Text="{Binding Port, FallbackValue=NA, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                 Grid.Row="3" Grid.Column="1" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}"/>
                     </Grid>
 
                     <Grid IsEnabled="{Binding ServerIsEnabled}">
