@@ -40,6 +40,7 @@
 
                         <AdornerDecorator Grid.Row="1" Grid.Column="2">
                             <TextBox Text="{Binding SettingsModel.PhoneNumber2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                 IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
                                  MaxLength="15" Style="{StaticResource TextBoxStyleMarging}" />
                         </AdornerDecorator>
                         <CheckBox Content="Allow" IsChecked="{Binding SettingsModel.AllowSmsControl_0}" Grid.Row="2" Grid.Column="1" Style="{StaticResource CheckBoxStyleMarging}" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"/>

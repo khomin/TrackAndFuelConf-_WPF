@@ -658,6 +658,7 @@ namespace TrackAndFuel.ViewModel
             set
             {
                 this.Set(ref this._enableSmsSubscribing_0, value);
+                ValidateSettings();
             }
         }
         public bool EnableSmsSubscribing_1
@@ -666,6 +667,7 @@ namespace TrackAndFuel.ViewModel
             set
             {
                 this.Set(ref this._enableSmsSubscribing_1, value);
+                ValidateSettings();
             }
         }
         public bool AllowSmsControl_0
@@ -879,13 +881,27 @@ namespace TrackAndFuel.ViewModel
         }
         private void ValidateSettings()
         {
-            var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1
-                && _serverConnectionIsValid2 && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1
-                && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 && _inputSettingsIsValid0
-                && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _phoneNumber1IsValid
-                && _phoneNumber2IsValid && _llsSettings1_IsValid && _llsSettings2_IsValid;
-            Console.WriteLine("ValidateSettings: " + isValid.ToString());
-            SettingsIsValid = isValid;
+            if (_enableSmsSubscribing_0 == false && _enableSmsSubscribing_1 == false)
+            {
+                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1
+                   && _serverConnectionIsValid2 && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1
+                   && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 && _inputSettingsIsValid0
+                   && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _llsSettings1_IsValid && _llsSettings2_IsValid;
+                SettingsIsValid = isValid;
+            } else if (_enableSmsSubscribing_0 == false)
+            {
+                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1 && _serverConnectionIsValid2 
+                    && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1 && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 
+                    && _inputSettingsIsValid0 && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _phoneNumber2IsValid && _llsSettings1_IsValid && _llsSettings2_IsValid; 
+                SettingsIsValid = isValid;
+            } else if (_enableSmsSubscribing_1 == false)
+            {
+                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1
+                   && _serverConnectionIsValid2 && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1
+                   && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 && _inputSettingsIsValid0
+                   && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _phoneNumber1IsValid && _llsSettings1_IsValid && _llsSettings2_IsValid;
+                SettingsIsValid = isValid;
+            }
         }
 
         public static string PrintObjectAddress(object a)

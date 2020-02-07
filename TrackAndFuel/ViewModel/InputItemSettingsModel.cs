@@ -58,6 +58,7 @@ namespace TrackAndFuel.ViewModel
             {
                 _portRoleIndex = (PortRole)value;
                 OnPropertyChanged();
+                NofifySettingsIsChanged();
             }
         }
 
@@ -172,7 +173,7 @@ namespace TrackAndFuel.ViewModel
         }
         private void NofifySettingsIsChanged()
         {
-            _settingsIsChangedCallbackNotify.Invoke(_portNameIsValid);
+            _settingsIsChangedCallbackNotify.Invoke(_portRoleIndex != PortRole.notUsed ? _portNameIsValid : true);
         }
         public void Dispose() { }
     }

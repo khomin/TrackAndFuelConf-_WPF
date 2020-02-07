@@ -24,7 +24,7 @@
                         <AdornerDecorator Grid.Row="1" Grid.Column="0">
                             <TextBox Text="{Binding PortLineName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
                                      IsEnabled="{Binding PortRoleIndex}"
-                                 Style="{StaticResource TextBoxStyleMarging}" />
+                                 Style="{StaticResource TextBoxStyleMarging}"/>
                         </AdornerDecorator>
                         <ComboBox ItemsSource="{Binding PortRoleList, FallbackValue=NA}" SelectedIndex="{Binding PortRoleIndex, Mode=TwoWay}"
                             Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyleMarging}"/>

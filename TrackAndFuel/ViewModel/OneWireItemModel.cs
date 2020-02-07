@@ -34,6 +34,7 @@ namespace TrackAndFuel.ViewModel
             {
                 _isEnable = value;
                 OnPropertyChanged();
+                NofifySettingsIsChanged();
             }
         }
         public string HexCode
@@ -97,7 +98,7 @@ namespace TrackAndFuel.ViewModel
 
         private void NofifySettingsIsChanged()
         {
-            _settingsIsChangedCallbackNotify.Invoke(_hexCodeIsValid && _sensorNameIsValid);
+            _settingsIsChangedCallbackNotify.Invoke(IsEnable ? (_hexCodeIsValid && _sensorNameIsValid) : true);
         }
 
         public void Dispose() { }
