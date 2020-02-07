@@ -16,7 +16,7 @@
 
         <Image Grid.Row="0">
             <Image.Source>
-                <BitmapImage  UriSource="/Resources/images/Logo.png" />
+                <BitmapImage  UriSource="/Resources/images/logo.png" />
             </Image.Source>
         </Image>
 

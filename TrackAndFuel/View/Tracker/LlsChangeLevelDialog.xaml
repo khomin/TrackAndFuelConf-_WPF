@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TrackAndFuel.Tracker"
         Title="LlsChangeLevelDialog"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        DataContext="{StaticResource LlsDataViewModel}"
+        DataContext="{StaticResource MainViewModel}"
         SizeToContent="WidthAndHeight"
         MinHeight="100" MinWidth="100">
     <StackPanel>
