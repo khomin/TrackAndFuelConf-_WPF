@@ -34,13 +34,13 @@
 
                         <AdornerDecorator Grid.Row="1" Grid.Column="1">
                             <TextBox Text="{Binding SettingsModel.PhoneNumber1, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                 Style="{StaticResource TextBoxStyleMarging}" 
+                                 MaxLength="15" Style="{StaticResource TextBoxStyleMarging}" 
                                  IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}" />
                         </AdornerDecorator>
 
                         <AdornerDecorator Grid.Row="1" Grid.Column="2">
                             <TextBox Text="{Binding SettingsModel.PhoneNumber2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-                                 Style="{StaticResource TextBoxStyleMarging}" />
+                                 MaxLength="15" Style="{StaticResource TextBoxStyleMarging}" />
                         </AdornerDecorator>
                         <CheckBox Content="Allow" IsChecked="{Binding SettingsModel.AllowSmsControl_0}" Grid.Row="2" Grid.Column="1" Style="{StaticResource CheckBoxStyleMarging}" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"/>
                             <CheckBox Content="Allow" IsChecked="{Binding SettingsModel.AllowSmsControl_1}" Grid.Row="2" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"/>

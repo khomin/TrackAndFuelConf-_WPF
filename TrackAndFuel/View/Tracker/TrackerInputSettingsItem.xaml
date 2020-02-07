@@ -1,15 +1,11 @@
 ﻿<UserControl x:Class="TrackAndFuel.Tracker.TrackerInputSettingsItem"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TrackAndFuel.Tracker"
-             xmlns:App="clr-namespace:XamlGeneratedNamespace"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              DataContext="{StaticResource MainViewModel}"
-             mc:Ignorable="d" Height="Auto" Width="Auto">
+             Height="Auto" Width="Auto">
     <StackPanel Height="Auto" MinWidth="550" MaxWidth="800">
-        <GroupBox Header="{Binding PortLineName}" Width="Auto">
+        <GroupBox Header="{Binding PortHeader}" Width="Auto">
             <StackPanel>
                 <Grid Style="{StaticResource GridStyleMarging}">
                     <Grid>
@@ -27,6 +23,7 @@
 
                         <AdornerDecorator Grid.Row="1" Grid.Column="0">
                             <TextBox Text="{Binding PortLineName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                                     IsEnabled="{Binding PortRoleIndex}"
                                  Style="{StaticResource TextBoxStyleMarging}" />
                         </AdornerDecorator>
                         <ComboBox ItemsSource="{Binding PortRoleList, FallbackValue=NA}" SelectedIndex="{Binding PortRoleIndex, Mode=TwoWay}"

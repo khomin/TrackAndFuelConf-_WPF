@@ -98,8 +98,7 @@
     <Compile Include="Resources\RegexValidationRule.cs" />
     <Compile Include="Resources\StatusBarColorConverter.cs" />
     <Compile Include="ViewModel\LlsCalibrateTableGenerateViewModel.cs" />
-    <Compile Include="ViewModel\ViewModel.cs" />
-    <Compile Include="ViewModel\ConnectPannelViewModel.cs" />
+    <Compile Include="ViewModel\ConnectPanelViewModel.cs" />
     <Compile Include="ViewModel\CurrentDataViewModel.cs" />
     <Compile Include="ViewModel\InputItemSettingsModel.cs" />
     <Compile Include="ViewModel\LlsCalibrateTableAddLevelViewModel.cs" />

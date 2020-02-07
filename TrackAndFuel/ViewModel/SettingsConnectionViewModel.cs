@@ -12,9 +12,16 @@ namespace TrackAndFuel.ViewModel
 {
     public class SettingsConnectionViewModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
-        private string _ipDnsAddress = "lkshuuuyaayooo.ru";
-        private int _port = 1000;
-        
+        private Action<bool> _settingsIsChangedCallbackNotify;
+        private bool _settingsIsValid = false;
+
+        private string _ipDnsAddress = "www.lkshuuuyaayooo.ru";
+        private bool _ipDnsAddressIsValid = false;
+
+        private string _port = "1000";
+        private bool _portIsValid = false;
+
+
         private ObservableCollection<string> _protocolType; // combox
         private int _protocolTypeIndex = 0;
 
@@ -26,8 +33,9 @@ namespace TrackAndFuel.ViewModel
         private int _sendingPeriodInSleepMode = 30; // slider
         private bool _serverIsEnabled = false;
 
-        public SettingsConnectionViewModel() 
+        public SettingsConnectionViewModel(Action<bool> settingsIsChangedCallbackNotify) 
         {
+            _settingsIsChangedCallbackNotify = settingsIsChangedCallbackNotify;
             _protocolType = new ObservableCollection<string>();
             _protocolType.Add("Wialon");
 
@@ -35,16 +43,13 @@ namespace TrackAndFuel.ViewModel
             _periodOfPingShortMessage.Add("15 sec");
             _periodOfPingShortMessage.Add("60 sec");
             _periodOfPingShortMessage.Add("3 min");
+            NofifySettingsIsChanged();
         }
 
         public string IpDnsAddress
         {
             get => _ipDnsAddress; 
-            set
-            {
-                _ipDnsAddress = value;
-                OnPropertyChanged();
-            }
+            set => this.Set(ref this._ipDnsAddress, value);
         }
 
         public int DelayBeforeNextAttempConnecting
@@ -57,14 +62,10 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public int Port
+        public string Port
         {
             get => _port; 
-            set
-            {
-                _port = value;
-                OnPropertyChanged();
-            }
+            set => this.Set(ref this._port, value);
         }
 
         public ObservableCollection<string> ProtocolType => _protocolType;
@@ -139,31 +140,53 @@ namespace TrackAndFuel.ViewModel
         /**/
         /* validation */
         /**/
-        Regex regexApn = new Regex("^[a-z0-9!#$%&'()*+,.\\/:;<=>?@\\[\\] ^_`{|}~-]{1,32}$");
+        Regex regexDns = new Regex("(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})");
+        Regex regexPort = new Regex("^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$");
 
         public string this[string columnName]
         {
             get
             {
+                string resultMessage = "";
                 if (columnName == nameof(IpDnsAddress))
                 {
-                    if (!regexApn.IsMatch(this.IpDnsAddress))
+                    _ipDnsAddressIsValid = regexDns.IsMatch(this.IpDnsAddress);
+                    if (!_ipDnsAddressIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
 
                 if (columnName == nameof(Port))
                 {
-                    if (this.Port == 0)
+                    _portIsValid = regexPort.IsMatch(this.Port);
+                    if (!_portIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
-                return null;
+
+                NofifySettingsIsChanged();
+
+                return resultMessage.Length == 0 ? null : resultMessage;
             }
         }
+
+        private void NofifySettingsIsChanged() 
+        {
+            _settingsIsChangedCallbackNotify.Invoke(_ipDnsAddressIsValid && _portIsValid);
+        }
+
         public void Dispose() { }
         public string Error => string.Empty;
+
+        public bool SettingsIsValid
+        {
+            get => _settingsIsValid; set
+            {
+                _settingsIsValid = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

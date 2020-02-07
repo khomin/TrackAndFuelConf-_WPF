@@ -11,11 +11,21 @@ namespace TrackAndFuel.ViewModel
 {
     public class OneWireItemModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
+        private Action<bool> _settingsIsChangedCallbackNotify;
         private bool _isEnable = false;
         private string _hexCode = "";
+        private bool _hexCodeIsValid = false;
+
         private string _sensorName = "";
+        private bool _sensorNameIsValid = false;
+
         private int lowerAlarmZone = 0;
         private int upperAlarmZone = 0;
+
+        public OneWireItemModel(Action<bool> settingsIsChangedCallbackNotify) 
+        {
+            _settingsIsChangedCallbackNotify = settingsIsChangedCallbackNotify;
+        }
 
         public bool IsEnable
         {
@@ -29,20 +39,12 @@ namespace TrackAndFuel.ViewModel
         public string HexCode
         {
             get => _hexCode;
-            set
-            {
-                _hexCode = value;
-                OnPropertyChanged();
-            }
+            set => this.Set(ref this._hexCode, value);
         }
         public string SensorName
         {
             get => _sensorName;
-            set
-            {
-                _sensorName = value;
-                OnPropertyChanged();
-            }
+            set => this.Set(ref this._sensorName, value);
         }
 
         public int LowerAlarmZone { get => lowerAlarmZone;
@@ -69,24 +71,35 @@ namespace TrackAndFuel.ViewModel
         {
             get
             {
+                string resultMessage = "";
                 if (columnName == nameof(HexCode))
                 {
-                    if (!regexOneWireName.IsMatch(this.HexCode))
+                    _hexCodeIsValid = regexOneWireName.IsMatch(this.HexCode);
+                    if (!_hexCodeIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
 
                 if (columnName == nameof(SensorName))
                 {
-                    if (!regexSensorName.IsMatch(this.SensorName))
+                    _sensorNameIsValid = regexSensorName.IsMatch(this.SensorName);
+                    if (!_sensorNameIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
-                return null;
+
+                NofifySettingsIsChanged();
+                return resultMessage.Length == 0 ? null : resultMessage;
             }
         }
+
+        private void NofifySettingsIsChanged()
+        {
+            _settingsIsChangedCallbackNotify.Invoke(_hexCodeIsValid && _sensorNameIsValid);
+        }
+
         public void Dispose() { }
         public string Error => string.Empty;
     }

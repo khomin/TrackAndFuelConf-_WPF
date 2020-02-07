@@ -55,8 +55,8 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Password" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
                         <PasswordBox Grid.Row="3" Grid.Column="3" MinWidth="200" 
-                                     Style="{StaticResource PasswordBoxStyle}"
-                            InputScope="{Binding SettingsModel.ApnLogin, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"         
+                                     Style="{StaticResource PasswordBoxStyle}" MaxLength="16"
+                            InputScope="{Binding SettingsModel.ApnPassword, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"         
                             IsEnabled="{Binding SettingsModel.ApnIsEditable}"/>
                     </Grid>
 
@@ -66,7 +66,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Pin code" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" IsEnabled="False"/>
-                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" IsEnabled="False" 
+                        <TextBox Grid.Row="4" Grid.Column="4" MinWidth="200" Style="{StaticResource TextBoxStyleMarging}" 
                             Text="{Binding SettingsModel.ApnPinCode, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
                     </Grid>
                 </StackPanel>

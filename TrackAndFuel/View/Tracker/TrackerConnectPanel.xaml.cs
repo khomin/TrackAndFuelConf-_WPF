@@ -20,7 +20,6 @@ namespace TrackAndFuel.Tracker
 
             this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
                 viewModel = this.DataContext as MainViewModel;
-                DataContext = viewModel;
             };
         }
         private void Disconnect_Click(object sender, RoutedEventArgs e)

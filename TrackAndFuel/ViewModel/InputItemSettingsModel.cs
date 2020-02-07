@@ -1,20 +1,19 @@
 ﻿using MetroDemo.Core;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TrackAndFuel.ViewModel
 {
     public class InputItemSettingsModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
+        private Action<bool> _settingsIsChangedCallbackNotify;
         private ObservableCollection<string> _portRoleList;
         private PortRole _portRoleIndex;
-        private string _portLineName = "Something pin name";
+        private readonly string _portHeader = "";
+        private string _portName = "Something pin name";
+        private bool _portNameIsValid;
         private bool _availableAsIgnitionSensor = false;
         private int _signalAnalysysTime = 250;
         private int _thresholdUpper = 0;
@@ -37,8 +36,9 @@ namespace TrackAndFuel.ViewModel
             tachometer = 8
         };
 
-        public InputItemSettingsModel(string name, bool itCanUseAsIgnitionDetectPort)
+        public InputItemSettingsModel(string portHeader, string portName, bool itCanUseAsIgnitionDetectPort, Action<bool> settingsIsChangedCallbackNotify)
         {
+            _settingsIsChangedCallbackNotify = settingsIsChangedCallbackNotify;
             AvailableAsIgnitionSensor = itCanUseAsIgnitionDetectPort;
             PortRoleIndex = 0;
             _portRoleList = new ObservableCollection<string>();
@@ -48,7 +48,8 @@ namespace TrackAndFuel.ViewModel
             PortRoleList.Add("Frequency sensor");
             PortRoleList.Add("Voltage measurement");
             //PortRoleList.Add("Tachometer");
-            _portLineName = name;
+            _portName = portName;
+            _portHeader = portHeader;
         }
 
         public int PortRoleIndex
@@ -63,11 +64,8 @@ namespace TrackAndFuel.ViewModel
         public ObservableCollection<string> PortRoleList { get => _portRoleList; }
         public string PortLineName
         {
-            get => _portLineName; set
-            {
-                _portLineName = value;
-                OnPropertyChanged();
-            }
+            get => _portName;
+            set => this.Set(ref this._portName, value);
         }
 
         public bool AvailableAsIgnitionSensor
@@ -148,6 +146,8 @@ namespace TrackAndFuel.ViewModel
 
         public string Error => string.Empty;
 
+        public string PortHeader { get => _portHeader; }
+
         /**/
         /* validation */
         /**/
@@ -157,15 +157,22 @@ namespace TrackAndFuel.ViewModel
         {
             get
             {
+                string resultMessage = "";
                 if (columnName == nameof(PortLineName))
                 {
-                    if (!regexPortName.IsMatch(this.PortLineName))
+                    _portNameIsValid = regexPortName.IsMatch(this.PortLineName);
+                    if (!_portNameIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
-                return null;
+                NofifySettingsIsChanged();
+                return resultMessage.Length == 0 ? null : resultMessage;
             }
+        }
+        private void NofifySettingsIsChanged()
+        {
+            _settingsIsChangedCallbackNotify.Invoke(_portNameIsValid);
         }
         public void Dispose() { }
     }

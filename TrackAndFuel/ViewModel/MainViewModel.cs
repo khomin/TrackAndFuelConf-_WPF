@@ -8,13 +8,13 @@ namespace TrackAndFuel.ViewModel
     {
         private SettingsViewModel _settingsViewModel;
         private RightPannelViewModel _rightPannelViewModel;
-        private ConnectPanelViewModel _connectPannelViewModel;
+        private ConnectPanelViewModel _connectPanelViewModel;
         private Page _content;
 
         public MainViewModel()
         {
             _rightPannelViewModel = new RightPannelViewModel();
-            _connectPannelViewModel = new ConnectPanelViewModel();
+            _connectPanelViewModel = new ConnectPanelViewModel();
             _settingsViewModel = new SettingsViewModel();
         }
 
@@ -40,11 +40,11 @@ namespace TrackAndFuel.ViewModel
         {
             get
             {
-                return _connectPannelViewModel;
+                return _connectPanelViewModel;
             }
             set
             {
-                _connectPannelViewModel = value;
+                _connectPanelViewModel = value;
                 OnPropertyChanged();
             }
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace TrackAndFuel.ViewModel
 {
     public class SettingsViewModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
+        private bool _settingsIsValid = false;
         private readonly ObservableCollection<string> _operatorsList;
         private int _operatorListIndex = 0;
         enum OperatorType
@@ -24,14 +26,23 @@ namespace TrackAndFuel.ViewModel
         };
 
         private string _apn = "gdata";
+        private bool _apnIsValid = false;
+
         private string _apnLogin = "login";
+        private bool _apnLoginIsValid = false;
+
         private string _apnPassword = "default";
+        private bool _apnPasswordIsValid = false;
+
         private string _apnPinCode = "";
+        private bool _apnPinCodeIsValid = false;
+
         private bool _apnIsEditable = false;
         private ObservableCollection<string> _serversConnection;
         private int _serverConnectionListIndex = 0;
         private ObservableCollection<SettingsConnectionViewModel> _serversConnectionModel;
-
+        private bool _serverConnectionIsValid1 = false;
+        private bool _serverConnectionIsValid2 = false;
 
         private ObservableCollection<string> _transmitProtocol;  // TODO: it now wialon only
         private int _transmitProtocolIndex = 0;
@@ -79,8 +90,13 @@ namespace TrackAndFuel.ViewModel
         private bool _enableSmsSubscribing_1 = false;
         private bool _allowSmsControl_0 = false;
         private bool _allowSmsControl_1 = false;
+
         private string _phoneNumber1 = "79032664165";
+        private bool _phoneNumber1IsValid = false;
+
         private string _phoneNumber2 = "79032664165";
+        private bool _phoneNumber2IsValid = false;
+
         private readonly ObservableCollection<String> _sensorActivation_0_phone_0;
         private int _sensorActivation_0_phone_0_index = 0;
         private readonly ObservableCollection<String> _sensorActivation_0_phone_1;
@@ -108,9 +124,20 @@ namespace TrackAndFuel.ViewModel
         };
 
         private readonly ObservableCollection<OneWireItemModel> _oneWireSettingsModelList;
+        private bool _oneWireSettingsIsValid0;
+        private bool _oneWireSettingsIsValid1;
+        private bool _oneWireSettingsIsValid2;
+        private bool _oneWireSettingsIsValid3;
+
         private readonly ObservableCollection<InputItemSettingsModel> _inputsSettingsModelList;
+        private bool _inputSettingsIsValid0;
+        private bool _inputSettingsIsValid1;
+        private bool _inputSettingsIsValid2;
 
         private readonly ObservableCollection<LlsDataViewModel> _llsDataViewModelList;
+        private bool _llsSettings1_IsValid;
+        private bool _llsSettings2_IsValid;
+        string testString = "11222";
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();
@@ -126,9 +153,22 @@ namespace TrackAndFuel.ViewModel
             _serversConnection.Add("Primary");
             _serversConnection.Add("Reserv");
 
+
             _serversConnectionModel = new ObservableCollection<SettingsConnectionViewModel>();
-            _serversConnectionModel.Add(new SettingsConnectionViewModel());
-            _serversConnectionModel.Add(new SettingsConnectionViewModel());
+            _serversConnectionModel.Add(new SettingsConnectionViewModel((isValid) =>
+            {
+                _serverConnectionIsValid1 = isValid;
+                ValidateSettings();
+            }));
+            _serversConnectionModel.Add(new SettingsConnectionViewModel((isValid) =>
+            {
+                _serverConnectionIsValid2 = isValid;
+                ValidateSettings();
+            }));
+            /* Those default - true, 
+             * because the second change after focuse on */
+            _serverConnectionIsValid1 = true;
+            _serverConnectionIsValid2 = true;
 
             _transmitProtocol = new ObservableCollection<string>();
             _transmitProtocol.Add("Wialon");
@@ -139,10 +179,34 @@ namespace TrackAndFuel.ViewModel
             TypeOfIgnitionDetection.Add("IN3");
 
             _oneWireSettingsModelList = new ObservableCollection<OneWireItemModel>();
-            _oneWireSettingsModelList.Add(new OneWireItemModel());
-            _oneWireSettingsModelList.Add(new OneWireItemModel());
-            _oneWireSettingsModelList.Add(new OneWireItemModel());
-            _oneWireSettingsModelList.Add(new OneWireItemModel());
+            _oneWireSettingsModelList.Add(new OneWireItemModel((IsValid) =>
+            {
+                _oneWireSettingsIsValid0 = IsValid;
+                ValidateSettings();
+                PrintObjectAddress(testString);
+            }));
+            _oneWireSettingsModelList.Add(new OneWireItemModel((IsValid) =>
+            {
+                _oneWireSettingsIsValid1 = IsValid;
+                ValidateSettings();
+            }));
+            _oneWireSettingsModelList.Add(new OneWireItemModel((IsValid) =>
+            {
+                _oneWireSettingsIsValid2 = IsValid;
+                ValidateSettings();
+            })); ;
+            _oneWireSettingsModelList.Add(new OneWireItemModel((IsValid) =>
+            {
+                _oneWireSettingsIsValid3 = IsValid;
+                ValidateSettings();
+            }));
+            /* Those default - true, 
+             * because the second change after focuse on */
+            _oneWireSettingsIsValid0 = true;
+            _oneWireSettingsIsValid1 = true;
+            _oneWireSettingsIsValid2 = true;
+            _oneWireSettingsIsValid3 = true;
+
             _oneWireSettingsModelList[0].HexCode = "AABBCC1000000000";
             _oneWireSettingsModelList[1].HexCode = "AABBCC1000000001";
             _oneWireSettingsModelList[2].HexCode = "AABBCC1000000002";
@@ -153,9 +217,26 @@ namespace TrackAndFuel.ViewModel
             _oneWireSettingsModelList[3].SensorName = "Temp4";
 
             _inputsSettingsModelList = new ObservableCollection<InputItemSettingsModel>();
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("LineIN1", false));
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("LineIN2", false));
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("LineIN3", true));
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN1", "LineIN1", false, (isValid) =>
+            {
+                _inputSettingsIsValid0 = isValid;
+                ValidateSettings();
+            }));
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN2", "LineIN2", false, (isValid) =>
+            {
+                _inputSettingsIsValid1 = isValid;
+                ValidateSettings();
+            }));
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN3", "LineIN3", true, (isValid) =>
+            {
+                _inputSettingsIsValid2 = isValid;
+                ValidateSettings();
+            }));
+            /* Those default - true, 
+             * because the second change after focuse on */
+            _inputSettingsIsValid0 = true;
+            _inputSettingsIsValid1 = true;
+            _inputSettingsIsValid2 = true;
 
             _sensorActivation_0_phone_0 = new ObservableCollection<string>();
             _sensorActivation_0_phone_1 = new ObservableCollection<string>();
@@ -198,8 +279,22 @@ namespace TrackAndFuel.ViewModel
             _temperatureRecoveryPhone_1.Add("Sent SMS");
 
             _llsDataViewModelList = new ObservableCollection<LlsDataViewModel>();
-            _llsDataViewModelList.Add(new LlsDataViewModel());
-            _llsDataViewModelList.Add(new LlsDataViewModel());
+            _llsDataViewModelList.Add(new LlsDataViewModel((isValid) =>
+            {
+                _llsSettings1_IsValid = isValid;
+                ValidateSettings();
+                PrintObjectAddress(testString);
+            }));
+            _llsDataViewModelList.Add(new LlsDataViewModel((isValid) =>
+            {
+                _llsSettings2_IsValid = isValid;
+                ValidateSettings();
+                PrintObjectAddress(testString);
+            }));
+            /* Those default - true, 
+            * because the second change after focuse on */
+            _llsSettings1_IsValid = true;
+            _llsSettings2_IsValid = true;
         }
 
         public ObservableCollection<string> OperatorsList { get => _operatorsList; }
@@ -243,6 +338,7 @@ namespace TrackAndFuel.ViewModel
                         ApnIsEditable = true;
                         break;
                 }
+                ValidateSettings();
                 this.Set(ref this._operatorListIndex, value);
             }
         }
@@ -507,7 +603,7 @@ namespace TrackAndFuel.ViewModel
         {
             get => _manualIgnitionDetectionHightValue;
             set
-            { 
+            {
                 this.Set(ref this._manualIgnitionDetectionHightValue, value);
             }
         }
@@ -605,7 +701,7 @@ namespace TrackAndFuel.ViewModel
             get => _sensorActivation_0_phone_1_index;
             set
             {
-               this.Set(ref this._sensorActivation_0_phone_1_index, value);
+                this.Set(ref this._sensorActivation_0_phone_1_index, value);
             }
         }
         public ObservableCollection<string> SensorActivation_1_phone_0 => _sensorActivation_1_phone_0;
@@ -695,6 +791,7 @@ namespace TrackAndFuel.ViewModel
 
         public string PhoneNumber1 { get => _phoneNumber1; set => this.Set(ref this._phoneNumber1, value); }
         public string PhoneNumber2 { get => _phoneNumber2; set => this.Set(ref this._phoneNumber2, value); }
+        public bool SettingsIsValid { get => _settingsIsValid; set => this.Set(ref this._settingsIsValid, value); }
 
         /**/
         /* validation */
@@ -707,62 +804,100 @@ namespace TrackAndFuel.ViewModel
         {
             get
             {
+                string resultMessage = "";
                 if (columnName == nameof(Apn))
                 {
-                    if (!regexApn.IsMatch(this.Apn))
+                    _apnIsValid = regexApn.IsMatch(this.Apn);
+                    if (!_apnIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
 
                 if (columnName == nameof(ApnLogin))
                 {
-                    if (this.ApnLogin.Length != 0) 
+                    if (this.ApnLogin.Length != 0)
                     {
-                        if (!regexApn.IsMatch(this.ApnLogin))
+                        _apnLoginIsValid = regexApn.IsMatch(this.ApnLogin);
+                        if (!_apnLoginIsValid)
                         {
-                            return "Value is not valid!";
+                            resultMessage = "Value is not valid!";
                         }
+                    }
+                    else
+                    {
+                        _apnLoginIsValid = true;
                     }
                 }
 
                 if (columnName == nameof(ApnPassword))
                 {
-                    if(this.ApnPassword.Length != 0)
+                    if (this.ApnPassword.Length != 0)
                     {
-                        if (!regexApn.IsMatch(this.ApnPassword))
+                        _apnPasswordIsValid = regexApn.IsMatch(this.ApnPassword);
+                        if (!_apnPasswordIsValid)
                         {
-                            return "Value is not valid!";
+                            resultMessage = "Value is not valid!";
                         }
+                    }
+                    else
+                    {
+                        _apnPasswordIsValid = false;
                     }
                 }
 
                 if (columnName == nameof(ApnPinCode))
                 {
-                    if (!regexPinCode.IsMatch(this.ApnPinCode))
+                    _apnPinCodeIsValid = regexPinCode.IsMatch(this.ApnPinCode);
+                    if (!_apnPinCodeIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
 
                 if (columnName == nameof(PhoneNumber1))
                 {
-                    if (!regexPhone.IsMatch(this.PhoneNumber1))
+                    _phoneNumber1IsValid = regexPhone.IsMatch(this.PhoneNumber1);
+                    if (!_phoneNumber1IsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
 
                 if (columnName == nameof(PhoneNumber2))
                 {
-                    if (!regexPhone.IsMatch(this.PhoneNumber2))
+                    _phoneNumber2IsValid = regexPhone.IsMatch(this.PhoneNumber2);
+                    if (!_phoneNumber2IsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
-                return null;
+
+                ValidateSettings();
+                return (resultMessage.Length == 0) ? null : resultMessage;
             }
         }
-        public void Dispose() {}
+        private void ValidateSettings()
+        {
+            var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1
+                && _serverConnectionIsValid2 && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1
+                && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 && _inputSettingsIsValid0
+                && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _phoneNumber1IsValid
+                && _phoneNumber2IsValid && _llsSettings1_IsValid && _llsSettings2_IsValid;
+            Console.WriteLine("ValidateSettings: " + isValid.ToString());
+            SettingsIsValid = isValid;
+        }
+
+        public static string PrintObjectAddress(object a)
+        {
+            GCHandle handle = GCHandle.Alloc(a, GCHandleType.Pinned);
+            IntPtr pointer = GCHandle.ToIntPtr(handle);
+            string pointerDisplay = pointer.ToString();
+            handle.Free();
+            Console.WriteLine("Addr:" + pointerDisplay);
+            return pointerDisplay;
+        }
+
+        public void Dispose() { }
     }
 }

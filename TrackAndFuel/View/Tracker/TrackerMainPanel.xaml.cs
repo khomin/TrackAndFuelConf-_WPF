@@ -117,7 +117,7 @@ namespace TrackAndFuel.Tracker
                             default: break;
                         }
                     }
-                    _viewModel.ConnectViewModel.IsReadyReadWriteSettings = true;
+                    //_viewModel.ConnectViewModel.IsReadyReadWriteSettings = true;
                     Application.Current.Dispatcher.Invoke(delegate
                     {
                         MessageBox.Show("Settings have been recorded",
@@ -278,7 +278,7 @@ namespace TrackAndFuel.Tracker
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsAll, Type = typeof(int), Data = 0 }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             _dataPort.WriteData("writeSettings", data.ToArray());
-            _viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
+            //_viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
         }
 
         private void TrackerConnectPannel_saveConfigEvent(object sender, EventArgs e)
@@ -296,7 +296,7 @@ namespace TrackAndFuel.Tracker
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsTrack, Type = typeof(byte[]), Data = new byte[10] }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             _dataPort.WriteData("writeSettings", data.ToArray());
-            _viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
+            //_viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
         }
 
         private List<Tuple<double, double>> _mapList = new List<Tuple<double, double>>();

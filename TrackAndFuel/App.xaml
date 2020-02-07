@@ -38,7 +38,7 @@
             <!--import viewmodels -->
             <!---->
             <Models:MainViewModel x:Key="MainViewModel" />
-            <Models:LlsDataViewModel x:Key="LlsDataViewModel" />
+            <!--<Models:LlsDataViewModel x:Key="LlsDataViewModel" />-->
             <Models:LlsCalibrateTableAddLevelViewModel x:Key="LlsCalibrateTableAddLevelViewModel"/>
             <Models:LlsCalibrateTableGenerateViewModel x:Key="LlsCalibrateTableGenerateViewModel"/>
 

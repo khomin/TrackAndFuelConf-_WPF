@@ -62,7 +62,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Algorithm of working with telematic services" IsEnabled="{Binding ServerIsEnabled}">
+            <GroupBox Header="Algorithm of working with telematic services">
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>

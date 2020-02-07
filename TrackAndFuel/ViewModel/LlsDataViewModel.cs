@@ -12,6 +12,7 @@ namespace TrackAndFuel.ViewModel
 {
     public class LlsDataViewModel : ViewModelBase, IDataErrorInfo, IDisposable
     {
+        private Action<bool> _settingsIsChangedCallbackNotify;
         private readonly ObservableCollection<string> _tempCompensationMode;
         private TemperatureCompenstationModeType _tempCompenstationModeIndex = TemperatureCompenstationModeType.Off;
         enum TemperatureCompenstationModeType
@@ -27,9 +28,17 @@ namespace TrackAndFuel.ViewModel
         };
 
         private string _tempCompensationCoef1 = "12.34";
+        private bool _tempCompensationCoef1IsValid;
+
         private string _tempCompensationCoef2 = "01.98";
+        private bool _tempCompensationCoef2IsValid;
+
         private string _minLevel = "100";
+        private bool _minLevelIsValid;
+
         private string _maxLevel = "200";
+        private bool _maxLevelIsValid;
+
         private bool _typeOutMessageIsRelativeLevel = false;
         private readonly ObservableCollection<string> _typeOfInterpolation;
         private InterpolationType _typeOfInterpolationIndex = InterpolationType.Lineally;
@@ -51,9 +60,16 @@ namespace TrackAndFuel.ViewModel
         };
 
         private string _filtrationAveragingTime = "10";
+        private bool _filtrationAveragingTimeIsValid;
+
         private string _filtrationLenghtOfMedian = "2";
+        private bool _filtrationLenghtOfMedianIsValid;
+
         private string _filtrationProcessNoiseCovarianceQ = "3";
+        private bool _filtrationProcessNoiseCovarianceQIsValid;
+
         private string _filtrationMeasurementNoiseCovarianceR = "4";
+        private bool _filtrationMeasurementNoiseCovarianceRIsValid;
 
         private bool _errorMinLimitLessThan10Percent = false;
         private bool _errorMaxLimitIsExceededBy10Percent = false;
@@ -65,7 +81,7 @@ namespace TrackAndFuel.ViewModel
         private string _sensorFrequency = "555";
         private string _sensorLevelInPercent = "80";
 
-        public class CalibrateTable : ViewModelBase
+        public class CalibrateTable : ViewModelBase, IDataErrorInfo, IDisposable
         {
             private int _value;
             private int _level;
@@ -74,6 +90,11 @@ namespace TrackAndFuel.ViewModel
             {
                 _value = value;
                 _level  = level;
+            }
+
+            public string this[string columnName] 
+            {
+                get => null;
             }
 
             public int Value
@@ -86,13 +107,21 @@ namespace TrackAndFuel.ViewModel
                 get => _level;
                 set => Set(ref _level, value);
             }
+
+            public string Error => string.Empty;
+
+            public void Dispose()
+            {
+                
+            }
         }
 
         private readonly ObservableCollection<CalibrateTable> _calibrateTables;
         private int _calibrateTablesIndex = 0;
 
-        public LlsDataViewModel()
+        public LlsDataViewModel(Action<bool> settingsIsChangedCallbackNotify)
         {
+            _settingsIsChangedCallbackNotify = settingsIsChangedCallbackNotify;
             _tempCompensationMode = new ObservableCollection<string>();
             _tempCompensationMode.Add("Off");
             _tempCompensationMode.Add("Petrol-95");
@@ -280,7 +309,7 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public string Error => throw new NotImplementedException();
+        public string Error => string.Empty;
 
         /**/
         /* validation */
@@ -295,64 +324,81 @@ namespace TrackAndFuel.ViewModel
         {
             get
             {
+                string resultMessage = "";
                 if (columnName == nameof(TempCompensationCoef1))
                 {
-                    if ((!regexFloat.IsMatch(this.TempCompensationCoef1)) || (this.TempCompensationCoef1.Length == 0))
+                    _tempCompensationCoef1IsValid = regexFloat.IsMatch(this.TempCompensationCoef1) && (this.TempCompensationCoef1.Length != 0);
+                    if (!_tempCompensationCoef1IsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
                 if (columnName == nameof(TempCompensationCoef2))
                 {
-                    if ((!regexFloat.IsMatch(this.TempCompensationCoef2)) || (this.TempCompensationCoef2.Length == 0))
+                    _tempCompensationCoef2IsValid = regexFloat.IsMatch(this.TempCompensationCoef2) && (this.TempCompensationCoef2.Length != 0);
+                    if (!_tempCompensationCoef2IsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
                 if (columnName == nameof(MinLevel))
                 {
-                    if (!regexMinLelel.IsMatch(this.MinLevel))
+                    _minLevelIsValid = regexMinLelel.IsMatch(this.MinLevel);
+                    if (!_minLevelIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
                 if (columnName == nameof(MaxLevel))
                 {
-                    if (!regexMaxLevel.IsMatch(this.MaxLevel))
+                    _maxLevelIsValid = regexMaxLevel.IsMatch(this.MaxLevel);
+                    if (!_maxLevelIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
                 if (columnName == nameof(FiltrationAveragingTime))
                 {
-                    if (!regexAveragingTime.IsMatch(this.FiltrationAveragingTime))
+                    _filtrationAveragingTimeIsValid = regexAveragingTime.IsMatch(this.FiltrationAveragingTime);
+                    if (!_filtrationAveragingTimeIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
                 if (columnName == nameof(FiltrationLenghtOfMedian))
                 {
-                    if (!regexFiltrationAveragingTime.IsMatch(this.FiltrationLenghtOfMedian))
+                    _filtrationLenghtOfMedianIsValid = regexFiltrationAveragingTime.IsMatch(this.FiltrationLenghtOfMedian);
+                    if (!_filtrationLenghtOfMedianIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
                 if (columnName == nameof(FiltrationProcessNoiseCovarianceQ))
                 {
-                    if ((!regexFloat.IsMatch(this.FiltrationProcessNoiseCovarianceQ)) || (this.FiltrationProcessNoiseCovarianceQ.Length == 0))
+                    _filtrationProcessNoiseCovarianceQIsValid = regexFloat.IsMatch(this.FiltrationProcessNoiseCovarianceQ) && (this.FiltrationProcessNoiseCovarianceQ.Length != 0);
+                    if (!_filtrationProcessNoiseCovarianceQIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
                 if (columnName == nameof(FiltrationMeasurementNoiseCovarianceR))
                 {
-                    if ((!regexFloat.IsMatch(this.FiltrationMeasurementNoiseCovarianceR)) || (this.FiltrationMeasurementNoiseCovarianceR.Length == 0))
+                    _filtrationMeasurementNoiseCovarianceRIsValid = regexFloat.IsMatch(this.FiltrationMeasurementNoiseCovarianceR) && (this.FiltrationMeasurementNoiseCovarianceR.Length != 0);
+                    if (!_filtrationMeasurementNoiseCovarianceRIsValid)
                     {
-                        return "Value is not valid!";
+                        resultMessage = "Value is not valid!";
                     }
                 }
-                return null;
+
+                NofifySettingsIsChanged();
+                return resultMessage.Length == 0 ? null : resultMessage;
             }
+        }
+        private void NofifySettingsIsChanged()
+        {
+            _settingsIsChangedCallbackNotify.Invoke(_tempCompensationCoef1IsValid && _tempCompensationCoef2IsValid 
+                && _minLevelIsValid && _maxLevelIsValid && _filtrationAveragingTimeIsValid && _filtrationLenghtOfMedianIsValid 
+                && _filtrationProcessNoiseCovarianceQIsValid && _filtrationMeasurementNoiseCovarianceRIsValid);
         }
         public void Dispose() { }
     }
