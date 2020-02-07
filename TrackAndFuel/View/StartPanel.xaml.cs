@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using TrackAndFuel.ViewModel;
 
 namespace TrackAndFuel.Tracker
@@ -14,6 +15,9 @@ namespace TrackAndFuel.Tracker
         public StartPanel(MainViewModel viewModel)
         {
             InitializeComponent();
+            NavigationCommands.BrowseBack.InputGestures.Clear();
+            NavigationCommands.BrowseForward.InputGestures.Clear();
+
             DataContext = viewModel;
             _viewModel = viewModel;
         }
