@@ -9,7 +9,7 @@ namespace TrackAndFuel.Instrumentals
 {
     class StructureBinaryConverter
     {
-        public byte[] getBytes(TrackerStructureSettingsConnection str)
+        public byte[] getBytes<T>(T str)
         {
             int size = Marshal.SizeOf(str);
             byte[] arr = new byte[size];
@@ -20,13 +20,13 @@ namespace TrackAndFuel.Instrumentals
             return arr;
         }
 
-        public TrackerStructureSettingsConnection fromBytes(byte[] arr)
+        public T fromBytes<T>(byte[] arr)
         {
-            TrackerStructureSettingsConnection str = new TrackerStructureSettingsConnection();
+            T str = Activator.CreateInstance<T>();
             int size = Marshal.SizeOf(str);
             IntPtr ptr = Marshal.AllocHGlobal(size);
             Marshal.Copy(arr, 0, ptr, size);
-            str = (TrackerStructureSettingsConnection)Marshal.PtrToStructure(ptr, str.GetType());
+            str = (T)Marshal.PtrToStructure(ptr, str.GetType());
             Marshal.FreeHGlobal(ptr);
             return str;
         }

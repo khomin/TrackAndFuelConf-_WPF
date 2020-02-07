@@ -183,7 +183,6 @@ namespace TrackAndFuel.ViewModel
             {
                 _oneWireSettingsIsValid0 = IsValid;
                 ValidateSettings();
-                PrintObjectAddress(testString);
             }));
             _oneWireSettingsModelList.Add(new OneWireItemModel((IsValid) =>
             {
@@ -283,13 +282,11 @@ namespace TrackAndFuel.ViewModel
             {
                 _llsSettings1_IsValid = isValid;
                 ValidateSettings();
-                PrintObjectAddress(testString);
             }));
             _llsDataViewModelList.Add(new LlsDataViewModel((isValid) =>
             {
                 _llsSettings2_IsValid = isValid;
                 ValidateSettings();
-                PrintObjectAddress(testString);
             }));
             /* Those default - true, 
             * because the second change after focuse on */
@@ -904,15 +901,6 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public static string PrintObjectAddress(object a)
-        {
-            GCHandle handle = GCHandle.Alloc(a, GCHandleType.Pinned);
-            IntPtr pointer = GCHandle.ToIntPtr(handle);
-            string pointerDisplay = pointer.ToString();
-            handle.Free();
-            Console.WriteLine("Addr:" + pointerDisplay);
-            return pointerDisplay;
-        }
 
         public void Dispose() { }
     }

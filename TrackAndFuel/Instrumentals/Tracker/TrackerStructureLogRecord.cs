@@ -8,8 +8,18 @@ using System.Threading.Tasks;
 namespace TrackAndFuel.Instrumentals
 {
     [StructLayout(LayoutKind.Explicit, Size = 56, Pack = 1)]
-    public struct TrackerStructureSettingsConnection
+    public struct TrackerStructureLogRecord
     {
+        /* record id */
+        [MarshalAs(UnmanagedType.U4)]
+        [FieldOffset(0)]
+        public UInt32 Id;
+
+        /* datetime */
+        [MarshalAs(UnmanagedType.U8)]
+        [FieldOffset(4)]
+        public long DateTimestamp;
+
         /* event mask */
         [MarshalAs(UnmanagedType.U8)]
         [FieldOffset(12)]

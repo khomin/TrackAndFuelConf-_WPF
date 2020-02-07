@@ -134,7 +134,7 @@ namespace TrackAndFuel.Instrumentals
             data.Add((int)TrackerTypeData.TypePacketData.AsyncData);
             data.Add((int)TrackerTypeData.TypeMessage.Log);
             var logRecord = new byte[256];
-            TrackerStructureSettingsConnection record = _structureConverter.fromBytes(logRecord);
+            TrackerStructureLogRecord record = _structureConverter.fromBytes<TrackerStructureLogRecord>(logRecord);
             record.AdcAin1 = new Random().Next(0, 31);
             record.AdcAin2 = new Random().Next(0, 31);
             record.AdcAin3 = new Random().Next(0, 31);

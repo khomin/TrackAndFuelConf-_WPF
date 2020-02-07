@@ -249,7 +249,7 @@ namespace TrackAndFuel.Tracker
                         Application.Current.Dispatcher.Invoke(delegate
                         {
                             StructureBinaryConverter structureBinaryConverter = new StructureBinaryConverter();
-                            var log = structureBinaryConverter.fromBytes((byte[])i.Data);
+                            var log = structureBinaryConverter.fromBytes<TrackerStructureLogRecord>((byte[])i.Data);
                             _viewModel.RightPannelModel.CurrentData.LogPositionList.Add(new CurrentDataViewModel.LogPoint(log.Id, log.GnssLongitude, log.GnssLatitude, DateTime.Now));
                             if (!DrawMap(log.GnssLatitude, log.GnssLongitude))
                             {
