@@ -104,6 +104,8 @@
     <Compile Include="Resources\BoolToColorConverter.cs" />
     <Compile Include="Resources\BoolToStringConverter.cs" />
     <Compile Include="Resources\IgnitionAutoManualConverter.cs" />
+    <Compile Include="Resources\InputRoleDiscreateOrAnalogConverter.cs" />
+    <Compile Include="Resources\InputRoleShowValueAsTextConverter.cs" />
     <Compile Include="Resources\RoleInputPinToSign.cs" />
     <Compile Include="Resources\IntToStringConverter.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />

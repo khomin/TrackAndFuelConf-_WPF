@@ -13,14 +13,30 @@ namespace TrackAndFuel.Resources
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value == true)
+            var color = Brushes.Red;
+            if (value.GetType() == typeof(float))
             {
-                return Brushes.Red;
+                if ((float)value == 0f)
+                {
+                    color = Brushes.Red;
+                }
+                else 
+                {
+                    color = Brushes.Green;
+                }
             }
-            else 
+            else
             {
-                return Brushes.Green;
+                if ((bool)value == true)
+                {
+                    color = Brushes.Red;
+                }
+                else
+                {
+                    color = Brushes.Green;
+                }
             }
+            return color;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
