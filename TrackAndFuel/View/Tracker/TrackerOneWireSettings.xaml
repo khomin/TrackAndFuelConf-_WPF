@@ -92,8 +92,8 @@
                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[0].IsEnable}"
                                     LowerValue="{Binding SettingsModel.OneWireSettingsModelList[0].LowerAlarmZone}" 
                                     UpperValue="{Binding SettingsModel.OneWireSettingsModelList[0].UpperAlarmZone}"
-                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    Minimum="-40"
+                                    Maximum="125" 
                                     AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                     IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
                                 </mah:RangeSlider>
@@ -134,8 +134,8 @@
                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[1].IsEnable}"
                                     LowerValue="{Binding SettingsModel.OneWireSettingsModelList[1].LowerAlarmZone}" 
                                     UpperValue="{Binding SettingsModel.OneWireSettingsModelList[1].UpperAlarmZone}"
-                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    Minimum="-40"
+                                    Maximum="125" 
                                     AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                     IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
                                 </mah:RangeSlider>
@@ -176,8 +176,8 @@
                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[2].IsEnable}"
                                     LowerValue="{Binding SettingsModel.OneWireSettingsModelList[2].LowerAlarmZone}" 
                                     UpperValue="{Binding SettingsModel.OneWireSettingsModelList[2].UpperAlarmZone}"
-                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    Minimum="-40"
+                                    Maximum="125" 
                                     AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                     IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
                                 </mah:RangeSlider>
@@ -218,8 +218,8 @@
                                     IsEnabled="{Binding SettingsModel.OneWireSettingsModelList[3].IsEnable}"
                                     LowerValue="{Binding SettingsModel.OneWireSettingsModelList[3].LowerAlarmZone}" 
                                     UpperValue="{Binding SettingsModel.OneWireSettingsModelList[3].UpperAlarmZone}"
-                                    Minimum="{Binding Path=MinValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Maximum="{Binding Path=MaxValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    Minimum="-40"
+                                    Maximum="125" 
                                     AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="2" MoveWholeRange="True"
                                     IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ExtendedMode="True">
                                 </mah:RangeSlider>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using static TrackAndFuel.ViewModel.SettingsViewModel;
 
 namespace TrackAndFuel.ViewModel
 {
@@ -14,7 +15,8 @@ namespace TrackAndFuel.ViewModel
         private readonly string _portHeader = "";
         private string _portName = "Something pin name";
         private bool _portNameIsValid;
-        private bool _availableAsIgnitionSensor = false;
+        private Action<bool> _useIngtionUpdatedNotify;
+        private bool _usePinAsIgnitionDetection = false;
         private int _signalAnalysysTime = 250;
         private int _thresholdUpper = 0;
         private int _thresholdLower = 0;
@@ -23,23 +25,19 @@ namespace TrackAndFuel.ViewModel
         private int _averagingWindowValue = 1;
         private int _levelOfFiltrationValue = 0;
 
-        enum PortRole
+        public enum PortRole
         {
             notUsed = 0,
-            discrete_NO_minus = 1,
-            discrete_NC_minus = 2,
-            discrete_NO_plus = 3,
-            discrete_NC_plus = 4,
-            pulseCounter = 5,
-            frequencySensor = 6,
-            voltageMeasurement = 7,
-            tachometer = 8
+            discrete = 1,
+            frequencySensor = 2,
+            voltageMeasurement = 3
         };
 
-        public InputItemSettingsModel(string portHeader, string portName, bool itCanUseAsIgnitionDetectPort, Action<bool> settingsIsChangedCallbackNotify)
+        public InputItemSettingsModel(string portHeader, string portName, Action<bool> useIngtionUpdatedNotify, 
+            Action<bool> settingsIsChangedCallbackNotify)
         {
             _settingsIsChangedCallbackNotify = settingsIsChangedCallbackNotify;
-            AvailableAsIgnitionSensor = itCanUseAsIgnitionDetectPort;
+            _useIngtionUpdatedNotify = useIngtionUpdatedNotify;
             PortRoleIndex = 0;
             _portRoleList = new ObservableCollection<string>();
             PortRoleList.Add("Not used");
@@ -67,16 +65,6 @@ namespace TrackAndFuel.ViewModel
         {
             get => _portName;
             set => this.Set(ref this._portName, value);
-        }
-
-        public bool AvailableAsIgnitionSensor
-        {
-            get => _availableAsIgnitionSensor;
-            set
-            {
-                _availableAsIgnitionSensor = value;
-                OnPropertyChanged();
-            }
         }
 
         public int SignalAnalysysTime
@@ -148,6 +136,16 @@ namespace TrackAndFuel.ViewModel
         public string Error => string.Empty;
 
         public string PortHeader { get => _portHeader; }
+        public bool UsePinAsIgnitionDetection
+        {
+            get => _usePinAsIgnitionDetection;
+            set
+            {
+                _usePinAsIgnitionDetection = value;
+                _useIngtionUpdatedNotify.Invoke(value);
+                OnPropertyChanged();
+            }
+        }
 
         /**/
         /* validation */

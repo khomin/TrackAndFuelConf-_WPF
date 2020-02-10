@@ -28,9 +28,11 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="AIN1" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Text="UIN1" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.Ain1Value}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding SettingsModel.InputsSettingsModelList[0].PortRoleIndex, Converter={StaticResource RoleInputPinToSign}}"/>
                         </Grid>
 
                         <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Stretch">

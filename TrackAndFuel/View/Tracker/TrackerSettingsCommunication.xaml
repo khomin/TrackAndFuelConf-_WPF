@@ -9,6 +9,10 @@
              DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Models:MainViewModel}}">
     <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
         <StackPanel Height="690">
+            <GroupBox Header="Password" Width="Auto">
+                <Button Content="Change password" Grid.Column="1" MaxWidth="100" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleMarging}"/>
+            </GroupBox>
+
             <GroupBox Header="GPRS setup" Width="Auto">
                 <StackPanel>
                     <Grid>
@@ -19,7 +23,6 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Operator" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-
                         <ComboBox ItemsSource="{Binding Path=SettingsModel.OperatorsList}" 
                                   SelectedIndex="{Binding SettingsModel.OperatorListIndex}"
                                   Grid.Row="0" Grid.Column="1" MinWidth="200" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxStyleMarging}"/>

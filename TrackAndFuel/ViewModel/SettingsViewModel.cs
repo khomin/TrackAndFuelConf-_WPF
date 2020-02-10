@@ -74,7 +74,7 @@ namespace TrackAndFuel.ViewModel
         {
             Off = 0,
             AutoByPower = 1,
-            Input3 = 2
+            Input = 2
         };
 
         private float _manualIgnitionDetectionLowValue = 0;
@@ -105,6 +105,10 @@ namespace TrackAndFuel.ViewModel
         private int _sensorActivation_1_phone_0_index = 0;
         private readonly ObservableCollection<String> _sensorActivation_1_phone_1;
         private int _sensorActivation_1_phone_1_index = 0;
+        private readonly ObservableCollection<String> _sensorActivation_2_phone_0;
+        private int _sensorActivation_2_phone_0_index = 0;
+        private readonly ObservableCollection<String> _sensorActivation_2_phone_1;
+        private int _sensorActivation_2_phone_1_index = 0;
         private readonly ObservableCollection<String> _temperatureDecreasePhone_0;
         private int _temperatureDecreasePhone_0_index = 0;
         private readonly ObservableCollection<String> _temperatureDecreasePhone_1;
@@ -117,6 +121,16 @@ namespace TrackAndFuel.ViewModel
         private int _temperatureRecoveryPhone_0_index = 0;
         private readonly ObservableCollection<String> _temperatureRecoveryPhone_1;
         private int _temperatureRecoveryPhone_1_index = 0;
+
+        private readonly ObservableCollection<String> _lls1DrainPhone_0;
+        private int _lls1DrainPhone_0_index = 0;
+        private readonly ObservableCollection<String> _lls1DrainPhone_1;
+        private int _lls1DrainPhone_1_index = 0;
+        private readonly ObservableCollection<String> _lls1FillUpPhone_0;
+        private int _lls1FillUpPhone_0_index = 0;
+        private readonly ObservableCollection<String> _lls1FillUpPhone_1;
+        private int _lls1FillUpPhone_1_index = 0;
+
         public enum SubscribitionEvent
         {
             Off = 0,
@@ -130,6 +144,12 @@ namespace TrackAndFuel.ViewModel
         private bool _oneWireSettingsIsValid3;
 
         private readonly ObservableCollection<InputItemSettingsModel> _inputsSettingsModelList;
+        public class IgnitionPinDetectIsAvailable
+        {
+            public bool IgnitionPin1DetectIsUse = false;
+            public bool IgnitionPin2DetectIsUse = false;
+            public bool IgnitionPin3DetectIsUse = false;
+        }
         private bool _inputSettingsIsValid0;
         private bool _inputSettingsIsValid1;
         private bool _inputSettingsIsValid2;
@@ -137,7 +157,6 @@ namespace TrackAndFuel.ViewModel
         private readonly ObservableCollection<LlsDataViewModel> _llsDataViewModelList;
         private bool _llsSettings1_IsValid;
         private bool _llsSettings2_IsValid;
-        string testString = "11222";
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();
@@ -176,7 +195,7 @@ namespace TrackAndFuel.ViewModel
             TypeOfIgnitionDetection = new ObservableCollection<string>();
             TypeOfIgnitionDetection.Add("Disable");
             TypeOfIgnitionDetection.Add("Virtual (by power voltage");
-            TypeOfIgnitionDetection.Add("IN3");
+            TypeOfIgnitionDetection.Add("Discret input");
 
             _oneWireSettingsModelList = new ObservableCollection<OneWireItemModel>();
             _oneWireSettingsModelList.Add(new OneWireItemModel((IsValid) =>
@@ -216,17 +235,37 @@ namespace TrackAndFuel.ViewModel
             _oneWireSettingsModelList[3].SensorName = "Temp4";
 
             _inputsSettingsModelList = new ObservableCollection<InputItemSettingsModel>();
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN1", "LineIN1", false, (isValid) =>
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN1", "LineIN1", (isUsedAsIgntition) =>
+            {
+                if (isUsedAsIgntition) {
+                    _inputsSettingsModelList[1].UsePinAsIgnitionDetection = false;
+                    _inputsSettingsModelList[2].UsePinAsIgnitionDetection = false;
+                }
+            }, (isValid) =>
             {
                 _inputSettingsIsValid0 = isValid;
                 ValidateSettings();
             }));
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN2", "LineIN2", false, (isValid) =>
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN2", "LineIN2", (isUsedAsIgntition) =>
+            {
+                if (isUsedAsIgntition)
+                {
+                    _inputsSettingsModelList[0].UsePinAsIgnitionDetection = false;
+                    _inputsSettingsModelList[2].UsePinAsIgnitionDetection = false;
+                }
+            }, (isValid) =>
             {
                 _inputSettingsIsValid1 = isValid;
                 ValidateSettings();
             }));
-            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN3", "LineIN3", true, (isValid) =>
+            _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN3", "LineIN3", (isUsedAsIgntition) =>
+            {
+                if (isUsedAsIgntition)
+                {
+                    _inputsSettingsModelList[0].UsePinAsIgnitionDetection = false;
+                    _inputsSettingsModelList[1].UsePinAsIgnitionDetection = false;
+                }
+            }, (isValid) =>
             {
                 _inputSettingsIsValid2 = isValid;
                 ValidateSettings();
@@ -247,6 +286,9 @@ namespace TrackAndFuel.ViewModel
             _temperatureIncreasePhone_1 = new ObservableCollection<string>();
             _temperatureRecoveryPhone_0 = new ObservableCollection<string>();
             _temperatureRecoveryPhone_1 = new ObservableCollection<string>();
+            _sensorActivation_2_phone_0 = new ObservableCollection<string>();
+            _sensorActivation_2_phone_1 = new ObservableCollection<string>();
+
             _sensorActivation_0_phone_0.Add("Off");
             _sensorActivation_0_phone_0.Add("Sent SMS");
 
@@ -258,6 +300,9 @@ namespace TrackAndFuel.ViewModel
 
             _sensorActivation_1_phone_1.Add("Off");
             _sensorActivation_1_phone_1.Add("Sent SMS");
+
+            _sensorActivation_2_phone_1.Add("Off");
+            _sensorActivation_2_phone_1.Add("Sent SMS");
 
             _temperatureDecreasePhone_0.Add("Off");
             _temperatureDecreasePhone_0.Add("Sent SMS");
@@ -792,6 +837,30 @@ namespace TrackAndFuel.ViewModel
         public string PhoneNumber2 { get => _phoneNumber2; set => this.Set(ref this._phoneNumber2, value); }
         public bool SettingsIsValid { get => _settingsIsValid; set => this.Set(ref this._settingsIsValid, value); }
 
+        public ObservableCollection<string> SensorActivation_2_phone_0 => _sensorActivation_2_phone_0;
+
+        public int SensorActivation_2_phone_0_index { get => _sensorActivation_2_phone_0_index; set => this.Set(ref this._sensorActivation_2_phone_0_index, value); }
+
+        public ObservableCollection<string> SensorActivation_2_phone_1 => _sensorActivation_2_phone_1;
+
+        public int SensorActivation_2_phone_1_index { get => _sensorActivation_2_phone_1_index; set => this.Set(ref this._sensorActivation_2_phone_1_index, value); }
+
+        public ObservableCollection<string> Lls1DrainPhone_0 => _lls1DrainPhone_0;
+
+        public int Lls1DrainPhone_0_index { get => _lls1DrainPhone_0_index; set => this.Set(ref this._lls1DrainPhone_0_index, value); }
+
+        public ObservableCollection<string> Lls1DrainPhone_1 => _lls1DrainPhone_1;
+
+        public int Lls1DrainPhone_1_index { get => _lls1DrainPhone_1_index; set => this.Set(ref this._lls1DrainPhone_1_index, value); }
+
+        public ObservableCollection<string> Lls1FillUpPhone_0 => _lls1FillUpPhone_0;
+
+        public int Lls1FillUpPhone_0_index { get => _lls1FillUpPhone_0_index; set => this.Set(ref this._lls1FillUpPhone_0_index, value); }
+
+        public ObservableCollection<string> Lls1FillUpPhone_1 => _lls1FillUpPhone_1;
+
+        public int Lls1FillUpPhone_1_index { get => _lls1FillUpPhone_1_index; set => this.Set(ref this._lls1FillUpPhone_1_index, value); }
+
         /**/
         /* validation */
         /**/
@@ -885,13 +954,15 @@ namespace TrackAndFuel.ViewModel
                    && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 && _inputSettingsIsValid0
                    && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _llsSettings1_IsValid && _llsSettings2_IsValid;
                 SettingsIsValid = isValid;
-            } else if (_enableSmsSubscribing_0 == false)
+            }
+            else if (_enableSmsSubscribing_0 == false)
             {
-                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1 && _serverConnectionIsValid2 
-                    && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1 && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 
-                    && _inputSettingsIsValid0 && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _phoneNumber2IsValid && _llsSettings1_IsValid && _llsSettings2_IsValid; 
+                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1 && _serverConnectionIsValid2
+                    && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1 && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3
+                    && _inputSettingsIsValid0 && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _phoneNumber2IsValid && _llsSettings1_IsValid && _llsSettings2_IsValid;
                 SettingsIsValid = isValid;
-            } else if (_enableSmsSubscribing_1 == false)
+            }
+            else if (_enableSmsSubscribing_1 == false)
             {
                 var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1
                    && _serverConnectionIsValid2 && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1

@@ -52,6 +52,7 @@
             <Resourse:BoolToColorConverter x:Key="BoolToColorConverter"/>
             <Resourse:StatusBarColorConverter x:Key="StatusBarColorConverter"/>
             <Resourse:BoolToStringConverter x:Key="BoolToStringConverter"/>
+            <Resourse:RoleInputPinToSign x:Key="RoleInputPinToSign"/>
 
             <!---->
             <!--validators-->

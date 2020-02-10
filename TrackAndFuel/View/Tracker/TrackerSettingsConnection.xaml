@@ -86,11 +86,11 @@
                                 <LineBreak/>
                                 Delay before next connecting
                         </TextBlock>
-                        <Slider Value="{Binding DelayBeforeNextAttempConnecting}" Maximum="100" 
+                        <Slider Value="{Binding DelayBeforeNextAttempConnecting}" Minimum="15" Maximum="300" 
                                 Grid.Row="0" Grid.Column="1" MinWidth="120" VerticalAlignment="Center" Style="{StaticResource SliderStyleMarging}"/>
                         <TextBlock Text="{Binding DelayBeforeNextAttempConnecting, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}"
                                    Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBlock Text="Second" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Sec" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
                     </Grid>
 
                     <Grid>
@@ -106,19 +106,19 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Sending period during parking" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <Slider Value="{Binding SendingPeriodDuringParking}" Maximum="10000" 
+                        <Slider Value="{Binding SendingPeriodDuringParking}" Minimum="15" Maximum="300" 
                             Grid.Row="0" Grid.Column="2" MinWidth="120" VerticalAlignment="Center" Style="{StaticResource SliderStyleMarging}"/>
                         <TextBlock Text="{Binding SendingPeriodDuringParking, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" 
                                    Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBlock Text="Second" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Sec" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
 
                         <TextBlock Text="Sending period in sleep mode" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" 
                                    IsEnabled="False" Grid.ColumnSpan="2" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <Slider Value="{Binding SendingPeriodInSleepMode}" Maximum="10000" IsEnabled="False" 
+                        <Slider Value="{Binding SendingPeriodInSleepMode}" Minimum="60" Maximum="3600" IsEnabled="False" 
                             Grid.Row="1" Grid.Column="2" MinWidth="120" VerticalAlignment="Center" Style="{StaticResource SliderStyleMarging}"/>
                         <TextBlock Text="{Binding SendingPeriodInSleepMode, Converter={StaticResource IntToStringConverter}, FallbackValue=NA}" IsEnabled="False"
                             Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                        <TextBlock Text="Second" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}" IsEnabled="False"/>
+                        <TextBlock Text="Sec" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}" IsEnabled="False"/>
                     </Grid>
                 </StackPanel>
             </GroupBox>

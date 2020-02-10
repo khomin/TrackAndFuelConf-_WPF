@@ -104,6 +104,7 @@
     <Compile Include="Resources\BoolToColorConverter.cs" />
     <Compile Include="Resources\BoolToStringConverter.cs" />
     <Compile Include="Resources\IgnitionAutoManualConverter.cs" />
+    <Compile Include="Resources\RoleInputPinToSign.cs" />
     <Compile Include="Resources\IntToStringConverter.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
     <Compile Include="Resources\RegexValidationRule.cs" />

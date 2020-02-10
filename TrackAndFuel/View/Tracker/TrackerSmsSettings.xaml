@@ -8,29 +8,29 @@
              DataContext="{StaticResource MainViewModel}">
     <StackPanel Height="Auto" MinWidth="400">
         <GroupBox Header="SMS" Width="Auto">
-                <StackPanel>
+            <StackPanel>
+                <Grid>
                     <Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="200"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                            <TextBlock Text="Enable subscribing" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <CheckBox Content="Enable" IsChecked="{Binding SettingsModel.EnableSmsSubscribing_0}" Grid.Row="0" Grid.Column="1" Style="{StaticResource CheckBoxStyleMarging}"/>
-                            <CheckBox Content="Enable" IsChecked="{Binding SettingsModel.EnableSmsSubscribing_1}" Grid.Row="0" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}"/>
-                            <TextBlock Text="Allow SMS control for this number" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Enable subscribing" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <CheckBox Content="Enable" IsChecked="{Binding SettingsModel.EnableSmsSubscribing_0}" Grid.Row="0" Grid.Column="1" Style="{StaticResource CheckBoxStyleMarging}"/>
+                        <CheckBox Content="Enable" IsChecked="{Binding SettingsModel.EnableSmsSubscribing_1}" Grid.Row="0" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}"/>
+                        <TextBlock Text="Allow SMS control for this number" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
 
-                            <TextBlock Text="Phone nickname" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Phone nickname" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
 
                         <AdornerDecorator Grid.Row="1" Grid.Column="1">
                             <TextBox Text="{Binding SettingsModel.PhoneNumber1, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
@@ -43,77 +43,129 @@
                                  IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
                                  MaxLength="15" Style="{StaticResource TextBoxStyleMarging}" />
                         </AdornerDecorator>
-                        <CheckBox Content="Allow" IsChecked="{Binding SettingsModel.AllowSmsControl_0}" Grid.Row="2" Grid.Column="1" Style="{StaticResource CheckBoxStyleMarging}" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"/>
-                            <CheckBox Content="Allow" IsChecked="{Binding SettingsModel.AllowSmsControl_1}" Grid.Row="2" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"/>
-                        </Grid>
+                        <CheckBox Content="Allow" IsChecked="{Binding SettingsModel.AllowSmsControl_0}" Grid.Row="2" Grid.Column="1" Style="{StaticResource CheckBoxStyleMarging}" IsEnabled="False"/>
+                        <CheckBox Content="Allow" IsChecked="{Binding SettingsModel.AllowSmsControl_1}" Grid.Row="2" Grid.Column="2" Style="{StaticResource CheckBoxStyleMarging}" IsEnabled="False"/>
                     </Grid>
+                </Grid>
 
-                    <GroupBox Header="Autoactivation" Width="Auto" >
-                        <StackPanel>
-                            <Grid Style="{StaticResource GridStyleMarging}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="200"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
+                <GroupBox Header="Autoactivation" Width="Auto" >
+                    <StackPanel>
+                        <Grid Style="{StaticResource GridStyleMarging}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                                    <TextBlock Text="Sensor activation IN1" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <ComboBox Grid.Row="0" Grid.Column="1"  IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                <TextBlock Text="Sensor activation IN1" Grid.Row="0" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1"  IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
                                           ItemsSource="{Binding SettingsModel.SensorActivation_0_phone_0}" SelectedIndex="{Binding SettingsModel.SensorActivation_0_phone_0_index}" 
                                           MinWidth="180" Style="{StaticResource ComboBoxStyleMarging}"/>
-                                    <ComboBox Grid.Row="0" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                <ComboBox Grid.Row="0" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
                                           ItemsSource="{Binding SettingsModel.SensorActivation_0_phone_1}" SelectedIndex="{Binding SettingsModel.SensorActivation_0_phone_1_index}" 
                                           Style="{StaticResource ComboBoxStyleMarging}"/>
 
-                                    <TextBlock Text="Sensor activation IN2" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <ComboBox Grid.Row="1" Grid.Column="1" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                <TextBlock Text="Sensor activation IN2" Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
                                           ItemsSource="{Binding SettingsModel.SensorActivation_1_phone_0}" SelectedIndex="{Binding SettingsModel.SensorActivation_1_phone_0_index}"
                                           MinWidth="180" Style="{StaticResource ComboBoxStyleMarging}"/>
-                                    <ComboBox Grid.Row="1" Grid.Column="2" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                <ComboBox Grid.Row="1" Grid.Column="2" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
                                           ItemsSource="{Binding SettingsModel.SensorActivation_1_phone_1}" SelectedIndex="{Binding SettingsModel.SensorActivation_1_phone_1_index}"
                                           MinWidth="180" Style="{StaticResource ComboBoxStyleMarging}"/>
 
-                                    <TextBlock Text="Temperature decrease" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <ComboBox Grid.Row="3" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                <TextBlock Text="Sensor activation IN3" Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                          ItemsSource="{Binding SettingsModel.SensorActivation_2_phone_0}" SelectedIndex="{Binding SettingsModel.SensorActivation_1_phone_0_index}"
+                                          MinWidth="180" Style="{StaticResource ComboBoxStyleMarging}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="2" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                          ItemsSource="{Binding SettingsModel.SensorActivation_2_phone_1}" SelectedIndex="{Binding SettingsModel.SensorActivation_1_phone_1_index}"
+                                          MinWidth="180" Style="{StaticResource ComboBoxStyleMarging}"/>
+
+                                <TextBlock Text="Temperature decrease" Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="3" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
                                           ItemsSource="{Binding SettingsModel.TemperatureDecreasePhone_0}" SelectedIndex="{Binding SettingsModel.TemperatureDecreasePhone_0_index}"
                                           Style="{StaticResource ComboBoxStyleMarging}"/>
-                                    <ComboBox Grid.Row="3" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                <ComboBox Grid.Row="3" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
                                           ItemsSource="{Binding SettingsModel.TemperatureDecreasePhone_1}" SelectedIndex="{Binding SettingsModel.TemperatureDecreasePhone_1_index}"
                                           Style="{StaticResource ComboBoxStyleMarging}"/>
 
-                                    <TextBlock Text="Temperature increase" Grid.Row="4" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <ComboBox Grid.Row="4" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                <TextBlock Text="Temperature increase" Grid.Row="4" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="4" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
                                         ItemsSource="{Binding SettingsModel.TemperatureIncreasePhone_0}" 
                                         SelectedIndex="{Binding SettingsModel.TemperatureIncreasePhone_0_index}"
                                           Style="{StaticResource ComboBoxStyleMarging}"/>
-                                    <ComboBox Grid.Row="4" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                <ComboBox Grid.Row="4" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
                                             ItemsSource="{Binding SettingsModel.TemperatureIncreasePhone_1}" 
                                             SelectedIndex="{Binding SettingsModel.TemperatureIncreasePhone_1_index}"
                                           Style="{StaticResource ComboBoxStyleMarging}"/>
 
-                                    <TextBlock Text="Temperature recovery" Grid.Row="5" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
-                                    <ComboBox Grid.Row="5" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                <TextBlock Text="Temperature recovery" Grid.Row="5" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="5" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
                                         ItemsSource="{Binding SettingsModel.TemperatureRecoveryPhone_0}" 
                                         SelectedIndex="{Binding SettingsModel.TemperatureRecoveryPhone_0_index}"
                                           Style="{StaticResource ComboBoxStyleMarging}"/>
-                                    <ComboBox Grid.Row="5" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                <ComboBox Grid.Row="5" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
                                         ItemsSource="{Binding SettingsModel.TemperatureRecoveryPhone_1}" 
                                         SelectedIndex="{Binding SettingsModel.TemperatureRecoveryPhone_1_index}"
                                           Style="{StaticResource ComboBoxStyleMarging}"/>
-                                </Grid>
+
+                                <TextBlock Text="LLS1 drain" Grid.Row="6" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="6" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                        ItemsSource="{Binding SettingsModel.Lls1DrainPhone_0}" 
+                                        SelectedIndex="{Binding SettingsModel.Lls1DrainPhone_0_index}"
+                                          Style="{StaticResource ComboBoxStyleMarging}"/>
+                                <ComboBox Grid.Row="6" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                        ItemsSource="{Binding SettingsModel.Lls1DrainPhone_1}" 
+                                        SelectedIndex="{Binding SettingsModel.Lls1DrainPhone_1_index}"
+                                          Style="{StaticResource ComboBoxStyleMarging}"/>
+
+                                <TextBlock Text="LLS1 fill up" Grid.Row="7" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="7" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                        ItemsSource="{Binding SettingsModel.Lls1FillUpPhone_0}" 
+                                        SelectedIndex="{Binding SettingsModel.Lls1FillUpPhone_0_index}"
+                                          Style="{StaticResource ComboBoxStyleMarging}"/>
+                                <ComboBox Grid.Row="7" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                        ItemsSource="{Binding SettingsModel.Lls1FillUpPhone_1}" 
+                                        SelectedIndex="{Binding SettingsModel.Lls1FillUpPhone_1_index}"
+                                          Style="{StaticResource ComboBoxStyleMarging}"/>
+
+                                <TextBlock Text="LLS2 drain" Grid.Row="8" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="8" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                        ItemsSource="{Binding SettingsModel.Lls1DrainPhone_0}" 
+                                        SelectedIndex="{Binding SettingsModel.Lls1DrainPhone_0_index}"
+                                          Style="{StaticResource ComboBoxStyleMarging}"/>
+                                <ComboBox Grid.Row="8" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                        ItemsSource="{Binding SettingsModel.Lls1DrainPhone_1}" 
+                                        SelectedIndex="{Binding SettingsModel.Lls1DrainPhone_1_index}"
+                                          Style="{StaticResource ComboBoxStyleMarging}"/>
+
+                                <TextBlock Text="LLS1 fill up" Grid.Row="9" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <ComboBox Grid.Row="9" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
+                                        ItemsSource="{Binding SettingsModel.Lls1FillUpPhone_0}" 
+                                        SelectedIndex="{Binding SettingsModel.Lls1FillUpPhone_0_index}"
+                                          Style="{StaticResource ComboBoxStyleMarging}"/>
+                                <ComboBox Grid.Row="9" Grid.Column="2" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_1}"
+                                        ItemsSource="{Binding SettingsModel.Lls1FillUpPhone_1}" 
+                                        SelectedIndex="{Binding SettingsModel.Lls1FillUpPhone_1_index}"
+                                          Style="{StaticResource ComboBoxStyleMarging}"/>
                             </Grid>
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>
-            </GroupBox>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </GroupBox>
     </StackPanel>
 </UserControl>
