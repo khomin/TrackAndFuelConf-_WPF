@@ -90,11 +90,11 @@
     <Compile Include="Instrumentals\Tracker\TrackerParserDataAbstract.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerSerialPort.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerSimulationPort.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerStructureGsm.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureLogRecord.cs" />
-    <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsCalibration.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsConnection.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsGeofence.cs" />
-    <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsInputs.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerStructureGPIO.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsLls.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsOneWire.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsSms.cs" />

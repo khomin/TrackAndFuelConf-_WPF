@@ -152,7 +152,7 @@
                                         SelectedIndex="{Binding SettingsModel.Lls1DrainPhone_1_index}"
                                           Style="{StaticResource ComboBoxStyleMarging}"/>
 
-                                <TextBlock Text="LLS1 fill up" Grid.Row="9" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
+                                <TextBlock Text="LLS2 fill up" Grid.Row="9" Grid.Column="0" Style="{StaticResource TextBlockStyleMarging}"/>
                                 <ComboBox Grid.Row="9" Grid.Column="1" MinWidth="180" IsEnabled="{Binding SettingsModel.EnableSmsSubscribing_0}"
                                         ItemsSource="{Binding SettingsModel.Lls1FillUpPhone_0}" 
                                         SelectedIndex="{Binding SettingsModel.Lls1FillUpPhone_0_index}"

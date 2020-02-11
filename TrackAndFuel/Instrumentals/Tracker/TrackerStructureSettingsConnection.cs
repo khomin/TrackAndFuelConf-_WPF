@@ -7,137 +7,47 @@ using System.Threading.Tasks;
 
 namespace TrackAndFuel.Instrumentals
 {
-    [StructLayout(LayoutKind.Explicit, Size = 56, Pack = 1)]
+    [StructLayout(LayoutKind.Explicit, Size = 104, Pack = 1)]
     public struct TrackerStructureSettingsConnection
     {
-        /* event mask */
-        [MarshalAs(UnmanagedType.U8)]
-        [FieldOffset(12)]
-        public UInt64 EventHistory;
+        [MarshalAs(UnmanagedType.U1)]
+        [FieldOffset(0)]
+        public byte ProtocolType;
 
-        /* odometer */
-        [MarshalAs(UnmanagedType.U4)]
-        [FieldOffset(16)]
-        public UInt32 Odometr;
+        [MarshalAs(UnmanagedType.LPArray)]
+        [FieldOffset(1)]
+        public byte[] Connect1Addr;
 
-        /* gnss is valid */
+        [MarshalAs(UnmanagedType.LPArray)]
+        [FieldOffset(65)]
+        public byte[] Connect1Password;
+
+        [MarshalAs(UnmanagedType.U2)]
+        [FieldOffset(81)]
+        public UInt16 Connect1Port;
+
         [MarshalAs(UnmanagedType.Bool)]
-        [FieldOffset(17)]
-        public bool GnssRecordIsValid;
+        [FieldOffset(82)]
+        public bool Connect1UseCompression;
 
-        /* gnss longitude */
-        [MarshalAs(UnmanagedType.R4)]
-        [FieldOffset(21)]
-        public float GnssLongitude;
+        [MarshalAs(UnmanagedType.U4)]
+        [FieldOffset(83)]
+        public UInt32 Connect1PeriodOfPingMessage;
 
-        /* gnss latitude */
-        [MarshalAs(UnmanagedType.R4)]
-        [FieldOffset(25)]
-        public float GnssLatitude;
+        [MarshalAs(UnmanagedType.U4)]
+        [FieldOffset(86)]
+        public UInt32 Connect1DelayBeforeNextConnecting;
 
-        /* gnss altitude */
-        [MarshalAs(UnmanagedType.I2)]
-        [FieldOffset(27)]
-        public Int16 GnssAltitude;
+        [MarshalAs(UnmanagedType.U4)]
+        [FieldOffset(90)]
+        public UInt32 Connect1SendingPeropdDuringParking;
 
-        /* gnss fix */
-        [MarshalAs(UnmanagedType.U1)]
-        [FieldOffset(28)]
-        public byte GnssFixStatus;
+        [MarshalAs(UnmanagedType.U4)]
+        [FieldOffset(94)]
+        public UInt32 Connect1SendingPeropdInSleepMode;
 
-        /* gnss heading */
-        [MarshalAs(UnmanagedType.U2)]
-        [FieldOffset(30)]
-        public UInt16 GnssHeading;
-
-        /* gnss speed */
-        [MarshalAs(UnmanagedType.U2)]
-        [FieldOffset(32)]
-        public UInt16 GnssSpeed;
-
-        /* gnss hdop */
-        [MarshalAs(UnmanagedType.U2)]
-        [FieldOffset(34)]
-        public UInt16 GnssHdop;
-
-        /* gnss sats count */
-        [MarshalAs(UnmanagedType.U1)]
-        [FieldOffset(35)]
-        public byte GnssSatsCount;
-
-        /* gsm signal strenght */
-        [MarshalAs(UnmanagedType.U1)]
-        [FieldOffset(36)]
-        public byte GsmSignalStrenght;
-
-        /* power ain1 */
-        [MarshalAs(UnmanagedType.R4)]
-        [FieldOffset(40)]
-        public float AdcAin1;
-
-        /* power ain2 */
-        [MarshalAs(UnmanagedType.R4)]
-        [FieldOffset(44)]
-        public float AdcAin2;
-
-        /* power ain3 */
-        [MarshalAs(UnmanagedType.R4)]
-        [FieldOffset(48)]
-        public float AdcAin3;
-
-        /* power external */
-        [MarshalAs(UnmanagedType.R4)]
-        [FieldOffset(52)]
-        public float AdcPowerExternal;
-
-        /* power internal */
-        [MarshalAs(UnmanagedType.R4)]
-        [FieldOffset(56)]
-        public float AdcPowerInternal;
-
-        /* lls internal 1 value */
-        [MarshalAs(UnmanagedType.U2)]
-        [FieldOffset(58)]
-        public UInt16 LlsInternal_0_Value;
-
-        /* lls internal 1 frequency */
-        [MarshalAs(UnmanagedType.U2)]
-        [FieldOffset(60)]
-        public UInt16 LlsInternal_0_Frequency;
-
-        /* lls internal 2 value */
-        [MarshalAs(UnmanagedType.U2)]
-        [FieldOffset(62)]
-        public UInt16 LlsInternal_1_Value;
-
-        /* lls internal 2 frequency */
-        [MarshalAs(UnmanagedType.U2)]
-        [FieldOffset(64)]
-        public UInt16 LlsInternal_1_Frequency;
-
-        /* onewire tempsesor 1 */
-        [MarshalAs(UnmanagedType.I2)]
-        [FieldOffset(66)]
-        public Int16 OneWireTempSensor_0;
-
-        /* onewire tempsesor 2 */
-        [MarshalAs(UnmanagedType.I2)]
-        [FieldOffset(68)]
-        public Int16 OneWireTempSensor_1;
-
-        /* onewire tempsesor 3 */
-        [MarshalAs(UnmanagedType.I2)]
-        [FieldOffset(70)]
-        public Int16 OneWireTempSensor_2;
-
-        /* onewire tempsesor 4 */
-        [MarshalAs(UnmanagedType.I2)]
-        [FieldOffset(72)]
-        public Int16 OneWireTempSensor_3;
-
-        /* record crc */
-        [MarshalAs(UnmanagedType.U1)]
-        [FieldOffset(73)]
-        public byte CrcRecord;
+        [MarshalAs(UnmanagedType.U4)]
+        [FieldOffset(100)]
+        public UInt32 AdditionParams;
     }
 }

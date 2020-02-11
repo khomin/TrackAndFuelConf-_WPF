@@ -1,12 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
-namespace TrackAndFuel.Instrumentals.Tracker
+namespace TrackAndFuel.Instrumentals
 {
-    class TrackerStructureSettingsSms
+    [StructLayout(LayoutKind.Sequential, Size = 38, Pack = 1)]
+    public struct TrackerStructureSettingsSms
     {
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
+        public byte[] Phone1Number;
+
+        [MarshalAs(UnmanagedType.Bool)]
+        public bool Phone1IsEnable;
+
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
+        public byte[] Phone2Number;
+
+        [MarshalAs(UnmanagedType.Bool)]
+        public bool Phone2IsEnable;
+
+        [MarshalAs(UnmanagedType.U2)]
+        public UInt16 EventsPhone1;
+
+        [MarshalAs(UnmanagedType.U2)]
+        public UInt16 EventsPhone2;
     }
 }

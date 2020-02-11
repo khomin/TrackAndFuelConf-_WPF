@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace TrackAndFuel.Instrumentals
 {
     class TrackerSimulationPort : TrackerDataPortAbstract
     {
         private System.Timers.Timer testStatusTimer;
-        private bool _settingsIsWrited = false;
         private bool _logLoadIsEnabled = false;
         private static UInt32 _logRecordIdCounter = 0;
         private StructureBinaryConverter _structureConverter = new StructureBinaryConverter();
+        private Action<List<byte>> _updateDataCallback;
         private static float lat = 0;
         private static float lon = 0;
         public override bool Open(Dictionary<string, object> property, Action<List<byte>> updateDataCallback, Action disconnectCallback)
@@ -20,25 +21,23 @@ namespace TrackAndFuel.Instrumentals
             testStatusTimer = new System.Timers.Timer(2000);
             testStatusTimer.AutoReset = true;
             testStatusTimer.Enabled = true;
+
+            _updateDataCallback = updateDataCallback;
+
+            // TODO: remove it
+            _updateDataCallback.Invoke(GetNextRightPanelPacket());
+
             testStatusTimer.Elapsed += (sourse, evendt) =>
             {
                 /* The status data packet */
                 //updateDataCallback.Invoke(GetNextStatusPacket());
 
                 /* The right panel data packet */
-                updateDataCallback.Invoke(GetNextRightPanelPacket());
-
-                if (_settingsIsWrited)
-                {
-                    _settingsIsWrited = false;
-
-                    /* About accept new settings */
-                    updateDataCallback.Invoke(GetPacketAboutNewSettings());
-                }
+                //updateDataCallback.Invoke(GetNextRightPanelPacket());
 
                 if (_logLoadIsEnabled)
                 {
-                    updateDataCallback.Invoke(GetPacketAboutLog());
+                    _updateDataCallback.Invoke(GetPacketAboutLog());
                 }
 
             };
@@ -56,15 +55,13 @@ namespace TrackAndFuel.Instrumentals
 
             if (dataHintOptional.Contains("writeSettings"))
             {
-                System.Timers.Timer testStatusTimer;
-                testStatusTimer = new System.Timers.Timer(1500);
-                testStatusTimer.AutoReset = false;
-                testStatusTimer.Enabled = true;
-                testStatusTimer.Elapsed += (sourse, evendt) =>
-                {
-                    _settingsIsWrited = true;
-                    testStatusTimer.Stop();
-                };
+                /* About accept new settings */
+                _updateDataCallback.Invoke(GetPacketAboutNewSettings());
+            }
+            if (dataHintOptional.Contains("readSettings"))
+            {
+                /* About accept reading the settings */
+                _updateDataCallback.Invoke(GetPacketAboutReadSettings());
             }
 
             if (dataHintOptional.Contains("startTestLog"))
@@ -105,7 +102,6 @@ namespace TrackAndFuel.Instrumentals
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.PowerBat, Type = typeof(float), Data = (float)new Random().Next(3, 4) }));
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.PowerExt, Type = typeof(float), Data = (float)new Random().Next(10, 12) }));
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.imei, Type = typeof(string), Data = String.Format("12345678953555") }));
-
             float lat = (float)new Random().Next(50, 60);
             float lon = (float)new Random().Next(20, 30);
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssLat, Type = typeof(float), Data = lat }));
@@ -121,8 +117,65 @@ namespace TrackAndFuel.Instrumentals
             var data = new List<byte>();
             var parser = new TrackerParserData();
             data.Add((int)TrackerTypeData.TypePacketData.Answer);
-            data.Add((int)TrackerTypeData.TypeMessage.SettingsRead);
+            data.Add((int)TrackerTypeData.TypeMessage.SettignsWrite);
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsAcknowledgement, Type = typeof(int), Data = 0 }));
+            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            return data;
+        }
+
+        private List<byte> GetPacketAboutReadSettings()
+        {
+            var data = new List<byte>();
+            var parser = new TrackerParserData();
+            var converter = new StructureBinaryConverter();
+            data.Add((int)TrackerTypeData.TypePacketData.Answer);
+            data.Add((int)TrackerTypeData.TypeMessage.SettingsRead);
+            
+            var settingsGsm = new TrackerStructureGsm();
+            var settingsGpio = new TrackerStructureGPIO();
+            var settingsLlsInternal = new TrackerStructureSettingsLls();
+            var settingsOneWire = new TrackerStructureSettingsOneWire();
+            var settingsSms = new TrackerStructureSettingsSms();
+            var settingsTrack = new TrackerStructureSettingsTrack();
+
+            settingsGsm.Apn = Encoding.ASCII.GetBytes("testApn");
+
+            data.AddRange(parser.addParam(new DataItemParam
+            {
+                Key = TrackerTypeData.KeyParameter.SettingsGsm,
+                Type = typeof(byte[]),
+                Data = converter.getBytes(settingsGsm)
+            }));
+            data.AddRange(parser.addParam(new DataItemParam
+            {
+                Key = TrackerTypeData.KeyParameter.SettingsGpio,
+                Type = typeof(byte[]),
+                Data = converter.getBytes(settingsGpio)
+            }));
+            data.AddRange(parser.addParam(new DataItemParam
+            {
+                Key = TrackerTypeData.KeyParameter.SettingsLlsInternal,
+                Type = typeof(byte[]),
+                Data = converter.getBytes(settingsLlsInternal)
+            }));
+            data.AddRange(parser.addParam(new DataItemParam
+            {
+                Key = TrackerTypeData.KeyParameter.SettingsOneWire,
+                Type = typeof(byte[]),
+                Data = converter.getBytes(settingsOneWire)
+            }));
+            data.AddRange(parser.addParam(new DataItemParam
+            {
+                Key = TrackerTypeData.KeyParameter.SettingsSms,
+                Type = typeof(byte[]),
+                Data = converter.getBytes(settingsSms)
+            }));
+            data.AddRange(parser.addParam(new DataItemParam
+            {
+                Key = TrackerTypeData.KeyParameter.SettingsTrack,
+                Type = typeof(byte[]),
+                Data = converter.getBytes(settingsTrack)
+            }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             return data;
         }
@@ -133,8 +186,7 @@ namespace TrackAndFuel.Instrumentals
             var parser = new TrackerParserData();
             data.Add((int)TrackerTypeData.TypePacketData.AsyncData);
             data.Add((int)TrackerTypeData.TypeMessage.Log);
-            var logRecord = new byte[256];
-            TrackerStructureLogRecord record = _structureConverter.fromBytes<TrackerStructureLogRecord>(logRecord);
+            TrackerStructureLogRecord record = new TrackerStructureLogRecord();//_structureConverter.fromBytes<TrackerStructureLogRecord>(logRecord);
             record.AdcAin1 = new Random().Next(0, 31);
             record.AdcAin2 = new Random().Next(0, 31);
             record.AdcAin3 = new Random().Next(0, 31);
