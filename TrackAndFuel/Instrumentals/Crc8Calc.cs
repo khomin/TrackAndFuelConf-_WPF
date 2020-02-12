@@ -54,23 +54,46 @@ namespace TrackAndFuel.Instrumentals
             return crc;
         }
 
-        //public static byte ComputeChecksum(IEnumerable<byte[]> bytes)
-        //{
-        //    //return ComputeChecksum(bytes.SelectMany(i => i).ToArray());
-        //    byte crc = 0;
-        //    var array = bytes.ToList();
-        //    if (bytes != null && array.Count() > 0)
-        //    {
-        //        for (var i = 0; i < bytes.Count(); i++)
-        //        {
-        //            crc = table[crc ^ array.at;
-        //        }
-        //        //foreach (byte b in bytes)
-        //        //{
-        //        //    crc = table[crc ^ b];
-        //        //}
-        //    }
-        //    return crc;
-        //}
-    }
+        public static UInt16 Crc16(byte[] data)
+        {
+            int i = 0;
+            int i2 = 0;
+            int crc_value = 0xffff;
+            int len = data.Length;
+            while (len-- > 0)
+            {
+                crc_value ^= data[i2++] & 0x00FF;
+
+                for (i = 0; i < 8; i++)
+                {
+                    if ((crc_value & 0x01) == 1 ? true : false)
+                    {
+                        crc_value = (crc_value >> 1) ^ 0xa001;
+                    }
+                    else crc_value = crc_value >> 1;
+                }
+            }
+            return (Convert.ToUInt16(crc_value));
+        }
+
+
+            //public static byte ComputeChecksum(IEnumerable<byte[]> bytes)
+            //{
+            //    //return ComputeChecksum(bytes.SelectMany(i => i).ToArray());
+            //    byte crc = 0;
+            //    var array = bytes.ToList();
+            //    if (bytes != null && array.Count() > 0)
+            //    {
+            //        for (var i = 0; i < bytes.Count(); i++)
+            //        {
+            //            crc = table[crc ^ array.at;
+            //        }
+            //        //foreach (byte b in bytes)
+            //        //{
+            //        //    crc = table[crc ^ b];
+            //        //}
+            //    }
+            //    return crc;
+            //}
+        }
 }

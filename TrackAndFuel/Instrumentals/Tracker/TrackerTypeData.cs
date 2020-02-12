@@ -68,7 +68,8 @@ namespace TrackAndFuel.Instrumentals
         {
             TypePacket = 0x00,
             TypeMessage = 0x01,
-            StartDataInPacket = 0x02
+            ParamCount = 0x02,
+            StartDataInPacket = 0x03
         }
     }
 }

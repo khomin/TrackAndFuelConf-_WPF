@@ -9,7 +9,7 @@ namespace TrackAndFuel.ViewModel
     {
         private Boolean _crystal8Mhz;
         private Boolean _crystal16KHz;
-        private ObservableCollection<LogItem> _log = new ObservableCollection<LogItem>();
+        private readonly ObservableCollection<LogItem> _log = new ObservableCollection<LogItem>();
 
         public class LogItem
         {
@@ -40,11 +40,6 @@ namespace TrackAndFuel.ViewModel
         public ObservableCollection<LogItem> Log 
         {
             get => _log;
-            set 
-            {
-                _log = value;
-                OnPropertyChanged();
-            }
         }
     }
 }

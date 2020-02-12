@@ -19,12 +19,4 @@ namespace TrackAndFuel.Instrumentals
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
         public byte[] ApnPassword;
     }
-
-        //public class TrackerStructureGsm
-        //{
-        //    public byte[] PinCode;
-        //    public byte[] Apn;
-        //    public byte[] ApnUser;
-        //    public byte[] ApnPassword;
-        //}
-    }
+}

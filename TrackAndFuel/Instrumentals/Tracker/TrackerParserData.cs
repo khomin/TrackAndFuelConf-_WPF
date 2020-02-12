@@ -18,15 +18,17 @@ namespace TrackAndFuel.Instrumentals
         public override ParserResult Parse()
         {
             ParserResult result = null;
-            if (data.Length != 0)
+            if (data.Length > 2)
             {
-                byte[] crcArray = new byte[data.Length - 1];
+                byte[] crcArray = new byte[data.Length - 2];
                 Array.Copy(data, 0, crcArray, 0, crcArray.Length);
-                if (Crc8Calc.ComputeChecksum(crcArray) == data[data.Length - 1])
+                if (Crc8Calc.Crc16(crcArray) == BitConverter.ToUInt16(data, data.Length - 2))
                 {
                     var packet = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.TypePacket];
-                    var bodyData = ParseField(data, (int)TrackerTypeData.PacketField.StartDataInPacket);
-                    result = new ParserResult(packet, bodyData, (TrackerTypeData.TypeMessage)data[(int)TrackerTypeData.PacketField.TypeMessage]);
+                    var typeMessage = (TrackerTypeData.TypeMessage)data[(int)TrackerTypeData.PacketField.TypeMessage];
+                    var paramCount = data[(int)TrackerTypeData.PacketField.ParamCount];
+                    var bodyData = ParseField(data, (int)TrackerTypeData.PacketField.StartDataInPacket, paramCount);
+                    result = new ParserResult(packet, bodyData, typeMessage);
                 }
                 else
                 {
@@ -43,8 +45,6 @@ namespace TrackAndFuel.Instrumentals
 
         public override ParserResult Parse(List<int> data)
         {
-            //this.data = data.Select(i => BitConverter.GetBytes(i)).SelectMany(i => i).ToArray();
-
             this.data = new byte[data.Count];
             for (int i = 0; i < this.data.Length; i++)
             {
@@ -96,7 +96,7 @@ namespace TrackAndFuel.Instrumentals
                 var value = (byte[])data.Data;
                 res.Add((byte)value.Length);
                 res.Add((byte)0);
-                foreach (var i in value) 
+                foreach (var i in value)
                 {
                     res.Add((byte)i);
                 }
@@ -104,12 +104,12 @@ namespace TrackAndFuel.Instrumentals
             return res;
         }
 
-        private List<DataItemParam> ParseField(byte[] data, int beginIndex)
+        private List<DataItemParam> ParseField(byte[] data, int beginIndex, int paramCount)
         {
             List<DataItemParam> list = new List<DataItemParam>();
             try
             {
-                while (beginIndex < data.Length-1)
+                while (paramCount != 0)
                 {
                     DataItemParam dataField = new DataItemParam();
                     dataField.Key = (TrackerTypeData.KeyParameter)(int)data[beginIndex++];
@@ -149,6 +149,7 @@ namespace TrackAndFuel.Instrumentals
                             beginIndex += len;
                             break;
                     }
+                    paramCount -= 1;
                     list.Add(dataField);
                 }
             }

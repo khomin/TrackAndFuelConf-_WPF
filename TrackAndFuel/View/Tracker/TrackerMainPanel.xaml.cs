@@ -48,8 +48,6 @@ namespace TrackAndFuel.Tracker
 
         private void connectToPort(string portName)
         {
-            Dictionary<string, object> connectProperty = new Dictionary<string, object>();
-
             if (portName.Contains("Demo"))
             {
                 _dataPort = new TrackerSimulationPort();
@@ -59,7 +57,7 @@ namespace TrackAndFuel.Tracker
                 _dataPort = new TrackerSerialPort(portName, 115200, Parity.None, 8, StopBits.One);
             }
 
-            _dataPort.Open(connectProperty, (newData) =>
+            var isOpen =_dataPort.Open((newData) =>
             {
                 /* updating of new data */
                 ReceiveData(newData);
@@ -68,6 +66,11 @@ namespace TrackAndFuel.Tracker
                 /* disconnect callback */
                 DisconnectHandle();
             });
+
+            if (isOpen) 
+            {
+                getSettings();
+            }
 
             _viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Visible;
             _viewModel.ConnectViewModel.StatusConnect = "Connecting";
@@ -87,14 +90,14 @@ namespace TrackAndFuel.Tracker
             });
         }
 
-        private void ReceiveData(List<byte> data)
+        private void ReceiveData(byte[] data)
         {
             _viewModel.ConnectViewModel.IsConnected = true;
             _viewModel.ConnectViewModel.LoadingViewIsShow = Visibility.Hidden;
             _viewModel.ConnectViewModel.StatusConnect = "Connected";
 
             TrackerParserData parserData = new TrackerParserData();
-            var result = parserData.Parse(data.ToArray());
+            var result = parserData.Parse(data);
             var converter = new StructureBinaryConverter();
 
             if (result != null)
@@ -106,30 +109,75 @@ namespace TrackAndFuel.Tracker
                         switch (i.Key)
                         {
                             case TrackerTypeData.KeyParameter.SettingsGsm:
-                                TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
-                                _viewModel.SettingsModel.ApnPinCode = System.Text.Encoding.UTF8.GetString(settings.PinCode, 0, 4);
-                                _viewModel.SettingsModel.Apn = System.Text.Encoding.UTF8.GetString(settings.Apn, 0, 64);
-                                _viewModel.SettingsModel.ApnLogin = System.Text.Encoding.UTF8.GetString(settings.ApnUser, 0, 16);
-                                _viewModel.SettingsModel.ApnPassword = System.Text.Encoding.UTF8.GetString(settings.ApnPassword, 0, 16);
+                                TrackerStructureGsm gsm = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                                _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(gsm.PinCode);
+                                _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(gsm.Apn);
+                                _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(gsm.ApnUser);
+                                _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(gsm.ApnPassword);
                                 break;
                             case TrackerTypeData.KeyParameter.SettingsServers:
+                                //TrackerStructureSettingsConnection con = converter.Deserialize<TrackerStructureSettingsConnection>((byte[])i.Data);
+                                //_viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                                //_viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                                //_viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                                //_viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
                                 break;
-                            case TrackerTypeData.KeyParameter.SettingsSleep:
-                                break;
-                            case TrackerTypeData.KeyParameter.SettingsGpio:
-                                break;
-                            case TrackerTypeData.KeyParameter.SettingsLlsInternal:
-                                break;
-                            case TrackerTypeData.KeyParameter.SettingsOneWire:
-                                break;
-                            case TrackerTypeData.KeyParameter.SettingsSms:
-                                break;
-                            case TrackerTypeData.KeyParameter.SettingsGeofence:
-                                break;
-                            case TrackerTypeData.KeyParameter.SettingsTrack:
-                                break;
-                            case TrackerTypeData.KeyParameter.SettingsAcknowledgement:
-                                break;
+                            //case TrackerTypeData.KeyParameter.SettingsSleep:
+                            //    TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                            //    _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                            //    _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                            //    _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                            //    _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
+                            //    break;
+                            //case TrackerTypeData.KeyParameter.SettingsGpio:
+                            //    TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                            //    _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                            //    _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                            //    _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                            //    _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
+                            //    break;
+                            //case TrackerTypeData.KeyParameter.SettingsLlsInternal:
+                            //    TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                            //    _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                            //    _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                            //    _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                            //    _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
+                            //    break;
+                            //case TrackerTypeData.KeyParameter.SettingsOneWire:
+                            //    TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                            //    _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                            //    _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                            //    _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                            //    _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
+                            //    break;
+                            //case TrackerTypeData.KeyParameter.SettingsSms:
+                            //    TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                            //    _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                            //    _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                            //    _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                            //    _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
+                            //    break;
+                            //case TrackerTypeData.KeyParameter.SettingsGeofence:
+                            //    TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                            //    _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                            //    _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                            //    _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                            //    _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
+                            //    break;
+                            //case TrackerTypeData.KeyParameter.SettingsTrack:
+                            //    TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                            //    _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                            //    _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                            //    _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                            //    _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
+                            //    break;
+                            //case TrackerTypeData.KeyParameter.SettingsAcknowledgement:
+                            //    TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                            //    _viewModel.SettingsModel.ApnPinCode = Encoding.UTF8.GetString(settings.PinCode);
+                            //    _viewModel.SettingsModel.Apn = Encoding.UTF8.GetString(settings.Apn);
+                            //    _viewModel.SettingsModel.ApnLogin = Encoding.UTF8.GetString(settings.ApnUser);
+                            //    _viewModel.SettingsModel.ApnPassword = Encoding.UTF8.GetString(settings.ApnPassword);
+                            //    break;
                             default:
                                 break;
                         }
@@ -206,12 +254,12 @@ namespace TrackAndFuel.Tracker
                 switch (i.Key)
                 {
                     case TrackerTypeData.KeyParameter.DbgLevel:
+                        break;
+                    case TrackerTypeData.KeyParameter.DbgMessage:
                         Application.Current.Dispatcher.Invoke(delegate
                         {
                             _viewModel.RightPannelModel.StatusInfo.Log.Add(item: new StatusDataViewModel.LogItem { Message = i.Data.ToString(), Type = i.Key });
                         });
-                        break;
-                    case TrackerTypeData.KeyParameter.DbgMessage:
                         break;
                     case TrackerTypeData.KeyParameter.imei:
                         Application.Current.Dispatcher.Invoke(delegate
@@ -302,14 +350,7 @@ namespace TrackAndFuel.Tracker
 
         private void TrackerConnectPannel_loadConfigEvent(object sender, EventArgs e)
         {
-            var parser = new TrackerParserData();
-            var data = new List<byte>();
-            data.Add((int)TrackerTypeData.TypePacketData.Request);
-            data.Add((int)TrackerTypeData.TypeMessage.SettingsRead);
-            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsReadAll, Type = typeof(int), Data = 0 }));
-            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
-            _dataPort.WriteData("readSettings", data.ToArray());
-            _viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
+            getSettings();
         }
 
         private void TrackerConnectPannel_saveConfigEvent(object sender, EventArgs e)
@@ -323,6 +364,19 @@ namespace TrackAndFuel.Tracker
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsTrack, Type = typeof(byte[]), Data = new byte[10] }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             _dataPort.WriteData("writeSettings", data.ToArray());
+            _viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
+        }
+
+        private void getSettings() 
+        {
+            var parser = new TrackerParserData();
+            var data = new List<byte>();
+            data.Add((int)TrackerTypeData.TypePacketData.Request);
+            data.Add((int)TrackerTypeData.TypeMessage.SettingsRead);
+            data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsReadAll, Type = typeof(int), Data = 0 }));
+            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            _dataPort.WriteData("readSettings", data.ToArray());
+
             _viewModel.ConnectViewModel.IsReadyReadWriteSettings = false;
         }
 

@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Threading;
+using System.Windows.Documents;
 
 namespace TrackAndFuel.Instrumentals
 {
     class TrackerSerialPort : TrackerDataPortAbstract
     {
-        static SerialPort _serialPort;        
+        static SerialPort _serialPort;
         Action disconnectCallback;
 
         private bool _serialIsActive = false;
@@ -15,6 +18,14 @@ namespace TrackAndFuel.Instrumentals
         public TrackerSerialPort(string name, int baudrate, Parity parity, int dataBits, StopBits stopBits)
         {
             _serialPort = new SerialPort(name, baudrate, parity, dataBits, stopBits);
+            _serialPort.PortName = name;
+            _serialPort.BaudRate = baudrate;
+            _serialPort.Parity = Parity.None;
+            _serialPort.StopBits = StopBits.One;
+            _serialPort.DtrEnable = false;
+            _serialPort.RtsEnable = false;
+            _serialPort.ReadTimeout = 2;
+            _serialPort.WriteTimeout = 100;
         }
 
         public override void Close()
@@ -24,70 +35,85 @@ namespace TrackAndFuel.Instrumentals
             _serialIsActive = false;
         }
 
-        public override bool Open(Dictionary<string, object> property, Action<List<byte>> updateDataCallback, Action disconnectCallback)
+        public override bool Open(Action<byte[]> updateDataCallback, Action disconnectCallback)
         {
-            bool result = false;
             try
             {
-                // Attach a method to be called when there
-                // is data waiting in the port's buffer
-                _serialPort.DataReceived += new SerialDataReceivedEventHandler((o, i) =>
+                if (_serialPort.IsOpen == true)
                 {
-                    bool readyRead = false;
-                    var rxData = new List<byte>();
-                    do
-                    {
-                        try
-                        {
-                            int data = _serialPort.ReadByte();
-                            rxData.Add((byte)data);
-                            _serialIsActive = true;
-                        }
-                        catch (TimeoutException)
-                        {
-                            readyRead = true;
-                        }
-                    } while (readyRead);
-
-                    updateDataCallback.Invoke(rxData);
-                });
-
-                // Begin communications
+                    _serialPort.Close();
+                }
                 _serialPort.Open();
-                result = true;
+                _serialPort.DiscardInBuffer();
+                _serialIsActive = _serialPort.IsOpen;
 
-                _timerDisconnectControl = new System.Timers.Timer(3000);
-                _timerDisconnectControl.AutoReset = true;
-                _timerDisconnectControl.Enabled = true;
-                _timerDisconnectControl.Elapsed += (sourse, e) =>
+                if (_serialIsActive)
                 {
-                    if (_serialIsActive)
+                    new Thread(() =>
                     {
-                        _serialIsActive = false;
-                    }
-                    else
+                        var data = new byte[65535];
+                        int len = 0;
+                        while (true)
+                        {
+                            try
+                            {
+                                do
+                                {
+                                    data[len++] = (byte)_serialPort.ReadByte();
+                                    if (!_serialIsActive)
+                                    {
+                                        _serialIsActive = true;
+                                    }
+                                } while (true);
+                            }
+                            catch (TimeoutException) {}
+                            if (len != 0)
+                            {
+                                var result = new byte[len];
+                                Array.Copy(data, result, len);
+                                updateDataCallback.Invoke(result);
+                                len = 0;
+                                _serialPort.DiscardInBuffer();
+                            }
+                            Thread.Sleep(10);
+                        }
+                    }).Start();
+
+                    _timerDisconnectControl = new System.Timers.Timer(3000);
+                    _timerDisconnectControl.AutoReset = true;
+                    _timerDisconnectControl.Enabled = true;
+                    _timerDisconnectControl.Elapsed += (sourse, e) =>
                     {
-                        Close();
-                        disconnectCallback.Invoke();
-                    }
-                };
+                        //if (_serialIsActive)
+                        //{
+                        //    _serialIsActive = false;
+                        //}
+                        //else
+                        //{
+                        //    Close();
+                        //    disconnectCallback.Invoke();
+                        //}
+                    };
+                }
             }
             catch (Exception)
             {
                 Console.WriteLine("SerialPort: exception " + this.GetType().FullName + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
-            if (!result)
+
+            if (!_serialIsActive)
             {
                 disconnectCallback.Invoke();
             }
-
-            return result;
+            return _serialIsActive;
         }
 
         public override bool WriteData(string hintDataOptional, byte[] data)
         {
-            throw new NotImplementedException();
+            bool result = true;
+            _serialPort.Write(data, 0, data.Length);
+            return result;
         }
     }
 }
