@@ -132,50 +132,57 @@ namespace TrackAndFuel.Instrumentals
             data.Add((int)TrackerTypeData.TypeMessage.SettingsRead);
             
             var settingsGsm = new TrackerStructureGsm();
-            var settingsGpio = new TrackerStructureGPIO();
-            var settingsLlsInternal = new TrackerStructureSettingsLls();
-            var settingsOneWire = new TrackerStructureSettingsOneWire();
-            var settingsSms = new TrackerStructureSettingsSms();
-            var settingsTrack = new TrackerStructureSettingsTrack();
+            settingsGsm.PinCode = Encoding.Default.GetBytes("1234");
+            settingsGsm.Apn = Encoding.Default.GetBytes("TestApnSomethingBlabla");
+            settingsGsm.ApnUser = Encoding.Default.GetBytes("TestUserName16");
+            settingsGsm.ApnPassword = Encoding.Default.GetBytes("11445500991991");
 
-            settingsGsm.Apn = Encoding.ASCII.GetBytes("testApn");
+            //var settingsGpio = new TrackerStructureGPIO();
+            //var settingsLlsInternal = new TrackerStructureSettingsLls();
+            //var settingsOneWire = new TrackerStructureSettingsOneWire();
+            //var settingsSms = new TrackerStructureSettingsSms();
+            //var settingsTrack = new TrackerStructureSettingsTrack();
+
+            //settingsGsm.PinCode = Encoding.ASCII.GetBytes("0000");
+            //settingsGsm.PinCode = Encoding.Default.GetBytes("000");
+            //settingsGsm.Apn = Encoding.Default.GetBytes("1111111111");
 
             data.AddRange(parser.addParam(new DataItemParam
             {
                 Key = TrackerTypeData.KeyParameter.SettingsGsm,
                 Type = typeof(byte[]),
-                Data = converter.getBytes(settingsGsm)
+                Data = converter.Serialize(settingsGsm)
             }));
-            data.AddRange(parser.addParam(new DataItemParam
-            {
-                Key = TrackerTypeData.KeyParameter.SettingsGpio,
-                Type = typeof(byte[]),
-                Data = converter.getBytes(settingsGpio)
-            }));
-            data.AddRange(parser.addParam(new DataItemParam
-            {
-                Key = TrackerTypeData.KeyParameter.SettingsLlsInternal,
-                Type = typeof(byte[]),
-                Data = converter.getBytes(settingsLlsInternal)
-            }));
-            data.AddRange(parser.addParam(new DataItemParam
-            {
-                Key = TrackerTypeData.KeyParameter.SettingsOneWire,
-                Type = typeof(byte[]),
-                Data = converter.getBytes(settingsOneWire)
-            }));
-            data.AddRange(parser.addParam(new DataItemParam
-            {
-                Key = TrackerTypeData.KeyParameter.SettingsSms,
-                Type = typeof(byte[]),
-                Data = converter.getBytes(settingsSms)
-            }));
-            data.AddRange(parser.addParam(new DataItemParam
-            {
-                Key = TrackerTypeData.KeyParameter.SettingsTrack,
-                Type = typeof(byte[]),
-                Data = converter.getBytes(settingsTrack)
-            }));
+            //data.AddRange(parser.addParam(new DataItemParam
+            //{
+            //    Key = TrackerTypeData.KeyParameter.SettingsGpio,
+            //    Type = typeof(byte[]),
+            //    Data = converter.getBytes(settingsGpio)
+            //}));
+            //data.AddRange(parser.addParam(new DataItemParam
+            //{
+            //    Key = TrackerTypeData.KeyParameter.SettingsLlsInternal,
+            //    Type = typeof(byte[]),
+            //    Data = converter.getBytes(settingsLlsInternal)
+            //}));
+            //data.AddRange(parser.addParam(new DataItemParam
+            //{
+            //    Key = TrackerTypeData.KeyParameter.SettingsOneWire,
+            //    Type = typeof(byte[]),
+            //    Data = converter.getBytes(settingsOneWire)
+            //}));
+            //data.AddRange(parser.addParam(new DataItemParam
+            //{
+            //    Key = TrackerTypeData.KeyParameter.SettingsSms,
+            //    Type = typeof(byte[]),
+            //    Data = converter.getBytes(settingsSms)
+            //}));
+            //data.AddRange(parser.addParam(new DataItemParam
+            //{
+            //    Key = TrackerTypeData.KeyParameter.SettingsTrack,
+            //    Type = typeof(byte[]),
+            //    Data = converter.getBytes(settingsTrack)
+            //}));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             return data;
         }
@@ -203,7 +210,7 @@ namespace TrackAndFuel.Instrumentals
             {
                 Key = TrackerTypeData.KeyParameter.LogRecord,
                 Type = typeof(byte[]),
-                Data = _structureConverter.getBytes(record)
+                Data = _structureConverter.Serialize(record)
             }));
             data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
             return data;

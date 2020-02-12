@@ -1,10 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace TrackAndFuel.Instrumentals
 {
-    [StructLayout(LayoutKind.Sequential, Size = 100, Pack = 1)]
-    public struct TrackerStructureGsm
+    [StructLayout(LayoutKind.Sequential, Size = 70, Pack = 1)]
+    public class TrackerStructureGsm
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
         public byte[] PinCode;
@@ -18,5 +19,12 @@ namespace TrackAndFuel.Instrumentals
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
         public byte[] ApnPassword;
     }
-}
 
+        //public class TrackerStructureGsm
+        //{
+        //    public byte[] PinCode;
+        //    public byte[] Apn;
+        //    public byte[] ApnUser;
+        //    public byte[] ApnPassword;
+        //}
+    }

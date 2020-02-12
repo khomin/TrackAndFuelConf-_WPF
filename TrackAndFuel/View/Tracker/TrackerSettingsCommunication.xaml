@@ -57,9 +57,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Password" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                        <PasswordBox Grid.Row="3" Grid.Column="3" MinWidth="200" 
-                                     Style="{StaticResource PasswordBoxStyle}" MaxLength="16"
-                            InputScope="{Binding SettingsModel.ApnPassword, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"         
+                        <TextBox Grid.Row="3" Grid.Column="3" MinWidth="200" 
+                                     Style="{StaticResource TextBoxStyleMarging}" MaxLength="16"
+                            Text="{Binding SettingsModel.ApnPassword, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"         
                             IsEnabled="{Binding SettingsModel.ApnIsEditable}"/>
                     </Grid>
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -94,6 +95,7 @@ namespace TrackAndFuel.Tracker
 
             TrackerParserData parserData = new TrackerParserData();
             var result = parserData.Parse(data.ToArray());
+            var converter = new StructureBinaryConverter();
 
             if (result != null)
             {
@@ -104,6 +106,11 @@ namespace TrackAndFuel.Tracker
                         switch (i.Key)
                         {
                             case TrackerTypeData.KeyParameter.SettingsGsm:
+                                TrackerStructureGsm settings = converter.Deserialize<TrackerStructureGsm>((byte[])i.Data);
+                                _viewModel.SettingsModel.ApnPinCode = System.Text.Encoding.UTF8.GetString(settings.PinCode, 0, 4);
+                                _viewModel.SettingsModel.Apn = System.Text.Encoding.UTF8.GetString(settings.Apn, 0, 64);
+                                _viewModel.SettingsModel.ApnLogin = System.Text.Encoding.UTF8.GetString(settings.ApnUser, 0, 16);
+                                _viewModel.SettingsModel.ApnPassword = System.Text.Encoding.UTF8.GetString(settings.ApnPassword, 0, 16);
                                 break;
                             case TrackerTypeData.KeyParameter.SettingsServers:
                                 break;
@@ -272,7 +279,7 @@ namespace TrackAndFuel.Tracker
                         Application.Current.Dispatcher.Invoke(delegate
                         {
                             StructureBinaryConverter structureBinaryConverter = new StructureBinaryConverter();
-                            var log = structureBinaryConverter.fromBytes<TrackerStructureLogRecord>((byte[])i.Data);
+                            var log = structureBinaryConverter.Deserialize<TrackerStructureLogRecord>((byte[])i.Data);
                             _viewModel.RightPannelModel.CurrentData.LogPositionList.Add(new CurrentDataViewModel.LogPoint(log.Id, log.GnssLongitude, log.GnssLatitude, DateTime.Now));
                             if (!DrawMap(log.GnssLatitude, log.GnssLongitude))
                             {
