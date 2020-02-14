@@ -24,8 +24,8 @@ namespace TrackAndFuel.Instrumentals
             _serialPort.StopBits = StopBits.One;
             _serialPort.DtrEnable = false;
             _serialPort.RtsEnable = false;
-            _serialPort.ReadTimeout = 10;
-            _serialPort.WriteTimeout = 100;
+            _serialPort.ReadTimeout = 500;
+            _serialPort.WriteTimeout = 1000;
         }
 
         public override void Close()
@@ -61,20 +61,11 @@ namespace TrackAndFuel.Instrumentals
                         {
                             try
                             {
-                                do
-                                {
-                                    data[len] = (byte)_serialPort.ReadByte();
-                                    if (!_serialIsActive)
-                                    {
-                                        _serialIsActive = true;
-                                    }
-                                    len += 1;
-                                } while (true);
+                                Thread.Sleep(10);
+                                len = _serialPort.Read(data, 0, data.Length);
                             }
-                            catch (TimeoutException) { }
-                            catch (Exception ex) 
+                            catch (Exception ex)
                             {
-                                Console.WriteLine("TrackerSerialPort: exception" + ex.ToString());
                                 disconnectCallback.Invoke();
                                 Close();
                                 Thread.CurrentThread.Abort();
@@ -85,9 +76,13 @@ namespace TrackAndFuel.Instrumentals
                                 Array.Copy(data, result, len);
                                 updateDataCallback.Invoke(result);
                                 len = 0;
-                                _serialPort.DiscardInBuffer(); // TODO: control throw
+                                _serialPort.DiscardInBuffer();
+                                /* update status if not set */
+                                if (!_serialIsActive)
+                                {
+                                    _serialIsActive = true;
+                                }
                             }
-                            Thread.Sleep(1);
                         }
                     }).Start();
 
@@ -127,7 +122,7 @@ namespace TrackAndFuel.Instrumentals
             {
                 _serialPort.Write(data, 0, data.Length);
             }
-            catch (Exception ex)  {}
+            catch (Exception ex) { }
             return result;
         }
     }
