@@ -75,19 +75,23 @@ namespace TrackAndFuel.Instrumentals
                             {
                                 if (len != 0)
                                 {
-                                    var result = new byte[len];
-                                    Array.Copy(data, result, len);
-                                    updateDataCallback.Invoke(result);
-                                    len = 0;
-                                    _serialPort.DiscardInBuffer(); // TODO: control throw
+                                    try
+                                    {
+                                        var result = new byte[len];
+                                        Array.Copy(data, result, len);
+                                        updateDataCallback.Invoke(result);
+                                        len = 0;
+                                        _serialPort.DiscardInBuffer();
+                                    }
+                                    catch (Exception)
+                                    {
+                                        HandleOfThrowSerilPort();
+                                    }
                                 }
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
-                                Console.WriteLine("TrackerSerialPort: exception" + ex.ToString());
-                                disconnectCallback.Invoke();
-                                Close();
-                                Thread.CurrentThread.Abort();
+                                HandleOfThrowSerilPort();
                             }
                             Thread.Sleep(1);
                         }
@@ -120,6 +124,16 @@ namespace TrackAndFuel.Instrumentals
                 disconnectCallback.Invoke();
             }
             return _serialIsActive;
+        }
+
+        private void HandleOfThrowSerilPort()
+        {
+            if (disconnectCallback != null)
+            {
+                disconnectCallback.Invoke();
+            }
+            Close();
+            Thread.CurrentThread.Abort();
         }
 
         public override bool WriteData(string hintDataOptional, byte[] data)

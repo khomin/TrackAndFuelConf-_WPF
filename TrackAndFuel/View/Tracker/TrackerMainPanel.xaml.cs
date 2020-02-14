@@ -88,7 +88,14 @@ namespace TrackAndFuel.Tracker
                                       "Warning",
                                       MessageBoxButton.OK,
                                       MessageBoxImage.Warning);
-                _viewModel.NavigateContent.NavigationService.GoBack();
+                try
+                {
+                    _viewModel.NavigateContent.NavigationService.GoBack();
+                }
+                catch (Exception ex) 
+                {
+                    Console.WriteLine(ex.ToString());
+                }
             });
         }
 
