@@ -10,10 +10,11 @@ namespace TrackAndFuel.Instrumentals
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct TrackerStructureGPIO
     {
-        // UIN1
+        /* UIN1 */
         [MarshalAs(UnmanagedType.U1)]
         public byte IN1_Mode;
 
+        /* TODO: not binding to form */
         [MarshalAs(UnmanagedType.U2)]
         public UInt16 IN1_delta;
 
@@ -32,7 +33,7 @@ namespace TrackAndFuel.Instrumentals
         [MarshalAs(UnmanagedType.U1)]
         public byte IN1_AveragingFilterLenght;
 
-        // UIN2
+        /* UIN2 */
         [MarshalAs(UnmanagedType.U1)]
         public byte IN2_Mode;
 
@@ -54,7 +55,7 @@ namespace TrackAndFuel.Instrumentals
         [MarshalAs(UnmanagedType.U1)]
         public byte IN2_AveragingFilterLenght;
 
-        // UIN3
+        /* UIN3 */
         [MarshalAs(UnmanagedType.U1)]
         public byte IN3_Mode;
 
@@ -76,11 +77,11 @@ namespace TrackAndFuel.Instrumentals
         [MarshalAs(UnmanagedType.U1)]
         public byte IN3_AveragingFilterLenght;
 
-        // OUT1
+        /* OUT1 */
         [MarshalAs(UnmanagedType.U1)]
         public byte Out1Mode;
 
-        // OUT2
+        /* OUT2 */
         [MarshalAs(UnmanagedType.U1)]
         public byte Out2Mode;
     }

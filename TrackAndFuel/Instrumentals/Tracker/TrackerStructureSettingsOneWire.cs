@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace TrackAndFuel.Instrumentals
 {
-    [StructLayout(LayoutKind.Sequential, Size = 136, Pack = 1)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct TrackerStructureSettingsOneWire
     {
         /* sensor 1 */

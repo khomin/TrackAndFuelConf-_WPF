@@ -39,6 +39,12 @@ namespace TrackAndFuel.ViewModel
         private string _maxLevel = "200";
         private bool _maxLevelIsValid;
 
+        private string _cntEmpty = "";
+        private bool _cntEmptyIsValid;
+
+        private string _cntFull = "";
+        private bool cntFullIsValid;
+
         private bool _typeOutMessageIsRelativeLevel = false;
         private readonly ObservableCollection<string> _typeOfInterpolation;
         private InterpolationType _typeOfInterpolationIndex = InterpolationType.Lineally;
@@ -86,13 +92,13 @@ namespace TrackAndFuel.ViewModel
             private int _value;
             private int _level;
 
-            public CalibrateTable(int value, int level) 
+            public CalibrateTable(int value, int level)
             {
                 _value = value;
-                _level  = level;
+                _level = level;
             }
 
-            public string this[string columnName] 
+            public string this[string columnName]
             {
                 get => null;
             }
@@ -112,7 +118,7 @@ namespace TrackAndFuel.ViewModel
 
             public void Dispose()
             {
-                
+
             }
         }
 
@@ -150,7 +156,7 @@ namespace TrackAndFuel.ViewModel
         public ObservableCollection<string> TempCompensationMode { get => _tempCompensationMode; }
         public int TempCompenstationModeIndex
         {
-            get => (int)_tempCompenstationModeIndex; 
+            get => (int)_tempCompenstationModeIndex;
             set
             {
                 _tempCompenstationModeIndex = (TemperatureCompenstationModeType)value;
@@ -301,7 +307,7 @@ namespace TrackAndFuel.ViewModel
 
         public int CalibrateTablesIndex
         {
-            get => _calibrateTablesIndex; 
+            get => _calibrateTablesIndex;
             set
             {
                 _calibrateTablesIndex = value;
@@ -310,6 +316,41 @@ namespace TrackAndFuel.ViewModel
         }
 
         public string Error => string.Empty;
+
+        public string CntEmpty
+        {
+            get => _cntEmpty;
+            set
+            {
+                _cntEmpty = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool CntEmptyIsValid
+        {
+            get => _cntEmptyIsValid;
+            set
+            {
+                _cntEmptyIsValid = value;
+                OnPropertyChanged();
+            }
+        }
+        public string CntFull { 
+            get => _cntFull;
+            set {
+                _cntFull = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool CntFullIsValid
+        {
+            get => cntFullIsValid;
+            set
+            {
+                cntFullIsValid = value;
+                OnPropertyChanged();
+            }
+        }
 
         /**/
         /* validation */

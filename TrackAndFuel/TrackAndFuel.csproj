@@ -102,6 +102,7 @@
     <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsOneWire.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsSms.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureSettingsTrack.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerStructureSleep.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerTypeData.cs" />
     <Compile Include="Resources\BoolInvertConverter.cs" />
     <Compile Include="Resources\BoolToColorConverter.cs" />

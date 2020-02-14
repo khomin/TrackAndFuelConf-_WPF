@@ -142,15 +142,15 @@ namespace TrackAndFuel.Instrumentals
             settingsGsm.ApnPassword = Encoding.Default.GetBytes("11445500991991");
 
             var settingsConnection = new TrackerStructureSettingsConnection();
-            settingsConnection.ProtocolType = 0;
-            settingsConnection.Connect1Addr = Encoding.Default.GetBytes("locuscomtech.com");
-            settingsConnection.Connect1Password = Encoding.Default.GetBytes("998876655");
-            settingsConnection.Connect1DelayBeforeNextConnecting = 3;
-            settingsConnection.Connect1PeriodOfPingMessage = 3;
-            settingsConnection.Connect1Port = 45454;
-            settingsConnection.Connect1SendingPeropdDuringParking = 3;
-            settingsConnection.Connect1SendingPeropdInSleepMode = 3;
-            settingsConnection.Connect1UseCompression = false;
+            //settingsConnection.ProtocolType = 0;
+            //settingsConnection.Connect1Addr = Encoding.Default.GetBytes("locuscomtech.com");
+            //settingsConnection.Connect1Password = Encoding.Default.GetBytes("998876655");
+            //settingsConnection.Connect1DelayBeforeNextConnecting = 3;
+            //settingsConnection.Connect1PeriodOfPingMessage = 3;
+            //settingsConnection.Connect1Port = 45454;
+            //settingsConnection.Connect1SendingPeropdDuringParking = 3;
+            //settingsConnection.Connect1SendingPeropdInSleepMode = 3;
+            //settingsConnection.Connect1UseCompression = false;
 
             var settingsGpio = new TrackerStructureGPIO();
             settingsGpio.IN1_AveragingFilterLenght = 3;

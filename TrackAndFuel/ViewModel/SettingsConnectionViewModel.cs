@@ -14,16 +14,18 @@ namespace TrackAndFuel.ViewModel
     {
         private Action<bool> _settingsIsChangedCallbackNotify;
         private bool _settingsIsValid = false;
-
         private string _ipDnsAddress = "www.lkshuuuyaayooo.ru";
         private bool _ipDnsAddressIsValid = false;
-
         private string _port = "1000";
         private bool _portIsValid = false;
-
-
+        private bool _useCompression = false;
         private ObservableCollection<string> _protocolType; // combox
         private int _protocolTypeIndex = 0;
+        private int _connectPeriodOfPingMessage = 0;
+        private int _connectDelayBeforeNextConnecting;
+        private int _connectSendingPeropdDuringParking;
+        private int _connectSendingPeropdInSleepMode;
+        private int _additionParams;
 
         private ObservableCollection<string>  _periodOfPingShortMessage; // combox
         private int _periodOfPingShortMessageIndex = 0;
@@ -185,6 +187,60 @@ namespace TrackAndFuel.ViewModel
             get => _settingsIsValid; set
             {
                 _settingsIsValid = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool UseCompression
+        {
+            get => _useCompression; set
+            {
+                _useCompression = value;
+                OnPropertyChanged();
+            }
+        }
+        public int ConnectPeriodOfPingMessage
+        {
+            get => _connectPeriodOfPingMessage; 
+            set
+            {
+                _connectPeriodOfPingMessage = value;
+                OnPropertyChanged();
+            }
+        }
+        public int ConnectDelayBeforeNextConnecting
+        {
+            get => _connectDelayBeforeNextConnecting;
+            set
+            {
+                _connectDelayBeforeNextConnecting = value;
+                OnPropertyChanged();
+            }
+        }
+        public int ConnectSendingPeropdDuringParking
+        {
+            get => _connectSendingPeropdDuringParking;
+            set
+            {
+                _connectSendingPeropdDuringParking = value;
+                OnPropertyChanged();
+            }
+        }
+        public int ConnectSendingPeropdInSleepMode
+        {
+            get => _connectSendingPeropdInSleepMode;
+            set
+            {
+                _connectSendingPeropdInSleepMode = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int AdditionParams
+        {
+            get => _additionParams;
+            set
+            {
+                _additionParams = value;
                 OnPropertyChanged();
             }
         }

@@ -24,8 +24,8 @@ namespace TrackAndFuel.Instrumentals
             _serialPort.StopBits = StopBits.One;
             _serialPort.DtrEnable = false;
             _serialPort.RtsEnable = false;
-            _serialPort.ReadTimeout = 500;
-            _serialPort.WriteTimeout = 1000;
+            _serialPort.ReadTimeout = 10;
+            _serialPort.WriteTimeout = 100;
         }
 
         public override void Close()
@@ -61,28 +61,35 @@ namespace TrackAndFuel.Instrumentals
                         {
                             try
                             {
-                                Thread.Sleep(10);
-                                len = _serialPort.Read(data, 0, data.Length);
+                                do
+                                {
+                                    data[len] = (byte)_serialPort.ReadByte();
+                                    if (!_serialIsActive)
+                                    {
+                                        _serialIsActive = true;
+                                    }
+                                    len += 1;
+                                } while (true);
+                            }
+                            catch (TimeoutException) 
+                            {
+                                if (len != 0)
+                                {
+                                    var result = new byte[len];
+                                    Array.Copy(data, result, len);
+                                    updateDataCallback.Invoke(result);
+                                    len = 0;
+                                    _serialPort.DiscardInBuffer(); // TODO: control throw
+                                }
                             }
                             catch (Exception ex)
                             {
+                                Console.WriteLine("TrackerSerialPort: exception" + ex.ToString());
                                 disconnectCallback.Invoke();
                                 Close();
                                 Thread.CurrentThread.Abort();
                             }
-                            if (len != 0)
-                            {
-                                var result = new byte[len];
-                                Array.Copy(data, result, len);
-                                updateDataCallback.Invoke(result);
-                                len = 0;
-                                _serialPort.DiscardInBuffer();
-                                /* update status if not set */
-                                if (!_serialIsActive)
-                                {
-                                    _serialIsActive = true;
-                                }
-                            }
+                            Thread.Sleep(1);
                         }
                     }).Start();
 

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace TrackAndFuel.Instrumentals
 {
-    [StructLayout(LayoutKind.Sequential, Size = 70, Pack = 1)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public class TrackerStructureGsm
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]

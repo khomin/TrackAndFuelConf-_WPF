@@ -7,47 +7,71 @@ using System.Threading.Tasks;
 
 namespace TrackAndFuel.Instrumentals
 {
-    [StructLayout(LayoutKind.Explicit, Size = 104, Pack = 1)]
+    [StructLayout(LayoutKind.Sequential, Size = 104, Pack = 1)]
     public struct TrackerStructureSettingsConnection
     {
+        /* first connect */
+
         [MarshalAs(UnmanagedType.U1)]
-        [FieldOffset(0)]
-        public byte ProtocolType;
+        public byte ProtocolType_0;
 
-        [MarshalAs(UnmanagedType.LPArray)]
-        [FieldOffset(1)]
-        public byte[] Connect1Addr;
+        [MarshalAs(UnmanagedType.LPArray, SizeConst = 64)]
+        public byte[] ConnectAddr_0;
 
-        [MarshalAs(UnmanagedType.LPArray)]
-        [FieldOffset(65)]
-        public byte[] Connect1Password;
+        [MarshalAs(UnmanagedType.LPArray, SizeConst = 16)]
+        public byte[] ConnectPassword_0;
 
         [MarshalAs(UnmanagedType.U2)]
-        [FieldOffset(81)]
-        public UInt16 Connect1Port;
+        public UInt16 ConnectPort_0;
 
         [MarshalAs(UnmanagedType.Bool)]
-        [FieldOffset(82)]
-        public bool Connect1UseCompression;
+        public bool ConnectUseCompression_0;
 
         [MarshalAs(UnmanagedType.U4)]
-        [FieldOffset(83)]
-        public UInt32 Connect1PeriodOfPingMessage;
+        public UInt32 ConnectPeriodOfPingMessage_0;
 
         [MarshalAs(UnmanagedType.U4)]
-        [FieldOffset(86)]
-        public UInt32 Connect1DelayBeforeNextConnecting;
+        public UInt32 ConnectDelayBeforeNextConnecting_0;
 
         [MarshalAs(UnmanagedType.U4)]
-        [FieldOffset(90)]
-        public UInt32 Connect1SendingPeropdDuringParking;
+        public UInt32 ConnectSendingPeropdDuringParking_0;
 
         [MarshalAs(UnmanagedType.U4)]
-        [FieldOffset(94)]
-        public UInt32 Connect1SendingPeropdInSleepMode;
+        public UInt32 ConnectSendingPeropdInSleepMode_0;
 
         [MarshalAs(UnmanagedType.U4)]
-        [FieldOffset(100)]
-        public UInt32 AdditionParams;
+        public UInt32 AdditionParams_0;
+
+        /* second connect */
+
+        [MarshalAs(UnmanagedType.U1)]
+        public byte ProtocolType_1;
+
+        [MarshalAs(UnmanagedType.LPArray, SizeConst = 64)]
+        public byte[] ConnectAddr_1;
+
+        [MarshalAs(UnmanagedType.LPArray, SizeConst = 16 )]
+        public byte[] ConnectPassword_1;
+
+        [MarshalAs(UnmanagedType.U2)]
+        public UInt16 ConnectPort_1;
+
+        [MarshalAs(UnmanagedType.Bool)]
+        public bool ConnectUseCompression_1;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 ConnectPeriodOfPingMessage_1;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 ConnectDelayBeforeNextConnecting_1;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 ConnectSendingPeropdDuringParking_1;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 ConnectSendingPeropdInSleepMode_1;
+
+        [MarshalAs(UnmanagedType.U4)]
+        public UInt32 AdditionParams_1;
     }
 }
