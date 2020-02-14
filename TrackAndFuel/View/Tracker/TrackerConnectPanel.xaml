@@ -7,8 +7,7 @@
                     xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
                     MinHeight="50"
                     MinWidth="100"
-                    mc:Ignorable="d"
-                    DataContext="{StaticResource MainViewModel}">
+                    DataContext="{Binding DataContext.MainViewModel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Models:MainViewModel}}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

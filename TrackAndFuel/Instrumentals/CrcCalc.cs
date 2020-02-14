@@ -8,7 +8,7 @@ namespace TrackAndFuel.Instrumentals
 {
     // BASED ON 
     // http://sanity-free.org/146/crc8_implementation_in_csharp.html
-    public static class Crc8Calc
+    public static class CrcCalc
     {
         // This table comes from Dallas sample code where it is
         // freely reusable, though Copyright (C) 2000 Dallas 
@@ -41,19 +41,6 @@ namespace TrackAndFuel.Instrumentals
          10, 84, 215, 137, 107, 53
       };
 
-        public static byte ComputeChecksum(byte[] bytes)
-        {
-            byte crc = 0;
-            if (bytes != null && bytes.Length > 0)
-            {
-                foreach (byte b in bytes)
-                {
-                    crc = table[crc ^ b];
-                }
-            }
-            return crc;
-        }
-
         public static UInt16 Crc16(byte[] data)
         {
             int i = 0;
@@ -75,25 +62,5 @@ namespace TrackAndFuel.Instrumentals
             }
             return (Convert.ToUInt16(crc_value));
         }
-
-
-            //public static byte ComputeChecksum(IEnumerable<byte[]> bytes)
-            //{
-            //    //return ComputeChecksum(bytes.SelectMany(i => i).ToArray());
-            //    byte crc = 0;
-            //    var array = bytes.ToList();
-            //    if (bytes != null && array.Count() > 0)
-            //    {
-            //        for (var i = 0; i < bytes.Count(); i++)
-            //        {
-            //            crc = table[crc ^ array.at;
-            //        }
-            //        //foreach (byte b in bytes)
-            //        //{
-            //        //    crc = table[crc ^ b];
-            //        //}
-            //    }
-            //    return crc;
-            //}
-        }
+    }
 }

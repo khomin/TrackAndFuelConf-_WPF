@@ -16,7 +16,6 @@ namespace TrackAndFuel.Tracker
             InitializeComponent();
             this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
                 viewModel = this.DataContext as MainViewModel;
-                DataContext = viewModel;
             };
         }
     }

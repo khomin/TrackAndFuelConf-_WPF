@@ -28,7 +28,7 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public RightPannelViewModel RightPannelModel
+        public RightPannelViewModel RightPanelModel
         {
             get
             {

@@ -12,16 +12,16 @@ namespace TrackAndFuel.ViewModel
     public class CurrentDataViewModel : ViewModelBase
     {
         private string _imeiModemValue = "";
-        private float _ain1Value = 0.96f;
-        private float _ain2Value = 0.0f;
-        private float _ain3Value = 0.0f;
+        private int _ain1Value = 0;
+        private int _ain2Value = 0;
+        private int _ain3Value = 0;
         private float _gmsSignalStrenghtPercentValue = 0;
         private int _gnssSatFixValue = 0;
         private float _gnssLatValue = 0.0f;
         private float _gnssLonValue = 0.0f;
         private string _gnssPositionAsString = "";
-        private float _powerBatteryValue = 0.0f;
-        private float _powerExternalValue = 0.0f;
+        private int _powerBatteryValue = 0;
+        private int _powerExternalValue = 0;
         private Boolean _inDiscret1Value = false;
         private Boolean _inDiscret2Value = false;
         private Boolean _inDiscret3Value = false;
@@ -30,7 +30,8 @@ namespace TrackAndFuel.ViewModel
         private Boolean _outDiscret2Value = false;
         private readonly ObservableCollection<LogPoint> _logPositionList;
         private int _logPositionListIndex = 0;
-        
+        private DateTime _timeUnixTimestamp = DateTime.Now;
+
         public class LogPoint
         {
             public UInt32 Id { get; set; }
@@ -62,7 +63,7 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public float Ain1Value
+        public int Ain1Value
         {
             get => _ain1Value;
             set
@@ -72,7 +73,7 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public float Ain2Value
+        public int Ain2Value
         {
             get => _ain2Value;
             set
@@ -82,7 +83,7 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public float Ain3Value
+        public int Ain3Value
         {
             get => _ain3Value;
             set
@@ -134,7 +135,7 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public float PowerBatteryValue
+        public int PowerBatteryValue
         {
             get => _powerBatteryValue;
             set
@@ -144,12 +145,22 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public float PowerExternalValue
+        public int PowerExternalValue
         {
             get => _powerExternalValue;
             set
             {
                 _powerExternalValue = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime Time
+        {
+            get => _timeUnixTimestamp;
+            set
+            {
+                _timeUnixTimestamp = value;
                 OnPropertyChanged();
             }
         }

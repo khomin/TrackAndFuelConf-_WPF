@@ -7,7 +7,7 @@
              xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" Height="Auto" Width="Auto"
-             DataContext="{StaticResource MainViewModel}">
+             DataContext="{Binding DataContext.MainViewModel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Models:MainViewModel}}}">
     <GroupBox Header="Log" Width="Auto">
         <Grid VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
@@ -24,8 +24,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <ListView Grid.Row="0" Name="lvUsers" 
-                          ItemsSource="{Binding RightPannelModel.CurrentData.LogPositionList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedIndex="{Binding RightPannelModel.CurrentData.LogPositionListIndex, Mode=TwoWay}"
+                          ItemsSource="{Binding RightPanelModel.CurrentData.LogPositionList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedIndex="{Binding RightPanelModel.CurrentData.LogPositionListIndex, Mode=TwoWay}"
                           VerticalAlignment="Stretch">
                     <ListView.View>
                         <GridView>
@@ -55,7 +55,7 @@
             <m:Map x:Name="Map" 
                    Grid.Column="1" VerticalAlignment="Stretch" 
                        CredentialsProvider="AgMT8wAJD7dJkiyzhEvL6W4xGpBk1JkZb0sZjncZwMo2IDMQKpC1omr8gpBeseya"  
-                       Center="{Binding RightPannelModel.CurrentData.GnssPositionAsString}" 
+                       Center="{Binding RightPanelModel.CurrentData.GnssPositionAsString}" 
                    ZoomLevel="12">
             </m:Map>
         </Grid>

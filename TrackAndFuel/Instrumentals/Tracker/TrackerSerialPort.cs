@@ -24,15 +24,19 @@ namespace TrackAndFuel.Instrumentals
             _serialPort.StopBits = StopBits.One;
             _serialPort.DtrEnable = false;
             _serialPort.RtsEnable = false;
-            _serialPort.ReadTimeout = 2;
+            _serialPort.ReadTimeout = 10;
             _serialPort.WriteTimeout = 100;
         }
 
         public override void Close()
         {
-            _timerDisconnectControl.Stop();
-            _serialPort.Close();
-            _serialIsActive = false;
+            try
+            {
+                _timerDisconnectControl.Stop();
+                _serialPort.Close();
+                _serialIsActive = false;
+            }
+            catch (Exception) { }
         }
 
         public override bool Open(Action<byte[]> updateDataCallback, Action disconnectCallback)
@@ -59,23 +63,31 @@ namespace TrackAndFuel.Instrumentals
                             {
                                 do
                                 {
-                                    data[len++] = (byte)_serialPort.ReadByte();
+                                    data[len] = (byte)_serialPort.ReadByte();
                                     if (!_serialIsActive)
                                     {
                                         _serialIsActive = true;
                                     }
+                                    len += 1;
                                 } while (true);
                             }
-                            catch (TimeoutException) {}
+                            catch (TimeoutException) { }
+                            catch (Exception ex) 
+                            {
+                                Console.WriteLine("TrackerSerialPort: exception" + ex.ToString());
+                                disconnectCallback.Invoke();
+                                Close();
+                                Thread.CurrentThread.Abort();
+                            }
                             if (len != 0)
                             {
                                 var result = new byte[len];
                                 Array.Copy(data, result, len);
                                 updateDataCallback.Invoke(result);
                                 len = 0;
-                                _serialPort.DiscardInBuffer();
+                                _serialPort.DiscardInBuffer(); // TODO: control throw
                             }
-                            Thread.Sleep(10);
+                            Thread.Sleep(1);
                         }
                     }).Start();
 
@@ -101,7 +113,6 @@ namespace TrackAndFuel.Instrumentals
                 Console.WriteLine("SerialPort: exception " + this.GetType().FullName + "." + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
-
             if (!_serialIsActive)
             {
                 disconnectCallback.Invoke();
@@ -112,7 +123,11 @@ namespace TrackAndFuel.Instrumentals
         public override bool WriteData(string hintDataOptional, byte[] data)
         {
             bool result = true;
-            _serialPort.Write(data, 0, data.Length);
+            try
+            {
+                _serialPort.Write(data, 0, data.Length);
+            }
+            catch (Exception ex)  {}
             return result;
         }
     }

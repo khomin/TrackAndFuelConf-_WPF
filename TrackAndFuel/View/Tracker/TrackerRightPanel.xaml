@@ -21,25 +21,36 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="IMEI" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.ImeiModemValue}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding RightPanelModel.CurrentData.ImeiModemValue}" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
 
                         <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Left">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Time" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Column="1" 
+                                       Text="{Binding RightPanelModel.CurrentData.Time, StringFormat={}{0:d/M/yyyy HH:mm:ss}}" VerticalAlignment="Center"
+                                       Style="{StaticResource TextBlockStyleMarging}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="UIN1" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.Ain1Value}" 
+                            <TextBlock Grid.Column="1" Text="{Binding RightPanelModel.CurrentData.Ain1Value}" 
                                        VerticalAlignment="Center"
                                        Visibility="{Binding SettingsModel.InputsSettingsModelList[0].PortRoleIndex, Converter={StaticResource InputRoleShowValueAsTextConverter}}"
                                        Style="{StaticResource TextBlockStyleMarging}"/>
                             <TextBlock Grid.Column="2" Text="{Binding SettingsModel.InputsSettingsModelList[0].PortRoleIndex, Converter={StaticResource RoleInputPinToSign}}" 
                                        VerticalAlignment="Center"
                                        Style="{StaticResource TextBlockStyleMarging}"/>
-                            <Border Grid.Column="2" Background="{Binding RightPannelModel.CurrentData.Ain1Value, Converter={StaticResource BoolToColorConverter}}"
+                            <Border Grid.Column="2" Background="{Binding RightPanelModel.CurrentData.Ain1Value, Converter={StaticResource BoolToColorConverter}}"
                                     Visibility="{Binding SettingsModel.InputsSettingsModelList[0].PortRoleIndex, Converter={StaticResource InputRoleDiscreateOrAnalogConverter}}"
                                     Width="10" Height="10" Style="{StaticResource BorderStyleMarging}"/>
                         </Grid>
@@ -52,14 +63,14 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="UIN2" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.Ain2Value}" 
+                            <TextBlock Grid.Column="1" Text="{Binding RightPanelModel.CurrentData.Ain2Value}" 
                                        VerticalAlignment="Center"
                                        Visibility="{Binding SettingsModel.InputsSettingsModelList[1].PortRoleIndex, Converter={StaticResource InputRoleShowValueAsTextConverter}}"
                                        Style="{StaticResource TextBlockStyleMarging}"/>
                             <TextBlock Grid.Column="2" Text="{Binding SettingsModel.InputsSettingsModelList[1].PortRoleIndex, Converter={StaticResource RoleInputPinToSign}}" 
                                        VerticalAlignment="Center"
                                        Style="{StaticResource TextBlockStyleMarging}"/>
-                            <Border Grid.Column="2" Background="{Binding RightPannelModel.CurrentData.Ain2Value, Converter={StaticResource BoolToColorConverter}}"
+                            <Border Grid.Column="2" Background="{Binding RightPanelModel.CurrentData.Ain2Value, Converter={StaticResource BoolToColorConverter}}"
                                     Visibility="{Binding SettingsModel.InputsSettingsModelList[1].PortRoleIndex, Converter={StaticResource InputRoleDiscreateOrAnalogConverter}}"
                                     Width="10" Height="10" Style="{StaticResource BorderStyleMarging}"/>
                         </Grid>
@@ -72,14 +83,14 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="UIN3" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.Ain3Value}" 
+                            <TextBlock Grid.Column="1" Text="{Binding RightPanelModel.CurrentData.Ain3Value, Converter={StaticResource IntToStringConverter}}" 
                                        VerticalAlignment="Center"
                                        Visibility="{Binding SettingsModel.InputsSettingsModelList[2].PortRoleIndex, Converter={StaticResource InputRoleShowValueAsTextConverter}}"
                                        Style="{StaticResource TextBlockStyleMarging}"/>
                             <TextBlock Grid.Column="2" Text="{Binding SettingsModel.InputsSettingsModelList[2].PortRoleIndex, Converter={StaticResource RoleInputPinToSign}}" 
                                        VerticalAlignment="Center"
                                        Style="{StaticResource TextBlockStyleMarging}"/>
-                            <Border Grid.Column="2" Background="{Binding RightPannelModel.CurrentData.Ain3Value, Converter={StaticResource BoolToColorConverter}}"
+                            <Border Grid.Column="2" Background="{Binding RightPanelModel.CurrentData.Ain3Value, Converter={StaticResource BoolToColorConverter}}"
                                     Visibility="{Binding SettingsModel.InputsSettingsModelList[2].PortRoleIndex, Converter={StaticResource InputRoleDiscreateOrAnalogConverter}}"
                                     Width="10" Height="10" Style="{StaticResource BorderStyleMarging}"/>
                         </Grid>
@@ -90,7 +101,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="CSQ" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="5" Grid.Column="1"  Text="{Binding RightPannelModel.CurrentData.GmsSignalStrenghtPercentValue}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="1"  Text="{Binding RightPanelModel.CurrentData.GmsSignalStrenghtPercentValue}" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
 
                         <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Left">
@@ -99,7 +110,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="FIX" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="6" Grid.Column="1"  Text="{Binding RightPannelModel.CurrentData.GnssSatFixValue}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="1"  Text="{Binding RightPanelModel.CurrentData.GnssSatFixValue}" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
 
                         <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Left">
@@ -108,7 +119,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Lat" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.GnssLatValue}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding RightPanelModel.CurrentData.GnssLatValue}" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
 
                         <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Left">
@@ -117,16 +128,18 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Lon" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.GnssLonValue}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding RightPanelModel.CurrentData.GnssLonValue}" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
 
                         <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Left">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Battery" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.PowerBatteryValue}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding RightPanelModel.CurrentData.PowerBatteryValue}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Column="3" Text="V" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
 
                         <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Left">
@@ -135,7 +148,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="External" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding RightPannelModel.CurrentData.PowerExternalValue}" Style="{StaticResource TextBlockStyleMarging}"/>
+                            <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding RightannelModel.CurrentData.PowerExternalValue}" Style="{StaticResource TextBlockStyleMarging}"/>
                         </Grid>
 
                         <Grid Style="{StaticResource GridStyleMarging}" HorizontalAlignment="Left">
@@ -224,7 +237,7 @@
 
                         <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0" Margin="0,0,0,0">
                             <StackPanel Orientation="Vertical" Margin="0,0,0,0">
-                                <ItemsControl ItemsSource="{Binding RightPannelViewModel.StatusInfo.Log}">
+                                <ItemsControl ItemsSource="{Binding RightPanelModel.StatusInfo.Log}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate DataType="local:Log">
                                             <TextBlock Text="{Binding Message}" x:Name="MessageText" HorizontalAlignment="Stretch"/>

@@ -16,7 +16,7 @@ namespace TrackAndFuel.ViewModel
         private bool _settingsIsValid = false;
         private readonly ObservableCollection<string> _operatorsList;
         private int _operatorListIndex = 0;
-        enum OperatorType
+        public enum OperatorType
         {
             MTS = 0,
             Megafon = 1,
@@ -374,9 +374,9 @@ namespace TrackAndFuel.ViewModel
                         ApnIsEditable = false;
                         break;
                     case OperatorType.Custom:
-                        Apn = "";
-                        ApnLogin = "";
-                        ApnPassword = "";
+                        //Apn = "";
+                        //ApnLogin = "";
+                        //ApnPassword = "";
                         ApnIsEditable = true;
                         break;
                 }

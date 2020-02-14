@@ -108,7 +108,9 @@ namespace TrackAndFuel.Instrumentals
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssLon, Type = typeof(float), Data = lon }));
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GnssSat, Type = typeof(int), Data = new Random().Next(0, 10) }));
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.GsmCsq, Type = typeof(int), Data = new Random().Next(0, 31) }));
-            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            var crc = CrcCalc.Crc16(data.ToArray());
+            var crcArray = BitConverter.GetBytes(crc);
+            data.AddRange(crcArray);
             return data.ToArray();
         }
 
@@ -119,7 +121,9 @@ namespace TrackAndFuel.Instrumentals
             data.Add((int)TrackerTypeData.TypePacketData.Answer);
             data.Add((int)TrackerTypeData.TypeMessage.SettignsWrite);
             data.AddRange(parser.addParam(new DataItemParam { Key = TrackerTypeData.KeyParameter.SettingsAcknowledgement, Type = typeof(int), Data = 0 }));
-            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            var crc = CrcCalc.Crc16(data.ToArray());
+            var crcArray = BitConverter.GetBytes(crc);
+            data.AddRange(crcArray);
             return data.ToArray();
         }
 
@@ -255,7 +259,9 @@ namespace TrackAndFuel.Instrumentals
                 Type = typeof(byte[]),
                 Data = converter.Serialize(settingsTrack)
             }));
-            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            var crc = CrcCalc.Crc16(data.ToArray());
+            var crcArray = BitConverter.GetBytes(crc);
+            data.AddRange(crcArray);
             return data.ToArray();
         }
 
@@ -284,7 +290,9 @@ namespace TrackAndFuel.Instrumentals
                 Type = typeof(byte[]),
                 Data = _structureConverter.Serialize(record)
             }));
-            data.Add(Crc8Calc.ComputeChecksum(data.ToArray()));
+            var crc = CrcCalc.Crc16(data.ToArray());
+            var crcArray = BitConverter.GetBytes(crc);
+            data.AddRange(crcArray);
             return data.ToArray();
         }
     }

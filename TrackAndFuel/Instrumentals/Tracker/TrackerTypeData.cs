@@ -42,6 +42,7 @@ namespace TrackAndFuel.Instrumentals
             Ain3 = 0x0A,
             PowerBat = 0x0B,
             PowerExt = 0x0C,
+            Time = 0x0d,
             SettingsGsm = 0x40,
             SettingsServers = 0x41,
             SettingsSleep = 0x42,
@@ -51,6 +52,7 @@ namespace TrackAndFuel.Instrumentals
             SettingsSms = 0x46,
             SettingsGeofence = 0x47,
             SettingsTrack = 0x48,
+            Security = 0x49,
             SettingsAcknowledgement = 0x50,
             SettingsReadAll = 0x51,
             LogRecord = 0x18
@@ -66,10 +68,12 @@ namespace TrackAndFuel.Instrumentals
         }
         public enum PacketField
         {
-            TypePacket = 0x00,
-            TypeMessage = 0x01,
-            ParamCount = 0x02,
-            StartDataInPacket = 0x03
+            PacketHeaderIndex = 0x00,
+            PacketLenByteL = 0x01,
+            PacketLenByteH = 0x02,
+            PacketTypeMessageIndex = 0x03,
+            PacketParamCountIndex = 0x04,
+            PacketStartDataInPacketIndex = 0x05
         }
     }
 }

@@ -17,10 +17,7 @@ namespace TrackAndFuel.Tracker
         public TrackerConnectPannel() 
         {
             InitializeComponent();
-
-            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
-                viewModel = this.DataContext as MainViewModel;
-            };
+            viewModel = this.DataContext as MainViewModel;
         }
         private void Disconnect_Click(object sender, RoutedEventArgs e)
         {

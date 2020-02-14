@@ -73,6 +73,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Tako.CRC, Version=1.0.3.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tako.CRC.1.0.3.4\lib\net40-client\Tako.CRC.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -82,7 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Instrumentals\Crc8Calc.cs" />
+    <Compile Include="Instrumentals\CrcCalc.cs" />
     <Compile Include="Instrumentals\StructureBinaryConverter.cs" />
     <Compile Include="Instrumentals\Tracker\DataItemParam.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerDataPortAbstract.cs" />
@@ -106,7 +109,7 @@
     <Compile Include="Resources\IgnitionAutoManualConverter.cs" />
     <Compile Include="Resources\InputRoleDiscreateOrAnalogConverter.cs" />
     <Compile Include="Resources\InputRoleShowValueAsTextConverter.cs" />
-    <Compile Include="Resources\RoleInputPinToSign.cs" />
+    <Compile Include="Resources\InputRolePinToSign.cs" />
     <Compile Include="Resources\IntToStringConverter.cs" />
     <Compile Include="Resources\ListToStringConverter.cs" />
     <Compile Include="Resources\RegexValidationRule.cs" />

@@ -5,7 +5,7 @@
                 xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                 xmlns:fa="http://schemas.fontawesome.io/icons/"
                 xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
-                DataContext="{StaticResource MainViewModel}" 
+                DataContext="{Binding DataContext.MainViewModel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Models:MainViewModel}}}"
       Height="Auto" Width="Auto">
     <Grid>
         <Grid>

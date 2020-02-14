@@ -16,9 +16,6 @@ namespace TrackAndFuel.Tracker
             DataContext = _viewModel;
 
             _viewModel.NavigateContent = new StartPanel(_viewModel);
-
-            _viewModel.RightPannelModel.CurrentData.Ain2Value = 10.20f;
-
             //_viewModel.NavigateContent = new TrackerMainPanel(_viewModel);
         }
     }

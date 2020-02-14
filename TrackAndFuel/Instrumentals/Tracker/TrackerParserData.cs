@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tako.CRC;
 
 namespace TrackAndFuel.Instrumentals
 {
     class TrackerParserData : TrackerParserDataAbstract
     {
+        private const int MinSizeDataPacket = 5;
         public TrackerParserData()
         {
 
@@ -18,21 +20,35 @@ namespace TrackAndFuel.Instrumentals
         public override ParserResult Parse()
         {
             ParserResult result = null;
-            if (data.Length > 2)
+            if (data.Length > MinSizeDataPacket)
             {
-                byte[] crcArray = new byte[data.Length - 2];
-                Array.Copy(data, 0, crcArray, 0, crcArray.Length);
-                if (Crc8Calc.Crc16(crcArray) == BitConverter.ToUInt16(data, data.Length - 2))
+                var startByteList = new TrackerTypeData.TypePacketData[] { TrackerTypeData.TypePacketData.Answer, TrackerTypeData.TypePacketData.AsyncData, TrackerTypeData.TypePacketData.Request };
+                var startByteIndex = 0;
+                while(startByteIndex < startByteList.Length) 
                 {
-                    var packet = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.TypePacket];
-                    var typeMessage = (TrackerTypeData.TypeMessage)data[(int)TrackerTypeData.PacketField.TypeMessage];
-                    var paramCount = data[(int)TrackerTypeData.PacketField.ParamCount];
-                    var bodyData = ParseField(data, (int)TrackerTypeData.PacketField.StartDataInPacket, paramCount);
-                    result = new ParserResult(packet, bodyData, typeMessage);
-                }
-                else
-                {
-                    return null;
+                    var startByte = Array.IndexOf(data, (byte)startByteList[startByteIndex]);
+                    if(startByte != -1)
+                    {
+                        var lenWholePacket = BitConverter.ToUInt16(data, (int)TrackerTypeData.PacketField.PacketLenByteL);
+                        byte[] crcArray = new byte[lenWholePacket - 2];
+                        if(data.Length >= crcArray.Length)
+                        {
+                            Array.Copy(data, 0, crcArray, 0, crcArray.Length);
+                            if (CrcCalc.Crc16(crcArray) == BitConverter.ToUInt16(data, lenWholePacket - 2))
+                            {
+                                var packet = (TrackerTypeData.TypePacketData)(int)data[(int)TrackerTypeData.PacketField.PacketHeaderIndex];
+                                var typeMessage = (TrackerTypeData.TypeMessage)data[(int)TrackerTypeData.PacketField.PacketTypeMessageIndex];
+                                var paramCount = data[(int)TrackerTypeData.PacketField.PacketParamCountIndex];
+                                var bodyData = ParseField(data, (int)TrackerTypeData.PacketField.PacketStartDataInPacketIndex, paramCount);
+                                result = new ParserResult(packet, bodyData, typeMessage);
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                    startByteIndex += 1;
                 }
             }
             return result;

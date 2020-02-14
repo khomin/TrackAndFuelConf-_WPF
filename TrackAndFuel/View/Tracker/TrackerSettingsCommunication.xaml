@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:TrackAndFuel.Tracker"
              xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
              mc:Ignorable="d" Height="Auto" Width="Auto"
-             DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Models:MainViewModel}}">
+             DataContext="{Binding DataContext.MainViewModel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Models:MainViewModel}}}">
     <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
         <StackPanel Height="690">
             <GroupBox Header="Password" Width="Auto">
-                <Button Content="Change password" Grid.Column="1" MaxWidth="100" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleMarging}"/>
+                <Button Content="Change password" Grid.Column="1" Width="Auto" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleMarging}"/>
             </GroupBox>
 
             <GroupBox Header="GPRS setup" Width="Auto">

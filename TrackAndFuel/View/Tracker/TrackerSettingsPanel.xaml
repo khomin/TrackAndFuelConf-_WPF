@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrackAndFuel.Tracker"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Models="clr-namespace:TrackAndFuel.ViewModel"
              mc:Ignorable="d" 
-             DataContext="{StaticResource MainViewModel}"
+             DataContext="{Binding DataContext.MainViewModel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Models:MainViewModel}}}"
              Height="Auto" Width="Auto">
     <TabControl x:Name="SettingsTabPanel" VerticalAlignment="Stretch">
         <TabItem Header="Communication" mah:ControlsHelper.HeaderFontSize="16">

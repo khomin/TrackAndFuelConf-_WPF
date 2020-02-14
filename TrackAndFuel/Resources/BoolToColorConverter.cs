@@ -14,9 +14,9 @@ namespace TrackAndFuel.Resources
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var color = Brushes.Red;
-            if (value.GetType() == typeof(float))
+            if (value.GetType() == typeof(int))
             {
-                if ((float)value == 0f)
+                if ((int)value == 0)
                 {
                     color = Brushes.Red;
                 }
@@ -27,13 +27,20 @@ namespace TrackAndFuel.Resources
             }
             else
             {
-                if ((bool)value == true)
+                if (value.GetType() == typeof(bool))
                 {
-                    color = Brushes.Red;
+                    if ((bool)value == true)
+                    {
+                        color = Brushes.Red;
+                    }
+                    else
+                    {
+                        color = Brushes.Green;
+                    }
                 }
-                else
+                else 
                 {
-                    color = Brushes.Green;
+                    Console.WriteLine("BoolToColorConveter: invalid type");
                 }
             }
             return color;

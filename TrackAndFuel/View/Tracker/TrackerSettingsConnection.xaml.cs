@@ -17,6 +17,7 @@ namespace TrackAndFuel.Tracker
 
             this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
                 viewModel = this.DataContext as SettingsConnectionViewModel;
+                DataContext = viewModel;
             };
         }
     }

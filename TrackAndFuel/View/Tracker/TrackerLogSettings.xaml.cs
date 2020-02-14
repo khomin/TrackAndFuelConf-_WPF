@@ -31,7 +31,7 @@ namespace TrackAndFuel.Tracker
             this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
                 viewModel = this.DataContext as MainViewModel;
                 DataContext = viewModel;
-                viewModel.RightPannelModel.CurrentData.Map = Map;
+                viewModel.RightPanelModel.CurrentData.Map = Map;
             };
         }
 
