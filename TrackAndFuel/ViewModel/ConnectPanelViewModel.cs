@@ -19,7 +19,7 @@ namespace TrackAndFuel.ViewModel
         private string _statusConnect = "Disconnected";
         private bool _isLogReading = false;
         private readonly List<CommandData> _commandDataBuf;
-        private bool _isReadyReadWriteSettings = false;
+        // private bool _isReadyReadWriteSettings = false; TODO: maybe it need
         private bool _isWaitsForLogClear = false;
         public class CommandData
         {
@@ -155,14 +155,15 @@ namespace TrackAndFuel.ViewModel
             }
         }
 
-        public bool IsReadyReadWriteSettings
-        {
-            get => _isReadyReadWriteSettings;
-            set
-            {
-                _isReadyReadWriteSettings = value;
-                OnPropertyChanged();
-            }
-        }
+        // TODO: maybe it need
+        //public bool IsReadyReadWriteSettings
+        //{
+        //    get => _isReadyReadWriteSettings;
+        //    set
+        //    {
+        //        _isReadyReadWriteSettings = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
     }
 }

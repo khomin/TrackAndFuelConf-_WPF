@@ -50,28 +50,34 @@ namespace TrackAndFuel.Instrumentals
         public override bool WriteData(string dataHintOptional, byte[] data)
         {
             bool result = false;
+            // change regist to lower
+            dataHintOptional = dataHintOptional.ToLower();
 
-            result = true;
-
-            if (dataHintOptional.Contains("writeSettings"))
+            if (dataHintOptional.Contains(string.Format("writeSettings").ToLower()))
             {
                 /* About accept new settings */
                 _updateDataCallback.Invoke(GetPacketAboutNewSettings());
+                result = true;
             }
-            if (dataHintOptional.Contains("readSettings"))
+            else if (dataHintOptional.Contains(string.Format("readSettings").ToLower()))
             {
                 /* About accept reading the settings */
                 _updateDataCallback.Invoke(GetPacketAboutReadSettings());
+                result = true;
             }
-
-            if (dataHintOptional.Contains("startTestLog"))
+            else if (dataHintOptional.Contains(string.Format("startTestLog").ToLower()))
             {
                 _logLoadIsEnabled = true;
+                result = true;
             }
-
-            if (dataHintOptional.Contains("stopTestLog"))
+            else if (dataHintOptional.Contains(string.Format("stopTestLog").ToLower()))
             {
                 _logLoadIsEnabled = false;
+                result = true;
+            }
+            else 
+            {
+                throw new Exception("TtackerSimulation port: Undefined command");
             }
 
             return result;

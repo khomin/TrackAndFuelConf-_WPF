@@ -88,9 +88,12 @@
     <Compile Include="Instrumentals\CrcCalc.cs" />
     <Compile Include="Instrumentals\StructureBinaryConverter.cs" />
     <Compile Include="Instrumentals\Tracker\DataItemParam.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerCommandController.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerDataPortAbstract.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerParserData.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerParserDataAbstract.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerDataToView.cs" />
+    <Compile Include="Instrumentals\Tracker\TrackerSecuritySettings.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerSerialPort.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerSimulationPort.cs" />
     <Compile Include="Instrumentals\Tracker\TrackerStructureGsm.cs" />
@@ -145,8 +148,8 @@
     <Compile Include="View\StartPanel.xaml.cs">
       <DependentUpon>StartPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Tracker\AuthPassowrdDialog.xaml.cs">
-      <DependentUpon>AuthPassowrdDialog.xaml</DependentUpon>
+    <Compile Include="View\Tracker\AuthPasswordDialog.xaml.cs">
+      <DependentUpon>AuthPasswordDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Tracker\ChangePasswordDialog.xaml.cs">
       <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
@@ -266,7 +269,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Tracker\AuthPassowrdDialog.xaml">
+    <Page Include="View\Tracker\AuthPasswordDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -158,6 +158,8 @@ namespace TrackAndFuel.ViewModel
         private readonly ObservableCollection<LlsDataViewModel> _llsDataViewModelList;
         private bool _llsSettings1_IsValid;
         private bool _llsSettings2_IsValid;
+
+        private string _securityPassword = "";
         public SettingsViewModel()
         {
             _operatorsList = new ObservableCollection<string>();
@@ -872,6 +874,16 @@ namespace TrackAndFuel.ViewModel
             set
             {
                 _maxStendingTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SecurityPassword
+        {
+            get => _securityPassword;
+            set
+            {
+                _securityPassword = value;
                 OnPropertyChanged();
             }
         }

@@ -42,7 +42,7 @@ namespace TrackAndFuel.Tracker
 
         public string GetNewPassword() 
         {
-            return ;
+            return NewPasswordUi.Text;
         }
     }
 }

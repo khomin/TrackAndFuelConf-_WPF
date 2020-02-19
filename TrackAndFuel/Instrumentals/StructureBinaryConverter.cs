@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using TrackAndFuel.Instrumentals.Tracker;
 
 namespace TrackAndFuel.Instrumentals
 {
@@ -174,6 +175,10 @@ namespace TrackAndFuel.Instrumentals
                     data.Out1Mode = reader.ReadByte();
                     /* out 2 */
                     data.Out2Mode = reader.ReadByte();
+                } else if (typeof(T) == typeof(TrackerSecuritySettings))
+                {
+                    var data = (TrackerSecuritySettings)(object)item;
+                    data.Password = reader.ReadBytes(16);
                 }
                 else
                 {
@@ -219,7 +224,7 @@ namespace TrackAndFuel.Instrumentals
                         UInt32 connectSendingPeriodDuringParking = 0;
                         UInt32 ConnectSendingPeropdInSleepMode = 0;
                         UInt32 AdditionParams = 0;
-                        
+
                         /* connection 1 */
                         protType = data.ProtocolType_0;
                         data.ConnectAddr_0.CopyTo(connectAddr, 0);
@@ -240,7 +245,7 @@ namespace TrackAndFuel.Instrumentals
                         writer.Write(connectDelayBeforeNextCon);
                         writer.Write(connectSendingPeriodDuringParking);
                         writer.Write(ConnectSendingPeropdInSleepMode);
-                        
+
                         /* connection 2 */
                         protType = data.ProtocolType_1;
                         data.ConnectAddr_1.CopyTo(connectAddr, 0);
@@ -377,6 +382,13 @@ namespace TrackAndFuel.Instrumentals
                         var data = (TrackerStructureSleep)(object)item;
                         writer.Write(data.SleepIsEnabled);
                         writer.Write(data.SleepVoltageThreshold);
+                    }
+                    else if (typeof(T) == typeof(TrackerSecuritySettings)) 
+                    {
+                        var data = (TrackerSecuritySettings)(object)item;
+                        var password = new byte[16];
+                        data.Password.CopyTo(password, 0);
+                        writer.Write(password);
                     }
                     else
                     {

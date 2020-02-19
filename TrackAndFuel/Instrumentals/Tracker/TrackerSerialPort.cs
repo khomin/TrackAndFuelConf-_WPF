@@ -138,12 +138,35 @@ namespace TrackAndFuel.Instrumentals
 
         public override bool WriteData(string hintDataOptional, byte[] data)
         {
-            bool result = true;
-            try
+            bool result = false;
+            // change regist to lower
+            hintDataOptional = hintDataOptional.ToLower();
+
+            if (hintDataOptional.Contains(string.Format("writeSettings").ToLower()))
             {
                 _serialPort.Write(data, 0, data.Length);
+                result = true;
             }
-            catch (Exception ex) { }
+            else if (hintDataOptional.Contains(string.Format("readSettings").ToLower()))
+            {
+                _serialPort.Write(data, 0, data.Length);
+                result = true;
+            }
+            else if (hintDataOptional.Contains(string.Format("startTestLog").ToLower()))
+            {
+                _serialPort.Write(data, 0, data.Length);
+                result = true;
+            }
+            else if (hintDataOptional.Contains(string.Format("stopTestLog").ToLower()))
+            {
+                _serialPort.Write(data, 0, data.Length);
+                result = true;
+            }
+            else
+            {
+                throw new Exception("TrackerSerialPort: Undefined command");
+            }
+
             return result;
         }
     }
