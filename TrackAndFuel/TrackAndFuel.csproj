@@ -145,6 +145,12 @@
     <Compile Include="View\StartPanel.xaml.cs">
       <DependentUpon>StartPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Tracker\AuthPassowrdDialog.xaml.cs">
+      <DependentUpon>AuthPassowrdDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Tracker\ChangePasswordDialog.xaml.cs">
+      <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Tracker\LlsCalibrateTableAddLevel.xaml.cs">
       <DependentUpon>LlsCalibrateTableAddLevel.xaml</DependentUpon>
     </Compile>
@@ -259,6 +265,14 @@
     <Page Include="View\StartPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Tracker\AuthPassowrdDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Tracker\ChangePasswordDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Tracker\LlsCalibrateTableAddLevel.xaml">
       <Generator>MSBuild:Compile</Generator>

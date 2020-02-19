@@ -21,5 +21,10 @@ namespace TrackAndFuel.Tracker
                 viewModel = this.DataContext as MainViewModel;
             };
         }
+
+        private void ChangePasswordClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

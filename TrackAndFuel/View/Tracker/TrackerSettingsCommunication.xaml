@@ -10,7 +10,10 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" Width="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
         <StackPanel Height="690">
             <GroupBox Header="Password" Width="Auto">
-                <Button Content="Change password" Grid.Column="1" Width="Auto" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleMarging}"/>
+                <Button Content="Change password" 
+                        Grid.Column="1" Width="Auto" HorizontalAlignment="Right" 
+                        Click="ChangePasswordClick"
+                        Style="{StaticResource ButtonStyleMarging}"/>
             </GroupBox>
 
             <GroupBox Header="GPRS setup" Width="Auto">
