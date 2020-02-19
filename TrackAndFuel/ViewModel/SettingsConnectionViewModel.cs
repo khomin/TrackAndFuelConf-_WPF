@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using TrackAndFuel.Instrumentals;
 
 namespace TrackAndFuel.ViewModel
 {
@@ -39,6 +40,7 @@ namespace TrackAndFuel.ViewModel
         {
             _settingsIsChangedCallbackNotify = settingsIsChangedCallbackNotify;
             _protocolType = new ObservableCollection<string>();
+            _protocolType.Add("Off");
             _protocolType.Add("Wialon");
 
             _periodOfPingShortMessage = new ObservableCollection<string>();
@@ -93,10 +95,10 @@ namespace TrackAndFuel.ViewModel
 
         public bool ServerIsEnabled
         {
-            get => ServerIsEnabled1;
-            set
+            get => _serverIsEnabled;
+            private set
             {
-                ServerIsEnabled1 = value;
+                _serverIsEnabled = value;
                 OnPropertyChanged();
             }
         }
@@ -109,16 +111,6 @@ namespace TrackAndFuel.ViewModel
                 OnPropertyChanged();
             }
         }
-        public bool ServerIsEnabled1
-        {
-            get => _serverIsEnabled;
-            set
-            {
-                _serverIsEnabled = value;
-                OnPropertyChanged();
-            }
-        }
-
         public int ProtocolTypeIndex
         {
             get => _protocolTypeIndex; 
@@ -126,6 +118,7 @@ namespace TrackAndFuel.ViewModel
             {
                 _protocolTypeIndex = value;
                 OnPropertyChanged();
+                ServerIsEnabled = ((TrackerTypeData.ConnectType)value  != TrackerTypeData.ConnectType.Disabled);
             }
         }
 

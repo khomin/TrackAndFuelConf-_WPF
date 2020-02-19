@@ -13,7 +13,6 @@
             <GroupBox Header="Server">
                 <StackPanel>
                     <!--CheckBox Enable/Disable -->
-                    <CheckBox Content="Enable" IsChecked="{Binding ServerIsEnabled,Mode=TwoWay}" Grid.Row="0" Grid.Column="0"/>
                     <Grid IsEnabled="{Binding ServerIsEnabled}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -45,15 +44,18 @@
                         <Button Grid.Row="0" IsEnabled="False" Content="Check" Grid.Column="1" MinWidth="200" Style="{StaticResource ButtonStyleMarging}"/>
                     </Grid>
 
-                    <Grid IsEnabled="{Binding ServerIsEnabled}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <!--DataProtocol-->
-                        <TextBlock Text="Protocol type" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource TextBlockStyleMarging}"/>
+                        <TextBlock Text="Protocol type" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" 
+                                   IsEnabled="{Binding ServerIsEnabled}"
+                                   Style="{StaticResource TextBlockStyleMarging}"/>
                         <ComboBox ItemsSource="{Binding ProtocolType, FallbackValue=NA}"
                                   SelectedIndex="{Binding ProtocolTypeIndex, Mode=TwoWay}"
+                                  IsEnabled="True"
                                   Grid.Row="0" Grid.Column="1" MinWidth="200" Style="{StaticResource ComboBoxStyleMarging}"/>
                     </Grid>
 

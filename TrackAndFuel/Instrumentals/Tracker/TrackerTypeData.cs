@@ -75,5 +75,11 @@ namespace TrackAndFuel.Instrumentals
             PacketParamCountIndex = 0x04,
             PacketStartDataInPacketIndex = 0x05
         }
+
+        public enum ConnectType
+        {
+            Disabled,
+            Wialon
+        };
     }
 }

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace TrackAndFuel.Instrumentals
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct TrackerStructureSettingsOneWire
+    public class TrackerStructureSettingsOneWire
     {
         /* sensor 1 */
         [MarshalAs(UnmanagedType.Bool)]

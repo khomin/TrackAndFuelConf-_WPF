@@ -23,7 +23,7 @@ namespace TrackAndFuel.Resources
                     sign = "Hz";
                     break;
                 case PortRole.voltageMeasurement:
-                    sign = "V";
+                    sign = "mV";
                     break;
             }
             return sign;

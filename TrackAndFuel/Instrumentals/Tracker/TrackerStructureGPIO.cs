@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TrackAndFuel.Instrumentals
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct TrackerStructureGPIO
+    public class TrackerStructureGPIO
     {
         /* UIN1 */
         [MarshalAs(UnmanagedType.U1)]

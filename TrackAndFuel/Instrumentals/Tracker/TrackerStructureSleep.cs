@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TrackAndFuel.Instrumentals
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct TrackerStructureSleep
+    public class TrackerStructureSleep
     {
         [MarshalAs(UnmanagedType.Bool)]
         public bool SleepIsEnabled;

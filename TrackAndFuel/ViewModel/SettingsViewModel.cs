@@ -38,11 +38,10 @@ namespace TrackAndFuel.ViewModel
         private bool _apnPinCodeIsValid = false;
 
         private bool _apnIsEditable = false;
-        private ObservableCollection<string> _serversConnection;
+        private readonly ObservableCollection<string> _serversConnection;
         private int _serverConnectionListIndex = 0;
-        private ObservableCollection<SettingsConnectionViewModel> _serversConnectionModel;
-        private bool _serverConnectionIsValid1 = false;
-        private bool _serverConnectionIsValid2 = false;
+        private readonly SettingsConnectionViewModel _serversConnectionModel;
+        private bool _serverConnectionIsValid = false;
 
         private ObservableCollection<string> _transmitProtocol;  // TODO: it now wialon only
         private int _transmitProtocolIndex = 0;
@@ -85,6 +84,8 @@ namespace TrackAndFuel.ViewModel
         private int _accelerationThresholdDetermMotion = 0;
         private int _minSpeedForDetectionMotion = 0;
         private int _maxSpeedForDetectionParking = 0;
+        private int _maxStendingTime = 0;
+        private int _maxHeading = 0;
 
         private bool _enableSmsSubscribing_0 = false;
         private bool _enableSmsSubscribing_1 = false;
@@ -173,21 +174,14 @@ namespace TrackAndFuel.ViewModel
             _serversConnection.Add("Reserv");
 
 
-            _serversConnectionModel = new ObservableCollection<SettingsConnectionViewModel>();
-            _serversConnectionModel.Add(new SettingsConnectionViewModel((isValid) =>
+            _serversConnectionModel = new SettingsConnectionViewModel((isValid) =>
             {
-                _serverConnectionIsValid1 = isValid;
+                _serverConnectionIsValid = isValid;
                 ValidateSettings();
-            }));
-            _serversConnectionModel.Add(new SettingsConnectionViewModel((isValid) =>
-            {
-                _serverConnectionIsValid2 = isValid;
-                ValidateSettings();
-            }));
+            });
             /* Those default - true, 
              * because the second change after focuse on */
-            _serverConnectionIsValid1 = true;
-            _serverConnectionIsValid2 = true;
+            _serverConnectionIsValid = true;
 
             _transmitProtocol = new ObservableCollection<string>();
             _transmitProtocol.Add("Wialon");
@@ -237,7 +231,8 @@ namespace TrackAndFuel.ViewModel
             _inputsSettingsModelList = new ObservableCollection<InputItemSettingsModel>();
             _inputsSettingsModelList.Add(new InputItemSettingsModel("Line IN1", "LineIN1", (isUsedAsIgntition) =>
             {
-                if (isUsedAsIgntition) {
+                if (isUsedAsIgntition)
+                {
                     _inputsSettingsModelList[1].UsePinAsIgnitionDetection = false;
                     _inputsSettingsModelList[2].UsePinAsIgnitionDetection = false;
                 }
@@ -429,8 +424,6 @@ namespace TrackAndFuel.ViewModel
                 this.Set(ref this._apnIsEditable, value);
             }
         }
-
-        public ObservableCollection<SettingsConnectionViewModel> ServersConnectionModel { get => _serversConnectionModel; }
         public int ServerConnectionListIndex
         {
             get => _serverConnectionListIndex;
@@ -861,6 +854,28 @@ namespace TrackAndFuel.ViewModel
 
         public int Lls1FillUpPhone_1_index { get => _lls1FillUpPhone_1_index; set => this.Set(ref this._lls1FillUpPhone_1_index, value); }
 
+        public SettingsConnectionViewModel ServersConnectionModel => _serversConnectionModel;
+
+        public int MaxHeading
+        {
+            get => _maxHeading;
+            set
+            {
+                _maxHeading = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int MaxStendingTime
+        {
+            get => _maxStendingTime;
+            set
+            {
+                _maxStendingTime = value;
+                OnPropertyChanged();
+            }
+        }
+
         /**/
         /* validation */
         /**/
@@ -949,23 +964,23 @@ namespace TrackAndFuel.ViewModel
         {
             if (_enableSmsSubscribing_0 == false && _enableSmsSubscribing_1 == false)
             {
-                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1
-                   && _serverConnectionIsValid2 && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1
+                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid
+                   && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1
                    && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 && _inputSettingsIsValid0
                    && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _llsSettings1_IsValid && _llsSettings2_IsValid;
                 SettingsIsValid = isValid;
             }
             else if (_enableSmsSubscribing_0 == false)
             {
-                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1 && _serverConnectionIsValid2
+                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid
                     && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1 && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3
                     && _inputSettingsIsValid0 && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _phoneNumber2IsValid && _llsSettings1_IsValid && _llsSettings2_IsValid;
                 SettingsIsValid = isValid;
             }
             else if (_enableSmsSubscribing_1 == false)
             {
-                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid1
-                   && _serverConnectionIsValid2 && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1
+                var isValid = _apnIsValid && _apnLoginIsValid && _serverConnectionIsValid
+                   && _oneWireSettingsIsValid0 && _oneWireSettingsIsValid1
                    && _oneWireSettingsIsValid2 && _oneWireSettingsIsValid3 && _inputSettingsIsValid0
                    && _inputSettingsIsValid1 && _inputSettingsIsValid2 && _phoneNumber1IsValid && _llsSettings1_IsValid && _llsSettings2_IsValid;
                 SettingsIsValid = isValid;

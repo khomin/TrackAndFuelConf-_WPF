@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace TrackAndFuel.Instrumentals
 {
     [StructLayout(LayoutKind.Sequential, Size = 38, Pack = 1)]
-    public struct TrackerStructureSettingsSms
+    public class TrackerStructureSettingsSms
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
         public byte[] Phone1Number;

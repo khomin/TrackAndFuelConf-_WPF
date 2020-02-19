@@ -17,12 +17,25 @@ namespace TrackAndFuel.Tracker
         public TrackerConnectPannel() 
         {
             InitializeComponent();
-            viewModel = this.DataContext as MainViewModel;
+            if(this.DataContext as MainViewModel != null) 
+            {
+                viewModel = this.DataContext as MainViewModel;
+            }
+
+            this.DataContextChanged += (object sender, DependencyPropertyChangedEventArgs e) => {
+                if (this.DataContext as MainViewModel != null)
+                {
+                    viewModel = this.DataContext as MainViewModel;
+                }
+            };
         }
         private void Disconnect_Click(object sender, RoutedEventArgs e)
         {
             disconnectEvent(this, EventArgs.Empty);
-            viewModel.NavigateContent.NavigationService.GoBack();
+            if (viewModel != null)
+            {
+                this.Dispatcher.Invoke(() => viewModel.NavigateContent.NavigationService.GoBack());
+            }
         }
 
         private void LoadConfig_Click(object sender, RoutedEventArgs e)

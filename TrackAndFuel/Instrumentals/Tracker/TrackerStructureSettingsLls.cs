@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace TrackAndFuel.Instrumentals
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct TrackerStructureSettingsLls
+    public class TrackerStructureSettingsLls
     {
         // lls 1
         [MarshalAs(UnmanagedType.U2)] // TODO: not used

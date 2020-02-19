@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace TrackAndFuel.Instrumentals
 {
     [StructLayout(LayoutKind.Explicit, Size = 31, Pack = 1)]
-    public struct TrackerStructureSettingsTrack
+    public class TrackerStructureSettingsTrack
     {
         [MarshalAs(UnmanagedType.U2)]
         [FieldOffset(0)]

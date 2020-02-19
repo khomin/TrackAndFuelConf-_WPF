@@ -66,6 +66,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -107,6 +109,21 @@
                         <TextBlock Text="{Binding SettingsModel.MaxSpeedForDetectionParking, FallbackValue=NA, Converter={StaticResource IntToStringConverter}}" 
                                    Grid.Row="4" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                         <TextBlock Text="km/h" Grid.Row="4" Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+
+                        <TextBlock Text="The maximum heading" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0" Grid.Row="5"/>
+                        <Slider Value="{Binding SettingsModel.MaxHeading}"
+                                Minimum="0" Maximum="65535"
+                                Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="5"/>
+                        <TextBlock Text="{Binding SettingsModel.MaxHeading, FallbackValue=NA, Converter={StaticResource IntToStringConverter}}" 
+                                   Grid.Row="5" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+
+                        <TextBlock Text="The maximum stending time" Style="{StaticResource TextBlockStyleMarging}" Grid.Column="0" Grid.Row="6"/>
+                        <Slider Value="{Binding SettingsModel.MaxStendingTime}"
+                                Minimum="0" Maximum="65535"
+                                Style="{StaticResource SliderStyleMarging}" Grid.Column="1" Grid.Row="6"/>
+                        <TextBlock Text="{Binding SettingsModel.MaxStendingTime, FallbackValue=NA, Converter={StaticResource IntToStringConverter}}" 
+                                   Grid.Row="6" Grid.Column="2" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
+                        <TextBlock Text="Min" Grid.Row="6" Grid.Column="3" Style="{StaticResource TextBlockStyleMarging}" VerticalAlignment="Center"/>
                     </Grid>
                 </StackPanel>
             </GroupBox>
